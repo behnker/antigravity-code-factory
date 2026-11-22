@@ -48,36 +48,49 @@ HIGH_IMPACT_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
 ]
 
 
-def evaluate_command(command_line: str) -> dict[str, Any]:
-    """Return a PreToolUse hook decision dict for the given command line."""
-    if not command_line or not command_line.strip():
-        return {}
+def evaluate_command(command_line: str, bypass_sandbox: bool = False) -> dict[str, Any]:
+    """Return a PreToolUse hook decision dict for the given command line.
 
-    for label, pattern in HIGH_IMPACT_PATTERNS:
-        if pattern.search(command_line):
-            return {
-                "decision": "force_ask",
-                "reason": (
-                    f"Enterprise Code Factory HITL Safety Gate: command matches "
-                    f"'{label}', which always requires explicit human confirmation."
-                ),
-            }
+    Antigravity's PreToolUse contract requires an explicit `decision`
+    ("allow", "deny", "ask", or "force_ask"); an empty dict fails closed.
+    """
+    if command_line and command_line.strip():
+        for label, pattern in HIGH_IMPACT_PATTERNS:
+            if pattern.search(command_line):
+                return {
+                    "decision": "force_ask",
+                    "reason": (
+                        f"Enterprise Code Factory HITL Safety Gate: command matches "
+                        f"'{label}', which always requires explicit human confirmation."
+                    ),
+                }
 
-    return {}
+    if bypass_sandbox:
+        return {
+            "decision": "ask",
+            "reason": "Command requested execution outside the sandbox.",
+        }
+
+    return {"decision": "allow"}
 
 
-def extract_command_line(payload: dict[str, Any]) -> str:
-    """Extract the command line from a PreToolUse hook stdin payload."""
+def extract_tool_args(payload: dict[str, Any]) -> tuple[str, bool]:
+    """Extract (command_line, bypass_sandbox) from a PreToolUse hook stdin payload."""
     tool_call = payload.get("toolCall") or payload.get("tool_call") or {}
     args = tool_call.get("args") or {}
     cmd = args.get("CommandLine") or args.get("commandLine") or args.get("command_line") or ""
-    return cmd if isinstance(cmd, str) else ""
+    bypass = bool(
+        args.get("BypassSandbox")
+        or args.get("bypassSandbox")
+        or args.get("bypass_sandbox")
+    )
+    return (cmd if isinstance(cmd, str) else ""), bypass
 
 
 def main() -> int:
     raw = sys.stdin.read()
     if not raw.strip():
-        print("{}")
+        print(json.dumps({"decision": "ask", "reason": "Empty PreToolUse hook payload."}))
         return 0
 
     try:
@@ -95,10 +108,11 @@ def main() -> int:
         return 0
 
     if not isinstance(payload, dict):
-        print("{}")
+        print(json.dumps({"decision": "ask", "reason": "Unexpected PreToolUse hook payload type."}))
         return 0
 
-    result = evaluate_command(extract_command_line(payload))
+    cmd, bypass_sandbox = extract_tool_args(payload)
+    result = evaluate_command(cmd, bypass_sandbox=bypass_sandbox)
     print(json.dumps(result))
     return 0
 

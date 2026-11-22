@@ -30,7 +30,11 @@ class TestHitlGate(unittest.TestCase):
         ]
         for cmd in benign:
             with self.subTest(cmd=cmd):
-                self.assertEqual(hitl_gate.evaluate_command(cmd), {})
+                self.assertEqual(hitl_gate.evaluate_command(cmd), {"decision": "allow"})
+
+    def test_bypass_sandbox_benign_command_asks(self) -> None:
+        res = hitl_gate.evaluate_command("curl https://example.com", bypass_sandbox=True)
+        self.assertEqual(res.get("decision"), "ask")
 
     def test_high_impact_commands_require_force_ask(self) -> None:
         dangerous = [
