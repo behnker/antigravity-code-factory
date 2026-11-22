@@ -29,6 +29,46 @@ HIGH_IMPACT_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
     ("docker/podman push", re.compile(r"(?:^|[\s;&|()])(?:docker|podman)\s+push(?:\s|$)", re.IGNORECASE)),
     ("kubectl apply/delete", re.compile(r"(?:^|[\s;&|()])kubectl\s+(?:apply|delete|replace|patch)(?:\s|$)", re.IGNORECASE)),
     (
+        "cloudflare deploy/delete",
+        re.compile(
+            r"(?:^|[\s;&|()])(?:"
+            r"(?:npx\s+)?wrangler\s+(?:deploy|publish|delete|d1\s+migrations\s+apply)|"
+            r"cf\s+deploy"
+            r")(?:\s|$)",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "vercel production deploy/delete",
+        re.compile(
+            r"(?:^|[\s;&|()])(?:npx\s+)?vercel\s+(?:"
+            r"(?:deploy\s+)?(?:[^\n;&|]*\s)?--prod\b|"
+            r"(?:rm|remove)\b|"
+            r"env\s+rm\b"
+            r")",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "supabase deploy/db mutation",
+        re.compile(
+            r"(?:^|[\s;&|()])(?:npx\s+)?supabase\s+(?:"
+            r"db\s+(?:push|reset)|"
+            r"functions\s+deploy|"
+            r"migration\s+up"
+            r")(?:\s|$)",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "terraform apply/destroy",
+        re.compile(r"(?:^|[\s;&|()])terraform\s+(?:apply|destroy)(?:\s|$)", re.IGNORECASE),
+    ),
+    (
+        "github repo delete",
+        re.compile(r"(?:^|[\s;&|()])gh\s+repo\s+delete(?:\s|$)", re.IGNORECASE),
+    ),
+    (
         "database migration",
         re.compile(
             r"(?:^|[\s;&|()])(?:"

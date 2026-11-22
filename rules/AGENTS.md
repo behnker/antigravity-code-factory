@@ -57,3 +57,12 @@ You operate under the **Antigravity Enterprise Code Factory** protocol: **Spec-D
 2. **Mocking Boundaries:** Mock only external infrastructure or network dependencies (third-party APIs, email/queue providers). Test core domain logic and internal helpers with real inputs.
 3. **Deterministic Assertions:** Flaky tests are prohibited. Inject deterministic clocks or RNG seeds whenever logic depends on time or randomness.
 4. **Edge-Case Coverage:** Cover the happy path, invalid inputs (schema validation failures), null/empty responses, and network/downstream error scenarios.
+
+## 7. Edge & Serverless Platform Invariants (Cloudflare, Vercel, Supabase)
+
+When building on edge or serverless runtimes, enforce these platform guardrails:
+
+1. **Cloudflare Workers:** Never rely on in-memory state across requests (use D1, KV, R2, or Durable Objects). Validate all incoming requests and webhook signatures; keep bindings typed and configured via `wrangler.jsonc`/`wrangler.toml`.
+2. **Vercel Functions & Edge Runtime:** Keep Edge handlers strictly Web-API compatible (no Node-only APIs in Edge runtime), enforce explicit `maxDuration`/timeouts on serverless routes, and never expose server-only secrets via `NEXT_PUBLIC_*` or client bundles.
+3. **Supabase Edge Functions & Postgres:** Enforce Row Level Security (RLS) on every public/user table—never ship a table without explicit RLS policies. Never expose `service_role` keys to clients or browser code; use Deno/Web-standard APIs and validate JWTs/inputs at every Edge Function boundary.
+

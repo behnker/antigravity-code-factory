@@ -1,9 +1,18 @@
 {
   "name": "code-factory",
   "displayName": "Enterprise Code Factory",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "logo": "assets/logo.svg",
-  "description": "Spec-Driven Development (SDD), invariant quality gates (security, scalability, UI/UX, testing), persistent .memory/ handovers, and a 6-stage SDLC skill pipeline across all projects.",
+  "description": "Spec-Driven Development (SDD), invariant quality gates (security, scalability, UI/UX, testing, edge/serverless), persistent .memory/ handovers, HITL safety hook, custom personas, and an 11-skill SDLC pipeline across all projects.",
+  "author": {
+    "name": "Ralph Behnke",
+    "url": "https://github.com/behnker"
+  },
+  "homepage": "https://github.com/behnker/antigravity-code-factory",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/behnker/antigravity-code-factory"
+  },
   "suggestedPrompts": [
     "Bootstrap the Code Factory workspace (.memory/ and plans/) in this project",
     "Start a session by loading workspace memory and verifying git status",
