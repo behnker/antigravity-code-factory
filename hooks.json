@@ -1,0 +1,16 @@
+{
+  "code-factory-hitl-gate": {
+    "PreToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ./hooks/hitl-gate.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

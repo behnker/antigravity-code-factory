@@ -1,0 +1,12 @@
+{
+  "name": "code-factory",
+  "displayName": "Enterprise Code Factory",
+  "version": "2.0.0",
+  "logo": "assets/logo.svg",
+  "description": "Spec-Driven Development (SDD), invariant quality gates (security, scalability, UI/UX, testing), persistent .memory/ handovers, and a 6-stage SDLC skill pipeline across all projects.",
+  "suggestedPrompts": [
+    "Bootstrap the Code Factory workspace (.memory/ and plans/) in this project",
+    "Start a session by loading workspace memory and verifying git status",
+    "Grill me on requirements and draft a locked feature spec"
+  ]
+}
