@@ -14,11 +14,24 @@ Verify quality, security, accessibility, and visual fidelity before staging depl
 ## Steps
 
 1. **Automated Code Quality & Security Checks:**
-   Run the project's equivalents of:
-   - Linter (e.g., `npm run lint`, `ruff check`, `cargo clippy`)
-   - Typechecker (e.g., `npx tsc --noEmit`, `mypy`, `pyright`)
-   - Unit & integration test suite with coverage (e.g., `npm test -- --coverage`, `pytest --cov`)
-   - Dependency / SAST audit if configured (e.g., `npm audit`, `pip-audit`, `bandit`, `semgrep`)
+   Run the project's applicable checks:
+   - **TypeScript / Zod Core:**
+     - Linter: `npm run lint` (or `npx eslint .` / `npx biome check .`)
+     - Typechecker: `npx tsc --noEmit`
+     - Unit & integration tests with coverage: `npm test -- --coverage` (or `npx vitest run --coverage`)
+     - Dependency / SAST audit: `npm audit --audit-level=high` (or `ruff check` / `pytest --cov` / `pip-audit` for Python; `cargo clippy` / `cargo test` for Rust)
+     - Verify every external API/webhook/RPC boundary validates payloads with Zod (or Pydantic/Valibot) schemas rather than raw `as` type assertions.
+   - **Cloudflare Workers** *(when `wrangler.jsonc` / `wrangler.toml` is present)*:
+     - Regenerate & verify typed bindings: `npx wrangler types` followed by `npx tsc --noEmit`
+     - Bundle & binding dry-run check: `npx wrangler deploy --dry-run`
+     - Confirm zero in-memory cross-request state and valid webhook signature verification.
+   - **Vercel Functions / Next.js** *(when `vercel.json` / `next.config.*` is present)*:
+     - Production build verification: `npx vercel build` (or `npm run build`)
+     - Verify Edge routes avoid Node-only APIs, serverless routes declare `maxDuration`, and no server secrets leak via `NEXT_PUBLIC_*`.
+   - **Supabase Edge Functions & Postgres** *(when `supabase/` is present)*:
+     - Schema drift check: `npx supabase db diff`
+     - Typecheck Edge Functions: `deno check supabase/functions/**/*.ts` (when Deno is installed)
+     - Verify every public/user table has `ENABLE ROW LEVEL SECURITY` with explicit RLS policies and zero `service_role` keys in client code.
 2. **Independent Invariant & Security Review:**
    - Inspect `git diff` (preferably via a fresh reviewer subagent to preserve separation of concerns).
    - Verify compliance with every invariant: zero hardcoded secrets, runtime schema validation at boundaries, parameterized queries / no shell concat, pagination limits, HTTP timeouts/retries, WCAG 2.1 AA, deterministic tests, and edge-case coverage.

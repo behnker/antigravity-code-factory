@@ -88,6 +88,16 @@ HIGH_IMPACT_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
 ]
 
 
+# Patterns where --dry-run on the same command segment makes the invocation read-only.
+DRY_RUN_EXEMPT_LABELS = {
+    "cloudflare deploy/delete",
+    "supabase deploy/db mutation",
+}
+
+SEGMENT_SPLITTER = re.compile(r"(?:&&|\|\||[;\n|])")
+DRY_RUN_FLAG = re.compile(r"(?:^|\s)--dry-run(?:\s|$)", re.IGNORECASE)
+
+
 def evaluate_command(command_line: str, bypass_sandbox: bool = False) -> dict[str, Any]:
     """Return a PreToolUse hook decision dict for the given command line.
 
@@ -95,15 +105,22 @@ def evaluate_command(command_line: str, bypass_sandbox: bool = False) -> dict[st
     ("allow", "deny", "ask", or "force_ask"); an empty dict fails closed.
     """
     if command_line and command_line.strip():
-        for label, pattern in HIGH_IMPACT_PATTERNS:
-            if pattern.search(command_line):
-                return {
-                    "decision": "force_ask",
-                    "reason": (
-                        f"Enterprise Code Factory HITL Safety Gate: command matches "
-                        f"'{label}', which always requires explicit human confirmation."
-                    ),
-                }
+        for segment in SEGMENT_SPLITTER.split(command_line):
+            seg = segment.strip()
+            if not seg:
+                continue
+            is_dry_run = bool(DRY_RUN_FLAG.search(seg))
+            for label, pattern in HIGH_IMPACT_PATTERNS:
+                if pattern.search(seg):
+                    if is_dry_run and label in DRY_RUN_EXEMPT_LABELS:
+                        continue
+                    return {
+                        "decision": "force_ask",
+                        "reason": (
+                            f"Enterprise Code Factory HITL Safety Gate: command matches "
+                            f"'{label}', which always requires explicit human confirmation."
+                        ),
+                    }
 
     if bypass_sandbox:
         return {
