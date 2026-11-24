@@ -1,0 +1,433 @@
+{
+  "id": "code-factory-sdlc",
+  "slug": "code-factory-sdlc",
+  "number": 2,
+  "title": "The Enterprise Code Factory: 8-Stage SDLC Reference Model (Live Meta-Build)",
+  "subtitle": "Master all 8 repeatable engineering stages—Research, Spec, Architecture, Build, Test, Deploy, User Feedback, and Optimise—through the live artifacts produced while building Antigravity Academy itself.",
+  "level": "all-levels",
+  "estimatedMinutes": 70,
+  "threeScenePreset": "sdlc-orbital",
+  "accentTone": "violet",
+  "tags": [
+    "sdlc",
+    "spec-driven-development",
+    "code-factory",
+    "architecture",
+    "swarm",
+    "qa-review",
+    "vercel",
+    "meta-build"
+  ],
+  "video": {
+    "title": "Live Walkthrough: Building Antigravity Academy with Antigravity",
+    "durationLabel": "24:15",
+    "provider": "coming_soon",
+    "posterLabel": "Course 02 Meta-Build Documentary — Every Real Artifact from Stage 1 to Stage 8",
+    "chapters": [
+      {
+        "id": "ch1-research-license-catch",
+        "title": "Stage 1 Research: Catching GSAP's Proprietary EULA Before Line 1",
+        "timestampSeconds": 0,
+        "summary": "How cf-research prevented a license violation and chose MIT Motion + direct Three.js islands."
+      },
+      {
+        "id": "ch2-grill-me-and-spec",
+        "title": "Stages 2–3 Spec & Architecture: Locking 5 Decisions & ADR-0002",
+        "timestampSeconds": 340,
+        "summary": "Turning open-ended vision into plans/antigravity-academy-spec.md with Zod schemas and zero ambiguity."
+      },
+      {
+        "id": "ch3-swarm-build",
+        "title": "Stage 4 Build: Task 0 Interfaces & Zero-Collision Swarm Partitions",
+        "timestampSeconds": 720,
+        "summary": "Coordinating parallel Backend, 3D Three.js, Glassmorphic UI, and Vitest workers with zero merge conflicts."
+      },
+      {
+        "id": "ch4-qa-and-deploy",
+        "title": "Stages 5–6 Test & Deploy: cf-reviewer, 3-Viewport Browser QA & Vercel HITL",
+        "timestampSeconds": 1080,
+        "summary": "Independent security audit, live visual checks at 375/768/1440px, and rollback-ready staging deploy."
+      },
+      {
+        "id": "ch5-feedback-optimise",
+        "title": "Stages 7–8 Feedback & Optimise: Triage, cf-learn & Adding Course N+1",
+        "timestampSeconds": 1290,
+        "summary": "Closing the loop with permanent invariants, <=3 KB handover.md, and appending future courses cleanly."
+      }
+    ],
+    "transcriptSummary": "This course is a living meta-build reference model: every single stage you study is backed by the real markdown specs, ADRs, hooks, skills, and code that built Antigravity Academy itself. Starting from Stage 1 (cf-research), you see how dependency auditing caught GSAP's proprietary EULA before a single package was installed. In Stages 2 and 3 (cf-grill-me + cf-plan), five crisp questions locked our isolated Next.js App Router architecture in ADR-0002 and froze Zod schemas in plans/antigravity-academy-spec.md. In Stage 4 (cf-implement), Task 0 froze shared interfaces so four parallel Swarm workers built the Backend APIs, Three.js 3D Engine, Glassmorphic UI, and Vitest suite without a single overlapping file edit. In Stages 5 and 6 (cf-qa-review + cf-deploy-staging), an independent cf-reviewer audited security boundaries while the browser subagent verified 375px, 768px, and 1440px viewports prior to a HITL-gated Vercel preview deploy. Finally, Stages 7 and 8 (cf-triage + cf-learn + cf-handover) show how to convert lessons into permanent rules and add Course N+1 in any future conversation."
+  },
+  "steps": [
+    {
+      "id": "cf-stage-1-research",
+      "order": 1,
+      "title": "Stage 1 — Research: Discovery, Trade-Offs & License Auditing",
+      "stageTag": "Stage 1: Research",
+      "summary": "Never jump straight into coding. Stage 1 (`cf-research` via `cf-architect`) inspects the workspace, evaluates architectural options, audits dependency licenses (MIT/Apache-2.0/BSD), and flags upfront security risks in `.memory/research*.md`.",
+      "keyTakeaways": [
+        "Live Meta-Build Win: During Stage 1 of Antigravity Academy, dependency inspection flagged GSAP's proprietary Webflow Standard License and immediately replaced it with MIT-licensed `motion` before any code was written.",
+        "Plugin Root Isolation constraint discovered early: because the repo root is symlinked into `~/.gemini/config/plugins/code-factory`, the web platform had to live inside `academy/` to keep plugin discovery spotless.",
+        "Every research doc ends with a human Senior Engineer Sign-Off Gate confirming trade-offs, licenses, and security posture."
+      ],
+      "actionChecklist": [
+        "Open `.memory/research-academy-platform.md` in the Repo Explorer to inspect the full dependency compliance table.",
+        "Verify every new package has a permissive license (MIT/Apache-2.0/BSD/ISC) and zero known High/Critical CVEs.",
+        "Require explicit human sign-off on architectural trade-offs before opening Stage 2."
+      ],
+      "mermaidDiagram": "flowchart LR\n    A[\"Idea / Goal\"] --> B[\"cf-research (Codebase + Tooling Audit)\"]\n    B --> C[\"License & CVE Gate (Reject GSAP -> Pick MIT Motion)\"]\n    C --> D[\".memory/research.md\"]\n    D --> E{\"Senior Engineer Sign-Off\"}",
+      "repoArtifactPath": ".memory/research-academy-platform.md",
+      "promptId": "cf-prompt-bootstrap-research"
+    },
+    {
+      "id": "cf-stage-2-spec",
+      "order": 2,
+      "title": "Stage 2 — Spec: Interrogating Ambiguity & Locking Contracts",
+      "stageTag": "Stage 2: Spec",
+      "summary": "Ambiguous requirements cause expensive rework. Stage 2 pairs `cf-grill-me` (up to 5 sharp decision questions) with `cf-plan` to freeze a self-contained specification at `plans/<feature>-spec.md` with Zod schemas, error envelopes, and explicit non-goals.",
+      "keyTakeaways": [
+        "Live Meta-Build Win: `cf-grill-me` locked 5 decisive calls in under two minutes—Next.js App Router over raw HTML, stateless v1 `localStorage` + Zod, dark glassmorphic palette, unified `VideoStage`, and pure TypeScript HITL simulation.",
+        "Every API endpoint specifies its exact Zod schema, pagination defaults (`limit=20`, `max=100`), Vercel `maxDuration`, and 4xx/5xx error codes before implementation begins.",
+        "Explicit Non-Goals prevent scope creep during Swarm execution (e.g., deferring Supabase Auth + Postgres RLS cleanly to v2)."
+      ],
+      "actionChecklist": [
+        "Inspect `plans/antigravity-academy-spec.md` in the Repo Explorer to see how Zod contracts and UI state matrices are specified.",
+        "Never skip `cf-grill-me` when a request leaves persistence, auth, or visual direction ambiguous.",
+        "Verify the locked spec lists explicit Loading, Error, Empty, and WCAG 2.1 AA states for every interactive component."
+      ],
+      "codeSnippet": {
+        "language": "typescript",
+        "filename": "academy/src/lib/schemas.ts (Locked Boundary Contract)",
+        "code": "export const PaginationQuerySchema = z.object({\n  limit: z.coerce.number().int().min(1).max(100).default(20),\n  offset: z.coerce.number().int().min(0).default(0),\n});\n\nexport const HitlSimulateRequestSchema = z.object({\n  commandLine: z.string().trim().min(1).max(1000),\n  bypassSandbox: z.boolean().optional().default(false),\n});"
+      },
+      "repoArtifactPath": "plans/antigravity-academy-spec.md",
+      "promptId": "cf-prompt-grill-and-plan"
+    },
+    {
+      "id": "cf-stage-3-architecture",
+      "order": 3,
+      "title": "Stage 3 — Architecture: System Maps, ADRs & Design Tokens",
+      "stageTag": "Stage 3: Architecture",
+      "summary": "Durable decisions belong in `.memory/decisions/` (ADRs) and `.memory/architecture.md`, not buried in ephemeral chat history. Stage 3 freezes boundaries, rejected alternatives, Tailwind v4 `@theme` design tokens, and non-overlapping file partitions.",
+      "keyTakeaways": [
+        "Live Meta-Build Win: `ADR-0002` explicitly documents why direct imperative Three.js islands beat `@react-three/fiber` (zero React 19 peer friction + full WebGL/DPR/IntersectionObserver control) and why build-time allowlisted repo sync prevents secret leaks.",
+        "Design System Invariant: All colors, typography (`Space Grotesk` + `JetBrains Mono`), and glass surfaces live in `globals.css` `@theme` tokens—zero hardcoded hex values in UI components.",
+        "Partition Planning: Decomposing the work into Task 0 (shared schemas/tokens) + Tasks 1–4 guarantees parallel agents never overwrite each other's files."
+      ],
+      "actionChecklist": [
+        "Read `.memory/decisions/0002-academy-nextjs-glassmorphic-architecture.md` in the Repo Explorer.",
+        "Check that every ADR records Context, Decision, Alternatives Considered, and Consequences.",
+        "Confirm Task 0 freezes all shared TypeScript interfaces (`schemas.ts`, `contracts.ts`) before launching parallel builders."
+      ],
+      "mermaidDiagram": "flowchart TD\n    T0[\"Task 0: Shared Schemas, Contracts & Design Tokens\"] --> T1[\"Task 1: Backend APIs, HITL Evaluator & Course JSON\"]\n    T0 --> T2[\"Task 2: Three.js 3D Engine Islands\"]\n    T0 --> T3[\"Task 3: Glassmorphic UI Components\"]\n    T0 --> T4[\"Task 4: Deterministic Vitest Suite\"]\n    T1 --> QA[\"Stage 5: Independent QA & Browser Audit\"]\n    T2 --> QA\n    T3 --> QA\n    T4 --> QA",
+      "repoArtifactPath": ".memory/decisions/0002-academy-nextjs-glassmorphic-architecture.md",
+      "promptId": "cf-prompt-grill-and-plan"
+    },
+    {
+      "id": "cf-stage-4-build",
+      "order": 4,
+      "title": "Stage 4 — Build: Task 0 Lock & Non-Overlapping Swarm Execution",
+      "stageTag": "Stage 4: Build",
+      "summary": "Execution (`cf-implement`) strictly follows the locked spec. The orchestrator completes Task 0 first, then fans out clean `cf-backend` and `cf-frontend` workers onto strictly non-overlapping file partitions—preventing context rot and merge conflicts.",
+      "keyTakeaways": [
+        "Separation of Concerns: The architect who writes the spec is decoupled from the builders implementing it, and builders never invent unapproved dependencies or routes.",
+        "Zero File Contention: Task 1 owns `scripts/`, `content/`, `src/lib/`, `src/data/`, and `src/app/api/`; Task 2 owns `src/components/three/`; Task 3 owns UI components; Task 4 owns `tests/`.",
+        "All business logic ships with strict TypeScript (zero `any`), runtime Zod validation, and deterministic pure functions (zero `child_process` in API routes)."
+      ],
+      "actionChecklist": [
+        "Inspect `skills/cf-implement/references/orchestration.md` to review the exact Swarm partitioning rules.",
+        "Run `pnpm run sync:resources` to verify the allowlisted build-time manifest regenerates cleanly with zero errors.",
+        "Verify local `pnpm typecheck && pnpm lint && pnpm test` before handing off to Stage 5 QA."
+      ],
+      "repoArtifactPath": "skills/cf-implement/references/orchestration.md",
+      "promptId": "cf-prompt-swarm-implement"
+    },
+    {
+      "id": "cf-stage-5-test",
+      "order": 5,
+      "title": "Stage 5 — Test: Independent Security Review & 3-Viewport Browser QA",
+      "stageTag": "Stage 5: Test",
+      "summary": "Never let the author grade their own homework. Stage 5 (`cf-qa-review`) invokes `cf-reviewer` in a clean read-only context to audit the diff against `rules/AGENTS.md`, while the built-in `browser` subagent visually verifies 375px, 768px, and 1440px viewports.",
+      "keyTakeaways": [
+        "4-Layer Verification Gate: (1) Static checks (`tsc`, `eslint`, `next build`), (2) Deterministic Vitest parity & component suite, (3) Independent `cf-reviewer` SAST/invariant diff audit, (4) Live `browser` visual + console audit.",
+        "Visual Evidence Standard: The browser subagent validates layout stability (zero CLS), glassmorphism contrast (>= 4.5:1), keyboard focus rings, and zero console/hydration errors at Mobile (375px), Tablet (768px), and Desktop (1440px).",
+        "Output is persisted to `.memory/qa-report.md`—Stage 6 Deploy is strictly blocked if any P0/P1 defect remains."
+      ],
+      "actionChecklist": [
+        "Inspect `agents/cf-reviewer.md` and `skills/cf-qa-review/SKILL.md` in the Repo Explorer.",
+        "Verify all 4 Vitest suites pass deterministically with zero flaky timers or network mocks leaking.",
+        "Confirm `.memory/qa-report.md` records explicit Pass clearance across security, tests, and all 3 responsive viewports."
+      ],
+      "repoArtifactPath": "skills/cf-qa-review/SKILL.md",
+      "promptId": "cf-prompt-qa-review"
+    },
+    {
+      "id": "cf-stage-6-deploy",
+      "order": 6,
+      "title": "Stage 6 — Deploy: Rollback Plan, HITL Approval & Preview Smoke Tests",
+      "stageTag": "Stage 6: Deploy",
+      "summary": "Remote deployments are high-impact actions gated by both `cf-deploy-staging` and `hooks/hitl-gate.py`. Before pushing to Vercel Staging, the agent verifies QA clearance, documents the exact rollback command, obtains explicit human approval, and runs post-deploy smoke tests.",
+      "keyTakeaways": [
+        "Human-in-the-Loop Gate: `hooks/hitl-gate.py` enforces `force_ask` on `vercel --prod`, `wrangler deploy`, `supabase db push`, and `git push`, while permitting read-only `--dry-run` checks.",
+        "Rollback-First Discipline: Document the exact `vercel rollback <deployment-url>` command in `.memory/handover.md` *before* triggering a deployment.",
+        "Post-Deploy Smoke Test: Validate live HTTP 200 on `/`, `/api/courses`, `/api/resources`, and `POST /api/hitl/simulate` on the deployed staging preview URL."
+      ],
+      "actionChecklist": [
+        "Verify `.memory/qa-report.md` contains zero blocking defects before requesting staging deploy approval.",
+        "Test `vercel deploy` (staging preview) vs. `vercel --prod` (force_ask) in the live HITL Gate Simulator.",
+        "Record the staging preview URL, rollback command, and smoke-test results in `.memory/handover.md`."
+      ],
+      "codeSnippet": {
+        "language": "bash",
+        "filename": "Stage 6 Staging Smoke Test Commands",
+        "code": "# 1. Deploy staging preview (after human approval)\ncd academy && vercel deploy\n\n# 2. Smoke-test live API contracts (<= 5000ms timeout invariant)\ncurl --max-time 5 -sf \"$STAGING_URL/api/courses?limit=5\" | jq '.total'\ncurl --max-time 5 -sf \"$STAGING_URL/api/resources?category=skill&limit=20\" | jq '.total'\ncurl --max-time 5 -sf -X POST \"$STAGING_URL/api/hitl/simulate\" \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"commandLine\":\"git push --force\"}' | jq '.decision'"
+      },
+      "repoArtifactPath": "skills/cf-deploy-staging/SKILL.md",
+      "promptId": "cf-prompt-deploy-staging"
+    },
+    {
+      "id": "cf-stage-7-feedback",
+      "order": 7,
+      "title": "Stage 7 — User Feedback: Structured Triage & Severity Backlog",
+      "stageTag": "Stage 7: Feedback",
+      "summary": "Real learners and staging telemetry always surface edge cases that unit tests miss. Stage 7 (`cf-triage`) classifies feedback and runtime logs by severity (P0–P3), isolates root causes, and queues actionable items in `.memory/tasks.md`.",
+      "keyTakeaways": [
+        "Structured Triage beats ad-hoc patching: every bug report or UX friction point receives a severity tier (P0 Critical, P1 High, P2 Medium, P3 Enhancement) and minimal reproduction steps.",
+        "Separate quick regression fixes from new features: P0/P1 bugs enter immediate remediation while new course requests queue cleanly into the multi-course backlog.",
+        "Every staging observation links directly back to affected files, API endpoints, and viewport dimensions."
+      ],
+      "actionChecklist": [
+        "Inspect `skills/cf-triage/SKILL.md` and `.memory/tasks.md` to see how active backlog items are tracked.",
+        "Log every staging UX observation with its exact viewport width, reproduction step, and expected vs. actual behavior.",
+        "Prioritize P0/P1 regressions ahead of new feature work."
+      ],
+      "repoArtifactPath": "skills/cf-triage/SKILL.md",
+      "promptId": "cf-prompt-triage-feedback"
+    },
+    {
+      "id": "cf-stage-8-optimise",
+      "order": 8,
+      "title": "Stage 8 — Optimise: Distill Invariants, Handover & Add Course N+1",
+      "stageTag": "Stage 8: Optimise",
+      "summary": "Every completed cycle should make the factory permanently smarter. Stage 8 pairs `cf-learn` (promoting bug post-mortems into permanent rules & regression tests) with `cf-handover` (writing a <= 3 KB `.memory/handover.md`) so the next conversation starts hot and can drop in Course N+1 cleanly.",
+      "keyTakeaways": [
+        "Permanent Learning (`cf-learn`): Whenever a subtle bug is resolved (like GSAP's license or `PreToolUse` failing closed on `{}`), codify the invariant in `.agents/rules/` + a regression test so it can never recur.",
+        "Context Hygiene (`cf-handover`): Keep `.memory/handover.md` strictly <= 3 KB with current git status, completed milestones, and the exact next action for instant cross-model resumption.",
+        "Infinite Course Extensibility: Any future conversation in this repo can drop a new Zod-validated `academy/content/courses/<slug>/course.json` and run `pnpm run sync:resources`—the UI, Prompt Vault, and `/api/courses` update automatically!"
+      ],
+      "actionChecklist": [
+        "Inspect `skills/cf-learn/SKILL.md`, `skills/cf-handover/SKILL.md`, and `.memory/handover.md`.",
+        "Use the 'Add Course N+1' prompt below in your very next conversation to package any new project milestone into Course 3.",
+        "Export your learner progress JSON backup from the Course Studio header before switching machines."
+      ],
+      "mermaidDiagram": "flowchart LR\n    L[\"Resolved Bug / Milestone\"] --> R[\"cf-learn -> Permanent Rule + Regression Test\"]\n    R --> H[\"cf-handover -> .memory/handover.md (<= 3 KB)\"]\n    H --> C[\"New Conversation -> content/courses/<slug>/course.json\"]\n    C --> S[\"pnpm run sync:resources -> Live Academy Updated\"]\n    S --> NEXT[\"Next 8-Stage SDLC Cycle\"]",
+      "repoArtifactPath": ".memory/handover.md",
+      "promptId": "cf-prompt-learn-and-add-course"
+    }
+  ],
+  "prompts": [
+    {
+      "id": "cf-prompt-bootstrap-research",
+      "title": "Bootstrap Code Factory & Run Stage 1 Research",
+      "stage": "research",
+      "difficulty": "beginner",
+      "skillRef": "cf-bootstrap + cf-research",
+      "description": "Initializes the `.memory/` workspace structure and kicks off a disciplined Stage 1 discovery report with license and security checks.",
+      "template": "Run `cf-bootstrap` (if `.memory/` does not exist yet), then execute Stage 1 (`cf-research`) for `{{feature_name}}`.\n\nContext:\n- Problem statement: {{problem_statement}}\n- Target stack: {{target_stack}}\n\nDeliver `.memory/research.md` with: (1) codebase findings, (2) 2–3 architectural options & trade-offs, (3) dependency license/CVE audit (MIT/Apache-2.0/BSD preferred), and (4) upfront security & performance impacts. Stop at the Stage 1 Sign-Off Gate before designing.",
+      "variables": [
+        {
+          "key": "feature_name",
+          "label": "Feature Name",
+          "placeholder": "realtime-collab-canvas",
+          "defaultValue": "realtime-collab-canvas"
+        },
+        {
+          "key": "problem_statement",
+          "label": "Problem Statement",
+          "placeholder": "What user problem are we solving?",
+          "defaultValue": "Enable live multi-user curriculum annotations with offline resilience"
+        },
+        {
+          "key": "target_stack",
+          "label": "Target Stack",
+          "placeholder": "Next.js + Supabase + Vercel",
+          "defaultValue": "Next.js App Router + Zod + Vercel"
+        }
+      ],
+      "expectedOutcome": "A complete `.memory/` workspace and a sign-off-ready `.memory/research.md` with verified licenses and explicit trade-offs."
+    },
+    {
+      "id": "cf-prompt-grill-and-plan",
+      "title": "Run Stage 2A Interrogation (cf-grill-me) & Lock Spec + ADR",
+      "stage": "spec",
+      "difficulty": "beginner",
+      "skillRef": "cf-grill-me + cf-plan",
+      "description": "Surfaces hidden ambiguities with up to 5 focused questions and freezes an implementation-ready `plans/<feature>-spec.md` plus ADR.",
+      "template": "Execute Stage 2A (`cf-grill-me`) on `{{feature_name}}` using `.memory/research.md` as input.\n\nAsk me up to 5 high-impact questions to eliminate all ambiguity around {{ambiguity_focus}}. Once I answer, execute Stage 2B (`cf-plan`) to produce:\n1. A locked specification at `plans/{{feature_slug}}-spec.md` with Zod schemas, pagination bounds, error codes, UI Loading/Error/Empty/WCAG matrices, and non-overlapping Task 0..N file partitions.\n2. An Architecture Decision Record at `.memory/decisions/{{adr_filename}}`.\nDo not write production code until I approve the locked spec.",
+      "variables": [
+        {
+          "key": "feature_name",
+          "label": "Feature Title",
+          "placeholder": "User Progress Sync API",
+          "defaultValue": "User Progress Sync API"
+        },
+        {
+          "key": "feature_slug",
+          "label": "Spec Slug (kebab-case)",
+          "placeholder": "user-progress-sync",
+          "defaultValue": "user-progress-sync"
+        },
+        {
+          "key": "ambiguity_focus",
+          "label": "Key Ambiguity Areas",
+          "placeholder": "auth model, storage, responsive layout",
+          "defaultValue": "auth boundaries, Postgres RLS policies, and offline conflict resolution"
+        },
+        {
+          "key": "adr_filename",
+          "label": "ADR Filename",
+          "placeholder": "0003-progress-sync-architecture.md",
+          "defaultValue": "0003-progress-sync-architecture.md"
+        }
+      ],
+      "expectedOutcome": "Zero unstated assumptions, a locked `plans/<slug>-spec.md`, and a durable ADR under `.memory/decisions/`."
+    },
+    {
+      "id": "cf-prompt-swarm-implement",
+      "title": "Execute Stage 4 Swarm Build from a Locked Spec",
+      "stage": "build",
+      "difficulty": "intermediate",
+      "skillRef": "cf-implement",
+      "description": "Runs Task 0 shared interfaces first, then fans out parallel `cf-backend` and `cf-frontend` workers onto non-overlapping file partitions.",
+      "template": "Execute Stage 3/4 (`cf-implement`) strictly from the locked specification at `{{spec_path}}`.\n\nExecution Protocol:\n1. Complete Task 0 (shared Zod schemas, contracts, and design tokens) first in the coordinator context.\n2. Launch parallel workers on strictly non-overlapping file partitions (`{{worker_partitions}}`).\n3. Enforce all `rules/AGENTS.md` invariants: zero hardcoded secrets, zero `any`, strict Zod validation, WCAG 2.1 AA, and deterministic unit tests.\n4. Run `{{verify_cmd}}` and confirm 100% green before moving to Stage 4 QA Review.",
+      "variables": [
+        {
+          "key": "spec_path",
+          "label": "Locked Spec Path",
+          "placeholder": "plans/antigravity-academy-spec.md",
+          "defaultValue": "plans/antigravity-academy-spec.md"
+        },
+        {
+          "key": "worker_partitions",
+          "label": "Parallel Worker Partitions",
+          "placeholder": "Task 1 Backend, Task 2 3D, Task 3 UI, Task 4 Tests",
+          "defaultValue": "Task 1 Backend/APIs, Task 2 3D Islands, Task 3 Glassmorphic UI, Task 4 Vitest"
+        },
+        {
+          "key": "verify_cmd",
+          "label": "Local Verification Command",
+          "placeholder": "pnpm typecheck && pnpm lint && pnpm test && pnpm build",
+          "defaultValue": "pnpm typecheck && pnpm lint && pnpm test && pnpm build"
+        }
+      ],
+      "expectedOutcome": "A complete, spec-compliant, conflict-free implementation passing typecheck, lint, unit tests, and production build."
+    },
+    {
+      "id": "cf-prompt-qa-review",
+      "title": "Run Stage 5 Independent Security Audit & 3-Viewport Visual QA",
+      "stage": "test",
+      "difficulty": "intermediate",
+      "skillRef": "cf-qa-review",
+      "description": "Triggers `cf-reviewer` in a clean context plus the built-in `browser` subagent to audit 375px, 768px, and 1440px layouts.",
+      "template": "Execute Stage 4/5 (`cf-qa-review`) for `{{app_dir}}` served at `{{preview_url}}`:\n\n1. Run full static checks (`tsc --noEmit`, ESLint, Vitest coverage, production build).\n2. Invoke `cf-reviewer` in a clean context to inspect the diff against `rules/AGENTS.md` (security boundaries, XSS/injection, pagination, serverless timeouts, WCAG 2.1 AA).\n3. Invoke the `browser` subagent to inspect `{{preview_url}}` at 375px, 768px, and 1440px—verify zero console errors, zero horizontal overflow, interactive forms, and reduced-motion safety.\n4. Write the signed QA verdict to `.memory/qa-report.md`.",
+      "variables": [
+        {
+          "key": "app_dir",
+          "label": "Application Subdirectory",
+          "placeholder": "academy",
+          "defaultValue": "academy"
+        },
+        {
+          "key": "preview_url",
+          "label": "Local Dev Server URL",
+          "placeholder": "http://localhost:3000",
+          "defaultValue": "http://localhost:3000"
+        }
+      ],
+      "expectedOutcome": "A thorough `.memory/qa-report.md` documenting test results, security sign-off, and multi-viewport visual verification."
+    },
+    {
+      "id": "cf-prompt-deploy-staging",
+      "title": "Run Stage 6 HITL-Gated Staging Deployment & Smoke Tests",
+      "stage": "deploy",
+      "difficulty": "intermediate",
+      "skillRef": "cf-deploy-staging",
+      "description": "Verifies QA clearance, drafts the rollback plan, requests explicit human confirmation, deploys staging preview, and runs smoke checks.",
+      "template": "Execute Stage 5/6 (`cf-deploy-staging`) for `{{app_dir}}` to `{{target_platform}}` staging preview.\n\n1. Verify `.memory/qa-report.md` shows zero blocking P0/P1 defects.\n2. Document the exact rollback procedure in `.memory/handover.md` before executing any remote deploy.\n3. Present the deployment plan and wait for my explicit human approval (HITL gate).\n4. After approval, deploy the preview build and smoke-test `{{smoke_endpoints}}` with a <= 5000ms curl timeout.",
+      "variables": [
+        {
+          "key": "app_dir",
+          "label": "App Directory",
+          "placeholder": "academy",
+          "defaultValue": "academy"
+        },
+        {
+          "key": "target_platform",
+          "label": "Hosting Platform",
+          "placeholder": "Vercel / Cloudflare Workers",
+          "defaultValue": "Vercel"
+        },
+        {
+          "key": "smoke_endpoints",
+          "label": "Endpoints to Smoke Test",
+          "placeholder": "/, /api/courses, /api/resources, /api/hitl/simulate",
+          "defaultValue": "/, /api/courses, /api/resources, /api/hitl/simulate"
+        }
+      ],
+      "expectedOutcome": "A live staging preview URL verified by automated smoke tests and protected by a documented rollback command."
+    },
+    {
+      "id": "cf-prompt-triage-feedback",
+      "title": "Run Stage 7 Staging Feedback & Incident Triage",
+      "stage": "feedback",
+      "difficulty": "beginner",
+      "skillRef": "cf-triage",
+      "description": "Turns staging observations, user feedback, or runtime errors into severity-ranked root-cause items in `.memory/tasks.md`.",
+      "template": "Execute Stage 6A/7 (`cf-triage`) on the following staging feedback for `{{feature_name}}`:\n\nObserved issue or learner feedback:\n\"{{feedback_summary}}\"\n\n1. Classify severity (P0–P3) and isolate the concrete root cause in the codebase.\n2. Check whether this violates an existing invariant in `rules/AGENTS.md`.\n3. Queue prioritized remediation steps in `.memory/tasks.md` with clear acceptance criteria.",
+      "variables": [
+        {
+          "key": "feature_name",
+          "label": "Feature / Surface",
+          "placeholder": "Antigravity Academy",
+          "defaultValue": "Antigravity Academy"
+        },
+        {
+          "key": "feedback_summary",
+          "label": "Feedback or Incident Summary",
+          "placeholder": "Describe the UX issue, error log, or feature request",
+          "defaultValue": "Learners want keyboard shortcuts to cycle through SDLC stages in the 3D Orbital viewer"
+        }
+      ],
+      "expectedOutcome": "Severity-ranked root-cause analysis and prioritized remediation tasks logged in `.memory/tasks.md`."
+    },
+    {
+      "id": "cf-prompt-learn-and-add-course",
+      "title": "Stage 8 Optimise: Distill Lesson (cf-learn) & Add Course N+1",
+      "stage": "optimise",
+      "difficulty": "senior",
+      "skillRef": "cf-learn + cf-handover",
+      "description": "Promotes engineering lessons into permanent rules, updates handover.md (<= 3 KB), and scaffolds a brand-new Zod-validated Course N+1 inside Antigravity Academy.",
+      "template": "Execute Stage 6B/8 (`cf-learn` + `cf-handover`) and publish **Course {{course_number}}** into Antigravity Academy:\n\n1. Distill the key engineering lesson from this session (`{{lesson_learned}}`) into a permanent invariant rule and regression test requirement.\n2. Create `academy/content/courses/{{course_slug}}/course.json` conforming strictly to `CourseSchema` (`academy/src/lib/schemas.ts`), complete with video chapters, step-by-step walkthroughs, Mermaid diagrams, real `repoArtifactPath` links, and copyable variable prompts.\n3. Run `cd academy && pnpm run sync:resources && pnpm typecheck && pnpm test` to auto-ingest the new course.\n4. Update `.memory/tasks.md` and write a concise <= 3 KB `.memory/handover.md`.",
+      "variables": [
+        {
+          "key": "course_number",
+          "label": "Next Course Number",
+          "placeholder": "3",
+          "defaultValue": "3"
+        },
+        {
+          "key": "course_slug",
+          "label": "Course Slug (kebab-case)",
+          "placeholder": "supabase-rls-edge-security",
+          "defaultValue": "mcp-app-mission-control"
+        },
+        {
+          "key": "lesson_learned",
+          "label": "Post-Mortem / Engineering Lesson",
+          "placeholder": "What invariant should never be violated again?",
+          "defaultValue": "Always validate external embed URLs and hook payloads against strict Zod allowlists"
+        }
+      ],
+      "expectedOutcome": "A permanent invariant rule, a fresh <= 3 KB `.memory/handover.md`, and a newly published Course N+1 live in Antigravity Academy."
+    }
+  ]
+}

@@ -1,0 +1,306 @@
+{
+  "id": "harness-mastery",
+  "slug": "harness-mastery",
+  "number": 1,
+  "title": "Mastering the Agent Harness: Antigravity vs. Claude Code & Plugging the Gaps",
+  "subtitle": "Separate the model from the harness: master Antigravity's 4 surfaces, 3-tier orchestration, fail-closed hooks, and the concrete engineering upgrades that match and leapfrog Claude Code.",
+  "level": "all-levels",
+  "estimatedMinutes": 55,
+  "threeScenePreset": "harness-constellation",
+  "accentTone": "cyan",
+  "tags": [
+    "harness",
+    "antigravity",
+    "claude-code",
+    "hooks",
+    "swarm",
+    "run-workflow",
+    "sidecars",
+    "mcp"
+  ],
+  "video": {
+    "title": "Harness Deep Dive: Inside Antigravity vs. Claude Code",
+    "durationLabel": "18:40",
+    "provider": "coming_soon",
+    "posterLabel": "Course 01 Studio Walkthrough — 4 Surfaces, 12 Dimensions & Code Factory v3.0 Upgrades",
+    "chapters": [
+      {
+        "id": "ch1-harness-vs-model",
+        "title": "Harness vs. Model: 4 Surfaces & 3-Tier Orchestration",
+        "timestampSeconds": 0,
+        "summary": "Why engineering reliability depends more on tool loops, hooks, and sandboxing than raw LLM weights alone."
+      },
+      {
+        "id": "ch2-head-to-head",
+        "title": "12-Dimension Head-to-Head: Antigravity vs. Claude Code",
+        "timestampSeconds": 285,
+        "summary": "Evidence-backed comparison of where Antigravity leads decisively and where Claude Code sets the bar."
+      },
+      {
+        "id": "ch3-plugging-gaps",
+        "title": "Plugging the 4 Core Gaps with Code Factory v3.0",
+        "timestampSeconds": 610,
+        "summary": "Two-stage PostToolUse to PreInvocation bridge, Git-Shadow checkpoints, Unix-socket sidecar, and LSP-over-MCP."
+      },
+      {
+        "id": "ch4-exceeding",
+        "title": "Leapfrogging Terminal Harnesses with run_workflow & MCP Apps",
+        "timestampSeconds": 890,
+        "summary": "Typed Python async orchestration, live swarm model hot-swapping, and interactive Mission Control panes."
+      }
+    ],
+    "transcriptSummary": "In this studio walkthrough we dissect Google Antigravity as an engineering agent harness—separating the orchestration runtime, tool loop, lifecycle hooks, memory architecture, and sandbox containment from the underlying model weights. Grounded in our live repository research (.memory/research.md), we evaluate all 12 harness dimensions against Anthropic's Claude Code. You will inspect the real silent tools: frontmatter footgun we uncovered in agents/cf-*.md, learn why returning {} from Antigravity's PreToolUse hook fails closed, and build the exact four upgrades that close every parity gap: a two-stage PostToolUse to PreInvocation feedback bridge, non-destructive Git-Shadow checkpoints, a <10ms Unix-socket sidecar daemon, and a companion LSP-over-MCP plugin. Finally, we harness Antigravity's asymmetric superpowers—embedded Python run_workflow pipelines with JSON-schema finish gates, swarm model hot-swapping, and MCP App Mission Control—to exceed terminal-only harnesses."
+  },
+  "steps": [
+    {
+      "id": "hm-step-1-harness-vs-model",
+      "order": 1,
+      "title": "Harness vs. Model: Antigravity's 4 Surfaces & 3-Tier Orchestration",
+      "stageTag": "Foundations",
+      "summary": "Raw model intelligence is only half the equation. Production reliability comes from the agent harness: tool execution loops, sandboxing, context budgeting, and orchestration primitives. Antigravity unifies 4 execution surfaces (Antigravity 2.0 App, IDE, agy CLI, Python SDK) atop 3 distinct multi-agent tiers.",
+      "keyTakeaways": [
+        "Separate model capabilities from harness capabilities: hooks, memory hygiene, sandboxes, and deterministic verification gates turn stochastic models into reliable engineering systems.",
+        "Antigravity spans 4 surfaces: Electron Mission Control (Antigravity 2.0), VS Code IDE (Tab/Supercomplete, Inline Cmd+I, Diff Overlays), agy TUI CLI, and the async google-antigravity Python SDK.",
+        "Three native orchestration tiers cover every task scale: targeted Subagents (define_subagent + reactive wakeup), collaborative Swarm boards (shared feed + share/branch workspaces + live model hot-swap), and code-driven Python run_workflow pipelines.",
+        "Context is protected by a dedicated 20,000-token rules budget with 24 KB/file caps and progressive skill disclosure so heavy playbooks only load when needed."
+      ],
+      "actionChecklist": [
+        "Inspect plugin.json and rules/AGENTS.md to see how global invariants stay lean under the 20k-token budget.",
+        "Toggle between 'Raw Antigravity' and 'Antigravity + Code Factory v3.0' in the 3D Harness Constellation above.",
+        "Map your team's daily tasks to the right tier: 1-off research -> Subagent; parallel feature modules -> Swarm; repeatable multi-gate pipelines -> run_workflow."
+      ],
+      "mermaidDiagram": "flowchart TD\n    U[\"Engineer (IDE / App / CLI / SDK)\"] --> O[\"Orchestrator Core (20k Rules Budget)\"]\n    O --> T1[\"Tier 1: Subagents (define_subagent + Reactive Wakeup)\"]\n    O --> T2[\"Tier 2: Swarm Board (share/branch + Live Model Hot-Swap)\"]\n    O --> T3[\"Tier 3: run_workflow (Python Async + JSON Schema Gate)\"]\n    T1 --> S[\"OS Terminal Sandbox + PreToolUse Hooks\"]\n    T2 --> S\n    T3 --> S\n    S --> V[\"Browser Eye + Artifacts + MCP Apps\"]",
+      "repoArtifactPath": ".memory/research.md",
+      "promptId": "hm-prompt-harness-audit"
+    },
+    {
+      "id": "hm-step-2-head-to-head",
+      "order": 2,
+      "title": "Head-to-Head Reality Check: Antigravity vs. Claude Code",
+      "stageTag": "Benchmark",
+      "summary": "An honest staff-engineer appraisal across 12 harness dimensions reveals complementary philosophies. Antigravity is an agent-first, multi-surface visual orchestration platform; Claude Code is a precision-engineered UNIX terminal harness with deeper built-in hooks, native LSP, and auto-memory.",
+      "keyTakeaways": [
+        "Where Antigravity leads decisively: 3-tier multi-agent orchestration (run_workflow + swarm), built-in multimodal Browser subagent with tamper-resistant BROWSER_HOST_FACTS, Artifacts/Generative UI/MCP Apps, and declarative sidecar.json daemons.",
+        "Where Claude Code leads out of the box: 25–30+ lifecycle hook events with 5 handler types (command/http/prompt/agent/mcp_tool), native LSP & Glob/Grep tools, built-in Auto Memory (MEMORY.md) + PreCompact hooks, MDM/GPO managed settings, and hard maxBudgetUsd circuit breakers.",
+        "You do not have to choose blindly: almost every Claude Code harness advantage can be systematically bridged inside an Antigravity plugin while keeping Antigravity's unmatched visual and workflow superpowers."
+      ],
+      "actionChecklist": [
+        "Explore all 12 dimensions in the interactive Harness Comparison Lab and filter by 'Guardrails' and 'Orchestration'.",
+        "Compare the Raw Antigravity score against Antigravity + Code Factory v3.0 across each dimension.",
+        "Identify the top 2 harness bottlenecks currently slowing down your primary repository."
+      ],
+      "repoArtifactPath": ".memory/research.md",
+      "promptId": "hm-prompt-harness-audit"
+    },
+    {
+      "id": "hm-step-3-critical-audit",
+      "order": 3,
+      "title": "Critical Audit: Fixing the Silent tools: Footgun & Fail-Closed PreToolUse Hooks",
+      "stageTag": "Security & Guardrails",
+      "summary": "Direct codebase inspection of Code Factory v2.1.0 uncovered two subtle, high-impact Antigravity internals that every plugin author must master: omitted tools: in custom agents/*.md silently downgrade workers to read-only, and returning {} from a PreToolUse hook fails closed.",
+      "keyTakeaways": [
+        "Silent tools: Footgun: In Antigravity's agent spec, omitting `tools:` in `agents/cf-*.md` defaults the subagent to a tiny read-only set. Always declare explicit `subagent: true`, `mainAgent: false`, and least-privilege `tools:` lists.",
+        "Fail-Closed PreToolUse Contract: Never return `{}` from a `PreToolUse` hook—Antigravity treats an empty object as a hard deny. Always emit an explicit `decision`: `allow`, `ask`, `force_ask`, or `deny`.",
+        "Antigravity's `force_ask` ignores cached 'Allow' approvals for dangerous commands (`git push`, `rm -rf`, `vercel --prod`, DB migrations), while `overwrite` can transparently enforce safe flags like `curl --max-time 5`.",
+        "Segment-aware parsing splits chained shell commands (`&&`, `||`, `;`, `|`, newlines) so `wrangler deploy --dry-run && wrangler deploy` cannot smuggle an unguarded deploy behind a dry-run flag."
+      ],
+      "actionChecklist": [
+        "Test chained commands like `npx wrangler deploy --dry-run && npx wrangler deploy` in the live HITL Gate Simulator.",
+        "Review `hooks/hitl-gate.py` and verify how malformed JSON stdin fails closed to `ask`.",
+        "Audit your custom `agents/*.md` frontmatter to enforce least-privilege tool grants (`cf-architect` read-only vs. `cf-backend` write-enabled)."
+      ],
+      "codeSnippet": {
+        "language": "json",
+        "filename": "hooks.json (Code Factory v3.0 Multi-Event Target)",
+        "code": "{\n  \"hooks\": {\n    \"SessionStart\": [\n      { \"hooks\": [{ \"type\": \"command\", \"command\": \"python3 $PLUGIN_ROOT/hooks/session-hydrate.py\" }] }\n    ],\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"run_command\",\n        \"hooks\": [{ \"type\": \"command\", \"command\": \"python3 $PLUGIN_ROOT/hooks/hitl-gate.py\" }]\n      },\n      {\n        \"matcher\": \"edit_file|write_file\",\n        \"hooks\": [{ \"type\": \"command\", \"command\": \"python3 $PLUGIN_ROOT/hooks/secret-guard.py\" }]\n      }\n    ],\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"edit_file|write_file\",\n        \"hooks\": [{ \"type\": \"command\", \"command\": \"python3 $PLUGIN_ROOT/hooks/post-edit-lint.py\" }]\n      }\n    ],\n    \"PreInvocation\": [\n      { \"hooks\": [{ \"type\": \"command\", \"command\": \"python3 $PLUGIN_ROOT/hooks/inject-feedback.py\" }] }\n    ],\n    \"Stop\": [\n      { \"hooks\": [{ \"type\": \"command\", \"command\": \"python3 $PLUGIN_ROOT/hooks/stop-verify-gate.py\" }] }\n    ]\n  }\n}"
+      },
+      "repoArtifactPath": "hooks/hitl-gate.py",
+      "promptId": "hm-prompt-fix-agents-frontmatter"
+    },
+    {
+      "id": "hm-step-4-plugging-four-gaps",
+      "order": 4,
+      "title": "Plugging the 4 Core Gaps: Feedback Bridge, Git-Shadow, Sidecar & LSP-over-MCP",
+      "stageTag": "Architecture",
+      "summary": "Because Antigravity's PostToolUse hook cannot return context directly and hooks run synchronously, we plug all four structural parity gaps cleanly using zero-dependency Python stdlib patterns plus an optional companion LSP plugin.",
+      "keyTakeaways": [
+        "Gap 1 — Two-Stage PostToolUse -> PreInvocation Bridge: PostToolUse runs a fast (<2s) single-file lint/typecheck and writes compact diagnostics to `$PLUGIN_DATA/feedback/<cid>.json`; PreInvocation drains and injects them via `injectSteps.systemMessage`.",
+        "Gap 2 — Git-Shadow Checkpoints: Before the first mutating tool call per turn, run non-destructive `git stash create` and log `{stepIdx, sha}` to `$PLUGIN_DATA/checkpoints/<cid>.jsonl`—capturing even shell-mutated files.",
+        "Gap 3 — Async Unix-Socket Sidecar (`sidecar.json`): Hook shims fire-and-forget JSON in <10ms over a `0600` Unix socket to a supervised Python daemon that handles HTTP webhooks, OTel traces, and verified `.memory/auto-memory.md` distillation.",
+        "Gap 4 — Companion LSP-over-MCP (`code-factory-lsp`): Bundle pinned `mcp-language-server` + `ast-grep` MCP in an opt-in plugin so App, CLI, and Headless loops gain `goToDefinition`, `findReferences`, and structural AST queries."
+      ],
+      "actionChecklist": [
+        "Trace the Two-Stage Feedback Bridge diagram below to see how PostToolUse hands diagnostics to PreInvocation.",
+        "Keep every synchronous PreToolUse hook under 50ms and scope PostToolUse lint strictly to the single modified file.",
+        "Ensure any local sidecar socket binds strictly to a `0600` Unix domain socket under `$PLUGIN_DATA` (never `0.0.0.0` TCP)."
+      ],
+      "codeSnippet": {
+        "language": "python",
+        "filename": "hooks/inject-feedback.py (Two-Stage PreInvocation Bridge)",
+        "code": "#!/usr/bin/env python3\nimport json, os, pathlib, sys\n\ndef main() -> int:\n    payload = json.loads(sys.stdin.read() or \"{}\")\n    cid = payload.get(\"conversationId\", \"default\")\n    data_dir = pathlib.Path(os.environ.get(\"PLUGIN_DATA\", \"/tmp/cf-data\"))\n    fb_path = data_dir / \"feedback\" / f\"{cid}.json\"\n\n    if not fb_path.exists():\n        print(json.dumps({}))\n        return 0\n\n    diagnostics = json.loads(fb_path.read_text(encoding=\"utf-8\"))\n    fb_path.unlink(missing_ok=True)\n\n    summary = \"\\n\".join(diagnostics.get(\"errors\", [])[:10])\n    print(json.dumps({\n        \"injectSteps\": [{\n            \"systemMessage\": f\"[Code Factory Post-Edit Gate] Fix these lint/type issues immediately:\\n{summary}\"\n        }]\n    }))\n    return 0\n\nif __name__ == \"__main__\":\n    raise SystemExit(main())"
+      },
+      "mermaidDiagram": "sequenceDiagram\n    participant Agent as Antigravity Agent\n    participant Post as PostToolUse Hook\n    participant Store as PLUGIN_DATA/feedback\n    participant Pre as PreInvocation Hook\n    participant Sidecar as Unix-Socket Sidecar\n    Agent->>Post: edit_file (src/api.ts)\n    Post->>Sidecar: Fire-and-forget audit (<10ms)\n    Post->>Post: Single-file eslint/tsc (<2s)\n    Post->>Store: Write compact diagnostics JSON\n    Post-->>Agent: Return {}\n    Agent->>Pre: Next model invocation\n    Pre->>Store: Read & delete pending feedback\n    Pre-->>Agent: injectSteps.systemMessage (Diagnostics)\n    Agent->>Agent: Deterministically self-corrects edit",
+      "repoArtifactPath": "agents/cf-backend.md",
+      "promptId": "hm-prompt-feedback-bridge"
+    },
+    {
+      "id": "hm-step-5-exceeding-claude-code",
+      "order": 5,
+      "title": "Exceeding Claude Code: Typed run_workflow Pipelines, Swarm Hot-Swap & MCP Apps",
+      "stageTag": "Leapfrog",
+      "summary": "Once parity gaps are closed, Antigravity's native primitives let you build engineering automation impossible in terminal-only harnesses: Python-orchestrated parallel QA loops with JSON-schema finish contracts, live swarm model hot-switching, and a visual Mission Control side pane.",
+      "keyTakeaways": [
+        "Typed `run_workflow` pipelines replace fragile prose delegation with real Python `parallel()`, `pipeline()`, `phase()`, and `trajectory()` error mining, refusing to exit until a JSON-schema `finish` contract passes.",
+        "Live `swarm` model hot-switching (`swarm(action='model')`) preserves full conversation history when swapping a stalled worker from `flash` to `pro`—zero wasted tokens or lost context.",
+        "An interactive MCP App Mission Control side pane renders live SDLC stage progress, invariant pass/fail badges, and one-click Git-Shadow checkpoint rollbacks right inside Antigravity.",
+        "Wrap `agy -p --output-format stream-json` or the `google-antigravity` Python SDK in a budget-capped CI runner to add hard USD/token circuit breakers and SARIF PR annotations."
+      ],
+      "actionChecklist": [
+        "Copy the `run_workflow` QA Gate prompt below to scaffold a self-healing Reviewer <-> Fixer loop in your repo.",
+        "Route `flash` to high-fan-out parallel build/browser workers and reserve `pro` for `cf-architect` and `cf-reviewer`.",
+        "Advance to Course 2 to watch all 8 Enterprise Code Factory SDLC stages execute end-to-end on this exact codebase."
+      ],
+      "codeSnippet": {
+        "language": "python",
+        "filename": "workflows/cf_qa_gate.py (Typed run_workflow Self-Healing Gate)",
+        "code": "# Conceptual Antigravity run_workflow Stage 4 QA Pipeline\nfrom antigravity_workflow import agent, parallel, finish\n\nQA_SCHEMA = {\n    \"type\": \"object\",\n    \"required\": [\"passed\", \"blocking_defects\", \"viewports_verified\"],\n    \"properties\": {\n        \"passed\": {\"type\": \"boolean\"},\n        \"blocking_defects\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}},\n        \"viewports_verified\": {\"type\": \"array\", \"items\": {\"type\": \"integer\"}}\n    }\n}\n\nresults = parallel([\n    agent(\"cf-reviewer\", \"Audit git diff against rules/AGENTS.md invariants\"),\n    agent(\"browser\", \"Verify 375px, 768px, 1440px layouts & zero console errors\"),\n    agent(\"self\", \"Run pnpm typecheck && pnpm lint && pnpm test && pnpm build\")\n])\n\nfinish(schema=QA_SCHEMA, inputs=results)"
+      },
+      "repoArtifactPath": "skills/cf-implement/references/orchestration.md",
+      "promptId": "hm-prompt-run-workflow-qa"
+    }
+  ],
+  "prompts": [
+    {
+      "id": "hm-prompt-harness-audit",
+      "title": "Run a 12-Dimension Harness Gap Audit on Any Repository",
+      "stage": "research",
+      "difficulty": "beginner",
+      "skillRef": "cf-research",
+      "description": "Evaluates a target repository's current AI tooling setup against all 12 Antigravity harness dimensions and produces a prioritized upgrade roadmap.",
+      "template": "Run Stage 1 (`cf-research`) to audit the AI agent harness setup in `{{target_repo}}`.\n\n1. Inspect existing rules, hooks, custom agents, MCP configs, and CI scripts.\n2. Score the repository across the 12 harness dimensions (Surfaces, Tools, Hooks, Orchestration, Memory, LSP, Sandboxing, Governance, Browser/UI, Sidecars, CI/CD, Plugins).\n3. Flag any silent config footguns (such as omitted `tools:` in custom agents or fail-closed `{}` PreToolUse hooks).\n4. Write a concise upgrade roadmap to `.memory/research.md` tailored to our primary goal: {{audit_goal}}.",
+      "variables": [
+        {
+          "key": "target_repo",
+          "label": "Target Repository Path",
+          "placeholder": "./my-saas-platform",
+          "defaultValue": "."
+        },
+        {
+          "key": "audit_goal",
+          "label": "Primary Engineering Goal",
+          "placeholder": "e.g., faster PR review + stricter security gates",
+          "defaultValue": "deterministic post-edit QA and safe parallel feature builds"
+        }
+      ],
+      "expectedOutcome": "A primary-source-verified `.memory/research.md` scorecard identifying exact config footguns and the highest-ROI harness upgrades."
+    },
+    {
+      "id": "hm-prompt-fix-agents-frontmatter",
+      "title": "Harden Custom Subagent Least-Privilege Frontmatter",
+      "stage": "architecture",
+      "difficulty": "intermediate",
+      "skillRef": "cf-plan",
+      "description": "Fixes the silent read-only `tools:` footgun across custom `agents/*.md` files by adding explicit `subagent`, `mainAgent`, and least-privilege `tools:` declarations.",
+      "template": "Audit every custom agent definition under `{{agents_dir}}` against the Antigravity agent specification.\n\nFor each agent:\n- Explicitly add `subagent: true` and `mainAgent: false`.\n- Assign a least-privilege `tools:` list: read-only research/review personas (`{{readonly_agents}}`) get `read_file`, `search_web`, and spec/report write scope only; implementation personas (`{{builder_agents}}`) receive `read_file`, `edit_file`, `write_file`, and `run_command`.\n- Summarize every permission change in a table and wait for my approval before modifying files.",
+      "variables": [
+        {
+          "key": "agents_dir",
+          "label": "Agents Directory",
+          "placeholder": "agents/",
+          "defaultValue": "agents/"
+        },
+        {
+          "key": "readonly_agents",
+          "label": "Read-Only Personas",
+          "placeholder": "cf-architect, cf-reviewer",
+          "defaultValue": "cf-architect, cf-reviewer"
+        },
+        {
+          "key": "builder_agents",
+          "label": "Builder Personas",
+          "placeholder": "cf-backend, cf-frontend",
+          "defaultValue": "cf-backend, cf-frontend"
+        }
+      ],
+      "expectedOutcome": "An explicit least-privilege permission matrix and hardened frontmatter preventing silent tool stripping in subagents."
+    },
+    {
+      "id": "hm-prompt-feedback-bridge",
+      "title": "Build the Two-Stage PostToolUse -> PreInvocation Lint Bridge",
+      "stage": "build",
+      "difficulty": "senior",
+      "skillRef": "cf-implement",
+      "description": "Implements the deterministic two-stage hook bridge so Antigravity automatically lints modified files after every edit and injects compact errors before the next turn.",
+      "template": "Implement the Two-Stage `PostToolUse` -> `PreInvocation` feedback bridge in `hooks/` using Python 3 standard library only.\n\nRequirements:\n1. `hooks/post-edit-lint.py` triggers on `edit_file|write_file`, checks ONLY the single modified file using `{{linter_cmd}}` with a hard `{{timeout_ms}}ms` timeout, and writes compact diagnostics to `$PLUGIN_DATA/feedback/<conversationId>.json`.\n2. `hooks/inject-feedback.py` triggers on `PreInvocation`, atomically reads and deletes any pending feedback file, and returns `{\"injectSteps\": [{\"systemMessage\": \"...\"}]}`.\n3. Add deterministic Python unit tests covering clean edits, lint failures, timeouts, and missing files.",
+      "variables": [
+        {
+          "key": "linter_cmd",
+          "label": "Single-File Linter Command",
+          "placeholder": "npx eslint --max-warnings=0",
+          "defaultValue": "npx eslint --max-warnings=0"
+        },
+        {
+          "key": "timeout_ms",
+          "label": "Strict Timeout (ms)",
+          "placeholder": "2000",
+          "defaultValue": "2000"
+        }
+      ],
+      "expectedOutcome": "A <2s single-file lint feedback loop with unit tests giving Antigravity deterministic post-edit self-correction."
+    },
+    {
+      "id": "hm-prompt-hitl-guard",
+      "title": "Extend Fail-Closed PreToolUse Guardrails for Secrets & Deployments",
+      "stage": "build",
+      "difficulty": "intermediate",
+      "skillRef": "cf-implement",
+      "description": "Expands `hooks/hitl-gate.py` with custom organization safety patterns and secret-write blocking while preserving fail-closed semantics.",
+      "template": "Extend our fail-closed `PreToolUse` safety gate (`hooks/hitl-gate.py`) for `{{feature_name}}`:\n\n1. Add a high-impact `force_ask` regex rule blocking unapproved `{{blocked_command_class}}` commands with segment-aware splitting (`&&`, `||`, `;`, `|`).\n2. Add a companion `edit_file|write_file` guard that hard-denies (`decision: \"deny\"`) writes to `.env.production`, `~/.ssh/*`, or payloads matching hardcoded secret patterns.\n3. Verify that malformed stdin fails closed to `\"ask\"` and never emits `{}`.\n4. Update `hooks/test_hitl_gate.py` with positive, negative, and chained-command unit tests.",
+      "variables": [
+        {
+          "key": "feature_name",
+          "label": "Security Rule Scope",
+          "placeholder": "production-infra-guard",
+          "defaultValue": "production-infra-guard"
+        },
+        {
+          "key": "blocked_command_class",
+          "label": "Command Pattern to Gate",
+          "placeholder": "e.g., aws s3 rb / fly deploy --prod",
+          "defaultValue": "fly deploy --prod and aws s3 rb"
+        }
+      ],
+      "expectedOutcome": "Verified fail-closed PreToolUse rules with full regression coverage in `hooks/test_hitl_gate.py`."
+    },
+    {
+      "id": "hm-prompt-run-workflow-qa",
+      "title": "Launch a Typed Parallel Stage 4 QA Workflow",
+      "stage": "test",
+      "difficulty": "senior",
+      "skillRef": "cf-qa-review",
+      "description": "Orchestrates parallel independent security review, static checks, and multi-viewport browser QA using Antigravity's `run_workflow` primitive.",
+      "template": "Execute a parallel Stage 4 QA pipeline for `{{app_url}}` targeting `{{feature_name}}`:\n\n1. Run static checks (`{{test_cmd}}`) in one worker.\n2. Launch `cf-reviewer` in a clean read-only context to audit our git diff against `rules/AGENTS.md` invariants.\n3. Launch the built-in `browser` subagent to visually audit `{{app_url}}` across 375px, 768px, and 1440px viewports, verifying zero console errors, zero horizontal overflow, and WCAG 2.1 AA focus states.\n4. Synthesize all findings into `.memory/qa-report.md` with an explicit Pass/Fail clearance decision.",
+      "variables": [
+        {
+          "key": "app_url",
+          "label": "Local or Staging URL",
+          "placeholder": "http://localhost:3000",
+          "defaultValue": "http://localhost:3000"
+        },
+        {
+          "key": "feature_name",
+          "label": "Feature / Milestone Name",
+          "placeholder": "antigravity-academy",
+          "defaultValue": "antigravity-academy"
+        },
+        {
+          "key": "test_cmd",
+          "label": "Verification Command",
+          "placeholder": "pnpm typecheck && pnpm lint && pnpm test && pnpm build",
+          "defaultValue": "pnpm typecheck && pnpm lint && pnpm test && pnpm build"
+        }
+      ],
+      "expectedOutcome": "A unified `.memory/qa-report.md` backed by passing automated checks, independent diff review, and host-verified multi-viewport browser evidence."
+    }
+  ]
+}

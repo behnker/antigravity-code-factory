@@ -3,3 +3,10 @@
 *.swo
 __pycache__/
 *.pyc
+academy/node_modules/
+academy/.next/
+academy/out/
+academy/coverage/
+academy/.vercel/
+academy/*.tsbuildinfo
+academy/src/data/generated-repo-manifest.json
