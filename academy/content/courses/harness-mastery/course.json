@@ -3,9 +3,9 @@
   "slug": "harness-mastery",
   "number": 1,
   "title": "Mastering the Agent Harness: Antigravity vs. Claude Code & Plugging the Gaps",
-  "subtitle": "Separate the model from the harness: master Antigravity's 4 surfaces, 3-tier orchestration, fail-closed hooks, and the concrete engineering upgrades that match and leapfrog Claude Code.",
+  "subtitle": "Master the 10% Model / 90% Harness equation from The New Software Lifecycle: Antigravity's 4 surfaces, 3-tier orchestration, fail-closed hooks, Context Economics, and upgrades that leapfrog Claude Code.",
   "level": "all-levels",
-  "estimatedMinutes": 55,
+  "estimatedMinutes": 65,
   "threeScenePreset": "harness-constellation",
   "accentTone": "cyan",
   "tags": [
@@ -16,7 +16,9 @@
     "swarm",
     "run-workflow",
     "sidecars",
-    "mcp"
+    "mcp",
+    "context-economics",
+    "vibe-coding-sdlc"
   ],
   "video": {
     "title": "Harness Deep Dive: Inside Antigravity vs. Claude Code",
@@ -47,6 +49,12 @@
         "title": "Leapfrogging Terminal Harnesses with run_workflow & MCP Apps",
         "timestampSeconds": 890,
         "summary": "Typed Python async orchestration, live swarm model hot-swapping, and interactive Mission Control panes."
+      },
+      {
+        "id": "ch5-context-economics",
+        "title": "Context Engineering & Routing Economics (Days 2-3 Skills + MCP)",
+        "timestampSeconds": 1060,
+        "summary": "Static rules vs. progressive-disclosure skills and model routing as direct quality and financial levers."
       }
     ],
     "transcriptSummary": "In this studio walkthrough we dissect Google Antigravity as an engineering agent harness—separating the orchestration runtime, tool loop, lifecycle hooks, memory architecture, and sandbox containment from the underlying model weights. Grounded in our live repository research (.memory/research.md), we evaluate all 12 harness dimensions against Anthropic's Claude Code. You will inspect the real silent tools: frontmatter footgun we uncovered in agents/cf-*.md, learn why returning {} from Antigravity's PreToolUse hook fails closed, and build the exact four upgrades that close every parity gap: a two-stage PostToolUse to PreInvocation feedback bridge, non-destructive Git-Shadow checkpoints, a <10ms Unix-socket sidecar daemon, and a companion LSP-over-MCP plugin. Finally, we harness Antigravity's asymmetric superpowers—embedded Python run_workflow pipelines with JSON-schema finish gates, swarm model hot-swapping, and MCP App Mission Control—to exceed terminal-only harnesses."
@@ -57,12 +65,12 @@
       "order": 1,
       "title": "Harness vs. Model: Antigravity's 4 Surfaces & 3-Tier Orchestration",
       "stageTag": "Foundations",
-      "summary": "Raw model intelligence is only half the equation. Production reliability comes from the agent harness: tool execution loops, sandboxing, context budgeting, and orchestration primitives. Antigravity unifies 4 execution surfaces (Antigravity 2.0 App, IDE, agy CLI, Python SDK) atop 3 distinct multi-agent tiers.",
+      "summary": "As Google & Kaggle's 'The New SDLC With Vibe Coding' and Addy Osmani's 'The New Software Lifecycle' establish: Agent = Model (10%) + Harness (90%). Production reliability comes from tools, hooks, sandboxes, context budgets, and Antigravity's 4 surfaces atop 3 orchestration tiers.",
       "keyTakeaways": [
-        "Separate model capabilities from harness capabilities: hooks, memory hygiene, sandboxes, and deterministic verification gates turn stochastic models into reliable engineering systems.",
+        "Agent = Model (10%) + Harness (90%): Most real-world agent failures are harness failures (noisy context, missing tools, weak oracles, unguarded shell commands), not model intelligence failures.",
         "Antigravity spans 4 surfaces: Electron Mission Control (Antigravity 2.0), VS Code IDE (Tab/Supercomplete, Inline Cmd+I, Diff Overlays), agy TUI CLI, and the async google-antigravity Python SDK.",
         "Three native orchestration tiers cover every task scale: targeted Subagents (define_subagent + reactive wakeup), collaborative Swarm boards (shared feed + share/branch workspaces + live model hot-swap), and code-driven Python run_workflow pipelines.",
-        "Context is protected by a dedicated 20,000-token rules budget with 24 KB/file caps and progressive skill disclosure so heavy playbooks only load when needed."
+        "Context is protected by a dedicated 20,000-token rules budget with 24 KB/file caps and progressive skill disclosure (Day 3 Agent Skills) so heavy playbooks only load when needed."
       ],
       "actionChecklist": [
         "Inspect plugin.json and rules/AGENTS.md to see how global invariants stay lean under the 20k-token budget.",
@@ -167,6 +175,31 @@
       },
       "repoArtifactPath": "skills/cf-implement/references/orchestration.md",
       "promptId": "hm-prompt-run-workflow-qa"
+    },
+    {
+      "id": "hm-step-6-context-economics",
+      "order": 6,
+      "title": "Context Engineering & Routing Economics: Static Rules vs. Progressive Skills",
+      "stageTag": "Context Economics",
+      "summary": "Combining Google/Kaggle Day 2 (Tools & MCP), Day 3 (Agent Skills), and Addy Osmani's 'The New Software Lifecycle': context engineering has a shape, and it decides both your accuracy and your bill. Keep static rules lean, load skills dynamically, and route models by cognitive load.",
+      "keyTakeaways": [
+        "Static vs. Dynamic Split on This Repo: Always-on rules/AGENTS.md stays lean (< 10 KB of hard invariants), while 14 progressive-disclosure skills/cf-*/SKILL.md files and deep references/ manuals load strictly when triggered.",
+        "Solve the Goldilocks Problem: Bloated system prompts trigger 'lost in the middle' degradation and burn tokens every turn; crisp <= 3 KB .memory/handover.md records keep sessions sharp across model switches.",
+        "Tool & MCP Interoperability (Day 2): Connect typed, least-privilege Streamable HTTP MCP servers (Cloudflare, Vercel, Supabase, Google Drive) rather than pasting giant API docs into prompts.",
+        "Model Routing as a Financial Lever: Route high-reasoning models (pro) to cf-architect and independent cf-reviewer audits; route fast models (flash) to bounded parallel build workers and multi-viewport browser sweeps."
+      ],
+      "actionChecklist": [
+        "Measure your always-on rules footprint (`wc -c rules/AGENTS.md`) and move any multi-step checklists into progressive-disclosure `skills/<name>/SKILL.md` + `references/`.",
+        "Verify `.memory/handover.md` stays <= 3 KB so fresh sessions hydrate cleanly without context bloat.",
+        "Run the Context & Routing Economics Audit prompt below to optimize token spend across your agents and MCP tools."
+      ],
+      "codeSnippet": {
+        "language": "markdown",
+        "filename": "Project_Antigravity Context & Model Routing Budget",
+        "code": "| Layer | Mechanism | Loaded When | Budget Target on This Repo |\n| :--- | :--- | :--- | :--- |\n| Static Invariants | rules/AGENTS.md + .agents/rules/ | Every turn | <= 10 KB (hard cap 24 KB / 20k tokens) |\n| Dynamic Playbooks | 14x skills/cf-*/SKILL.md + references/ | Progressive disclosure | Name+desc only until matched |\n| Session State | .memory/handover.md + tasks.md | Session start / wrap-up | handover.md <= 3 KB |\n| Model Routing | agents/cf-*.md frontmatter | Per subagent role | pro: architect/reviewer; flash: browser/workers |"
+      },
+      "repoArtifactPath": "rules/AGENTS.md",
+      "promptId": "hm-prompt-context-economics"
     }
   ],
   "prompts": [
@@ -301,6 +334,36 @@
         }
       ],
       "expectedOutcome": "A unified `.memory/qa-report.md` backed by passing automated checks, independent diff review, and host-verified multi-viewport browser evidence."
+    },
+    {
+      "id": "hm-prompt-context-economics",
+      "title": "Audit Static vs. Dynamic Context & Model Routing Economics",
+      "stage": "optimise",
+      "difficulty": "intermediate",
+      "skillRef": "cf-loop-engineer",
+      "description": "Applies Day 2-3 Agent Skills & Osmani's Context Economics to slim always-on rules, extract progressive-disclosure skills, and optimize pro vs. flash model routing.",
+      "template": "Audit the Context Engineering and Model Routing economics of `{{repo_path}}`:\n\n1. Measure all always-on static rules (`AGENTS.md`, `rules/*.md`, `.agents/rules/*.md`) and flag any file exceeding `{{max_static_kb}} KB` or containing multi-step procedures better moved into progressive-disclosure `skills/<name>/SKILL.md` + `references/`.\n2. Inspect `.memory/handover.md` (must stay <= 3 KB) and MCP server tool surface area to eliminate unused context bloat.\n3. Propose a concrete Model Routing table assigning `pro` (architecture, locked specs, independent `cf-reviewer` audits) vs. `flash` (bounded parallel builds, test runs, `browser` viewport checks) for `{{primary_workflow}}`.",
+      "variables": [
+        {
+          "key": "repo_path",
+          "label": "Repository Path",
+          "placeholder": ".",
+          "defaultValue": "."
+        },
+        {
+          "key": "max_static_kb",
+          "label": "Max Static Rules Size (KB)",
+          "placeholder": "10",
+          "defaultValue": "10"
+        },
+        {
+          "key": "primary_workflow",
+          "label": "Primary Workflow to Optimize",
+          "placeholder": "Full-stack feature delivery & QA",
+          "defaultValue": "Course authoring, skill upgrades, and full-stack Next.js QA"
+        }
+      ],
+      "expectedOutcome": "A concrete byte/token context budget, progressive skill extraction plan, and cost-effective pro/flash routing table."
     }
   ]
 }

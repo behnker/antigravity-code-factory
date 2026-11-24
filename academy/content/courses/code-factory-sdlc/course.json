@@ -3,15 +3,18 @@
   "slug": "code-factory-sdlc",
   "number": 2,
   "title": "The Enterprise Code Factory: 8-Stage SDLC Reference Model (Live Meta-Build)",
-  "subtitle": "Master all 8 repeatable engineering stages—Research, Spec, Architecture, Build, Test, Deploy, User Feedback, and Optimise—through the live artifacts produced while building Antigravity Academy itself.",
+  "subtitle": "Operationalize The New SDLC With Vibe Coding and Lit Software Factories (Loop -> Harness -> Factory) across all 8 stages—with live artifacts, Dual-Axis Evals, and Outer-Loop governance built on this repo.",
   "level": "all-levels",
-  "estimatedMinutes": 70,
+  "estimatedMinutes": 80,
   "threeScenePreset": "sdlc-orbital",
   "accentTone": "violet",
   "tags": [
     "sdlc",
     "spec-driven-development",
     "code-factory",
+    "lit-factory",
+    "outer-loop",
+    "dual-axis-eval",
     "architecture",
     "swarm",
     "qa-review",
@@ -63,11 +66,12 @@
       "order": 1,
       "title": "Stage 1 — Research: Discovery, Trade-Offs & License Auditing",
       "stageTag": "Stage 1: Research",
-      "summary": "Never jump straight into coding. Stage 1 (`cf-research` via `cf-architect`) inspects the workspace, evaluates architectural options, audits dependency licenses (MIT/Apache-2.0/BSD), and flags upfront security risks in `.memory/research*.md`.",
+      "summary": "In 'The New SDLC With Vibe Coding' and 'Human Judgment Doesn't Leave the Software Factory, It Relocates', generation is cheap while intent and risk discovery move upstream. Stage 1 (`cf-research`) inspects the workspace, audits licenses/CVEs, and maps trade-offs in `.memory/research*.md`.",
       "keyTakeaways": [
+        "Human Judgment Moves Upstream: Because agents eliminate syntax translation friction, engineers focus first on problem intent, architecture constraints, and risk boundaries before a single line is generated.",
         "Live Meta-Build Win: During Stage 1 of Antigravity Academy, dependency inspection flagged GSAP's proprietary Webflow Standard License and immediately replaced it with MIT-licensed `motion` before any code was written.",
         "Plugin Root Isolation constraint discovered early: because the repo root is symlinked into `~/.gemini/config/plugins/code-factory`, the web platform had to live inside `academy/` to keep plugin discovery spotless.",
-        "Every research doc ends with a human Senior Engineer Sign-Off Gate confirming trade-offs, licenses, and security posture."
+        "Every research doc ends with a human Outer-Loop Sign-Off Gate confirming trade-offs, licenses, and security posture."
       ],
       "actionChecklist": [
         "Open `.memory/research-academy-platform.md` in the Repo Explorer to inspect the full dependency compliance table.",
@@ -83,8 +87,9 @@
       "order": 2,
       "title": "Stage 2 — Spec: Interrogating Ambiguity & Locking Contracts",
       "stageTag": "Stage 2: Spec",
-      "summary": "Ambiguous requirements cause expensive rework. Stage 2 pairs `cf-grill-me` (up to 5 sharp decision questions) with `cf-plan` to freeze a self-contained specification at `plans/<feature>-spec.md` with Zod schemas, error envelopes, and explicit non-goals.",
+      "summary": "Ambiguous requirements turn autonomous factories into Dark Factories shipping the wrong intent. Stage 2 pairs `cf-grill-me` (up to 5 sharp decision questions) with `cf-plan` to lock Zod contracts, Selective Autonomy tiers (Lights-Out vs. Human-Lit), and verification oracles in `plans/<feature>-spec.md`.",
       "keyTakeaways": [
+        "Lit vs. Dark Factory Spec Discipline: Every `cf-plan` spec classifies tasks into Lights-Out (crisp machine oracle) vs. Human-Lit (auth, security/RLS, finance, infra, core architecture) and declares the exact verification oracle upfront.",
         "Live Meta-Build Win: `cf-grill-me` locked 5 decisive calls in under two minutes—Next.js App Router over raw HTML, stateless v1 `localStorage` + Zod, dark glassmorphic palette, unified `VideoStage`, and pure TypeScript HITL simulation.",
         "Every API endpoint specifies its exact Zod schema, pagination defaults (`limit=20`, `max=100`), Vercel `maxDuration`, and 4xx/5xx error codes before implementation begins.",
         "Explicit Non-Goals prevent scope creep during Swarm execution (e.g., deferring Supabase Auth + Postgres RLS cleanly to v2)."
@@ -144,13 +149,14 @@
     {
       "id": "cf-stage-5-test",
       "order": 5,
-      "title": "Stage 5 — Test: Independent Security Review & 3-Viewport Browser QA",
+      "title": "Stage 5 — Test: Dual-Axis Evals (Output + Trajectory) & 3-Viewport QA",
       "stageTag": "Stage 5: Test",
-      "summary": "Never let the author grade their own homework. Stage 5 (`cf-qa-review`) invokes `cf-reviewer` in a clean read-only context to audit the diff against `rules/AGENTS.md`, while the built-in `browser` subagent visually verifies 375px, 768px, and 1440px viewports.",
+      "summary": "Verification is the line between vibe coding and engineering (Day 4 Security & Eval + Agentic Code Quality). Never let the generator grade its own homework: `cf-qa-review` + `cf-eval` audit BOTH final output AND execution trajectory via decoupled `cf-reviewer`, `cf-tester`, and `browser` agents.",
       "keyTakeaways": [
-        "4-Layer Verification Gate: (1) Static checks (`tsc`, `eslint`, `next build`), (2) Deterministic Vitest parity & component suite, (3) Independent `cf-reviewer` SAST/invariant diff audit, (4) Live `browser` visual + console audit.",
-        "Visual Evidence Standard: The browser subagent validates layout stability (zero CLS), glassmorphism contrast (>= 4.5:1), keyboard focus rings, and zero console/hydration errors at Mobile (375px), Tablet (768px), and Desktop (1440px).",
-        "Output is persisted to `.memory/qa-report.md`—Stage 6 Deploy is strictly blocked if any P0/P1 defect remains."
+        "Verification Is the Narrow Neck: Generation is wide and cheap; moving quality into the harness (strict types, Zod boundaries, `cf-next-verify`, deterministic Vitest, SAST) prevents review overload.",
+        "Dual-Axis Evaluation (`cf-eval`): Grade BOTH Output Quality (tests, CVEs, contrast >= 4.5:1, valid ARIA) AND Execution Trajectory (spec adherence, zero oracle-gaming/disabled lints, zero desktop-vs-mobile blind spots).",
+        "Real Project_Antigravity Catches: Decoupled review caught Three.js negative-dt frame-1 crashes, cyan CTA contrast (< 4.5:1 -> fixed to 5.70:1), invalid `role=\"tablist\"` nesting, and pnpm v11 ignored overrides.",
+        "Output is persisted to `.memory/qa-report.md`—Stage 6 Deploy is strictly blocked if any P0/P1 defect or trajectory violation remains."
       ],
       "actionChecklist": [
         "Inspect `agents/cf-reviewer.md` and `skills/cf-qa-review/SKILL.md` in the Repo Explorer.",
@@ -165,9 +171,10 @@
       "order": 6,
       "title": "Stage 6 — Deploy: Rollback Plan, HITL Approval & Preview Smoke Tests",
       "stageTag": "Stage 6: Deploy",
-      "summary": "Remote deployments are high-impact actions gated by both `cf-deploy-staging` and `hooks/hitl-gate.py`. Before pushing to Vercel Staging, the agent verifies QA clearance, documents the exact rollback command, obtains explicit human approval, and runs post-deploy smoke tests.",
+      "summary": "Day 5 ('Spec-Driven Production Grade Development') graduates local agents into governed, observable cloud deployments while humans Own the Outer Loop (Quality, Verdict, Answerability). `cf-deploy-staging` + `hooks/hitl-gate.py` enforce QA clearance, rollback plans, HITL approval, and live smoke tests.",
       "keyTakeaways": [
-        "Human-in-the-Loop Gate: `hooks/hitl-gate.py` enforces `force_ask` on `vercel --prod`, `wrangler deploy`, `supabase db push`, and `git push`, while permitting read-only `--dry-run` checks.",
+        "Own the Outer Loop (Quality / Verdict / Answerability): Before approving any staging or production deploy, verify harness quality evidence, issue an explicit human Verdict, and be answerable for why the change is safe.",
+        "Human-in-the-Loop Gate: `hooks/hitl-gate.py` enforces `force_ask` on `vercel --prod`, `wrangler deploy`, `supabase db push`, and `git push`, while `hooks/secret-guard.py` blocks accidental credential writes.",
         "Rollback-First Discipline: Document the exact `vercel rollback <deployment-url>` command in `.memory/handover.md` *before* triggering a deployment.",
         "Post-Deploy Smoke Test: Validate live HTTP 200 on `/`, `/api/courses`, `/api/resources`, and `POST /api/hitl/simulate` on the deployed staging preview URL."
       ],
@@ -428,6 +435,30 @@
         }
       ],
       "expectedOutcome": "A permanent invariant rule, a fresh <= 3 KB `.memory/handover.md`, and a newly published Course N+1 live in Antigravity Academy."
+    },
+    {
+      "id": "cf-prompt-trajectory-eval",
+      "title": "Run Dual-Axis Output + Trajectory Eval (cf-eval) in a Clean Context",
+      "stage": "test",
+      "difficulty": "senior",
+      "skillRef": "cf-eval",
+      "description": "Applies 'Never let the generator grade its own homework' and Day 4 Evaluation to grade both final code artifacts and execution trajectory against locked specs.",
+      "template": "Invoke `cf-reviewer` in a clean, decoupled context to execute `cf-eval` on `{{target_scope}}` against locked spec `{{spec_path}}`:\n\n1. **Axis 1 (Output Quality):** Verify `cf-next-verify` / test suite, `pnpm audit --audit-level=high` (0 High/Critical), runtime Zod boundaries, fail-closed hooks, and 375/768/1440px browser evidence.\n2. **Axis 2 (Execution Trajectory):** Check strict spec/partition adherence, anti-gaming oracle honesty (zero weakened assertions, `@ts-ignore`, or silenced lint rules), cross-viewport blind spots, and Human-Lit compliance on security/auth/deps/deploys.\n3. **Outer-Loop Deliverable:** Write an Answerability Statement (what changed, why safe, rollback command) and emit an explicit `SHIP` / `REVISE` / `BLOCK` verdict.",
+      "variables": [
+        {
+          "key": "target_scope",
+          "label": "Target Diff or Directory",
+          "placeholder": "academy/ and skills/",
+          "defaultValue": "academy/ and skills/"
+        },
+        {
+          "key": "spec_path",
+          "label": "Locked Spec Reference",
+          "placeholder": "plans/antigravity-academy-spec.md",
+          "defaultValue": "plans/antigravity-academy-spec.md"
+        }
+      ],
+      "expectedOutcome": "A decoupled Output + Trajectory scorecard with exact file:line citations, an Outer-Loop Answerability Statement, and a SHIP/REVISE/BLOCK verdict."
     }
   ]
 }

@@ -19,7 +19,8 @@ Produce a self-contained, formally locked specification before any production co
    - **API Contracts & Validation Schemas:** Fully typed request/response contracts (Zod / TypeScript / Pydantic / JSON Schema), pagination defaults/max limits, auth policies, and explicit error codes.
    - **Database & State Changes:** Schema additions/modifications, migration notes, foreign keys, and indexes.
    - **UI/UX & Accessibility Specs:** Component hierarchy, state diagrams (Loading / Error / Empty), design token usage, responsive behavior, and WCAG 2.1 AA criteria.
-   - **Atomic Task Breakdown:** Decomposed into non-overlapping file partitions so parallel workers never edit the same file concurrently. If multiple modules share an interface/types file, list that shared interface as **Task 0 (Prerequisite)** to be completed first.
+   - **Selective Autonomy & Verification Oracles:** Classify each task as **Lights-Out** (crisp machine oracle) vs. **Human-Lit** (auth, security/RLS, finance, infra, architecture) and declare the exact verification commands/schemas required before merge.
+   - **Atomic Task Breakdown:** Decomposed into non-overlapping file partitions (max 3–5 concurrent worker loops) so parallel workers never edit the same file concurrently. If multiple modules share an interface/types file, list that shared interface as **Task 0 (Prerequisite)** to be completed first.
 3. If the design introduces a significant architectural choice, record an ADR in `.memory/decisions/NNNN-<slug>.md`.
 4. **Stage 2 Senior Engineer Sign-Off Gate** — Prompt the user to verify and sign off on `plans/<feature-name>-spec.md`:
    - Is the spec completely self-contained with no implicit assumptions?

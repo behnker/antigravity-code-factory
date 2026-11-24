@@ -40,6 +40,9 @@ const SKILL_STAGE_MAP: Record<string, string> = {
   "cf-plan": "Stage 2B: Spec & Architecture",
   "cf-implement": "Stage 3: Build",
   "cf-qa-review": "Stage 4: Test & QA",
+  "cf-next-verify": "Stage 4: Full-Stack Verification",
+  "cf-eval": "Stage 4: Dual-Axis Eval",
+  "cf-loop-engineer": "Loop Engineering & Lit Factory",
   "cf-deploy-staging": "Stage 5: Deploy",
   "cf-triage": "Stage 6A: User Feedback & Triage",
   "cf-learn": "Stage 6B: Optimise & Learn",
@@ -211,6 +214,9 @@ function collectResources(): RepoResource[] {
   pushIfPresent(
     readAllowlistedResource("hooks/hitl-gate.py", "hook", "hitl-gate.py (PreToolUse Gate)", "Guardrails"),
   );
+  pushIfPresent(
+    readAllowlistedResource("hooks/secret-guard.py", "hook", "secret-guard.py (Secret Leak Guard)", "Guardrails"),
+  );
 
   // 2. Agents: agents/cf-*.md
   const agentsDir = assertSafeRepoFile(REPO_ROOT, path.join(REPO_ROOT, "agents"));
@@ -226,6 +232,7 @@ function collectResources(): RepoResource[] {
         "cf-backend": "Stage 3: Backend Build",
         "cf-frontend": "Stage 3: Frontend Build",
         "cf-reviewer": "Stage 4: Independent Security & QA",
+        "cf-tester": "Stage 4: Deterministic Test Verification",
       };
       pushIfPresent(
         readAllowlistedResource(
@@ -259,6 +266,22 @@ function collectResources(): RepoResource[] {
         "Stage 3: Swarm Orchestration",
       ),
     );
+    pushIfPresent(
+      readAllowlistedResource(
+        path.join("skills", "cf-loop-engineer", "references", "project-examples.md"),
+        "skill",
+        "cf-loop-engineer/project-examples.md",
+        "Loop Engineering Examples",
+      ),
+    );
+    pushIfPresent(
+      readAllowlistedResource(
+        path.join("skills", "cf-eval", "references", "eval-rubric.md"),
+        "skill",
+        "cf-eval/eval-rubric.md",
+        "Stage 4: Dual-Axis Eval Rubric",
+      ),
+    );
   }
 
   // 4. Memory: .memory/*.md and .memory/decisions/*.md
@@ -272,6 +295,7 @@ function collectResources(): RepoResource[] {
       const memoryStageMap: Record<string, string> = {
         "research.md": "Stage 1: Harness Research",
         "research-academy-platform.md": "Stage 1: Platform Research",
+        "research-vibe-coding-lit-factory.md": "Stage 1: Lit Factory Research",
         "architecture.md": "Stage 2B: System Architecture",
         "tasks.md": "Milestone Backlog",
         "handover.md": "Session Handover",

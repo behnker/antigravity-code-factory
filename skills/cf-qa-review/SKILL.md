@@ -32,9 +32,10 @@ Verify quality, security, accessibility, and visual fidelity before staging depl
      - Schema drift check: `npx supabase db diff`
      - Typecheck Edge Functions: `deno check supabase/functions/**/*.ts` (when Deno is installed)
      - Verify every public/user table has `ENABLE ROW LEVEL SECURITY` with explicit RLS policies and zero `service_role` keys in client code.
-2. **Independent Invariant & Security Review:**
-   - Inspect `git diff` (preferably via a fresh reviewer subagent to preserve separation of concerns).
-   - Verify compliance with every invariant: zero hardcoded secrets, runtime schema validation at boundaries, parameterized queries / no shell concat, pagination limits, HTTP timeouts/retries, WCAG 2.1 AA, deterministic tests, and edge-case coverage.
+2. **Independent Dual-Axis Review (Output + Trajectory via `cf-eval`):**
+   - Never let the generator grade its own homework: inspect `git diff` via a fresh `cf-reviewer` subagent decoupled from the implementation context.
+   - Grade **Output Quality** against every invariant in `rules/AGENTS.md` (zero hardcoded secrets, runtime schema validation at boundaries, parameterized queries / no shell concat, pagination limits, HTTP timeouts/retries, WCAG 2.1 AA, deterministic tests, edge-case coverage).
+   - Grade **Execution Trajectory** per `skills/cf-eval/SKILL.md`: verify strict spec/partition adherence, anti-gaming oracle honesty (zero weakened tests or silenced lint/type rules), cross-viewport blind-spot protection, and Human-Lit compliance on security/auth/infra/dependency changes.
 3. **Visual UI/UX Audit (if UI files were modified):**
    - Start the local dev server (as a daemon/background process if not already running).
    - Delegate visual inspection to the **`browser` subagent** to open the modified pages and verify:
@@ -48,7 +49,7 @@ Verify quality, security, accessibility, and visual fidelity before staging depl
    - Invariant compliance checklist (Pass / Fail with file:line citations)
    - Browser visual QA summary & screenshot references (or "N/A — no UI changes")
    - Blocking defects (must fix before Stage 5) vs. non-blocking observations
-5. **Stage 4 Senior Engineer Sign-Off Gate** — Confirm with the user:
-   - Are all unit, integration, and E2E tests passing?
-   - Did browser inspection confirm WCAG AA accessibility and responsive layouts (if UI changed)?
-   - Are static analysis and security scans 100% clean?
+5. **Stage 4 Outer-Loop Sign-Off Gate (Quality / Verdict / Answerability)** — Confirm with the user:
+   - **Quality:** Are all unit, integration, build, SAST, and 3-viewport browser checks 100% green?
+   - **Trajectory & Verdict:** Did independent `cf-reviewer` / `cf-eval` verification confirm zero oracle-gaming and zero blocking defects?
+   - **Answerability:** Can the engineer clearly explain why this change exists, why it is safe, and how to roll it back?

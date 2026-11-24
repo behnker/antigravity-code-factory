@@ -66,3 +66,15 @@ When building on edge or serverless runtimes, enforce these platform guardrails:
 2. **Vercel Functions & Edge Runtime:** Keep Edge handlers strictly Web-API compatible (no Node-only APIs in Edge runtime), enforce explicit `maxDuration`/timeouts on serverless routes, and never expose server-only secrets via `NEXT_PUBLIC_*` or client bundles.
 3. **Supabase Edge Functions & Postgres:** Enforce Row Level Security (RLS) on every public/user table—never ship a table without explicit RLS policies. Never expose `service_role` keys to clients or browser code; use Deno/Web-standard APIs and validate JWTs/inputs at every Edge Function boundary.
 
+## 8. Lit Software Factory, Context Economics & Loop Engineering Invariants
+
+Grounded in *The New SDLC With Vibe Coding*, *The New Software Lifecycle*, *Software Factories: Light and Dark*, and *Practical Loop Engineering*:
+
+1. **Lit Factory & Own the Outer Loop:** Agents run the **inner loop** (investigate → implement → verify → iterate); engineers own the **outer loop** across three obligations: **Quality** (deterministic harness gates), **Verdict** (explicit ship/block call), and **Answerability** (ability to explain why every change exists and why it is safe). Never operate a Dark Factory that ships unverified architectural drift.
+2. **Selective Autonomy & Delegation Boundaries:**
+   - **Lights-Out Candidates** (short loops with crisp, machine-checkable oracles): documentation, unit/property tests, deterministic lint/type fixes, Zod-validated JSON content bundles.
+   - **Human-Lit Mandatory** (high blast radius): authentication, security/RLS policies, billing/finance, secrets/hooks, infrastructure/system access, irreversible DB migrations, and core architectural contracts.
+3. **Never Let the Generator Grade Its Own Homework (Output + Trajectory):** Always verify substantive changes in a decoupled context (`cf-reviewer`, `cf-tester`, `browser`, `cf-eval`) grading *both* the final artifact and the execution trajectory (spec adherence, anti-gaming oracle honesty, cross-viewport blind spots).
+4. **Context Engineering & Model Routing Economics:** Keep always-on static context (`AGENTS.md`, `.agents/rules/`) lean (`≤ 10 KB`); move repeatable procedures into progressive-disclosure `skills/*/SKILL.md` + `references/`. Route high-reasoning models (`pro`) to architecture, specs, and independent review; route fast models (`flash`) to bounded parallel builds and browser audits.
+5. **Goals vs. Loops & Concurrency Ceiling:** Use **Goals** (`/goal`) for finite deliverables backed by an independent completion oracle; use **Loops** (`/schedule`) strictly for recurring cadence tasks (hygiene, CVE sweeps, monitoring) with read-only or explicit escalation bounds. Cap active concurrent loops at **3–5** so human review capacity stays sharp.
+

@@ -1,0 +1,334 @@
+{
+  "id": "lit-software-factory",
+  "slug": "lit-software-factory",
+  "number": 4,
+  "title": "Lit Software Factories & Practical Loop Engineering",
+  "subtitle": "Graduate from ad-hoc vibe coding to a governed Lit Software Factory: master the 5-part Vibe Coding whitepapers, Context Economics, Outer-Loop Accountability, Dual-Axis Evals, and Practical Loop Engineering on this repo.",
+  "level": "all-levels",
+  "estimatedMinutes": 65,
+  "threeScenePreset": "sdlc-orbital",
+  "accentTone": "cyan",
+  "tags": [
+    "lit-factory",
+    "loop-engineering",
+    "vibe-coding-sdlc",
+    "context-economics",
+    "outer-loop",
+    "dual-axis-eval",
+    "selective-autonomy",
+    "cf-loop-engineer",
+    "cf-eval"
+  ],
+  "video": {
+    "title": "From Vibe Coding to Lit Software Factories: Mastering the Outer Loop",
+    "durationLabel": "22:45",
+    "provider": "coming_soon",
+    "posterLabel": "Course 04 Capstone Studio — 5-Part Whitepapers + Fall 2026 O'Reilly Radar Arc Live on This Repo",
+    "chapters": [
+      {
+        "id": "lsf-ch-1",
+        "title": "The 5-Part Vibe Coding Whitepapers & Agent = Model + Harness",
+        "timestampSeconds": 0,
+        "summary": "Synthesizing Google/Kaggle Days 1-5 and why syntax generation collapsed while harness engineering became 90% of reliability."
+      },
+      {
+        "id": "lsf-ch-2",
+        "title": "Context Engineering Economics & Model Routing",
+        "timestampSeconds": 280,
+        "summary": "Balancing static rules/AGENTS.md against progressive-disclosure skills and pro vs. flash routing."
+      },
+      {
+        "id": "lsf-ch-3",
+        "title": "Software Factories, Light vs. Dark & Selective Autonomy",
+        "timestampSeconds": 560,
+        "summary": "Why verification is the narrow neck and how to classify Lights-Out vs. Human-Lit workstreams."
+      },
+      {
+        "id": "lsf-ch-4",
+        "title": "Human Judgment Relocates: Owning the Outer Loop",
+        "timestampSeconds": 840,
+        "summary": "Enforcing Quality, Verdict, and Answerability across specs, ADRs, and release gates."
+      },
+      {
+        "id": "lsf-ch-5",
+        "title": "Dual-Axis Evals (cf-eval) & Practical Loop Engineering (cf-loop-engineer)",
+        "timestampSeconds": 1100,
+        "summary": "Grading both output and trajectory, running /goal vs. /schedule loops, and graduating prototypes to production."
+      }
+    ],
+    "transcriptSummary": "This capstone course synthesizes Google and Kaggle's 5-Day AI Agents Intensive Vibe Coding whitepaper series (Days 1-5 by Addy Osmani, Shubham Saboo, and Sokratis Kartakis) together with Addy Osmani's 'The New Software Lifecycle' and Fall 2026 O'Reilly Radar arc ('Own the Outer Loop', 'Software Factories, Light and Dark', 'Human Judgment Doesn't Leave the Software Factory, It Relocates', 'Agentic Code Quality', and 'Practical Loop Engineering'). Every framework concept is translated directly into runnable Code Factory v2.3.0 artifacts in this repository: Section 8 of rules/AGENTS.md, two brand-new progressive-disclosure skills (cf-loop-engineer and cf-eval), fail-closed hooks (hitl-gate.py + secret-guard.py), 5 least-privilege personas, and real Project_Antigravity /goal, /schedule, and dual-axis eval case studies."
+  },
+  "steps": [
+    {
+      "id": "lsf-step-1-five-part-whitepapers",
+      "order": 1,
+      "title": "From Vibe Coding to Agentic Engineering: The 5-Part Whitepaper Architecture",
+      "stageTag": "Foundations",
+      "summary": "Google and Kaggle's May-June 2026 5-part series maps the complete journey from ad-hoc vibe coding to enterprise agentic engineering. Translation friction has collapsed: writing syntax is cheap, while harness design (90%), context, security, and spec-driven verification define production engineering.",
+      "keyTakeaways": [
+        "Day 1 ('The New SDLC With Vibe Coding'): Vibe coding accepts outputs that 'seem to work'; Agentic Engineering enforces locked specs, AGENTS.md invariants, CI gates, and evals.",
+        "Day 2 ('Agent Tools & Interoperability') + Day 3 ('Agent Skills'): Typed MCP servers, sandboxes, long-term memory, and progressive-disclosure skills transform an LLM into a composable system.",
+        "Day 4 ('Vibe Coding Agent Security and Evaluation'): HITL triage, automated threat/CVE scans, fail-closed guardrails, and eval suites stop security debt before merge.",
+        "Day 5 ('Spec-Driven Production Grade Development'): Local prototypes graduate directly into governed, observable cloud deployments via locked specs and scaled review harnesses."
+      ],
+      "actionChecklist": [
+        "Read `.memory/research-vibe-coding-lit-factory.md` in the Live Repo Explorer to inspect the full 5-paper + O'Reilly Radar synthesis table.",
+        "Map each of the 5 Kaggle whitepaper days to its concrete counterpart inside this repository (`rules/`, `hooks/`, `agents/`, `skills/`, `academy/`).",
+        "Identify where your current workflow still relies on ad-hoc 'vibe coding' instead of locked specs and automated oracles."
+      ],
+      "mermaidDiagram": "flowchart LR\n    D1[\"Day 1: New SDLC\\n(Agent = 10% Model + 90% Harness)\"] --> D2[\"Day 2: Tools & MCP\\n(Interoperability & Sandboxes)\"]\n    D2 --> D3[\"Day 3: Agent Skills\\n(Memory & Progressive Disclosure)\"]\n    D3 --> D4[\"Day 4: Security & Evals\\n(HITL, Guardrails, cf-eval)\"]\n    D4 --> D5[\"Day 5: Spec-Driven Prod\\n(Cloud Deploy & Outer Loop)\"]",
+      "repoArtifactPath": ".memory/research-vibe-coding-lit-factory.md",
+      "promptId": "lsf-prompt-context-audit"
+    },
+    {
+      "id": "lsf-step-2-context-economics",
+      "order": 2,
+      "title": "Context Engineering Economics: Static Rules, Progressive Skills & Routing",
+      "stageTag": "Context Economics",
+      "summary": "In Addy Osmani's 'The New Software Lifecycle', context engineering has a shape—and it directly controls both reasoning quality and API cost. Overstuffing static prompts causes lost-in-the-middle drift, while progressive-disclosure Agent Skills and smart model routing scale affordably.",
+      "keyTakeaways": [
+        "Static Context Discipline: Keep always-on `rules/AGENTS.md` lean (<= 10 KB of hard invariants, well under Antigravity's 24 KB / 20k-token cap) so every turn stays high-signal.",
+        "Dynamic Progressive Disclosure: Move heavy checklists, rubrics, and project examples into `skills/cf-*/SKILL.md` + `references/` so only matching skills consume tokens.",
+        "Memory Compaction: Persist milestone state in `.memory/tasks.md` and `<= 3 KB` `.memory/handover.md` rather than dragging 50-turn chat histories.",
+        "Model Routing Lever: Pin `pro` for `cf-architect` (specs/ADRs) and `cf-reviewer` (independent audits); route `flash` to bounded parallel workers and `browser` viewport checks."
+      ],
+      "actionChecklist": [
+        "Inspect `rules/AGENTS.md` Section 8 and compare its compact static footprint against the 14 progressive skills under `skills/cf-*/`.",
+        "Check `agents/cf-*.md` frontmatter to see how each least-privilege persona pins both `tools:` and `model:`.",
+        "Run the Context Economics Audit prompt below on your primary repository."
+      ],
+      "codeSnippet": {
+        "language": "yaml",
+        "filename": "agents/cf-reviewer.md (Least-Privilege + Model Routing)",
+        "code": "---\nname: cf-reviewer\nsubagent: true\nmainAgent: false\nmodel: pro\ncommandExecutionPolicy: sandbox\ntools:\n  - read_file\n  - write_file\n  - run_command\n  - manage_task\n  - search_web\n---"
+      },
+      "repoArtifactPath": "rules/AGENTS.md",
+      "promptId": "lsf-prompt-context-audit"
+    },
+    {
+      "id": "lsf-step-3-light-vs-dark-factories",
+      "order": 3,
+      "title": "Software Factories, Light and Dark: Loop -> Harness -> Factory",
+      "stageTag": "Factory Model",
+      "summary": "In 'Software Factories, Light and Dark', the unit of engineering work evolves from a manual diff to Loop -> Harness -> Factory. Generation is wide and cheap; verification is the narrow neck. A Dark Factory ships unreviewed architectural debt, whereas a Lit Factory pairs fast inner loops with strategic human governance.",
+      "keyTakeaways": [
+        "Verification Is the Narrow Neck: Accelerating code generation without scaling automated verification oracles simply buries human reviewers under larger PR piles.",
+        "Dark Factory Anti-Pattern: Shipping autonomous agent outputs verified purely by machines feels fast until silent technical debt, flawed product assumptions, or security gaps compound.",
+        "Lit Factory Architecture: Uses identical high-leverage automated inner loops while keeping humans upstream (intent, specs, oracles) and downstream (release verdict).",
+        "Selective Autonomy: Short loops with crisp machine oracles (docs, unit tests, lint/type fixes, Zod JSON bundles) earn Lights-Out status; auth, security/RLS, finance, hooks, and architecture stay Human-Lit."
+      ],
+      "actionChecklist": [
+        "Inspect `skills/cf-plan/SKILL.md` to see how every locked spec now mandates Lights-Out vs. Human-Lit classification and upfront Verification Oracles.",
+        "Review the Selective Autonomy table in `skills/cf-loop-engineer/references/project-examples.md`.",
+        "Run the Selective Autonomy Matrix prompt below to draw explicit delegation boundaries for your next milestone."
+      ],
+      "mermaidDiagram": "flowchart TD\n    U[\"Upstream Human Judgment\\n(Intent, Spec, ADR, Oracles)\"] --> L[\"Inner Agent Loops\\n(Max 3-5 Concurrent)\"]\n    L --> LO[\"Lights-Out Tier\\n(Docs, Tests, Lint, Zod JSON)\"]\n    L --> HL[\"Human-Lit Tier\\n(Auth, Security/RLS, Hooks, Finance, Deploy)\"]\n    LO --> V[\"Verification Narrow Neck\\n(cf-next-verify + cf-eval + cf-reviewer + browser)\"]\n    HL --> V\n    V --> O[\"Outer-Loop Human Verdict\\n(Quality / Verdict / Answerability)\"]",
+      "repoArtifactPath": "skills/cf-plan/SKILL.md",
+      "promptId": "lsf-prompt-autonomy-matrix"
+    },
+    {
+      "id": "lsf-step-4-outer-loop-accountability",
+      "order": 4,
+      "title": "Human Judgment Relocates: Owning the Outer Loop",
+      "stageTag": "Outer Loop",
+      "summary": "Synthesizing 'Own the Outer Loop' and 'Human Judgment Doesn't Leave the Software Factory, It Relocates': human judgment leaves mechanical syntax typing and relocates upstream into architecture and downstream into release governance across three pillars: Quality, Verdict, and Answerability.",
+      "keyTakeaways": [
+        "Pillar 1 — Quality: Engineers design and maintain the deterministic harness (rules/AGENTS.md, hitl-gate.py, secret-guard.py, Vitest, Zod schemas, WCAG contrast tokens) before delegating loops.",
+        "Pillar 2 — Verdict: Engineers inspect structured verification evidence (.memory/qa-report.md, browser screenshots, audit logs) and make the explicit SHIP / REVISE / BLOCK call.",
+        "Pillar 3 — Answerability: Leverage creates obligation—a human must always be able to explain why every shipped change exists, why it is safe, and how to roll it back.",
+        "Preserving Engineering Taste: Because agents absorb repetitive boilerplate reps, teams must intentionally review ADRs, failure post-mortems (`cf-learn`), and architecture boundaries."
+      ],
+      "actionChecklist": [
+        "Review the updated Stage 4 Outer-Loop Sign-Off Gate in `skills/cf-qa-review/SKILL.md`.",
+        "Check `.agents/rules/academy-invariants.md` to see how past defects were promoted into permanent Lit Factory guardrails.",
+        "Ensure every staging or production deploy records an explicit rollback command and Answerability Statement in `.memory/handover.md`."
+      ],
+      "repoArtifactPath": "skills/cf-qa-review/SKILL.md",
+      "promptId": "lsf-prompt-autonomy-matrix"
+    },
+    {
+      "id": "lsf-step-5-agentic-code-quality-evals",
+      "order": 5,
+      "title": "Agentic Code Quality & Dual-Axis Verification (cf-eval)",
+      "stageTag": "Dual-Axis Eval",
+      "summary": "Manual line-by-line review hits a physical wall when agents write thousands of lines in minutes ('Agentic Code Quality'). Move quality into the harness and enforce the golden rule of 'Practical Loop Engineering': never let the generator grade its own homework. Evaluate BOTH Output Quality and Execution Trajectory via `cf-eval`.",
+      "keyTakeaways": [
+        "Axis 1 — Output Quality: Deterministic checks (`tsc`, `eslint`, `vitest`, `next build`, `pnpm audit --audit-level=high`), runtime Zod boundaries, fail-closed hooks, and 375/768/1440px browser checks.",
+        "Axis 2 — Execution Trajectory: Audit spec/partition adherence, anti-gaming oracle honesty (zero weakened tests, `@ts-ignore`, or silenced lint rules), cross-viewport blind spots, and HITL compliance.",
+        "Real Project_Antigravity Catches: Decoupled verification caught GSAP's proprietary EULA, Three.js negative-dt crashes, cyan CTA contrast (< 4.5:1), invalid `role=\"tablist\"` nesting, and pnpm v11 ignored overrides.",
+        "5 Least-Privilege Personas: `cf-architect` (spec) -> `cf-backend`/`cf-frontend` (build) -> `cf-tester` + `cf-reviewer` + `browser` (independent grading)."
+      ],
+      "actionChecklist": [
+        "Open `skills/cf-eval/SKILL.md` and `skills/cf-eval/references/eval-rubric.md` in the Live Repo Explorer.",
+        "Never ask the same builder context that wrote code to sign off on its own diff—always invoke clean-context `cf-reviewer` + `cf-tester`.",
+        "Run the Dual-Axis Eval prompt below on your latest feature branch before opening a PR."
+      ],
+      "codeSnippet": {
+        "language": "markdown",
+        "filename": "skills/cf-eval/references/eval-rubric.md (Excerpt)",
+        "code": "| Dimension | Axis | Automatic Fail Trigger |\n| :--- | :--- | :--- |\n| Static & Build Gates | Output | Any @ts-ignore, disabled lint without ADR, failing build |\n| Security & CVEs | Output | Hardcoded secret, {} in PreToolUse, missing RLS |\n| Multi-Viewport & WCAG | Output | Desktop-only check, horizontal overflow, contrast < 4.5:1 |\n| Oracle Honesty | Trajectory | Weakening assertions or deleting failing tests to turn CI green |\n| Selective Autonomy | Trajectory | Unapproved prod deploy, force push, or silent dependency install |"
+      },
+      "repoArtifactPath": "skills/cf-eval/SKILL.md",
+      "promptId": "lsf-prompt-dual-axis-eval"
+    },
+    {
+      "id": "lsf-step-6-practical-loop-engineering",
+      "order": 6,
+      "title": "Practical Loop Engineering (cf-loop-engineer): Goals, Schedules & Cloud Graduation",
+      "stageTag": "Loop Engineering",
+      "summary": "Put the entire framework to work daily with `skills/cf-loop-engineer`: pick `/goal` for finite oracle-backed deliverables, `/schedule` for recurring read-only hygiene loops, `/teamwork` for disjoint parallel swarms (max 3-5 concurrent loops), and graduate specs directly into governed cloud deployments (Day 5).",
+      "keyTakeaways": [
+        "Goals (`/goal`) = Run-Until-Done: Requires a machine-checkable completion oracle upfront, a 3-retry circuit breaker, and independent `cf-reviewer` verification before completion.",
+        "Loops (`/schedule`) = Recurring Cadence: Ideal for weekly CVE audits, `.memory/handover.md` (<= 3 KB) size checks, and manifest drift detection—kept strictly read-only or PR-draft bounded.",
+        "Concurrency Cap (3-5 Active Loops): Running 5-10 agent workflows across a day while capping simultaneous active loops at <= 5 preserves sharp human outer-loop judgment.",
+        "Prototype-to-Production Graduation (Day 5): Every skill, hook, schema, and course built in this workspace runs locally with `cf-next-verify` and deploys cleanly to Vercel under HITL governance."
+      ],
+      "actionChecklist": [
+        "Inspect all 4 runnable `Project_Antigravity` recipes in `skills/cf-loop-engineer/references/project-examples.md`.",
+        "Copy the Oracle-Backed `/goal` prompt below to run a self-converging verification loop on this repository.",
+        "Copy the Weekly `/schedule` Hygiene prompt below to automate continuous CVE and context-budget monitoring."
+      ],
+      "codeSnippet": {
+        "language": "text",
+        "filename": "Project_Antigravity Bounded /goal Example",
+        "code": "/goal Converge academy/ to zero High/Critical CVEs and verified 4-course readiness:\n1. Run `cd academy && pnpm run sync:resources && pnpm audit --audit-level=high`.\n2. Validate every `academy/content/courses/*/course.json` against `CourseSchema`.\n3. Run `cf-next-verify` (tsc, eslint, vitest, next build) + Python hook unittests.\n4. Invoke clean-context `cf-reviewer` (`cf-eval`) before reporting completion.\nCircuit breaker: Stop after 3 failed retries and report the exact blocker."
+      },
+      "repoArtifactPath": "skills/cf-loop-engineer/SKILL.md",
+      "promptId": "lsf-prompt-goal-oracle"
+    }
+  ],
+  "prompts": [
+    {
+      "id": "lsf-prompt-context-audit",
+      "title": "Run a Static vs. Dynamic Context & Harness 90/10 Audit",
+      "stage": "research",
+      "difficulty": "beginner",
+      "skillRef": "cf-research",
+      "description": "Audits a repository through the Agent = Model (10%) + Harness (90%) lens and optimizes static rules vs. progressive-disclosure skills and model routing.",
+      "template": "Audit `{{target_repo}}` using the **Agent = Model (10%) + Harness (90%)** and **Context Engineering Economics** framework from `.memory/research-vibe-coding-lit-factory.md`:\n\n1. Measure always-on static context (`AGENTS.md`, `rules/`, `.agents/rules/`) against our `<= 10 KB` target (hard cap 24 KB / 20k tokens).\n2. Identify bloated static instructions that should move into progressive-disclosure `skills/<name>/SKILL.md` + `references/`.\n3. Audit MCP servers (Day 2), Hooks (Day 4: fail-closed `PreToolUse`, secret guards), and subagent `model:` routing (`pro` vs. `flash`).\n4. Output a prioritized harness-upgrade plan focused on `{{optimization_goal}}`.",
+      "variables": [
+        {
+          "key": "target_repo",
+          "label": "Target Repository",
+          "placeholder": ".",
+          "defaultValue": "."
+        },
+        {
+          "key": "optimization_goal",
+          "label": "Primary Optimization Goal",
+          "placeholder": "Lower token spend and higher first-pass QA accuracy",
+          "defaultValue": "Lower token spend and higher first-pass QA accuracy"
+        }
+      ],
+      "expectedOutcome": "A concrete byte/token context audit, skill extraction roadmap, and pro/flash routing recommendation."
+    },
+    {
+      "id": "lsf-prompt-autonomy-matrix",
+      "title": "Classify Selective Autonomy & Outer-Loop Gates for a Feature Spec",
+      "stage": "spec",
+      "difficulty": "intermediate",
+      "skillRef": "cf-plan",
+      "description": "Applies 'Software Factories, Light and Dark' and 'Own the Outer Loop' to classify Lights-Out vs. Human-Lit tasks and define upfront verification oracles.",
+      "template": "Before implementing `{{feature_name}}`, apply our **Lit Software Factory** protocol (`rules/AGENTS.md` Section 8 + `cf-plan`):\n\n1. Partition the work into non-overlapping tasks (max `{{max_loops}}` concurrent loops).\n2. Classify every task as **Lights-Out** (crisp machine oracle: docs, tests, lint, validated JSON) or **Human-Lit** (auth, security/RLS, finance, secrets/hooks, infra, architecture).\n3. Define the exact **Verification Oracle** (command, Zod schema, or 3-viewport browser assertion) for every task *before* any code is written.\n4. Define the **Outer-Loop Sign-Off** checklist (Quality, Verdict, Answerability + rollback plan).",
+      "variables": [
+        {
+          "key": "feature_name",
+          "label": "Feature / Milestone Name",
+          "placeholder": "Course 05 Interactive Lab",
+          "defaultValue": "Course 05 Interactive Lab"
+        },
+        {
+          "key": "max_loops",
+          "label": "Concurrency Cap (3-5)",
+          "placeholder": "4",
+          "defaultValue": "4"
+        }
+      ],
+      "expectedOutcome": "A Lit Factory spec section with explicit Lights-Out vs. Human-Lit boundaries, upfront machine oracles, and Outer-Loop accountability gates."
+    },
+    {
+      "id": "lsf-prompt-dual-axis-eval",
+      "title": "Execute Decoupled Dual-Axis Evaluation (Output + Trajectory) via cf-eval",
+      "stage": "test",
+      "difficulty": "senior",
+      "skillRef": "cf-eval",
+      "description": "Grades a completed implementation in a clean context across both Output Quality and Execution Trajectory—enforcing 'Never let the generator grade its own homework'.",
+      "template": "Invoke `cf-reviewer` in a fresh, decoupled context to run `skills/cf-eval/SKILL.md` on `{{diff_scope}}` against `{{spec_path}}`:\n\n1. **Axis 1 (Output Quality):** Verify static checks (`tsc`, `eslint`, `vitest`, `next build`), `pnpm audit --audit-level=high`, runtime Zod validation, fail-closed hooks, and 375/768/1440px browser evidence.\n2. **Axis 2 (Execution Trajectory):** Audit spec/partition compliance, oracle honesty (confirm zero weakened assertions, `@ts-ignore`, or disabled lint rules), cross-surface blind spots, and Human-Lit compliance.\n3. **Outer-Loop Deliverable:** Write an Answerability Statement (what changed, why it is safe, exact rollback command) and issue a clear `SHIP` / `REVISE` / `BLOCK` verdict.",
+      "variables": [
+        {
+          "key": "diff_scope",
+          "label": "Diff or Directory Scope",
+          "placeholder": "git diff main..HEAD",
+          "defaultValue": "git diff HEAD~1..HEAD"
+        },
+        {
+          "key": "spec_path",
+          "label": "Locked Spec Path",
+          "placeholder": "plans/antigravity-academy-spec.md",
+          "defaultValue": "plans/antigravity-academy-spec.md"
+        }
+      ],
+      "expectedOutcome": "A clean-context Dual-Axis Eval scorecard with file:line citations, trajectory audit, Answerability Statement, and SHIP/REVISE/BLOCK verdict."
+    },
+    {
+      "id": "lsf-prompt-goal-oracle",
+      "title": "Launch an Oracle-Backed /goal Convergence Loop (cf-loop-engineer)",
+      "stage": "build",
+      "difficulty": "intermediate",
+      "skillRef": "cf-loop-engineer",
+      "description": "Starts a finite, self-correcting /goal loop with an explicit machine-checkable completion oracle, 3-retry circuit breaker, and independent verifier sign-off.",
+      "template": "/goal Complete `{{deliverable_goal}}` in `{{target_dir}}` under `cf-loop-engineer` governance:\n\n1. Work strictly within the approved scope and invariants (`rules/AGENTS.md` + `.agents/rules/`).\n2. Verify completion using this exact independent oracle: `{{oracle_cmd}}`.\n3. Circuit breaker: If the oracle fails 3 consecutive times, stop immediately and report root-cause diagnostics instead of thrashing.\n4. Once the oracle passes, invoke clean-context `cf-reviewer` (`cf-eval`) to grade output and trajectory before reporting done.",
+      "variables": [
+        {
+          "key": "deliverable_goal",
+          "label": "Finite Deliverable Goal",
+          "placeholder": "Zero High/Critical CVEs and 4-course schema validation",
+          "defaultValue": "Zero High/Critical CVEs and 4-course manifest/test convergence"
+        },
+        {
+          "key": "target_dir",
+          "label": "Target Directory",
+          "placeholder": "academy/",
+          "defaultValue": "academy/"
+        },
+        {
+          "key": "oracle_cmd",
+          "label": "Independent Oracle Command",
+          "placeholder": "pnpm run sync:resources && pnpm audit --audit-level=high && pnpm typecheck && pnpm lint && pnpm test && pnpm build",
+          "defaultValue": "pnpm run sync:resources && pnpm audit --audit-level=high && pnpm typecheck && pnpm lint && pnpm test && pnpm build"
+        }
+      ],
+      "expectedOutcome": "A bounded, oracle-verified deliverable certified by both deterministic tooling and a decoupled reviewer."
+    },
+    {
+      "id": "lsf-prompt-schedule-hygiene",
+      "title": "Create a Read-Only Recurring /schedule Factory Hygiene Loop",
+      "stage": "optimise",
+      "difficulty": "beginner",
+      "skillRef": "cf-loop-engineer",
+      "description": "Configures a recurring cron-style /schedule loop to detect CVE advisories, rules/handover budget bloat, and manifest drift without risky auto-merges.",
+      "template": "/schedule {{cron_cadence}}: Run a read-only Lit Software Factory hygiene sweep on `{{repo_name}}`:\n\n1. Run `{{audit_cmd}}` and flag any newly disclosed High or Critical CVEs.\n2. Check static context hygiene: confirm `rules/AGENTS.md` <= 12 KB and `.memory/handover.md` <= 3072 bytes.\n3. Verify generated resource manifests and course schemas match current `skills/`, `agents/`, `hooks/`, and `academy/content/courses/` with zero drift.\n4. Output a concise P0/P1 drift digest only. Strictly read-only: do NOT edit files, add dependencies, or run `git push`.",
+      "variables": [
+        {
+          "key": "cron_cadence",
+          "label": "Schedule Cadence",
+          "placeholder": "every Monday at 09:00",
+          "defaultValue": "every Monday at 09:00"
+        },
+        {
+          "key": "repo_name",
+          "label": "Repository Name",
+          "placeholder": "Project_Antigravity",
+          "defaultValue": "Project_Antigravity"
+        },
+        {
+          "key": "audit_cmd",
+          "label": "Dependency Audit Command",
+          "placeholder": "cd academy && pnpm audit --audit-level=high",
+          "defaultValue": "cd academy && pnpm audit --audit-level=high"
+        }
+      ],
+      "expectedOutcome": "A recurring read-only hygiene digest catching CVE advisories, context bloat, and manifest drift before they compound."
+    }
+  ]
+}

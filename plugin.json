@@ -1,9 +1,9 @@
 {
   "name": "code-factory",
   "displayName": "Enterprise Code Factory",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "logo": "assets/logo.svg",
-  "description": "Spec-Driven Development (SDD), invariant quality gates (security, scalability, UI/UX, testing, edge/serverless), persistent .memory/ handovers, PreToolUse HITL and secret/leak guard hooks, 5 least-privilege personas, and a 12-skill SDLC & Next.js/TS/Vitest verification pipeline across all projects.",
+  "description": "Lit Software Factory & Spec-Driven Development (SDD) plugin: invariant quality gates (security, scalability, UI/UX, testing, edge/serverless, loop engineering & context economics), persistent .memory/ handovers, PreToolUse HITL and secret/leak guard hooks, 5 least-privilege personas, and a 14-skill SDLC, Loop Engineering & Dual-Axis Eval pipeline.",
   "author": {
     "name": "Ralph Behnke",
     "url": "https://github.com/behnker"
@@ -16,6 +16,7 @@
   "suggestedPrompts": [
     "Bootstrap the Code Factory workspace (.memory/ and plans/) in this project",
     "Start a session by loading workspace memory and verifying git status",
-    "Grill me on requirements and draft a locked feature spec"
+    "Grill me on requirements and draft a locked feature spec",
+    "Design a bounded /goal or /schedule loop with cf-loop-engineer and run a dual-axis cf-eval audit"
   ]
 }

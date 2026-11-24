@@ -41,7 +41,16 @@ Use parallel subagents or `swarm` workers for large multi-file refactors or modu
 - **Batch Implementation Phase:** Delegate modular implementation chunks to fast parallel workers with tight, spec-grounded briefs.
 - **QA & Verification Phase:** Use an independent reviewer context + multimodal `browser` subagent for visual inspection.
 
-## 5. Human-in-the-Loop (HITL) Execution Boundaries
+## 5. Human-in-the-Loop (HITL) Execution Boundaries & Selective Autonomy
 
-- **Autonomous (Low-Friction):** `git status`, `git diff`, `npm test`, `pytest`, `npx eslint`, `cargo check`, typechecking, read-only inspection.
-- **Explicit Human Approval Required:** `git push`, `npm publish`, `rm -rf`, `docker push`, `kubectl apply`, database schema migration execution, production deployments, and third-party dependency additions.
+Grounded in *Software Factories, Light and Dark* and *Practical Loop Engineering*, classify every loop before launch and cap active concurrency at **3–5 concurrent loops**:
+
+- **Lights-Out Candidates (Short Loops + Crisp Oracles):** `git status`, `git diff`, `npm test`, `pytest`, `npx eslint`, typechecking, docs updates, deterministic unit/property tests, and Zod-validated content JSON bundles.
+- **Human-Lit Mandatory (High Blast Radius — Explicit Human Approval + `cf-reviewer`):** Authentication, authorization, Postgres RLS policies, billing/finance logic, secret/hook edits, `git push`, `npm publish`, `rm -rf`, `docker push`, `kubectl apply`, database schema migrations, production deployments, and third-party dependency additions.
+
+## 6. Goals (`/goal`) vs. Recurring Loops (`/schedule`) & Context Economics
+
+- **Use `/goal` (Goals):** Finite, run-until-done workstreams backed by an independent machine-checkable completion oracle (see `skills/cf-loop-engineer/SKILL.md`).
+- **Use `/schedule` (Loops):** Recurring cadence maintenance (weekly CVE sweeps, manifest drift checks, stale handover alerts) scoped strictly to read-only audits or PR drafts.
+- **Context & Routing Economics:** Keep static always-on rules (`rules/AGENTS.md`) lean (`≤ 10 KB`); move procedural depth into progressive-disclosure `skills/*/SKILL.md` + `references/`. Route `pro` to `cf-architect` / `cf-reviewer` and `flash` to bounded parallel workers and `browser` audits.
+- **Never Let the Generator Grade Its Own Homework:** Always route completed diffs through clean-context `cf-reviewer` + `cf-tester` + `cf-eval` before human outer-loop verdict (**Quality / Verdict / Answerability**).

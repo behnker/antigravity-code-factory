@@ -3,9 +3,9 @@
   "slug": "pro-setup-playbook",
   "number": 3,
   "title": "Antigravity Pro Setup: Engineering & Content Playbook",
-  "subtitle": "Configure Desktop 2.0, IDE, and agy CLI like infrastructure-as-code — bounded autonomy, the 5 customization primitives, engineering & editorial workspaces, MCP servers, team plugin distribution, and daily pro operating habits.",
+  "subtitle": "Configure Desktop 2.0, IDE, and agy CLI like infrastructure-as-code — bounded autonomy, Selective Autonomy delegation boundaries, Practical Loop Engineering (/goal vs. /schedule), MCP servers, and daily pro operating habits.",
   "level": "all-levels",
-  "estimatedMinutes": 45,
+  "estimatedMinutes": 55,
   "threeScenePreset": "hook-pipeline",
   "accentTone": "emerald",
   "tags": [
@@ -15,6 +15,8 @@
     "content-ops",
     "mcp",
     "team-plugins",
+    "loop-engineering",
+    "selective-autonomy",
     "onboarding"
   ],
   "video": {
@@ -52,6 +54,12 @@
         "title": "Daily Senior Operating Habits & Day-1 Onboarding Smoke Tests",
         "timestampSeconds": 1080,
         "summary": "The Spec -> Build -> Independent Review -> /learn loop, slash command cheat sheet, and running Day-1 verification checks."
+      },
+      {
+        "id": "ps-ch-6",
+        "title": "Practical Loop Engineering: Goals, Schedules & Delegation Boundaries",
+        "timestampSeconds": 1240,
+        "summary": "Applying Addy Osmani's /goal vs. /schedule discipline, 3-5 concurrent loop cap, and Selective Autonomy matrix daily."
       }
     ],
     "transcriptSummary": "This practical operational walkthrough configures Google Antigravity across Desktop 2.0, IDE, and the agy CLI for both Engineering and Content teams. We establish bounded autonomy via proceed-in-sandbox and command allowlists/denylists, master all 5 customization primitives (Rules, Skills, Plugins, Hooks, MCP Servers) within the 24 KB per-file / 20,000-token aggregate budget, scaffold starter AGENTS.md and editorial-qa workflows, connect least-privilege Streamable HTTP MCP servers, package org-wide Git-symlinked plugins, and conclude with daily context-hygiene habits and a Day-1 teammate onboarding smoke test."
@@ -83,11 +91,11 @@
       "order": 2,
       "title": "Baseline Security, Permissions & Bounded Autonomy",
       "stageTag": "Guardrails",
-      "summary": "Configure Global Settings once to achieve bounded autonomy — zero friction on safe read-only and local verification commands while requiring explicit human approval for irreversible or outbound actions.",
+      "summary": "Configure Global Settings once to achieve bounded autonomy and Day 4 Security Guardrails — lights-out speed on safe local verification loops while enforcing Human-Lit approval for auth, security, finance, secrets, and outbound actions.",
       "keyTakeaways": [
         "Set Global Tool Execution Policy to proceed-in-sandbox with Terminal Sandbox Enabled to contain filesystem and network side effects.",
-        "Set Non-Workspace File Access and Internet Access Policy to ask (or deny on strict production repositories) to prevent accidental exfiltration.",
-        "Populate Command Allowlist with read-only checks (git status, git diff, npm test, pytest, tsc --noEmit) and Command Denylist with destructive ops (rm -rf, git push --force, git reset --hard, DROP TABLE).",
+        "Apply Selective Autonomy Delegation Boundaries: docs, unit tests, lint fixes, and validated JSON bundles can run lights-out; authentication, security/RLS, finance, hooks, and infra access must remain Human-Lit.",
+        "Pair hooks/hitl-gate.py (PreToolUse run_command force_ask) with hooks/secret-guard.py (PreToolUse edit_file/write_file secret & credential leak hard-deny).",
         "Use Settings -> Project Settings for repo-specific overrides (e.g., request-review for Terraform/infra repos; open web access on editorial research workspaces) rather than weakening global defaults."
       ],
       "actionChecklist": [
@@ -215,6 +223,31 @@
       "mermaidDiagram": "flowchart LR\n    A[\"1. Align\\n(/grill-me -> /plan)\"] --> B[\"2. Build\\n(Agent Mode / /teamwork)\"]\n    B --> C[\"3. Verify\\n(Fresh Reviewer + /browser)\"]\n    C --> D[\"4. Compound\\n(/learn -> Rules & Hooks)\"]\n    D --> A",
       "repoArtifactPath": ".memory/handover.md",
       "promptId": "prompt-ps-day1-smoketest"
+    },
+    {
+      "id": "ps-step-8",
+      "order": 8,
+      "title": "Practical Loop Engineering: Goals (/goal), Schedules (/schedule) & Concurrency Caps",
+      "stageTag": "Loop Engineering",
+      "summary": "Operationalize Addy Osmani's 'Practical Loop Engineering' inside your daily Antigravity OS: distinguish finite Goals from recurring Cron Loops, cap concurrent agents at 3-5 so review quality stays sharp, and never let the generator grade its own homework.",
+      "keyTakeaways": [
+        "Goals (/goal) vs. Loops (/schedule): Use /goal for run-until-done deliverables backed by an independent oracle (e.g., zero High/Critical CVEs + green cf-next-verify); use /schedule for recurring weekly hygiene sweeps (audit, handover size, manifest drift).",
+        "Respect the Human Review Ceiling (3-5 Concurrent Loops): Running 5-10 agent runs per day works smoothly when max concurrency stays <= 5; beyond that, review piles up and Dark Factory drift creeps in.",
+        "Never Let the Generator Grade Its Own Homework: Always split execution (cf-backend / cf-frontend) from clean-context verification (cf-reviewer / cf-tester / browser) so blind spots like mobile regressions are caught before merge.",
+        "Inspect skills/cf-loop-engineer/references/project-examples.md for 4 copy-ready Project_Antigravity recipes (Goal CVE convergence, Monday /schedule hygiene sweep, 4-worker Swarm, and Delegation Boundary table)."
+      ],
+      "actionChecklist": [
+        "Open `skills/cf-loop-engineer/SKILL.md` and `skills/cf-loop-engineer/references/project-examples.md` in the Live Repo Explorer.",
+        "Define an explicit machine-checkable oracle before launching your next `/goal` run.",
+        "Set up one read-only weekly `/schedule` hygiene loop checking CVE advisories, `.memory/handover.md` (<= 3 KB), and manifest drift."
+      ],
+      "codeSnippet": {
+        "language": "text",
+        "filename": "Project_Antigravity Weekly /schedule Hygiene Loop",
+        "code": "/schedule every Monday at 09:00: Run a read-only Code Factory hygiene sweep:\n1. Run `cd academy && pnpm audit --audit-level=high` for newly disclosed CVEs.\n2. Verify `.memory/handover.md` <= 3072 bytes and `rules/AGENTS.md` <= 12 KB.\n3. Check `generated-repo-manifest.json` against skills/, agents/, hooks/, courses/.\n4. Report actionable P0/P1 drift items only; never auto-edit or git push."
+      },
+      "repoArtifactPath": "skills/cf-loop-engineer/references/project-examples.md",
+      "promptId": "prompt-ps-loop-engineering"
     }
   ],
   "prompts": [
@@ -336,6 +369,36 @@
         }
       ],
       "expectedOutcome": "Verified Day-1 setup with confirmed sandbox/HITL guardrails and a recurring team hygiene schedule."
+    },
+    {
+      "id": "prompt-ps-loop-engineering",
+      "title": "Design a Bounded /goal, /schedule & Selective Autonomy Plan (cf-loop-engineer)",
+      "stage": "optimise",
+      "difficulty": "intermediate",
+      "skillRef": "cf-loop-engineer",
+      "description": "Applies Practical Loop Engineering to design a finite /goal with an independent oracle, a read-only /schedule hygiene loop, and a repo-specific Lights-Out vs. Human-Lit delegation matrix.",
+      "template": "Using `skills/cf-loop-engineer/SKILL.md`, design a Practical Loop Engineering operating plan for `{{repo_name}}`:\n\n1. **Selective Autonomy Matrix:** Classify our routine tasks into **Lights-Out** (docs, tests, lint/type fixes, validated content bundles) vs. **Human-Lit** (auth, security/RLS, billing/finance, secrets/hooks, production deploys).\n2. **Finite Goal (`/goal`):** Write a bounded `/goal` prompt for `{{goal_objective}}` with an independent machine-checkable completion oracle, a 3-retry circuit breaker, and a clean-context `cf-reviewer` grading step.\n3. **Recurring Loop (`/schedule`):** Write a read-only `{{schedule_cadence}}` hygiene prompt monitoring CVEs, static rules budget, and `.memory/handover.md` drift.",
+      "variables": [
+        {
+          "key": "repo_name",
+          "label": "Repository Name",
+          "placeholder": "Project_Antigravity",
+          "defaultValue": "Project_Antigravity"
+        },
+        {
+          "key": "goal_objective",
+          "label": "Bounded /goal Deliverable",
+          "placeholder": "Zero High/Critical CVEs + 100% green test/build suite",
+          "defaultValue": "Zero High/Critical CVEs + 4-course schema validation + green cf-next-verify"
+        },
+        {
+          "key": "schedule_cadence",
+          "label": "Recurring Cadence",
+          "placeholder": "every Monday at 09:00",
+          "defaultValue": "every Monday at 09:00"
+        }
+      ],
+      "expectedOutcome": "A concrete Delegation Boundary table, an oracle-backed /goal prompt, and a safe read-only /schedule hygiene automation."
     }
   ]
 }

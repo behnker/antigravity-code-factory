@@ -11,8 +11,16 @@ describe("Next.js API Route Handlers", () => {
       const res = await getCourses(req);
       expect(res.status).toBe(200);
       const data = await res.json();
-      expect(data.items.length).toBeGreaterThanOrEqual(2);
-      expect(data.total).toBeGreaterThanOrEqual(2);
+      expect(data.items.length).toBeGreaterThanOrEqual(4);
+      expect(data.total).toBeGreaterThanOrEqual(4);
+      expect(data.items.map((c: { slug: string }) => c.slug)).toEqual(
+        expect.arrayContaining([
+          "harness-mastery",
+          "code-factory-sdlc",
+          "pro-setup-playbook",
+          "lit-software-factory",
+        ]),
+      );
       expect(data.limit).toBe(10);
       expect(data.offset).toBe(0);
     });
@@ -34,8 +42,16 @@ describe("Next.js API Route Handlers", () => {
       const res = await getResources(req);
       expect(res.status).toBe(200);
       const data = await res.json();
-      expect(data.items.length).toBe(4);
+      expect(data.items.length).toBe(5);
       expect(data.syncedAt).toBeTruthy();
+
+      const skillReq = new NextRequest(
+        "http://localhost:3000/api/resources?category=skill&q=cf-loop-engineer",
+      );
+      const skillRes = await getResources(skillReq);
+      expect(skillRes.status).toBe(200);
+      const skillData = await skillRes.json();
+      expect(skillData.items.length).toBeGreaterThanOrEqual(1);
     });
 
     it("returns empty array when search has no match", async () => {
