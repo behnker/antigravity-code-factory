@@ -1,0 +1,341 @@
+{
+  "id": "pro-setup-playbook",
+  "slug": "pro-setup-playbook",
+  "number": 3,
+  "title": "Antigravity Pro Setup: Engineering & Content Playbook",
+  "subtitle": "Configure Desktop 2.0, IDE, and agy CLI like infrastructure-as-code — bounded autonomy, the 5 customization primitives, engineering & editorial workspaces, MCP servers, team plugin distribution, and daily pro operating habits.",
+  "level": "all-levels",
+  "estimatedMinutes": 45,
+  "threeScenePreset": "hook-pipeline",
+  "accentTone": "emerald",
+  "tags": [
+    "setup-playbook",
+    "permissions",
+    "engineering",
+    "content-ops",
+    "mcp",
+    "team-plugins",
+    "onboarding"
+  ],
+  "video": {
+    "title": "Antigravity Pro Setup: From Zero to Team-Wide Engineering & Content OS",
+    "durationLabel": "21:30",
+    "provider": "coming_soon",
+    "posterLabel": "Course 3 Studio Recording — 30–45 Minute Pro Setup & Day-1 Onboarding Walkthrough",
+    "chapters": [
+      {
+        "id": "ps-ch-1",
+        "title": "Surface Selection & 5-Tier Context Discovery Precedence",
+        "timestampSeconds": 0,
+        "summary": "Choosing between Antigravity 2.0 Desktop, IDE, and agy CLI, and understanding how workspace rules override global configs."
+      },
+      {
+        "id": "ps-ch-2",
+        "title": "Bounded Autonomy: Global Security, Sandbox & Project Overrides",
+        "timestampSeconds": 240,
+        "summary": "Locking proceed-in-sandbox, Terminal Sandbox, Allowlist/Denylist, and project-specific overrides for engineering vs. content repos."
+      },
+      {
+        "id": "ps-ch-3",
+        "title": "Engineering & Content Workspace Scaffolding (AGENTS.md + Skills + Hooks)",
+        "timestampSeconds": 540,
+        "summary": "Respecting the 24 KB / 20k-token rules budget, fail-closed PreToolUse hooks, and versioned editorial voice + fact-checking pipelines."
+      },
+      {
+        "id": "ps-ch-4",
+        "title": "MCP Servers & Git-Symlinked Team Plugin Distribution",
+        "timestampSeconds": 870,
+        "summary": "Streamable HTTP vs. mcp-remote bridges, global server prefixing, and rolling out an org-wide plugin with git pull."
+      },
+      {
+        "id": "ps-ch-5",
+        "title": "Daily Senior Operating Habits & Day-1 Onboarding Smoke Tests",
+        "timestampSeconds": 1080,
+        "summary": "The Spec -> Build -> Independent Review -> /learn loop, slash command cheat sheet, and running Day-1 verification checks."
+      }
+    ],
+    "transcriptSummary": "This practical operational walkthrough configures Google Antigravity across Desktop 2.0, IDE, and the agy CLI for both Engineering and Content teams. We establish bounded autonomy via proceed-in-sandbox and command allowlists/denylists, master all 5 customization primitives (Rules, Skills, Plugins, Hooks, MCP Servers) within the 24 KB per-file / 20,000-token aggregate budget, scaffold starter AGENTS.md and editorial-qa workflows, connect least-privilege Streamable HTTP MCP servers, package org-wide Git-symlinked plugins, and conclude with daily context-hygiene habits and a Day-1 teammate onboarding smoke test."
+  },
+  "steps": [
+    {
+      "id": "ps-step-1",
+      "order": 1,
+      "title": "Architecture at a Glance: Surfaces & 5-Tier Context Precedence",
+      "stageTag": "Architecture",
+      "summary": "Treat AI configuration like infrastructure-as-code: safe global defaults, specialized rules per repository, and repeatable workflows packaged as Skills and Plugins. Match each task to Antigravity 2.0 Desktop, IDE, or agy CLI.",
+      "keyTakeaways": [
+        "Antigravity 2.0 Desktop excels at multi-task orchestration, parallel projects, Scheduled Tasks, and Auxiliary Pane monitoring (Subagents, Artifacts, Files Changed).",
+        "Antigravity IDE excels at deep hands-on coding with Tab/Supercomplete, Tab-to-Jump, Tab-to-Import, Cmd+I / Ctrl+I Inline Command, Code Lenses, and Diagnostic Auto-Fix.",
+        "Antigravity CLI (agy) powers fast terminal sessions, headless CI scripts, and plugin enable/disable commands via ~/.gemini/antigravity-cli/settings.json.",
+        "Discovery precedence flows strictly: 1. Workspace (.agents/ + AGENTS.md) -> 2. Declared Repo Configs -> 3. Global (~/.gemini/config/) -> 4. Built-ins -> 5. Global Declared Configs."
+      ],
+      "actionChecklist": [
+        "Install and authenticate across Antigravity 2.0 Desktop, Antigravity IDE, and the agy CLI.",
+        "Confirm which surface fits each part of your workflow (IDE for localized diffs; Desktop 2.0 for swarms & schedules; CLI for headless automation).",
+        "Verify live customization discovery in Skills & Customizations or via agy /help."
+      ],
+      "mermaidDiagram": "flowchart TD\n    A[\"1. Workspace Project (.agents/ + AGENTS.md)\"] --> B[\"2. Declared Repo Configs (skills.json, plugins.json)\"]\n    B --> C[\"3. Global Machine Config (~/.gemini/config/)\"]\n    C --> D[\"4. Built-in Customizations\"]\n    D --> E[\"5. Global Declared Configs\"]",
+      "repoArtifactPath": "rules/AGENTS.md",
+      "promptId": "prompt-ps-eng-workspace"
+    },
+    {
+      "id": "ps-step-2",
+      "order": 2,
+      "title": "Baseline Security, Permissions & Bounded Autonomy",
+      "stageTag": "Guardrails",
+      "summary": "Configure Global Settings once to achieve bounded autonomy — zero friction on safe read-only and local verification commands while requiring explicit human approval for irreversible or outbound actions.",
+      "keyTakeaways": [
+        "Set Global Tool Execution Policy to proceed-in-sandbox with Terminal Sandbox Enabled to contain filesystem and network side effects.",
+        "Set Non-Workspace File Access and Internet Access Policy to ask (or deny on strict production repositories) to prevent accidental exfiltration.",
+        "Populate Command Allowlist with read-only checks (git status, git diff, npm test, pytest, tsc --noEmit) and Command Denylist with destructive ops (rm -rf, git push --force, git reset --hard, DROP TABLE).",
+        "Use Settings -> Project Settings for repo-specific overrides (e.g., request-review for Terraform/infra repos; open web access on editorial research workspaces) rather than weakening global defaults."
+      ],
+      "actionChecklist": [
+        "Lock Tool Execution Policy = proceed-in-sandbox and Terminal Sandbox = Enabled in Global Settings.",
+        "Configure Command Allowlist for test/lint loops and Command Denylist for destructive commands.",
+        "Enable Notifications and Keep Awake when running /goal or parallel swarms.",
+        "Set stricter Project-Level Overrides on production engineering or infrastructure repos."
+      ],
+      "repoArtifactPath": "hooks/hitl-gate.py"
+    },
+    {
+      "id": "ps-step-3",
+      "order": 3,
+      "title": "Master the 5 Customization Primitives & Context Budget",
+      "stageTag": "Primitives",
+      "summary": "Choose the exact customization primitive for each job so you never bloat the model's context window or fight drifting instructions.",
+      "keyTakeaways": [
+        "Rules (AGENTS.md / GEMINI.md) walk up from CWD to .git root, load always-on, and are capped at 24 KB per file and 20,000 aggregate tokens (over-budget rules demote to path pointers).",
+        "Skills (.agents/skills/<name>/SKILL.md) use progressive disclosure: only name + description load upfront; bulky reference manuals belong in skills/<name>/references/.",
+        "Plugins bundle rules, skills, subagents, hooks, and MCP servers into one toggleable unit (~/.gemini/config/plugins/<name>/).",
+        "Hooks (.agents/hooks.json or plugin-root hooks.json) enforce deterministic code guardrails (PreToolUse, PostToolUse, Stop) that natural-language rules cannot guarantee.",
+        "MCP Servers connect external tools (GitHub, Databases, Google Workspace, Cloud, CMS) globally or scoped to a plugin."
+      ],
+      "actionChecklist": [
+        "Keep root AGENTS.md crisp (~2–8 KB of hard invariants, no YAML frontmatter).",
+        "Move multi-step runbooks and checklists out of AGENTS.md into progressive-disclosure SKILL.md folders.",
+        "Audit total rules size to stay comfortably inside the 24 KB file cap and 20,000-token budget."
+      ],
+      "repoArtifactPath": "plugin.json"
+    },
+    {
+      "id": "ps-step-4",
+      "order": 4,
+      "title": "Configure Your Engineering Workspace & Fail-Closed Hooks",
+      "stageTag": "Engineering",
+      "summary": "Commit AGENTS.md, .memory/, plans/, and .agents/hooks.json directly into every engineering repo so every teammate gets identical quality gates immediately on git clone.",
+      "keyTakeaways": [
+        "Standalone AGENTS.md files use plain Markdown (no YAML frontmatter) listing Source-of-Truth commands, Architecture Boundaries (domain/api/ui), and Non-Negotiable Invariants.",
+        "Hook payloads use camelCase JSON on stdin/stdout (toolCall.args.CommandLine, conversationId).",
+        "CRITICAL: PreToolUse fails closed on {} — your hook script MUST always emit an explicit decision (allow, ask, force_ask, or deny).",
+        "In Stop hooks, always check continuationActive to prevent infinite loops; in native plugins, hooks.json MUST sit at the plugin root.",
+        "Install Marketplace engineering plugins (Cloudflare, Vercel, Supabase, Chrome DevTools, Figma, Jira/ClickUp) via Customizations -> Marketplace."
+      ],
+      "actionChecklist": [
+        "Commit starter AGENTS.md with exact install, typecheck, lint, test, and build commands.",
+        "Register PreToolUse HITL safety gate in .agents/hooks.json (or install the global code-factory plugin).",
+        "Install and authenticate core infrastructure & browser QA Marketplace plugins."
+      ],
+      "codeSnippet": {
+        "language": "json",
+        "filename": ".agents/hooks.json",
+        "code": "{\n  \"hitl-safety-gate\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"run_command\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"python3 ./hooks/hitl-gate.py\",\n            \"timeout\": 10\n          }\n        ]\n      }\n    ]\n  }\n}"
+      },
+      "repoArtifactPath": "hooks.json",
+      "promptId": "prompt-ps-eng-workspace"
+    },
+    {
+      "id": "ps-step-5",
+      "order": 5,
+      "title": "Configure Content & Editorial Workspaces with Rigor",
+      "stageTag": "Content Ops",
+      "summary": "Content projects fail when driven by ad-hoc chat prompts. Apply engineering discipline to editorial repos with versioned voice rules, gold-standard examples, verified product facts, and a decoupled editorial-qa review skill.",
+      "keyTakeaways": [
+        "Structure content repos with AGENTS.md (voice, ICP, banned clichés, factual attribution), content-briefs/, drafts/, published/, and .agents/skills/{draft-longform,editorial-qa,repurpose-kit}/.",
+        "Store 2–3 canonical A+ pieces inside skills/draft-longform/examples/ and verified claims inside references/product-facts.md.",
+        "Enforce factual invariants: never invent benchmarks or quotes; mark unverified claims with [VERIFY: <what to check>].",
+        "Run editorial-qa in a fresh subagent context so the reviewer audits accuracy, voice, and structure objectively.",
+        "Connect Google Drive, Google Docs, Google Sheets, Canva, Figma, and ClickUp via Agent Marketplace."
+      ],
+      "actionChecklist": [
+        "Create an editorial AGENTS.md defining primary reader, voice, banned buzzwords, and citation rules.",
+        "Add .agents/skills/editorial-qa/SKILL.md with the 4-stage Accuracy -> Voice -> Structure -> Verdict rubric.",
+        "Install Google Workspace (Drive/Docs/Sheets/Slides) and Canva/Figma Marketplace plugins."
+      ],
+      "codeSnippet": {
+        "language": "markdown",
+        "filename": ".agents/skills/editorial-qa/SKILL.md",
+        "code": "---\nname: editorial-qa\ndescription: >-\n  Use when reviewing, editing, or finalizing any article, newsletter, docs page,\n  or script before publication to verify brand voice, factual accuracy, clarity,\n  and formatting compliance.\n---\n\n# Editorial QA Pass\n\nRun this 4-stage audit in a fresh subagent context:\n1. **Accuracy Audit:** Flag every metric, date, quote, or claim missing a verified source.\n2. **Voice & Cliche Pass:** Compare against style-guide.md; cut filler intros and hedging.\n3. **Structure & Readability:** Verify scannable headers, <= 4-line paragraphs, and clear CTA.\n4. **Output:** Return Blocking Issues, Line Edits, and Ready / Needs Revision verdict."
+      },
+      "promptId": "prompt-ps-content-workspace"
+    },
+    {
+      "id": "ps-step-6",
+      "order": 6,
+      "title": "Connect MCP Servers & Distribute Org-Wide Team Plugins",
+      "stageTag": "Distribution",
+      "summary": "Stop copy-pasting prompts in Slack. Connect least-privilege Streamable HTTP MCP servers cleanly and distribute rules, skills, personas, and hooks via Git-backed team plugins.",
+      "keyTakeaways": [
+        "Prefer Streamable HTTP (url ending in /mcp) for remote MCP servers; wrap legacy HTTP+SSE (/sse) servers with a stdio bridge such as mcp-remote.",
+        "Prefix every plugin MCP server name (e.g., acme-cms, not cms) because MCP server names share a single global namespace across user config and all plugins.",
+        "Use read-only database credentials and scoped API tokens — never commit literal secrets into repo mcp_config.json files.",
+        "Pattern A (Single Project): commit AGENTS.md, .agents/skills/, and .agents/hooks.json directly (optionally referencing monorepo skills via .agents/skills.json).",
+        "Pattern B (Multi-Repo Team): package plugin.json, assets/logo.svg, rules/AGENTS.md, skills/, agents/, hooks.json, and mcp_config.json into one Git repo symlinked to ~/.gemini/config/plugins/<team-plugin>."
+      ],
+      "actionChecklist": [
+        "Verify live MCP tools via Additional Options (...) -> MCP Servers.",
+        "Confirm all custom MCP server keys are team-prefixed and use least-privilege tokens.",
+        "Set up Pattern A (repo-local) or Pattern B (1-minute git clone + ln -s team plugin install) so teammates sync via git pull."
+      ],
+      "codeSnippet": {
+        "language": "bash",
+        "filename": "team-plugin-install.sh",
+        "code": "# Teammate 1-minute global toolkit install\ngit clone https://github.com/<org>/acme-antigravity-toolkit.git ~/tools/acme-antigravity-toolkit\nln -s ~/tools/acme-antigravity-toolkit ~/.gemini/config/plugins/acme-toolkit\n\n# Stay in sync across all workspaces\ngit -C ~/tools/acme-antigravity-toolkit pull"
+      },
+      "promptId": "prompt-ps-team-plugin"
+    },
+    {
+      "id": "ps-step-7",
+      "order": 7,
+      "title": "Senior Daily Operating Habits & Day-1 Onboarding Checklist",
+      "stageTag": "Operating OS",
+      "summary": "Setup delivers 40% of the value; the remaining 60% comes from disciplined daily session habits — Spec -> Build -> Independent Review -> /learn — plus a crisp Day-1 smoke test for every new teammate.",
+      "keyTakeaways": [
+        "Run the 4-phase loop every day: Align (/grill-me -> /plan) -> Build (Agent Mode or /teamwork) -> Verify (clean-context Reviewer + 375/768/1440px /browser checks) -> Compound (/learn).",
+        "Master key slash commands: /plan, /grill-me, /boost, /teamwork, /goal, /compact (~65% context or 15–20 turns), /learn, /schedule, and /browser.",
+        "Enforce 5 Pro Context Hygiene Habits: (1) One session = one coherent deliverable, (2) Use explicit @ mentions, (3) Always decouple Author from Reviewer, (4) Persist state in .memory/ files not chat history, (5) Never fight the model twice on the same mistake — encode it via /learn.",
+        "Verify every Day-1 teammate with a live smoke test (run /plan + HITL trigger on engineering; run editorial-qa on content) and optional /schedule weekly hygiene automation."
+      ],
+      "actionChecklist": [
+        "Run /grill-me -> /plan on your next non-trivial task before editing code or drafting content.",
+        "Launch a decoupled reviewer subagent on every major diff or long-form draft.",
+        "Run /compact around 15–20 turns and update .memory/handover.md (<= 3 KB) before closing.",
+        "Complete all 7 Day-1 onboarding checklist items and set up one recurring /schedule hygiene job."
+      ],
+      "mermaidDiagram": "flowchart LR\n    A[\"1. Align\\n(/grill-me -> /plan)\"] --> B[\"2. Build\\n(Agent Mode / /teamwork)\"]\n    B --> C[\"3. Verify\\n(Fresh Reviewer + /browser)\"]\n    C --> D[\"4. Compound\\n(/learn -> Rules & Hooks)\"]\n    D --> A",
+      "repoArtifactPath": ".memory/handover.md",
+      "promptId": "prompt-ps-day1-smoketest"
+    }
+  ],
+  "prompts": [
+    {
+      "id": "prompt-ps-eng-workspace",
+      "title": "Scaffold Engineering AGENTS.md & .agents/ Workspace",
+      "stage": "architecture",
+      "difficulty": "beginner",
+      "skillRef": "cf-bootstrap",
+      "description": "Generates a crisp, budget-safe engineering AGENTS.md (no YAML frontmatter, < 8 KB) plus .agents/hooks.json and starter skills tailored to your repo.",
+      "template": "Inspect `{{repo_path}}` and scaffold an Antigravity Pro Engineering Workspace:\n\n1. Create a plain-Markdown `AGENTS.md` (no YAML frontmatter, <= 6 KB) documenting:\n   - Exact Source-of-Truth commands for `{{tech_stack}}` (install, typecheck, lint, test, build).\n   - Strict module boundaries (domain, API/boundary validation, UI tokens).\n   - Non-negotiable security, reliability, and testing invariants.\n2. Configure `.agents/hooks.json` with a fail-closed `PreToolUse` safety gate on `run_command` (always emitting explicit `allow` / `ask` / `force_ask` / `deny`).\n3. Recommend the top 3 Marketplace plugins and project-level sandbox overrides (`proceed-in-sandbox` vs `request-review`) for this repository.",
+      "variables": [
+        {
+          "key": "repo_path",
+          "label": "Repository Path",
+          "placeholder": "./my-service",
+          "defaultValue": "."
+        },
+        {
+          "key": "tech_stack",
+          "label": "Tech Stack",
+          "placeholder": "Next.js + TypeScript + Supabase",
+          "defaultValue": "TypeScript + Next.js + Zod"
+        }
+      ],
+      "expectedOutcome": "A committed, team-ready AGENTS.md and deterministic .agents/hooks.json configuration under the 24 KB / 20k-token rules budget."
+    },
+    {
+      "id": "prompt-ps-content-workspace",
+      "title": "Scaffold Editorial & Content Operations Workspace",
+      "stage": "spec",
+      "difficulty": "beginner",
+      "skillRef": "editorial-qa",
+      "description": "Sets up a versioned content repository with brand-voice AGENTS.md, factual attribution invariants, and a decoupled editorial-qa SKILL.md.",
+      "template": "Scaffold an Antigravity Content Workspace for `{{brand_name}}` targeting `{{target_audience}}`:\n\n1. Create directory structure: `content-briefs/`, `drafts/`, `published/`, and `.agents/skills/{draft-longform,editorial-qa,repurpose-kit}/`.\n2. Write `AGENTS.md` encoding:\n   - Brand voice: `{{voice_tone}}`\n   - Banned AI cliches and filler intros.\n   - Factual attribution invariant (mark any unverified stat with `[VERIFY: <claim>]`).\n3. Create `.agents/skills/editorial-qa/SKILL.md` implementing the 4-stage audit (Accuracy -> Voice & Cliche Pass -> Structure & Readability -> Ready / Needs Revision verdict) designed for a fresh reviewer subagent.",
+      "variables": [
+        {
+          "key": "brand_name",
+          "label": "Brand / Team Name",
+          "placeholder": "Acme Engineering Blog",
+          "defaultValue": "Antigravity Engineering"
+        },
+        {
+          "key": "target_audience",
+          "label": "Primary Reader / ICP",
+          "placeholder": "Staff engineers & CTOs",
+          "defaultValue": "Engineering leaders and AI builders"
+        },
+        {
+          "key": "voice_tone",
+          "label": "Voice & Cadence",
+          "placeholder": "Direct, evidence-backed, practitioner-to-practitioner",
+          "defaultValue": "Direct, crisp, evidence-backed, zero-hype"
+        }
+      ],
+      "expectedOutcome": "A git-versioned editorial OS with enforceable brand voice rules and decoupled subagent QA."
+    },
+    {
+      "id": "prompt-ps-mcp-audit",
+      "title": "Configure & Harden Team MCP Servers (Streamable HTTP)",
+      "stage": "architecture",
+      "difficulty": "intermediate",
+      "description": "Audits or generates a least-privilege mcp_config.json using Streamable HTTP, globally prefixed server names, and zero committed secrets.",
+      "template": "Design a clean `mcp_config.json` for `{{team_prefix}}` connecting `{{target_services}}`:\n\nConstraints:\n1. Prefix every server key with `{{team_prefix}}-` to avoid global MCP namespace collisions.\n2. Use Streamable HTTP (`url` ending in `/mcp`) for remote servers; wrap any legacy `/sse` server via `mcp-remote` stdio bridge.\n3. Never hardcode secrets — declare `${VAR}` placeholders with `variables` metadata (for plugin configs) or read-only credentials.\n4. Provide verification steps using `Additional Options (...) -> MCP Servers`.",
+      "variables": [
+        {
+          "key": "team_prefix",
+          "label": "Team Namespace Prefix",
+          "placeholder": "acme",
+          "defaultValue": "acme"
+        },
+        {
+          "key": "target_services",
+          "label": "External Services to Connect",
+          "placeholder": "readonly Postgres, internal CMS, Jira",
+          "defaultValue": "readonly analytics Postgres and internal docs CMS"
+        }
+      ],
+      "expectedOutcome": "A collision-free, least-privilege mcp_config.json compliant with Antigravity's Streamable HTTP transport."
+    },
+    {
+      "id": "prompt-ps-team-plugin",
+      "title": "Package an Org-Wide Git-Backed Antigravity Toolkit Plugin",
+      "stage": "build",
+      "difficulty": "senior",
+      "skillRef": "plugin",
+      "description": "Packages shared rules, skills, subagent personas, root-level hooks.json, and MCP configs into a single Git-symlinked team plugin.",
+      "template": "Package our team's shared standards into a standalone Antigravity plugin repo named `{{plugin_name}}`:\n\n1. Create `plugin.json` (name, displayName, version `1.0.0`, description, logo, suggestedPrompts) and a clean square `assets/logo.svg` (>= 128x128).\n2. Place consolidated invariants in `rules/AGENTS.md`, root-level `hooks.json`, specialized personas in `agents/*.md` (explicitly declaring `subagent: true`, `mainAgent: false`, and least-privilege `tools:`), and workflows in `skills/*/SKILL.md`.\n3. Write a 1-minute `README.md` teammate install guide using `git clone` + `ln -s ... ~/.gemini/config/plugins/{{plugin_name}}` and `git pull` updates.",
+      "variables": [
+        {
+          "key": "plugin_name",
+          "label": "Toolkit Plugin Name",
+          "placeholder": "acme-antigravity-toolkit",
+          "defaultValue": "acme-antigravity-toolkit"
+        }
+      ],
+      "expectedOutcome": "A portable, Git-versioned team plugin that keeps every engineer and content builder synchronized with git pull."
+    },
+    {
+      "id": "prompt-ps-day1-smoketest",
+      "title": "Run Day-1 Teammate Onboarding & Recurring Hygiene Smoke Test",
+      "stage": "optimise",
+      "difficulty": "beginner",
+      "skillRef": "cf-start",
+      "description": "Verifies a new teammate's Antigravity installation, sandboxed execution, HITL hooks, plugin discovery, and optional weekly /schedule job.",
+      "template": "Run a Day-1 Antigravity Pro Onboarding Smoke Test for a `{{role_track}}` teammate in `{{workspace_path}}`:\n\n1. Verify discovered plugins, rules (`AGENTS.md`), skills, and connected MCP servers.\n2. Confirm Global Safety Defaults (`proceed-in-sandbox`, Terminal Sandbox enabled, Allowlist/Denylist active).\n3. Run a safe dry-run verification test (sandboxed read-only test command + confirm `PreToolUse` HITL hook triggers on a protected command pattern without executing it).\n4. Propose 1 high-value weekly `/schedule` hygiene automation tailored to `{{role_track}}`.",
+      "variables": [
+        {
+          "key": "role_track",
+          "label": "Teammate Track",
+          "placeholder": "Engineering or Content",
+          "defaultValue": "Engineering"
+        },
+        {
+          "key": "workspace_path",
+          "label": "Target Workspace",
+          "placeholder": ".",
+          "defaultValue": "."
+        }
+      ],
+      "expectedOutcome": "Verified Day-1 setup with confirmed sandbox/HITL guardrails and a recurring team hygiene schedule."
+    }
+  ]
+}

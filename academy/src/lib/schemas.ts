@@ -73,7 +73,7 @@ export const VideoConfigSchema = z
   .superRefine((val, ctx) => {
     if (val.embedUrl && !isAllowedVideoUrl(val.embedUrl)) {
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: "custom",
         path: ["embedUrl"],
         message: "Video embedUrl must match an allowlisted provider or /media/*.mp4|webm path.",
       });

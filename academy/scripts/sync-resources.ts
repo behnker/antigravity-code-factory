@@ -381,14 +381,33 @@ function readPluginMetadata(): { pluginName: string; pluginVersion: string } {
   if (!fs.existsSync(pluginPath)) {
     return { pluginName: "code-factory", pluginVersion: "0.0.0" };
   }
-  const raw = JSON.parse(fs.readFileSync(pluginPath, "utf8")) as Record<string, unknown>;
-  return {
-    pluginName: typeof raw.name === "string" ? raw.name : "code-factory",
-    pluginVersion: typeof raw.version === "string" ? raw.version : "0.0.0",
-  };
+  try {
+    const raw = JSON.parse(fs.readFileSync(pluginPath, "utf8")) as Record<string, unknown>;
+    return {
+      pluginName: typeof raw.name === "string" ? raw.name : "code-factory",
+      pluginVersion: typeof raw.version === "string" ? raw.version : "0.0.0",
+    };
+  } catch {
+    return { pluginName: "code-factory", pluginVersion: "0.0.0" };
+  }
 }
 
 function main(): void {
+  const pluginManifestPath = path.join(REPO_ROOT, "plugin.json");
+  if (!fs.existsSync(pluginManifestPath) && fs.existsSync(OUTPUT_PATH)) {
+    try {
+      const existing = RepoManifestSchema.parse(
+        JSON.parse(fs.readFileSync(OUTPUT_PATH, "utf8")),
+      );
+      console.log(
+        `[sync-resources] Preserved existing validated manifest (${existing.resources.length} resources, ${existing.courses.length} courses).`,
+      );
+      return;
+    } catch {
+      // Fall through and regenerate from available paths.
+    }
+  }
+
   const { pluginName, pluginVersion } = readPluginMetadata();
   const resources = collectResources();
   const courses = collectCourses();

@@ -8,5 +8,6 @@ academy/.next/
 academy/out/
 academy/coverage/
 academy/.vercel/
+academy/.env*
 academy/*.tsbuildinfo
 academy/src/data/generated-repo-manifest.json
