@@ -1,34 +1,30 @@
 # Session Handover Record
 
-**Timestamp:** 2026-11-24 20:10 UTC  
+**Timestamp:** 2026-11-24 23:27 UTC  
 **Active Model:** Gemini 4 Neon (High)  
-**Git Branch:** `main` (base pushed commit `0d0924f` + pending commit for CVE patches, Course 03, Vercel deploy config, and `.agents/rules/academy-invariants.md`)
+**Git Branch & Commit:** `main` (v2.2.0 commit on top of `37cc6cd`)  
 
 ## 1. Executive Summary
-Completed all 6 Enterprise Code Factory SDLC stages for **Antigravity Academy** (`academy/`): patched all 3 High/Critical CVEs (`0 high / 0 critical`), added **Course 03 (`pro-setup-playbook`)** via the zero-UI-rewrite course registry, deployed live to **Vercel**, verified all 5 live smoke tests, and distilled permanent project invariants in `.agents/rules/academy-invariants.md`.
+Upgraded the global `code-factory` plugin to **v2.2.0** with the `cf-next-verify` Next.js/TS/Tailwind/Zod/Vitest skill, a <20ms `PreToolUse` secret & client-leak guard (`hooks/secret-guard.py`), least-privilege `tools:` frontmatter across all `agents/cf-*.md` personas, and a new `cf-tester` subagent. All `12/12` Python hook tests, `academy/` checks (`tsc`, ESLint, `27/27` Vitest, `0` leaks), and live `GetAllPlugins` discovery passed.
 
-## 2. Live Deployment & Verification
-- **Live Alias URL:** https://antigravity-academy-ten.vercel.app
-- **Deployment URL:** https://antigravity-academy-b12a4z41p-nexite-os.vercel.app
-- **Inspect Logs:** https://vercel.com/nexite-os/antigravity-academy/FqCfJ3tV2CebRToB2RknrKi3BrYf
-- **Live Smoke Tests (All PASS):**
-  - `GET /` → `HTTP 200` (`0.57s`)
-  - `GET /api/courses` → **3 courses** (`harness-mastery`, `code-factory-sdlc`, `pro-setup-playbook`)
-  - `GET /api/resources` → **29 live repo resources**
-  - `POST /api/hitl/simulate` → `force_ask` (`git push`), `HTTP 400 INVALID_INPUT` on blank input
-- **Local Checks:** `pnpm audit --audit-level=high` (**0 high / 0 critical**), `tsc --noEmit` (0 errors), `next lint` (0 warnings), Vitest (**27/27**), `next build` (`3.2s`).
+## 2. Completed Items
+- **`cf-next-verify` Skill:** Added `skills/cf-next-verify/{SKILL.md,references/stack-checklist.md,scripts/verify-stack.sh}` (auto-detects `pnpm`/`yarn`/`bun`/`npm`; verified `4 passed, 0 failed, 1 skipped` on `academy --skip-build`).
+- **`PreToolUse` Secret Guard:** Added `hooks/secret-guard.py` + `hooks/test_secret_guard.py` and registered in `hooks.json` for `write_file|edit_file|write_to_file|replace_file_content|multi_replace_file_content` (blocks hardcoded credentials/PEM keys, `NEXT_PUBLIC_*`/`VITE_*` secret env leaks, and client `service_role` usage).
+- **Hook Tests:** `python3 -m unittest -v hooks/test_hitl_gate.py hooks/test_secret_guard.py` — **12/12 passing** (`0.186s`).
+- **Agent Hardening:** Added `subagent: true`, `mainAgent: false`, and native `tools:` to `agents/cf-{architect,backend,frontend,reviewer}.md`; added `agents/cf-tester.md`.
+- **Live Discovery:** `GetAllPlugins` verified global `code-factory` (12 skills, 5 agents, `rules/AGENTS.md`, dual `PreToolUse` hooks).
 
-## 3. Verified Rollback Plan
-- **Remove/Rollback Vercel Deployment:** `cd academy && vercel remove https://antigravity-academy-b12a4z41p-nexite-os.vercel.app --yes --scope nexite-os` (or `vercel rollback <previous-url>` on subsequent deploys).
-- **Git Rollback:** `git revert <commit-sha>` (root plugin code remains cleanly isolated).
+## 3. Failed Approaches & Dead Ends
+- Trailing `\b` right after `SERVICE_ROLE` in `PUBLIC_SECRET_ENV_RE` missed `NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY`; fixed via `[A-Z0-9_]*\b`.
+- Wrapping a quoted Python heredoc inside macOS bash 3.2 `$(...)` failed to parse in `verify-stack.sh`; fixed by running `if python3 - "$TARGET_DIR" <<'PY'` directly.
 
-## 4. Key Changes Since `0d0924f`
-- Patched CVEs: `zod@4.6.7`, `pnpm-workspace.yaml` `overrides` (`tinypool >= 2.1.2`, `postcss >= 8.5.18`).
-- Added Course 03 (`academy/content/courses/pro-setup-playbook/course.json`) + 4-column responsive course grid (`CourseCurriculumStudio.tsx`).
-- Added Vercel Node `24.x` engine pin, `academy/.vercelignore`, `academy/.env*` gitignore guard, and isolated-build manifest preservation in `scripts/sync-resources.ts`.
-- Stage 6 `cf-learn`: Created `.agents/rules/academy-invariants.md`.
+## 4. Key Modified Files
+- `skills/cf-next-verify/{SKILL.md,references/stack-checklist.md,scripts/verify-stack.sh}`
+- `hooks/{secret-guard.py,test_secret_guard.py}`, `hooks.json`
+- `agents/cf-{architect,backend,frontend,reviewer,tester}.md`
+- `plugin.json`, `README.md`, `.memory/{handover,tasks}.md`
 
 ## 5. Next Step Action Plan
-1. Commit & push the CVE patches, Course 03, `.vercelignore`, `.agents/rules/academy-invariants.md`, and updated `.memory/` files to `origin/main`.
-2. Next milestone (`code-factory` v3.0): fix missing `tools:` frontmatter in `agents/cf-*.md` and implement Phase 1–3 harness upgrades from `.memory/research.md`.
-3. Add Course 04+ anytime by dropping a validated `course.json` into `academy/content/courses/<slug>/`.
+1. Push the local `v2.2.0` commit on `main` to `origin/main` (requires HITL `git push` confirmation).
+2. Optionally run `cd academy && pnpm run sync:resources` and redeploy Vercel (`https://antigravity-academy-ten.vercel.app`) to reflect `v2.2.0` files in Academy.
+3. Continue `code-factory` v3.0 Phase 1–3 from `.memory/research.md` (`PostToolUse` → `PreInvocation` feedback bridge, `SessionStart` `.memory/` injection, bundled `run_workflow` scripts).

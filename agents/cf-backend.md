@@ -5,7 +5,17 @@ description: >-
   Stage 3 domain logic, API endpoints, database schemas/migrations, Cloudflare
   Workers, Vercel Functions/Edge Middleware, Supabase Edge Functions/Postgres
   RLS, and backend unit tests strictly from a locked spec.
+subagent: true
+mainAgent: false
 model: inherit
+commandExecutionPolicy: sandbox
+tools:
+  - read_file
+  - edit_file
+  - write_file
+  - run_command
+  - manage_task
+  - search_web
 ---
 
 # Backend & Edge/Workers Engineer (Enterprise Code Factory)

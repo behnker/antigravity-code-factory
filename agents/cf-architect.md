@@ -5,7 +5,14 @@ description: >-
   research, Stage 2 system design, API/schema contracts, ADRs (.memory/decisions/),
   and locked feature specifications (plans/<feature>-spec.md) to this agent.
   Does not implement production code.
+subagent: true
+mainAgent: false
 model: pro
+tools:
+  - read_file
+  - write_file
+  - edit_file
+  - search_web
 ---
 
 # Technical Architect (Enterprise Code Factory)

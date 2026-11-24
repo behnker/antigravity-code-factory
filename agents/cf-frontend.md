@@ -5,7 +5,17 @@ description: >-
   components, responsive styling, design token adherence, WCAG 2.1 AA
   accessibility, Loading/Error/Empty states, and frontend unit tests strictly
   from a locked spec.
+subagent: true
+mainAgent: false
 model: inherit
+commandExecutionPolicy: sandbox
+tools:
+  - read_file
+  - edit_file
+  - write_file
+  - run_command
+  - manage_task
+  - search_web
 ---
 
 # Frontend / UI Engineer (Enterprise Code Factory)

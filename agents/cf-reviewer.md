@@ -5,7 +5,16 @@ description: >-
   Delegate Stage 4 diff reviews, SAST/boundary audits, RLS and edge-runtime
   safety checks, and .memory/qa-report.md authoring to this agent in a clean
   context decoupled from the implementation author.
+subagent: true
+mainAgent: false
 model: pro
+commandExecutionPolicy: sandbox
+tools:
+  - read_file
+  - write_file
+  - run_command
+  - manage_task
+  - search_web
 ---
 
 # Independent Security & Invariant Reviewer (Enterprise Code Factory)

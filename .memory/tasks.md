@@ -1,31 +1,28 @@
 # Active Milestone Tasks
 
 ## Current Milestone
-- **Goal:** Build the **Antigravity Academy** futuristic glassmorphic interactive learning & showcase platform (`academy/`) using the full Enterprise Code Factory SDLC, featuring Course 1 (Antigravity vs. Claude Code Harness Appraisal) and Course 2 (Code Factory SDLC Reference Model) with Three.js 3D visualizers, video support, copyable prompts, and live repo resource ingestion.
+- **Goal:** Evolve the globally installed **Enterprise Code Factory (`code-factory`)** plugin (`v2.2.0` → `v3.0.0`) alongside the live **Antigravity Academy** (`academy/`) platform.
 - **Repository:** https://github.com/behnker/antigravity-code-factory
 
 ## In Progress
-- [ ] **Stage 5 & Stage 6 Sign-Off:** Live Vercel deployment verified (`https://antigravity-academy-ten.vercel.app`, 3 courses, 29 resources, 0 high/critical CVEs); ready to commit/push final Stage 5–6 changes and collect user feedback.
+- [ ] **Push `v2.2.0` Plugin Release:** Push local `v2.2.0` commit (`cf-next-verify`, `hooks/secret-guard.py`, tightened `agents/cf-*.md`, `cf-tester`, and updated `.memory/`) to `origin/main` when approved.
 
 ## Up Next
-- [ ] Commit & push CVE patches, Course 03 (`pro-setup-playbook`), Vercel config (`.vercelignore`), `.agents/rules/academy-invariants.md`, and updated `.memory/` records to `origin/main`.
-- [ ] **Next Milestone (`code-factory` v3.0):** Fix missing `tools:` frontmatter in `agents/cf-*.md` and implement Phase 1–3 harness upgrades from `.memory/research.md`.
+- [ ] **Next Milestone (`code-factory` v3.0 Phase 1–3 from `.memory/research.md`):**
+  - Implement two-stage `PostToolUse` → `PreInvocation` single-file lint/feedback bridge and `SessionStart` `.memory/` auto-injection.
+  - Add bundled `run_workflow` Python orchestration scripts and optional `sidecar.json` / LSP MCP integration.
+- [ ] Sync `academy/` resource manifest (`pnpm run sync:resources`) if you want `v2.2.0` plugin files (`cf-next-verify`, `secret-guard.py`, `cf-tester`) reflected on the live Vercel site.
 - [ ] Add video recordings (`mp4` / YouTube / Loom URLs) into `academy/content/courses/*/course.json` as episodes are recorded.
 
 ## Completed
-- [x] **Stage 1 (`cf-research`):** Completed Antigravity vs. Claude Code Harness Appraisal (`.memory/research.md`) and Academy Platform Architecture & Dependency Research (`.memory/research-academy-platform.md`, flagging GSAP's proprietary EULA in favor of MIT `motion`).
-- [x] **Stage 2A (`cf-grill-me`):** Locked 5 key architectural decisions (Next.js App Router, "Antigravity Academy" glassmorphic brand, unified `VideoStage`, Zod-validated `localStorage` in v1, Vercel staging preview).
-- [x] **Stage 2B (`cf-plan`):** Locked `plans/antigravity-academy-spec.md`, ADR-0002, and `.memory/architecture.md`.
-- [x] **Stage 3 (`cf-implement`):** Built `academy/` via Task 0 + 3 parallel non-overlapping Swarm workers + 27 deterministic Vitest tests (`next build` green, `5/5` Python hook tests green).
-- [x] **Stage 4 (`cf-qa-review`):** Independent `cf-reviewer` + live `browser` audit (1440/768/375px); fixed all 3 blocking defects (Three.js negative-`dt` crash, WCAG contrast `5.70:1`, WAI-ARIA semantics) and re-verified 0 console errors & 0px overflow (`.memory/qa-report.md`).
-- [x] **Security Patching & Course 03:** Remediated all 3 High/Critical CVEs (`zod@4.6.7`, `tinypool >= 2.1.2`, `postcss >= 8.5.18` -> 0 high/critical) and added Course 03 (`pro-setup-playbook` from `antigravity-pro-setup-guide.md`).
+- [x] **`code-factory` v2.2.0 Stack Verification, Secret Guard & Agent Hardening:**
+  - Authored `skills/cf-next-verify/` (`SKILL.md`, `references/stack-checklist.md`, `scripts/verify-stack.sh` — verified live on `academy/`: `tsc`, `eslint`, `27/27` Vitest, `0` boundary leaks).
+  - Built & registered <20ms `PreToolUse` `hooks/secret-guard.py` (`hooks.json` + `hooks/test_secret_guard.py`; `12/12` Python hook tests passing).
+  - Fixed missing `tools:`, `subagent: true`, and `mainAgent: false` frontmatter across `agents/cf-architect.md`, `cf-backend.md`, `cf-frontend.md`, `cf-reviewer.md`, and added `agents/cf-tester.md`.
+  - Updated `plugin.json` (`v2.2.0`), `README.md`, and verified live discovery via `GetAllPlugins` (12 skills, 5 agents, rules, dual `PreToolUse` hooks).
+- [x] **Stage 5 & Stage 6 Commit/Push (`37cc6cd`):** Committed & pushed CVE patches, Course 03 (`pro-setup-playbook`), Vercel config (`.vercelignore`), `.agents/rules/academy-invariants.md`, and `.memory/` records to `origin/main`.
+- [x] **Stage 6 (`cf-learn` / `cf-handover`):** Distilled permanent project invariants into `.agents/rules/academy-invariants.md` and updated `.memory/handover.md` (≤ 3 KB).
 - [x] **Stage 5 (`cf-deploy-staging`):** Deployed to Vercel (`https://antigravity-academy-ten.vercel.app`) and passed all 5 live smoke tests (`/`, `/api/courses`, `/api/resources`, `/api/hitl/simulate` valid + 400).
-- [x] **Stage 6 (`cf-learn` / `cf-handover`):** Distilled permanent project invariants into `.agents/rules/academy-invariants.md` and updated `.memory/handover.md` (<= 3 KB).
-- [x] Downloaded and analyzed `Antigravity Enterprise Code Factory Blueprint.md` (v2.0.0) via Google Drive plugin.
-- [x] Created plugin scaffold (`plugin.json`, `assets/logo.svg`, `README.md`) and consolidated global rules (`rules/AGENTS.md`, 6.3 KB, graceful `.memory/` mode + Cloudflare/Vercel/Supabase invariants).
-- [x] Built all 11 `cf-*` SDLC & lifecycle skills (`cf-bootstrap` + script + 5 templates, `cf-start`, `cf-handover`, `cf-research`, `cf-grill-me`, `cf-plan`, `cf-implement` + orchestration playbook, `cf-qa-review`, `cf-deploy-staging`, `cf-triage`, `cf-learn`).
-- [x] Built 4 custom Blueprint subagent personas (`cf-architect`, `cf-backend`, `cf-frontend`, `cf-reviewer`).
-- [x] Built & unit-tested `PreToolUse` HITL safety gate (`hooks.json`, `hooks/hitl-gate.py`, `hooks/test_hitl_gate.py` — 5/5 suites passing).
-- [x] Symlinked repo to `~/.gemini/config/plugins/code-factory` and verified live discovery via `GetAllPlugins`.
-- [x] Created public GitHub repo `behnker/antigravity-code-factory` and pushed `main` through `2e89969`.
-- [x] Installed official Marketplace plugins for Google Drive, Vercel, and Supabase alongside existing Cloudflare plugin.
+- [x] **Security Patching & Course 03:** Remediated all 3 High/Critical CVEs (`zod@4.6.7`, `tinypool >= 2.1.2`, `postcss >= 8.5.18` → 0 high/critical) and added Course 03 (`pro-setup-playbook`).
+- [x] **Stage 1–4 (`academy/`):** Researched, specced (`plans/antigravity-academy-spec.md`, ADR-0002), implemented via Swarm (`27/27` Vitest, `next build` clean), and QA-audited (`cf-reviewer` + live `browser` at 1440/768/375px).
+- [x] **Plugin v2.0–v2.1 Foundation:** Built plugin scaffold (`plugin.json`, `rules/AGENTS.md`, 11 `cf-*` skills, 4 `cf-*` agents, `hooks/hitl-gate.py`), symlinked to `~/.gemini/config/plugins/code-factory`, and pushed `behnker/antigravity-code-factory`.
