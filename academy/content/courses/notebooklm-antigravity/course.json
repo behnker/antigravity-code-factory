@@ -1,0 +1,330 @@
+{
+  "id": "notebooklm-antigravity",
+  "slug": "notebooklm-antigravity",
+  "number": 5,
+  "title": "NotebookLM + Antigravity: Grounded Research, Media & Execution",
+  "subtitle": "Pair NotebookLM's source-grounded synthesis and Studio media (Audio, Video, Slides) with Antigravity's autonomous execution via Google Drive, Docs, Slides, Enterprise APIs, and MCP.",
+  "level": "all-levels",
+  "estimatedMinutes": 50,
+  "threeScenePreset": "harness-constellation",
+  "accentTone": "violet",
+  "tags": [
+    "notebooklm",
+    "gemini-notebook",
+    "grounding",
+    "google-drive",
+    "google-docs",
+    "google-slides",
+    "studio-media",
+    "mcp",
+    "research-to-spec",
+    "multimodal"
+  ],
+  "video": {
+    "title": "NotebookLM + Antigravity: Brain Meets Hands End-to-End",
+    "durationLabel": "20:15",
+    "provider": "coming_soon",
+    "posterLabel": "Course 05 Studio Walkthrough — Grounded Research, Studio Media Handoff & Bidirectional Docs Sync",
+    "chapters": [
+      {
+        "id": "nlm-ch-1",
+        "title": "Brain vs. Hands: Division of Labor & Anti-Patterns",
+        "timestampSeconds": 0,
+        "summary": "Why NotebookLM owns messy multimodal synthesis while Antigravity owns live code, verification, and execution."
+      },
+      {
+        "id": "nlm-ch-2",
+        "title": "3 Integration Tiers: Drive/Docs Bridge, Enterprise API & MCP",
+        "timestampSeconds": 240,
+        "summary": "Comparing official Google Workspace plugins, Gemini Notebook Enterprise API, and community MCP bridges."
+      },
+      {
+        "id": "nlm-ch-3",
+        "title": "Research-to-Spec Pipeline With Inline Citations",
+        "timestampSeconds": 510,
+        "summary": "Turning source-grounded NotebookLM briefs into locked specs, project rules, and zero-hallucination builds."
+      },
+      {
+        "id": "nlm-ch-4",
+        "title": "Studio Media Handoff: Podcasts, Video Overviews & Slide Decks",
+        "timestampSeconds": 780,
+        "summary": "When to share direct links vs. export MP3, MP4, PDF, and PPTX into Google Slides and Antigravity."
+      },
+      {
+        "id": "nlm-ch-5",
+        "title": "Reverse Sync, Legacy Drift Audits & Context Hygiene",
+        "timestampSeconds": 1020,
+        "summary": "Pushing architecture docs back to NotebookLM for Audio Overviews and preventing context bloat."
+      }
+    ],
+    "transcriptSummary": "This course teaches the complete operating playbook for combining NotebookLM (Gemini Notebook) with Google Antigravity. You will learn how to divide responsibilities cleanly—keeping messy external knowledge, PDFs, transcripts, and Studio media synthesis in NotebookLM while keeping live codebases, locked specs, automated verification, and execution in Antigravity. We compare all three integration tiers (the official Google Drive/Docs/Slides bridge, the Gemini Notebook Enterprise API, and community MCP servers), walk through citation-enforced Research-to-Spec workflows, cover exact sharing vs. download workflows for Audio Overviews, Video Overviews, and Slide Decks, and show how to reverse-sync living codebase documentation back into NotebookLM."
+  },
+  "steps": [
+    {
+      "id": "nlm-step-1-brain-vs-hands",
+      "order": 1,
+      "title": "Brain vs. Hands: Grounded Synthesis Meets Autonomous Execution",
+      "stageTag": "Foundations",
+      "summary": "NotebookLM and Antigravity multiply each other when their responsibilities stay crisp. NotebookLM acts as your source-grounded Research Brain over large external corpora (PDFs, RFCs, vendor specs, transcripts, YouTube talks), while Antigravity acts as your Execution Hands over live repositories, terminals, tests, browsers, and subagents.",
+      "keyTakeaways": [
+        "NotebookLM = Grounded Synthesis: Excels at cross-document reasoning, resolving contradictions across dozens of sources, enforcing inline citations, and producing Audio Overviews, Video Overviews, Mind Maps, and Slide Decks.",
+        "Antigravity = Autonomous Execution: Excels at symbol-accurate codebase inspection, Spec-Driven Development, running tests and linters, browser verification, and orchestrating parallel subagents.",
+        "Golden Separation Rule: Keep external reference knowledge, domain specs, and milestone snapshots in NotebookLM; keep living source code and git history in Antigravity.",
+        "Avoid dumping an active git repository into NotebookLM—files go stale immediately and lose git/LSP precision."
+      ],
+      "actionChecklist": [
+        "Scope one dedicated NotebookLM notebook per product, client, or technical initiative rather than one catch-all notebook.",
+        "Load raw domain sources (API PDFs, compliance docs, meeting transcripts, design briefs) into NotebookLM before opening a build session.",
+        "Verify your Antigravity Google Workspace plugins (`gdrive`, `gdocs`, `gslides`) are installed and connected for seamless handoffs."
+      ],
+      "mermaidDiagram": "flowchart LR\n    S[\"External Corpus\\n(PDFs, RFCs, Transcripts, Videos)\"] --> N[\"NotebookLM\\n(Grounded Brain + Inline Citations)\"]\n    N <--> B[\"Handoff Bridge\\n(Google Drive / Docs / Slides or MCP)\"]\n    B <--> A[\"Antigravity\\n(Specs, Code, Tests, Browser QA)\"]\n    A --> P[\"Shipped Software & Living Docs\\n(Reverse-Synced to NotebookLM)\"]",
+      "repoArtifactPath": "skills/cf-research/SKILL.md",
+      "promptId": "nlm-prompt-research-brief"
+    },
+    {
+      "id": "nlm-step-2-integration-tiers",
+      "order": 2,
+      "title": "Choose Your Integration Tier: Drive/Docs Bridge, Enterprise API, or MCP",
+      "stageTag": "Integration",
+      "summary": "Because Google does not currently provide a public consumer REST API or official first-party consumer MCP server for NotebookLM, pick the bridge that matches your reliability and governance needs—starting with the native Google Drive/Docs/Slides bridge.",
+      "keyTakeaways": [
+        "Tier 1 — Google Drive / Docs / Slides Bridge (Recommended Default): NotebookLM natively ingests/syncs Google Docs and exports reports to Docs. Antigravity reads and writes those exact files via official `gdrive`, `gdocs`, and `gslides` plugins with zero ToS risk and no expiring cookies.",
+        "Tier 2 — Gemini Notebook Enterprise API: Organizations with a Gemini Notebook Enterprise license can use Google Cloud's official `discoveryengine.googleapis.com` API (`roles/discoveryengine.notebookLmUser`) wrapped in an internal CLI or MCP server.",
+        "Tier 3 — Community NotebookLM MCP Servers: Power users can connect open-source MCP servers backed by local browser/CDP session auth for direct in-chat queries, but must account for cookie expiry, stdout JSON-RPC hygiene, and rate limits.",
+        "Human Review Checkpoint: Tier 1's explicit Drive/Docs handoff naturally reinforces Lit Software Factory outer-loop governance before autonomous execution starts."
+      ],
+      "actionChecklist": [
+        "Create a dedicated Google Drive folder for your project's NotebookLM handoff docs and exported Studio assets.",
+        "Document your canonical Google Doc URLs and citation expectations in a lightweight workspace rule under `.agents/rules/`.",
+        "If experimenting with a community MCP server, wrap stdout logging cleanly and never run bulk automated scraping."
+      ],
+      "codeSnippet": {
+        "language": "markdown",
+        "filename": ".agents/rules/notebooklm-bridge.md (Example Rule)",
+        "code": "# NotebookLM Handoff Convention\n\n- Canonical Research Doc: <Google Doc URL exported from NotebookLM>\n- Studio Drop Folder: `assets/notebooklm/` (MP3, MP4, PDF, PPTX exports)\n- Grounding Rule: Every API constraint, SLA, or schema pulled from NotebookLM\n  must preserve inline source citations before entering `plans/*-spec.md`.\n- Context Hygiene: Distill findings into `.memory/research.md` once instead\n  of re-reading large research dumps across turns."
+      },
+      "repoArtifactPath": "rules/AGENTS.md",
+      "promptId": "nlm-prompt-bridge-setup"
+    },
+    {
+      "id": "nlm-step-3-research-to-spec",
+      "order": 3,
+      "title": "The Research-to-Spec Pipeline: Citation-Enforced Grounding Into Code",
+      "stageTag": "Research -> Spec",
+      "summary": "The highest-ROI workflow compresses messy requirements inside NotebookLM before Antigravity writes line one. By demanding verbatim constraints and inline citations from NotebookLM, you stop coding agents from hallucinating endpoints, limits, or business rules.",
+      "keyTakeaways": [
+        "Step 1 (Interrogate & Reconcile in NotebookLM): Ask NotebookLM to extract functional requirements, schemas, error codes, and rate limits with inline citations—and explicitly flag contradictions across sources.",
+        "Step 2 (Export to Google Docs): Export the synthesized briefing doc or saved note directly from NotebookLM's Studio panel to Google Docs.",
+        "Step 3 (Ingest Into Antigravity): Point Antigravity at the Google Doc via `gdocs` to populate `.memory/research.md` and compare requirements against the live codebase.",
+        "Step 4 (Lock the Contract): Run `/grill-me` to close open ambiguities and `/plan` (`cf-plan`) to lock `plans/<feature>-spec.md` and `.agents/rules/` invariants before `cf-implement`."
+      ],
+      "actionChecklist": [
+        "Prompt NotebookLM for verbatim constraints + inline source citations rather than high-level prose summaries.",
+        "Export the grounded brief to Google Docs and run the Research-to-Spec Ingestion prompt below in Antigravity.",
+        "Promote critical external constraints (e.g., webhook headers, token lifetimes, compliance rules) directly into Vitest/Zod assertions."
+      ],
+      "mermaidDiagram": "flowchart TD\n    N[\"NotebookLM Studio\\n(Interrogate Sources + Flag Conflicts)\"] --> D[\"Export Briefing to Google Docs\\n(Verbatim Constraints + Citations)\"]\n    D --> R[\"Antigravity gdocs Plugin\\n(.memory/research.md)\"]\n    R --> P[\"/grill-me + /plan\\n(Locked Spec + Upfront Oracles)\"]\n    P --> B[\"cf-implement + cf-eval\\n(Verified, Grounded Code)\"]",
+      "repoArtifactPath": "skills/cf-plan/SKILL.md",
+      "promptId": "nlm-prompt-research-brief"
+    },
+    {
+      "id": "nlm-step-4-studio-media-handoff",
+      "order": 4,
+      "title": "Studio Media Mastery: Podcasts, Video Overviews & Slide Decks",
+      "stageTag": "Studio Media",
+      "summary": "NotebookLM Studio generates rich Audio Overviews (podcasts), Video Overviews, and Slide Decks. Knowing when to share a direct notebook link versus downloading assets is the key to turning Studio drafts into polished, publishable deliverables with Antigravity.",
+      "keyTakeaways": [
+        "Direct Link Sharing (Fast Human Review Only): Recipients can stream Audio/Video or view Slides inside a shared notebook, but links are non-interactive, subject to Workspace sharing policies, and break if you regenerate or delete the Studio output.",
+        "Podcasts (Audio Overviews) -> Download MP3/WAV: Required for offline listening, web embedding, or Antigravity processing. Antigravity natively reads local audio to generate transcripts, show notes, chapter timestamps, social snippets, or embedded web players.",
+        "Video Overviews -> Download MP4: Export standard or vertical short MP4s to publish externally or hand to Antigravity for visual inspection, SRT/VTT captioning, ffmpeg clipping, or landing-page integration.",
+        "Slide Decks -> Revise First, Then Export .pptx / PDF: Use NotebookLM's built-in Revise prompt while citations are live, then download `.pptx` or PDF. Upload `.pptx` to Google Drive -> open in Google Slides -> File > Save as Google Slides so Antigravity's `gslides` plugin can edit and brand-polish slides directly."
+      ],
+      "actionChecklist": [
+        "Treat NotebookLM as your drafting studio and local `assets/notebooklm/` (or Google Drive) as your durable asset host.",
+        "Before exporting a Slide Deck, run NotebookLM's per-slide Revise prompts to lock narrative accuracy while sources are attached.",
+        "Drop exported MP3, MP4, PDF, or `.pptx` files into `assets/notebooklm/` (or convert `.pptx` to Google Slides) and run the Studio Media Repurposing prompt below."
+      ],
+      "codeSnippet": {
+        "language": "text",
+        "filename": "Studio Media Export & Handoff Matrix",
+        "code": "NotebookLM Studio Output   | Export Format      | Antigravity Handoff Path\n---------------------------+--------------------+------------------------------------------\nAudio Overview (Podcast)   | MP3 / WAV download | assets/notebooklm/*.mp3 -> read_file / ffmpeg\nVideo Overview / Short     | MP4 download       | assets/notebooklm/*.mp4 -> read_file / captions\nSlide Deck                 | PPTX or PDF export | Drive -> Google Slides (`gslides`) or local PDF\nBriefing Doc / Data Table  | Native Docs/Sheets | Direct URL via `gdocs` / `gdrive` plugin"
+      },
+      "repoArtifactPath": "skills/cf-implement/SKILL.md",
+      "promptId": "nlm-prompt-media-repurpose"
+    },
+    {
+      "id": "nlm-step-5-reverse-sync-living-docs",
+      "order": 5,
+      "title": "Bidirectional Living Documentation: Reverse-Syncing Code to NotebookLM",
+      "stageTag": "Reverse Sync",
+      "summary": "Most teams only pull research out of NotebookLM—pushing curated architecture digests back into NotebookLM closes a powerful feedback loop for asynchronous design reviews, onboarding, and legacy modernization audits.",
+      "keyTakeaways": [
+        "Codebase -> Google Doc -> NotebookLM Sync: After each milestone, have Antigravity update a concise Architecture & ADR Digest in Google Docs via `gdocs`, then click Sync inside NotebookLM.",
+        "Async Engineering Reviews: Turn updated architecture docs, QA reports, and release notes into a 10-minute Audio Overview or Mind Map so stakeholders and teammates can absorb complex changes on a walk.",
+        "Legacy Modernization & Drift Audits: Load legacy SOPs, compliance manuals, and customer support logs into NotebookLM while Antigravity inspects the live repo—then reconcile documented intent against actual code behavior before refactoring.",
+        "Curated Snapshots Beat Raw Code Dumps: Reverse-sync high-signal markdown summaries (`.memory/architecture.md`, ADRs, API contracts) rather than thousands of raw source files."
+      ],
+      "actionChecklist": [
+        "Maintain one living Google Doc per project (e.g., `Architecture & Milestone Digest`) linked as a source in your project notebook.",
+        "At milestone wrap-up (`cf-handover`), run the Reverse-Sync prompt below to refresh that Doc and click Sync in NotebookLM.",
+        "Generate an Audio Overview or Slide Deck from the synced notebook for stakeholder demos and teammate onboarding."
+      ],
+      "repoArtifactPath": ".memory/architecture.md",
+      "promptId": "nlm-prompt-reverse-sync"
+    },
+    {
+      "id": "nlm-step-6-context-hygiene-antipatterns",
+      "order": 6,
+      "title": "Context Hygiene, Scoped Querying & Production Anti-Patterns",
+      "stageTag": "Production Ops",
+      "summary": "Even with NotebookLM's huge source capacity, sloppy handoffs degrade Antigravity's coding precision and waste tokens. Enforce tight notebook boundaries, surgical queries, local caching, and explicit spec gates.",
+      "keyTakeaways": [
+        "Never Dump Whole Notebooks Into Chat: If using MCP or large exported Docs, scope queries narrowly (e.g., 'OAuth token refresh edge cases + retry headers with citations') and persist distilled findings to `.memory/research.md`.",
+        "Avoid One Giant 'Everything' Notebook: Mixing unrelated projects dilutes grounding and introduces conflicting terminology across domains.",
+        "Never Skip the Spec Layer: Raw NotebookLM Q&A transcripts are great research but poor build instructions—always convert them into typed schemas, acceptance criteria, and verification oracles first.",
+        "Verify Citations Independently: Treat NotebookLM inline citations as an audit trail; confirm exact error codes, limits, and licenses before locking production code."
+      ],
+      "actionChecklist": [
+        "Keep every notebook scoped to a single domain or initiative with clean, non-duplicate sources.",
+        "Cache distilled research findings in workspace markdown (`.memory/`) so subagents read local files instead of repeating expensive lookups.",
+        "Run the Documented-Intent vs. Live-Code Drift Audit prompt before any high-risk refactor or compliance release."
+      ],
+      "repoArtifactPath": "skills/cf-eval/SKILL.md",
+      "promptId": "nlm-prompt-drift-audit"
+    }
+  ],
+  "prompts": [
+    {
+      "id": "nlm-prompt-research-brief",
+      "title": "Ingest a NotebookLM Google Doc Brief Into a Locked Spec",
+      "stage": "research",
+      "difficulty": "beginner",
+      "skillRef": "cf-research",
+      "description": "Reads a citation-backed Google Doc exported from NotebookLM via gdocs, persists distilled constraints in .memory/research.md, and prepares /grill-me and /plan.",
+      "template": "Read the NotebookLM briefing exported to Google Docs at `{{google_doc_url}}` using the `gdocs` plugin for feature `{{feature_name}}`:\n\n1. Extract all functional requirements, external API/schema constraints, rate limits, and edge cases while preserving **exact inline source citations**.\n2. Cross-check those requirements against our live codebase and flag any conflicts, missing assumptions, or stale details.\n3. Write a concise, structured synthesis to `.memory/research.md`.\n4. List the top open ambiguities to resolve with `/grill-me` before locking `plans/{{feature_name}}-spec.md` via `/plan`.",
+      "variables": [
+        {
+          "key": "google_doc_url",
+          "label": "NotebookLM Exported Google Doc URL",
+          "placeholder": "https://docs.google.com/document/d/...",
+          "defaultValue": "https://docs.google.com/document/d/YOUR_DOC_ID"
+        },
+        {
+          "key": "feature_name",
+          "label": "Feature Slug",
+          "placeholder": "oauth-partner-sync",
+          "defaultValue": "oauth-partner-sync"
+        }
+      ],
+      "expectedOutcome": "A citation-grounded .memory/research.md file reconciled against the real repository, ready for /grill-me and /plan."
+    },
+    {
+      "id": "nlm-prompt-bridge-setup",
+      "title": "Configure a Reusable NotebookLM Workspace Bridge Rule & Drop Folder",
+      "stage": "architecture",
+      "difficulty": "beginner",
+      "skillRef": "cf-bootstrap",
+      "description": "Scaffolds a project-local .agents/rules/notebooklm-bridge.md convention and local assets/notebooklm/ drop zone for seamless Drive, Docs, Slides, and media handoffs.",
+      "template": "Set up a lightweight NotebookLM + Antigravity bridge for `{{project_name}}`:\n\n1. Create `.agents/rules/notebooklm-bridge.md` recording our canonical Google Drive folder (`{{drive_folder_url}}`), Research Doc handoff convention, and strict inline-citation requirement.\n2. Create a local `assets/notebooklm/README.md` drop-zone guide for exported Audio Overviews (MP3), Video Overviews (MP4), and Slide Decks (PDF/PPTX).\n3. Keep the rule concise (<= 2 KB) so static context stays lean and compatible with `rules/AGENTS.md` Context Economics.",
+      "variables": [
+        {
+          "key": "project_name",
+          "label": "Project Name",
+          "placeholder": "Antigravity Academy",
+          "defaultValue": "Antigravity Academy"
+        },
+        {
+          "key": "drive_folder_url",
+          "label": "Google Drive Handoff Folder URL",
+          "placeholder": "https://drive.google.com/drive/folders/...",
+          "defaultValue": "https://drive.google.com/drive/folders/YOUR_FOLDER_ID"
+        }
+      ],
+      "expectedOutcome": "A clean, versioned workspace convention connecting your NotebookLM Drive folder, Docs/Slides exports, and local media drop zone."
+    },
+    {
+      "id": "nlm-prompt-media-repurpose",
+      "title": "Transform Exported NotebookLM Podcast, Video, or Slide Deck Assets",
+      "stage": "build",
+      "difficulty": "intermediate",
+      "skillRef": "cf-implement",
+      "description": "Inspects downloaded NotebookLM Studio media (MP3, MP4, PDF/PPTX) or a converted Google Slides URL and produces structured web, doc, or presentation deliverables.",
+      "template": "Inspect the NotebookLM Studio output located at `{{asset_path_or_slides_url}}` (media type: `{{media_type}}`) and produce `{{target_deliverable}}`:\n\n1. Read the local file directly (audio/video/PDF) or inspect the Google Slides deck via the `gslides` plugin—do not guess uninspected content.\n2. Preserve key factual claims, structure, and any cited source references from the Studio output.\n3. Format the deliverable to match our project's design tokens, tone, and accessibility standards (including transcripts/captions or alt text where applicable).\n4. Verify the generated output cleanly before wrapping up.",
+      "variables": [
+        {
+          "key": "asset_path_or_slides_url",
+          "label": "Local Asset Path or Google Slides URL",
+          "placeholder": "assets/notebooklm/overview.mp3 or https://docs.google.com/presentation/d/...",
+          "defaultValue": "assets/notebooklm/overview.mp3"
+        },
+        {
+          "key": "media_type",
+          "label": "Media Type",
+          "placeholder": "Audio Overview MP3 / Video MP4 / Google Slides",
+          "defaultValue": "Audio Overview MP3"
+        },
+        {
+          "key": "target_deliverable",
+          "label": "Target Deliverable",
+          "placeholder": "Timestamped show notes, chapter JSON, and summary blog post",
+          "defaultValue": "Timestamped show notes, chapter JSON, and summary blog post"
+        }
+      ],
+      "expectedOutcome": "Production-ready web content, captions, show notes, or brand-polished slides derived directly from NotebookLM Studio media."
+    },
+    {
+      "id": "nlm-prompt-reverse-sync",
+      "title": "Reverse-Sync Living Architecture & Milestone Digest to Google Docs",
+      "stage": "optimise",
+      "difficulty": "intermediate",
+      "skillRef": "cf-handover",
+      "description": "Synthesizes current repo architecture, ADRs, and recent changes into a Google Doc ready for one-click NotebookLM Sync and Audio Overview generation.",
+      "template": "Compile a concise **Living Architecture & Milestone Digest** for `{{milestone_name}}` from `.memory/architecture.md`, `.memory/decisions/`, `.memory/handover.md`, and recent git commits:\n\n1. Structure the digest clearly for NotebookLM ingestion: System Overview, Key Decisions & Trade-offs, What Shipped, Active Risks/Debt, and Next Milestone.\n2. Update (or create) the target Google Doc at `{{target_doc_url}}` via the `gdocs` plugin without leaking any secrets or `.env` values.\n3. Include 3 suggested NotebookLM prompts (e.g., for an Executive Audio Overview, Engineer Onboarding Guide, and Architecture Mind Map) once I click **Sync** in NotebookLM.",
+      "variables": [
+        {
+          "key": "milestone_name",
+          "label": "Milestone / Release Name",
+          "placeholder": "v2.4 NotebookLM Integration",
+          "defaultValue": "v2.4 NotebookLM Integration"
+        },
+        {
+          "key": "target_doc_url",
+          "label": "Target Google Doc URL (or 'create new')",
+          "placeholder": "https://docs.google.com/document/d/... or create new",
+          "defaultValue": "create new"
+        }
+      ],
+      "expectedOutcome": "An up-to-date, secret-free Google Doc ready to sync into NotebookLM for Audio Overviews, Mind Maps, and async reviews."
+    },
+    {
+      "id": "nlm-prompt-drift-audit",
+      "title": "Audit Documented Intent (NotebookLM) vs. Actual Codebase Behavior",
+      "stage": "test",
+      "difficulty": "senior",
+      "skillRef": "cf-eval",
+      "description": "Reconciles business rules or compliance requirements exported from NotebookLM against actual source code to uncover hidden drift before refactoring.",
+      "template": "Perform a **Documented Intent vs. Live Code Drift Audit** for `{{domain_scope}}`:\n\n1. Read the citation-backed business rules exported from NotebookLM at `{{rules_doc_url}}` (via `gdocs` or local markdown).\n2. Inspect the live implementation across `{{code_paths}}` in this repository.\n3. Produce a structured drift matrix categorizing every rule as:\n   - **Aligned** (with file:line proof)\n   - **Drifted / Contradictory** (code diverges from documented policy)\n   - **Undocumented Behavior** (code enforces logic missing from the docs)\n   - **Unimplemented** (documented requirement missing in code)\n4. Recommend prioritized regression tests and doc updates before any refactor.",
+      "variables": [
+        {
+          "key": "domain_scope",
+          "label": "Domain / Subsystem Scope",
+          "placeholder": "Billing & Refund Policy",
+          "defaultValue": "API Validation & Security Guardrails"
+        },
+        {
+          "key": "rules_doc_url",
+          "label": "NotebookLM Rules Doc URL or Local Path",
+          "placeholder": "https://docs.google.com/document/d/...",
+          "defaultValue": ".memory/research.md"
+        },
+        {
+          "key": "code_paths",
+          "label": "Repository Code Paths",
+          "placeholder": "src/app/api/ src/lib/",
+          "defaultValue": "academy/src/app/api/ academy/src/lib/"
+        }
+      ],
+      "expectedOutcome": "An evidence-backed drift matrix linking NotebookLM source citations to exact file:line code locations with prioritized remediation tasks."
+    }
+  ]
+}

@@ -11,14 +11,15 @@ describe("Next.js API Route Handlers", () => {
       const res = await getCourses(req);
       expect(res.status).toBe(200);
       const data = await res.json();
-      expect(data.items.length).toBeGreaterThanOrEqual(4);
-      expect(data.total).toBeGreaterThanOrEqual(4);
+      expect(data.items.length).toBeGreaterThanOrEqual(5);
+      expect(data.total).toBeGreaterThanOrEqual(5);
       expect(data.items.map((c: { slug: string }) => c.slug)).toEqual(
         expect.arrayContaining([
           "harness-mastery",
           "code-factory-sdlc",
           "pro-setup-playbook",
           "lit-software-factory",
+          "notebooklm-antigravity",
         ]),
       );
       expect(data.limit).toBe(10);

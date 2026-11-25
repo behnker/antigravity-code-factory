@@ -1,11 +1,11 @@
 # Active Milestone Tasks
 
 ## Current Milestone
-- **Goal:** Evolve the globally installed **Enterprise Code Factory (`code-factory`)** plugin (`v2.3.0` → `v3.0.0`) alongside the live **Antigravity Academy** (`academy/`) 4-course platform.
+- **Goal:** Evolve the globally installed **Enterprise Code Factory (`code-factory`)** plugin (`v2.3.0` → `v3.0.0`) alongside the live **Antigravity Academy** (`academy/`) multi-course platform.
 - **Repository:** https://github.com/behnker/antigravity-code-factory
 
 ## In Progress
-- [ ] **Commit, Push & Optional Staging Re-Deploy (`v2.3.0`):** Review local `v2.2.0` + `v2.3.0` Lit Software Factory & 4-course integration changes, commit/push to `origin/main`, and re-deploy `academy/` to Vercel when approved.
+- [ ] **Commit & Push Course 05 (`notebooklm-antigravity`) + Parallel Course 06:** Review local uncommitted course bundles, test updates, and `.memory/` updates, then commit and push to `origin/main` when approved.
 
 ## Up Next
 - [ ] **Next Milestone (`code-factory` v3.0 Phase 1–3 from `.memory/research.md`):**
@@ -14,6 +14,10 @@
 - [ ] Add video recordings (`mp4` / YouTube / Loom URLs) into `academy/content/courses/*/course.json` as episodes are recorded.
 
 ## Completed
+- [x] **Course 05 (`notebooklm-antigravity`) & Live Production Publish (`https://antigravity-academy-ten.vercel.app`):**
+  - Authored `academy/content/courses/notebooklm-antigravity/course.json` (6 steps, 2 Mermaid diagrams, 5 interactive prompt cards covering Drive/Docs/Slides bridges, Studio media export/handoff, reverse-sync, and drift audits) and added `/api/courses` assertions in `academy/tests/api-routes.test.ts`.
+  - Passed `pnpm run sync:resources`, `pnpm audit --audit-level=high` (`0` high/critical), `tsc --noEmit`, `next lint`, `27/27` Vitest, and `next build`.
+  - Deployed to Vercel production (`https://antigravity-academy-4we717co8-nexite-os.vercel.app`, aliased to `https://antigravity-academy-ten.vercel.app`) with HITL approval and passed all 5 live smoke tests.
 - [x] **`code-factory` v2.3.0 Lit Software Factory, Practical Loop Engineering & 4-Course Integration:**
   - Synthesized Google/Kaggle 5-Day Vibe Coding Whitepapers + Addy Osmani's *The New Software Lifecycle* & Fall 2026 O'Reilly Radar arc into `.memory/research-vibe-coding-lit-factory.md`.
   - Upgraded `rules/AGENTS.md` (Section 8: Lit Factory, Selective Autonomy, Dual-Axis Verification, Context Economics, Goals vs. Loops, 8.5 KB), `cf-plan`, `cf-qa-review`, `orchestration.md`, and `plugin.json` (`v2.3.0`).

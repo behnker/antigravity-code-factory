@@ -1,26 +1,28 @@
 # Session Handover Record
 
-**Timestamp:** 2026-11-24 23:50 UTC  
-**Active Model:** Gemini 4 Neon (High)  
-**Git Branch:** `main` (ahead of `origin/main` with `871e978` + uncommitted `code-factory` v2.3.0 Lit Factory & 4-course integration)
+**Timestamp:** 2026-11-25 00:00 UTC  
+**Git Branch:** `main` (`0a4cda9` pushed + uncommitted Course 05 `notebooklm-antigravity`, API test update, and parallel Course 06 `enterprise-product-video-studio`)
 
 ## 1. Executive Summary
-Integrated the full **Google/Kaggle 5-Day Vibe Coding Whitepaper Series** and **Addy Osmani's 2026 O'Reilly Radar Lit Software Factory & Loop Engineering arc** (from `https://gemini.google.com/share/6247662fdfdb`) directly into both the **Enterprise Code Factory protocol/plugin (`v2.3.0`)** and **all 4 courses** in Antigravity Academy (`academy/`).
+Authored, verified, and published **Course 05 (`notebooklm-antigravity`)** — *NotebookLM + Antigravity: Grounded Research, Media & Execution* — to live production at **https://antigravity-academy-ten.vercel.app**. All local gates (`sync:resources`, `pnpm audit --audit-level=high`, `tsc`, `eslint`, `27/27` Vitest, `next build`) and all 5 live production smoke tests passed.
 
-## 2. Protocol, Skills & Framework Upgrades (`v2.3.0`)
-- **Research Synthesis:** `.memory/research-vibe-coding-lit-factory.md` (5 Kaggle whitepapers + *The New Software Lifecycle* + *Own the Outer Loop*, *Software Factories: Light & Dark*, *Human Judgment Relocates*, *Agentic Code Quality*, *Practical Loop Engineering*).
-- **Global Protocol (`rules/AGENTS.md` Section 8, < 10 KB):** Lit Factory & Outer Loop (**Quality / Verdict / Answerability**), Selective Autonomy (Lights-Out vs. Human-Lit), Dual-Axis Verification (*Never let the generator grade its own homework*), Context Economics & Model Routing, and Goals (`/goal`) vs. Loops (`/schedule`) with a 3–5 concurrent loop cap.
-- **New Skills & Project Examples:**
-  - `skills/cf-loop-engineer/SKILL.md` + `references/project-examples.md` (4 runnable `Project_Antigravity` recipes: `/goal` CVE+course convergence, Monday `/schedule` hygiene sweep, 4-worker Swarm, Delegation Boundary table).
-  - `skills/cf-eval/SKILL.md` + `references/eval-rubric.md` (Dual-Axis Output + Trajectory rubric + 5 real `Project_Antigravity` defect catches).
-- **Updated SDLC Skills:** `cf-plan` (Selective Autonomy & upfront Oracles), `cf-qa-review` (Dual-Axis `cf-eval` + Outer-Loop Sign-Off), `cf-implement/references/orchestration.md`, `plugin.json` (`2.3.0`), `academy/scripts/sync-resources.ts`.
+## 2. Course 05 (`notebooklm-antigravity`) Delivered
+- **Bundle:** `academy/content/courses/notebooklm-antigravity/course.json` (zero-UI-code Zod-validated bundle).
+- **Curriculum (6 Steps + 2 Mermaid Diagrams + 5 Parameterized Prompt Cards):**
+  1. Brain vs. Hands division of labor (grounded synthesis vs. live codebase execution).
+  2. 3 Integration Tiers (Google Drive/Docs/Slides bridge, Gemini Notebook Enterprise API, community MCP servers).
+  3. Citation-enforced Research-to-Spec pipeline (`.memory/research.md` → `/grill-me` → `/plan`).
+  4. Studio Media Mastery (direct link sharing vs. exporting Audio MP3/WAV, Video MP4, and Slide Decks `.pptx`/PDF → Google Slides via `gslides`).
+  5. Bidirectional living documentation (reverse-syncing architecture digests to NotebookLM + legacy drift audits).
+  6. Context hygiene, scoped querying, and production anti-patterns.
+- **Tests:** Updated `academy/tests/api-routes.test.ts` to assert Course 05 (`notebooklm-antigravity`) in `GET /api/courses`.
 
-## 3. Curriculum Integration (All 4 Courses)
-- **Course 01 (`harness-mastery`):** Added 10% Model / 90% Harness framing + Step 6 (*Context Engineering & Routing Economics*) + `hm-prompt-context-economics`.
-- **Course 02 (`code-factory-sdlc`):** Wove Light vs. Dark Factories, upstream judgment, Dual-Axis Evals, and Day 5 Cloud Graduation + Outer-Loop Sign-Off across Stages 1, 2, 5, 6 + `cf-prompt-trajectory-eval`.
-- **Course 03 (`pro-setup-playbook`):** Integrated Selective Autonomy + `secret-guard.py` + Step 8 (*Practical Loop Engineering: `/goal`, `/schedule` & Concurrency Caps*) + `prompt-ps-loop-engineering`.
-- **Course 04 (`lit-software-factory`, NEW):** 6-step capstone + 5 interactive prompts unifying the entire corpus on this repository.
+## 3. Live Production Deployment & Rollback Plan
+- **Production URL:** `https://antigravity-academy-ten.vercel.app`
+- **Immutable Deployment URL:** `https://antigravity-academy-4we717co8-nexite-os.vercel.app`
+- **Live Smoke Tests:** `GET /` (200, renders Course 05), `GET /api/courses` (200, 6 courses including Course 05 `notebooklm-antigravity` & Course 06 `enterprise-product-video-studio`), `GET /api/resources` (200, 37 resources), `POST /api/hitl/simulate` (200 `force_ask` + 400 `INVALID_INPUT`).
+- **Rollback Command:** `cd academy && npx vercel rollback https://antigravity-academy-b12a4z41p-nexite-os.vercel.app`
 
 ## 4. Next Steps
-1. Commit & push `code-factory` v2.3.0 + Courses 01–04 upgrades to `origin/main` upon human approval.
-2. Re-deploy `academy/` staging preview to Vercel (`cf-deploy-staging`) so Course 04 and the updated 14-skill Resource Explorer go live.
+1. Review, commit, and push local Course 05 (`notebooklm-antigravity`), test update, and `.memory/` updates (alongside Course 06 if ready) to `origin/main` upon human approval.
+2. Continue `code-factory` v3.0 roadmap (two-stage `PostToolUse` → `PreInvocation` lint bridge, `SessionStart` `.memory/` auto-injection, bundled `run_workflow` scripts).
