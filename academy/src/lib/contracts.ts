@@ -303,7 +303,7 @@ export const ANTIGRAVITY_BUILDING_BLOCKS: readonly BuildingBlockSpec[] = [
     statusRaw: "parity",
     statusCodeFactory: "leader",
     rawSummary: "Read/edit/write and terminal execution built in; App/CLI loops lack native LSP.",
-    codeFactoryUpgrade: "Backed by cf-next-verify deterministic scripts and optional companion LSP-over-MCP.",
+    codeFactoryUpgrade: "Backed by cf-next-verify deterministic scripts, depcruise architecture boundary fences (arch:check), and optional companion LSP-over-MCP.",
   },
   {
     id: "mcp-connectors",
@@ -335,7 +335,7 @@ export const ANTIGRAVITY_BUILDING_BLOCKS: readonly BuildingBlockSpec[] = [
     statusRaw: "leader",
     statusCodeFactory: "leader",
     rawSummary: "Built-in multimodal browser subagent with host-verified visit facts.",
-    codeFactoryUpgrade: "Mandatory Stage 4 visual audit at 375px, 768px, and 1440px with zero console errors.",
+    codeFactoryUpgrade: "Dual-mode cf-verify-map (fast Playwright verify:map + browser subagent fallback) auditing 375px, 768px, and 1440px with zero console errors.",
   },
   {
     id: "rules-and-skills",
@@ -351,7 +351,7 @@ export const ANTIGRAVITY_BUILDING_BLOCKS: readonly BuildingBlockSpec[] = [
     statusRaw: "leader",
     statusCodeFactory: "leader",
     rawSummary: "20k-token rules budget with progressive-disclosure skill discovery.",
-    codeFactoryUpgrade: "Lean <= 10 KB global invariants + 14 specialized Code Factory SDLC skills.",
+    codeFactoryUpgrade: "Lean <= 10 KB global invariants + 15 specialized Code Factory SDLC, Feature Map & Eval skills.",
   },
   {
     id: "workspace-memory",
@@ -361,13 +361,13 @@ export const ANTIGRAVITY_BUILDING_BLOCKS: readonly BuildingBlockSpec[] = [
     categoryLabel: "Memory & Knowledge",
     eli5Analogy: "A shared project binder where every teammate writes what's finished, why decisions were made, and what comes next.",
     plainDescription:
-      "Plain Markdown files inside your repository (handover.md, tasks.md, architecture.md, decisions/) that survive across fresh chats and model switches.",
+      "Plain Markdown files inside your repository (handover.md, feature-map.md, tasks.md, architecture.md, decisions/) that survive across fresh chats and model switches.",
     whyItMatters:
       "Chats fade and get long; file-based memory keeps every subagent, swarm worker, and new session aligned on ground truth.",
     statusRaw: "gap",
     statusCodeFactory: "leader",
     rawSummary: "No built-in auto-memory file structure out of the box.",
-    codeFactoryUpgrade: "Structured .memory/ binder + <= 3 KB handover.md + ADRs + locked plans/*-spec.md.",
+    codeFactoryUpgrade: "Structured .memory/ binder + living feature-map.md contract + <= 3 KB handover.md + ADRs + locked plans/*-spec.md.",
   },
   {
     id: "terminal-sandbox",

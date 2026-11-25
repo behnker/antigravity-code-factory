@@ -207,8 +207,9 @@
         "Install Marketplace engineering plugins (Cloudflare, Vercel, Supabase, Chrome DevTools, Figma, Jira/ClickUp) via Customizations -> Marketplace."
       ],
       "actionChecklist": [
-        "Commit starter AGENTS.md with exact install, typecheck, lint, test, and build commands.",
+        "Commit starter AGENTS.md with exact install, typecheck, lint, test, arch:check, verify:map, and build commands.",
         "Register PreToolUse HITL safety gate in .agents/hooks.json (or install the global code-factory plugin).",
+        "Scaffold `.memory/feature-map.md` and `.dependency-cruiser.cjs` for deterministic route and folder-boundary checks.",
         "Install and authenticate core infrastructure & browser QA Marketplace plugins."
       ],
       "codeSnippet": {

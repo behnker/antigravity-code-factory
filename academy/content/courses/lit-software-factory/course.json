@@ -114,7 +114,7 @@
         "everydayAnalogy": "Hiring a senior architect for blueprints and fast carpenters for framing—while keeping only today's checklist on the table.",
         "simpleExplanation": "Every word your AI reads on every turn uses both attention and budget. If you dump giant manuals and fifty old messages into every prompt, the AI gets foggy in the middle and costs far more than necessary. Smart builders keep one short page of golden rules always open, store long checklists in bookshelf guides that open only when needed, save tiny handover summaries, and match fast models to routine jobs while saving deeper-thinking models for planning and final review.",
         "whyItMatters": "A clean information budget gives you two wins at once: noticeably sharper, more accurate answers and a much smaller bill as your projects grow bigger.",
-        "roleInProtocol": "This governs Context Engineering Economics across the Code Factory: lean rules/AGENTS.md invariants, 14 progressive-disclosure skills, <= 3 KB handover notes, and explicit per-persona model routing (deep thinkers for architect/reviewer, fast models for parallel workers).",
+        "roleInProtocol": "This governs Context Engineering Economics across the Code Factory: lean rules/AGENTS.md invariants, 15 progressive-disclosure skills, <= 3 KB handover notes, and explicit per-persona model routing (deep thinkers for architect/reviewer, fast models for parallel workers).",
         "howToUseGoingForward": "Whenever your main rule sheet grows bulky, move step-by-step recipes into bookshelf Skills. Keep session handover notes under one page, and assign fast models to clear, bounded chores while reserving deep-thinking models for plans and final audits.",
         "whenToUse": "Use this whenever a project grows past a few files, your AI starts missing rules buried in long prompts, or you want faster results at lower cost.",
         "realWorldExample": "Instead of sending a 40-page manual to a slow, pricey model just to fix button alignment, you use a fast helper with one tiny style guide—and save your deep-thinking reviewer to inspect the finished feature for hidden security risks.",
@@ -129,7 +129,7 @@
         "Model Routing Lever: Pin `pro` for `cf-architect` (specs/ADRs) and `cf-reviewer` (independent audits); route `flash` to bounded parallel workers and `browser` viewport checks."
       ],
       "actionChecklist": [
-        "Inspect `rules/AGENTS.md` Section 8 and compare its compact static footprint against the 14 progressive skills under `skills/cf-*/`.",
+        "Inspect `rules/AGENTS.md` Section 8 and compare its compact static footprint against the 15 progressive skills under `skills/cf-*/`.",
         "Check `agents/cf-*.md` frontmatter to see how each least-privilege persona pins both `tools:` and `model:`.",
         "Run the Context Economics Audit prompt below on your primary repository."
       ],
@@ -233,7 +233,7 @@
         "diagramCaption": "Independent two-axis grading: checking both the finished product and whether the builder followed the rules honestly."
       },
       "keyTakeaways": [
-        "Axis 1 — Output Quality: Deterministic checks (`tsc`, `eslint`, `vitest`, `next build`, `pnpm audit --audit-level=high`), runtime Zod boundaries, fail-closed hooks, and 375/768/1440px browser checks.",
+        "Axis 1 — Output Quality: Deterministic checks (`tsc`, `eslint`, `vitest`, `depcruise` architecture boundaries, `cf-verify-map` across 375/768/1440px, `next build`, `pnpm audit --audit-level=high`), runtime Zod boundaries, and fail-closed hooks.",
         "Axis 2 — Execution Trajectory: Audit spec/partition adherence, anti-gaming oracle honesty (zero weakened tests, `@ts-ignore`, or silenced lint rules), cross-viewport blind spots, and HITL compliance.",
         "Real Project_Antigravity Catches: Decoupled verification caught GSAP's proprietary EULA, Three.js negative-dt crashes, cyan CTA contrast (< 4.5:1), invalid `role=\"tablist\"` nesting, and pnpm v11 ignored overrides.",
         "5 Least-Privilege Personas: `cf-architect` (spec) -> `cf-backend`/`cf-frontend` (build) -> `cf-tester` + `cf-reviewer` + `browser` (independent grading)."

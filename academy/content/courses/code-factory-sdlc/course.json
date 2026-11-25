@@ -354,6 +354,46 @@
       "mermaidDiagram": "flowchart LR\n    L[\"Solved Snag or Finished Milestone\"] --> R[\"Save Permanent House Rule\\n+ Automatic Check\"]\n    R --> H[\"Write Tiny 1-Page Handover Note\"]\n    H --> C[\"Fresh Next Chat\\nStarts Smart Immediately\"]\n    C --> A[\"Add Next Feature or New Course\"]\n    A --> NEXT[\"Begin Next 8-Station Cycle\"]",
       "repoArtifactPath": ".memory/handover.md",
       "promptId": "cf-prompt-learn-and-add-course"
+    },
+    {
+      "id": "cf-stage-9-feature-map-boundaries",
+      "order": 9,
+      "title": "v2.4.0 Guardrail — Living Feature Maps (cf-verify-map) & Architecture Fences (depcruise)",
+      "stageTag": "Stage 4/5: Guardrails",
+      "summary": "Code Factory v2.4.0 adds two deterministic inner-loop verification gates: `.memory/feature-map.md` + `cf-verify-map` (dual-mode Playwright or browser subagent smoke verification across 375/768/1440px) and `dependency-cruiser` (`pnpm run arch:check`, Step 4b in `verify-stack.sh`) enforcing strict module boundaries.",
+      "eli5": {
+        "plainTitle": "Bonus Guardrail: Living Feature Maps & Code Floor-Plan Fences",
+        "oneLineHook": "Keep one live map of every screen so a robot checks them all automatically—and put up walls so buttons can never grab secret server pipes.",
+        "everydayAnalogy": "A restaurant's master menu checklist paired with solid walls separating the dining room from the kitchen gas lines.",
+        "simpleExplanation": "As an app grows, two sneaky problems appear: an edit on one page quietly breaks another page, or a visual button accidentally reaches into private server wiring. Code Factory stops both automatically. A Living Feature Map lists every screen and address in one tidy file so an automated checker tests phone, tablet, and desktop views in seconds. And Code Fences act like solid walls warning you right away if folders ever cross forbidden lines.",
+        "whyItMatters": "Without a living map and automatic folder walls, teams only discover broken pages or tangled spaghetti code weeks later—usually right when a real customer clicks a broken button.",
+        "roleInProtocol": "This upgrades Stage 4/5 Verification (`cf-verify-map` + `depcruise` inside `verify-stack.sh`). Whenever routes or buttons change, you update `.memory/feature-map.md` in the same commit, and automated checks verify zero console errors, zero overflow, and zero boundary leaks.",
+        "howToUseGoingForward": "Keep one short Feature Map file in `.memory/` listing every key screen and address—never storing passwords there—and run your Feature Map check plus Architecture Fence check before every pull request or live deploy.",
+        "whenToUse": "Use this right after editing any webpage layout, route, or API endpoint, or whenever your app grows past a handful of files and you want automatic protection against spaghetti imports and broken screens.",
+        "realWorldExample": "You rename a button section on your Course page. Running `pnpm run verify:map` checks `/` and all APIs across phone, tablet, and desktop in seconds and flags the missing section immediately, while `pnpm run arch:check` guarantees zero UI files accidentally imported server-only secrets.",
+        "audioScript": "As your app grows beyond a couple of pages, two sneaky problems love to creep in. First, fixing one screen quietly breaks another screen you forgot to click. Second, quick edits tangle your folders together so visual buttons accidentally reach straight into private database pipes. Code Factory version two point four solves both with two simple habits. First, keep a Living Feature Map—like a restaurant's master menu checklist listing every screen and key element—so an automated tester opens every page across phone, tablet, and desktop in seconds and saves a screenshot if anything breaks. Second, put up automatic Architecture Fences that catch tangled circular loops or secret server leaks before your code ever leaves your laptop.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "How a Living Feature Map and Architecture Fences catch broken screens, missing elements, and forbidden folder crossings automatically."
+      },
+      "keyTakeaways": [
+        "Living Feature Map (`.memory/feature-map.md`): Combines human-readable Golden Happy Paths with an embedded fenced `json feature-map` contract (routes, HTTP status codes, key selectors, 375/768/1440px overflow checks) with zero plaintext credentials.",
+        "Dual-Mode `cf-verify-map`: Runs fast headless Playwright (`pnpm run verify:map`) when installed and saves failure screenshots to `.tmp/verify-screenshots/`, or falls back cleanly (exit code `3`) to Antigravity's built-in `browser` subagent when Playwright is absent.",
+        "Automated Architecture Fences (`dependency-cruiser` / `pnpm run arch:check`): Enforces `no-circular`, `no-server-or-db-in-ui`, `no-lib-importing-app-or-ui`, and `no-cross-feature-imports` automatically as Step 4b of `skills/cf-next-verify/scripts/verify-stack.sh`.",
+        "Zero-Drift Rule (`rules/AGENTS.md` §6 #5): Update `.memory/feature-map.md` in the same commit whenever routes, API endpoints, or `data-testid` selectors change."
+      ],
+      "actionChecklist": [
+        "Inspect `.memory/feature-map.md` and `academy/.dependency-cruiser.cjs` in the Live Repo Explorer.",
+        "Run `cd academy && pnpm run arch:check` to verify zero circular dependencies or UI-to-server boundary leaks.",
+        "Run `cd academy && pnpm run verify:map` against a live local server to verify all routes, selectors, and 375/768/1440px viewports deterministically."
+      ],
+      "codeSnippet": {
+        "language": "bash",
+        "filename": "Run v2.4.0 Architecture Fence & Feature Map Gates",
+        "code": "# 1. Verify module boundaries (no-circular, no UI->server leaks, clean domain layer)\ncd academy && pnpm run arch:check\n\n# 2. Run deterministic Playwright Feature Map check across 375px / 768px / 1440px\ncd academy && pnpm run verify:map\n\n# 3. Full stack verification (includes tsc, lint, vitest, static scan, depcruise 4b, build)\nbash skills/cf-next-verify/scripts/verify-stack.sh academy --coverage"
+      },
+      "mermaidDiagram": "flowchart LR\n    Edit[\"Screen, Page, or Data Change\"] --> Map[\"Update Living Feature Map\\n(Master Checklist File)\"]\n    Map --> Fence[\"Code Floor-Plan Fences\\n(Block Loops & Secret Leaks)\"]\n    Fence --> Check[\"Automatic Screen & Link Checker\\n(Phone, Tablet, Desktop)\"]\n    Check -->|\"Every Page & Check Clean\"| Pass[\"Ready for Your Approval\"]\n    Check -->|\"Missing Piece or Glitches\"| Shot[\"Save Screenshot & Fix Fast\"]",
+      "repoArtifactPath": ".memory/feature-map.md",
+      "promptId": "cf-prompt-verify-feature-map"
     }
   ],
   "prompts": [
@@ -600,6 +640,64 @@
         }
       ],
       "expectedOutcome": "A decoupled Output + Trajectory scorecard with exact file:line citations, an Outer-Loop Answerability Statement, and a SHIP/REVISE/BLOCK verdict."
+    },
+    {
+      "id": "cf-prompt-verify-feature-map",
+      "title": "Build & Run a Living Feature Map Verification Gate (cf-verify-map)",
+      "eli5Title": "Create a Living Feature Map & Auto-Check Every Screen on Phone, Tablet, and Desktop",
+      "stage": "test",
+      "difficulty": "beginner",
+      "skillRef": "cf-verify-map",
+      "description": "Creates or updates `.memory/feature-map.md` with human Golden Happy Paths and an embedded JSON contract, then executes deterministic route, selector, console, and 3-viewport overflow checks.",
+      "whenToUse": "Copy this whenever you add or edit pages, buttons, or API endpoints and want one repeatable check proving nothing broke across phone, tablet, and desktop screens.",
+      "template": "Execute `skills/cf-verify-map/SKILL.md` for `{{app_dir}}` served at `{{base_url}}`:\n\n1. Create or update `.memory/feature-map.md` listing our key routes (`{{routes_to_check}}`), API health/contracts, key DOM selectors, and Golden Happy Paths—strictly zero plaintext passwords or secrets.\n2. Run the deterministic Feature Map verifier (`run-verify-map.mjs --map .memory/feature-map.md --all-viewports`) across `375px`, `768px`, and `1440px` (falling back cleanly to the `browser` subagent if Playwright is not installed).\n3. Output the structured Feature Map Verification Report showing console errors, page errors, `4xx/5xx` network failures, missing selectors, horizontal overflow, and any failure screenshot paths.",
+      "variables": [
+        {
+          "key": "app_dir",
+          "label": "App Directory",
+          "placeholder": "academy",
+          "defaultValue": "academy"
+        },
+        {
+          "key": "base_url",
+          "label": "Local Server URL",
+          "placeholder": "http://localhost:3000",
+          "defaultValue": "http://localhost:3000"
+        },
+        {
+          "key": "routes_to_check",
+          "label": "Routes & Endpoints to Map",
+          "placeholder": "/, /api/courses, /api/resources",
+          "defaultValue": "/, /api/courses, /api/resources"
+        }
+      ],
+      "expectedOutcome": "An up-to-date `.memory/feature-map.md` contract and a deterministic PASS/FAIL multi-viewport verification report with zero regressions."
+    },
+    {
+      "id": "cf-prompt-arch-boundaries",
+      "title": "Add Automated Architecture Boundary Fences (dependency-cruiser)",
+      "eli5Title": "Add Automatic Code Fences to Stop Spaghetti Loops & UI-to-Server Leaks",
+      "stage": "architecture",
+      "difficulty": "intermediate",
+      "skillRef": "cf-next-verify",
+      "description": "Configures `.dependency-cruiser.cjs` and `arch:check` so `verify-stack.sh` (Step 4b) automatically blocks circular imports, UI-to-database/server leaks, and domain-to-UI coupling.",
+      "whenToUse": "Copy this as soon as a project grows past a few folders so automated checks immediately block circular bugs or visual components importing server-only secrets.",
+      "template": "Set up automated Architecture Boundary Fences for `{{app_dir}}` using `skills/cf-verify-map/resources/dependency-cruiser.template.cjs`:\n\n1. Inspect `{{src_dir}}` module layers (UI components, domain/lib, API routes, feature slices) and tailor `.dependency-cruiser.cjs` enforcing: `no-circular`, `no-server-or-db-in-ui`, `no-lib-importing-app-or-ui`, and `no-cross-feature-imports`.\n2. Ask for my approval before installing `dependency-cruiser` as a devDependency if missing, then add `\"arch:check\": \"depcruise src --config .dependency-cruiser.cjs\"` to `package.json`.\n3. Run `pnpm run arch:check` and `skills/cf-next-verify/scripts/verify-stack.sh` to confirm Step 4b passes with zero boundary violations.",
+      "variables": [
+        {
+          "key": "app_dir",
+          "label": "App Directory",
+          "placeholder": "academy",
+          "defaultValue": "academy"
+        },
+        {
+          "key": "src_dir",
+          "label": "Source Directory",
+          "placeholder": "src",
+          "defaultValue": "src"
+        }
+      ],
+      "expectedOutcome": "An automated `arch:check` boundary gate wired into `verify-stack.sh` guaranteeing zero circular imports or UI-to-server leaks."
     }
   ]
 }
