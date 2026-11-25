@@ -3,6 +3,11 @@ import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testi
 import { AntigravityArchitectureExplorer } from "@/components/AntigravityArchitectureExplorer";
 import { AudioExplainerBar } from "@/components/AudioExplainerBar";
 import { CourseCurriculumStudio } from "@/components/CourseCurriculumStudio";
+import {
+  CourseEmblem,
+  getCourseVisualTheme,
+  type CourseEmblemSize,
+} from "@/components/CourseEmblem";
 import { CourseIllustrationBanner } from "@/components/CourseIllustrationBanner";
 import { Eli5MicrolearningCard } from "@/components/Eli5MicrolearningCard";
 import { MermaidDiagram } from "@/components/MermaidDiagram";
@@ -1746,5 +1751,215 @@ describe("4-Layer Antigravity Architecture Explorer & Contracts", () => {
     expect(
       within(safetyGroup).getByRole("button", { name: /Sandbox/i }),
     ).toHaveAttribute("aria-pressed", "false");
+  });
+
+  it("applies semantic mode accents (Swarm=cyan, Boost=rose, Teamwork=amber) in Layer 2 cards and the LAYER 2 AGENT MODE GUIDE inspector", () => {
+    render(<AntigravityArchitectureExplorer harnessMode="code-factory-v3" />);
+
+    const modeGroup = screen.getByRole("group", {
+      name: "Select one of the 7 Antigravity Agent Modes",
+    });
+    const inspector = screen.getByRole("complementary", {
+      name: "Selected architecture layer guide",
+    });
+
+    const semanticChecks = [
+      {
+        modeName: "Swarm",
+        commandHint: "/swarm",
+        computeLevel: 4,
+        cardBorder: "border-cyan-glow",
+        cardBg: "bg-cyan-glow/15",
+        badgeBorder: "border-cyan-glow/60",
+        badgeBg: "bg-cyan-glow/15",
+        badgeText: "text-cyan-glow",
+        analogyBorder: "border-cyan-glow/45",
+        analogyBg: "bg-cyan-glow/10",
+        pipActive: "bg-cyan-glow",
+      },
+      {
+        modeName: "Boost",
+        commandHint: "/boost",
+        computeLevel: 5,
+        cardBorder: "border-rose-glow",
+        cardBg: "bg-rose-glow/15",
+        badgeBorder: "border-rose-glow/60",
+        badgeBg: "bg-rose-glow/15",
+        badgeText: "text-rose-glow",
+        analogyBorder: "border-rose-glow/45",
+        analogyBg: "bg-rose-glow/10",
+        pipActive: "bg-rose-glow",
+      },
+      {
+        modeName: "Teamwork",
+        commandHint: "/teamwork",
+        computeLevel: 5,
+        cardBorder: "border-amber-glow",
+        cardBg: "bg-amber-glow/15",
+        badgeBorder: "border-amber-glow/60",
+        badgeBg: "bg-amber-glow/15",
+        badgeText: "text-amber-glow",
+        analogyBorder: "border-amber-glow/45",
+        analogyBg: "bg-amber-glow/10",
+        pipActive: "bg-amber-glow",
+      },
+    ] as const;
+
+    for (const check of semanticChecks) {
+      const modeButton = within(modeGroup).getByRole("button", {
+        name: new RegExp(check.modeName, "i"),
+      });
+      fireEvent.click(modeButton);
+
+      expect(modeButton).toHaveAttribute("aria-pressed", "true");
+      expect(modeButton).toHaveClass(check.cardBorder, check.cardBg);
+
+      const guideHeaderBadge = within(inspector).getByText("LAYER 2 · AGENT MODE GUIDE");
+      expect(guideHeaderBadge).toHaveClass(
+        check.badgeBorder,
+        check.badgeBg,
+        check.badgeText,
+      );
+
+      const guideCommandBadge = within(inspector).getByText(check.commandHint);
+      expect(guideCommandBadge).toHaveClass(
+        check.badgeBorder,
+        check.badgeBg,
+        check.badgeText,
+      );
+
+      const analogyLabel = within(inspector).getByText("Plain-English Analogy");
+      expect(analogyLabel).toHaveClass(check.badgeText);
+      const analogyBox = analogyLabel.closest(".rounded-xl");
+      expect(analogyBox).toHaveClass(check.analogyBorder, check.analogyBg);
+
+      const computeMeter = within(inspector).getByRole("img", {
+        name: `Compute level ${check.computeLevel} of 5`,
+      });
+      const pips = Array.from(computeMeter.querySelectorAll("span"));
+      expect(pips).toHaveLength(5);
+      pips.forEach((pip, index) => {
+        if (index < check.computeLevel) {
+          expect(pip).toHaveClass(check.pipActive);
+        } else {
+          expect(pip).toHaveClass("bg-void-800");
+        }
+      });
+    }
+  });
+});
+
+describe("CourseEmblem & Course Visual Themes (Stage B)", () => {
+  const CANONICAL_COURSES = [
+    { slug: "zero-to-one-foundations", courseNumber: 0, expectedColorToken: "emerald" },
+    { slug: "harness-mastery", courseNumber: 1, expectedColorToken: "cyan" },
+    { slug: "code-factory-sdlc", courseNumber: 2, expectedColorToken: "violet" },
+    { slug: "pro-setup-playbook", courseNumber: 3, expectedColorToken: "emerald" },
+    { slug: "lit-software-factory", courseNumber: 4, expectedColorToken: "amber" },
+    { slug: "notebooklm-antigravity", courseNumber: 5, expectedColorToken: "violet" },
+    { slug: "enterprise-product-video-studio", courseNumber: 6, expectedColorToken: "rose" },
+    { slug: "orchestration-showcase", courseNumber: 7, expectedColorToken: "cyan" },
+  ] as const;
+
+  it("renders clean decorative SVGs (aria-hidden='true') with distinct themes across all 8 canonical courses (00-07) and future Course 08 fallback", () => {
+    const renderedSvgMarkup = new Set<string>();
+    const observedColorFamilies = new Set<string>();
+
+    for (const course of CANONICAL_COURSES) {
+      const theme = getCourseVisualTheme(course.slug, course.courseNumber);
+      expect(theme.iconColorClass).toContain(course.expectedColorToken);
+      expect(theme.emblemContainerClass).toContain(course.expectedColorToken);
+      expect(theme.badgeClass.length).toBeGreaterThan(0);
+      expect(theme.borderClass.length).toBeGreaterThan(0);
+      expect(theme.activeBorderClass.length).toBeGreaterThan(0);
+      expect(theme.topBarClass.length).toBeGreaterThan(0);
+      expect(theme.themeLabel.trim().length).toBeGreaterThan(0);
+      observedColorFamilies.add(course.expectedColorToken);
+
+      const { container, unmount } = render(
+        <CourseEmblem slug={course.slug} courseNumber={course.courseNumber} />,
+      );
+      const wrapper = container.firstElementChild as HTMLElement | null;
+      expect(wrapper).not.toBeNull();
+      expect(wrapper).toHaveAttribute("aria-hidden", "true");
+      expect(wrapper?.className).toContain(theme.iconColorClass);
+
+      const svg = wrapper?.querySelector("svg");
+      expect(svg).not.toBeNull();
+      expect(svg).toHaveAttribute("aria-hidden", "true");
+      expect(svg).toHaveAttribute("viewBox", "0 0 32 32");
+      expect(svg?.querySelectorAll("path, rect, circle, line").length).toBeGreaterThan(0);
+
+      renderedSvgMarkup.add(svg!.innerHTML);
+      unmount();
+    }
+
+    // All 5 semantic theme families (emerald, cyan, violet, amber, rose) and 8 distinct artworks are present
+    expect(observedColorFamilies).toEqual(
+      new Set(["emerald", "cyan", "violet", "amber", "rose"]),
+    );
+    expect(renderedSvgMarkup.size).toBe(8);
+
+    // Future Course 08 fallback (unknown slug) wraps deterministically via modulo to Course 00 (emerald)
+    const course00Theme = getCourseVisualTheme("zero-to-one-foundations", 0);
+    const course08FallbackTheme = getCourseVisualTheme("future-course-08", 8);
+    expect(course08FallbackTheme).toEqual(course00Theme);
+
+    const { container: fallbackContainer, unmount: unmountFallback } = render(
+      <CourseEmblem slug="future-course-08" courseNumber={8} />,
+    );
+    const fallbackWrapper = fallbackContainer.firstElementChild as HTMLElement | null;
+    expect(fallbackWrapper).toHaveAttribute("aria-hidden", "true");
+    expect(fallbackWrapper?.className).toContain("emerald-glow");
+    const fallbackSvg = fallbackWrapper?.querySelector("svg");
+    expect(fallbackSvg).not.toBeNull();
+    expect(fallbackSvg).toHaveAttribute("aria-hidden", "true");
+    expect(fallbackSvg).toHaveAttribute("viewBox", "0 0 32 32");
+    unmountFallback();
+
+    // Negative boundary courseNumber with unknown slug also resolves safely without throwing
+    const negativeFallbackTheme = getCourseVisualTheme("future-course-negative", -1);
+    expect(negativeFallbackTheme).toEqual(
+      getCourseVisualTheme("orchestration-showcase", 7),
+    );
+  });
+
+  it("renders CourseEmblem cleanly across all supported sizes (xs, sm, md, lg) with expected container and SVG classes", () => {
+    const sizeExpectations: ReadonlyArray<{
+      size: CourseEmblemSize;
+      containerClasses: readonly string[];
+      svgClasses: readonly string[];
+    }> = [
+      { size: "xs", containerClasses: ["h-5", "w-5", "rounded-md"], svgClasses: ["h-4", "w-4"] },
+      { size: "sm", containerClasses: ["h-8", "w-8", "rounded-lg"], svgClasses: ["h-5", "w-5"] },
+      { size: "md", containerClasses: ["h-11", "w-11", "rounded-xl"], svgClasses: ["h-7", "w-7"] },
+      { size: "lg", containerClasses: ["h-14", "w-14", "rounded-2xl"], svgClasses: ["h-9", "w-9"] },
+    ];
+
+    for (const spec of sizeExpectations) {
+      const { container, unmount } = render(
+        <CourseEmblem
+          slug="orchestration-showcase"
+          courseNumber={7}
+          size={spec.size}
+          className="custom-emblem-hook"
+        />,
+      );
+
+      const wrapper = container.firstElementChild as HTMLElement | null;
+      expect(wrapper).not.toBeNull();
+      expect(wrapper).toHaveAttribute("aria-hidden", "true");
+      expect(wrapper).toHaveClass(
+        ...spec.containerClasses,
+        "text-cyan-glow",
+        "custom-emblem-hook",
+      );
+
+      const svg = wrapper?.querySelector("svg");
+      expect(svg).not.toBeNull();
+      expect(svg).toHaveAttribute("aria-hidden", "true");
+      expect(svg).toHaveClass(...spec.svgClasses);
+      unmount();
+    }
   });
 });

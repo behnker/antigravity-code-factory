@@ -19,6 +19,7 @@ import type {
   PromptCard,
   SdlcStageKey,
 } from "@/lib/schemas";
+import { CourseEmblem, getCourseVisualTheme } from "./CourseEmblem";
 
 export interface PromptVaultProps {
   courses: Course[];
@@ -34,6 +35,7 @@ export interface PromptVaultProps {
 
 interface IndexedPrompt extends PromptCard {
   courseNumber: number;
+  courseSlug: string;
   courseTitle: string;
 }
 
@@ -120,6 +122,7 @@ export function PromptVault({
         list.push({
           ...prompt,
           courseNumber: course.number,
+          courseSlug: course.slug,
           courseTitle: course.title,
         });
       }
@@ -358,6 +361,11 @@ export function PromptVault({
                 Boolean(prompt.eli5Title) &&
                 prompt.eli5Title !== prompt.title;
 
+              const courseTheme = getCourseVisualTheme(
+                prompt.courseSlug,
+                prompt.courseNumber,
+              );
+
               return (
                 <article
                   key={prompt.id}
@@ -470,12 +478,21 @@ export function PromptVault({
                     )}
 
                     <div className="mt-4">
-                      <div className="mb-1.5 flex items-center justify-between">
+                      <div className="mb-1.5 flex flex-wrap items-center justify-between gap-2">
                         <span className="font-mono text-xs text-ink-muted">
                           Live Interpolated Prompt
                         </span>
-                        <span className="font-mono text-xs text-ink-muted">
-                          Course {String(prompt.courseNumber).padStart(2, "0")}
+                        <span
+                          className={`inline-flex items-center gap-1.5 rounded-full border py-0.5 pr-2.5 pl-1 font-mono text-xs font-semibold ${courseTheme.badgeClass}`}
+                        >
+                          <CourseEmblem
+                            slug={prompt.courseSlug}
+                            courseNumber={prompt.courseNumber}
+                            size="xs"
+                          />
+                          <span>
+                            Course {String(prompt.courseNumber).padStart(2, "0")}
+                          </span>
                         </span>
                       </div>
                       <pre className="max-h-56 max-w-full overflow-auto whitespace-pre-wrap break-words rounded-xl border border-glass-border bg-void-950/90 p-3.5 font-mono text-xs leading-relaxed text-ink-primary">

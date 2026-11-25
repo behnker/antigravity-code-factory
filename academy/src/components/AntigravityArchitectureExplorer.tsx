@@ -36,6 +36,197 @@ type SelectionState =
   | { kind: "mode"; id: AgentModeId }
   | { kind: "block"; id: BuildingBlockId };
 
+interface AgentModeVisualStyle {
+  selectedCardClass: string;
+  idleCardClass: string;
+  dimmedCardClass: string;
+  orderBadgeSelectedClass: string;
+  orderBadgeIdleClass: string;
+  commandPillClass: string;
+  guideHeaderBadgeClass: string;
+  guideCommandBadgeClass: string;
+  analogyBoxClass: string;
+  analogyLabelClass: string;
+  computePipActiveClass: string;
+  usedByChipClass: string;
+  svgPrimaryToken: string;
+  svgSecondaryToken: string;
+}
+
+const AGENT_MODE_VISUAL_STYLES: Record<AgentModeId, AgentModeVisualStyle> = {
+  "just-ask": {
+    selectedCardClass:
+      "border-2 border-cyan-glow bg-cyan-glow/12 shadow-lg",
+    idleCardClass:
+      "border border-glass-border-strong bg-void-950/90 hover:border-cyan-glow/75",
+    dimmedCardClass:
+      "border border-glass-border bg-void-950/85 hover:border-cyan-glow/65",
+    orderBadgeSelectedClass: "bg-cyan-deep text-ink-primary",
+    orderBadgeIdleClass:
+      "border border-glass-border-strong bg-void-900 text-ink-primary",
+    commandPillClass:
+      "rounded-md border border-glass-border-strong bg-void-900/95 px-2 py-0.5 font-mono text-xs font-semibold text-ink-secondary",
+    guideHeaderBadgeClass:
+      "border-glass-border-strong bg-void-900/95 text-cyan-glow",
+    guideCommandBadgeClass:
+      "border-glass-border-strong bg-void-900 text-cyan-glow",
+    analogyBoxClass: "border-cyan-glow/35 bg-cyan-glow/10",
+    analogyLabelClass: "text-cyan-glow",
+    computePipActiveClass: "bg-cyan-glow",
+    usedByChipClass:
+      "border-glass-border-strong bg-void-900/90 text-cyan-glow hover:border-cyan-glow hover:bg-cyan-glow/15 hover:text-ink-primary",
+    svgPrimaryToken: "var(--color-cyan-glow)",
+    svgSecondaryToken: "var(--color-ink-secondary)",
+  },
+  subagents: {
+    selectedCardClass:
+      "border-2 border-emerald-glow bg-emerald-glow/12 shadow-lg",
+    idleCardClass:
+      "border border-emerald-glow/40 bg-void-950/90 hover:border-emerald-glow/85",
+    dimmedCardClass:
+      "border border-glass-border bg-void-950/85 hover:border-emerald-glow/65",
+    orderBadgeSelectedClass:
+      "border border-emerald-glow bg-emerald-glow/20 text-emerald-glow",
+    orderBadgeIdleClass:
+      "border border-emerald-glow/40 bg-emerald-glow/12 text-emerald-glow",
+    commandPillClass:
+      "rounded-md border border-emerald-glow/45 bg-emerald-glow/12 px-2 py-0.5 font-mono text-xs font-semibold text-emerald-glow",
+    guideHeaderBadgeClass:
+      "border-emerald-glow/45 bg-emerald-glow/15 text-emerald-glow",
+    guideCommandBadgeClass:
+      "border-emerald-glow/45 bg-emerald-glow/12 text-emerald-glow",
+    analogyBoxClass: "border-emerald-glow/35 bg-emerald-glow/10",
+    analogyLabelClass: "text-emerald-glow",
+    computePipActiveClass: "bg-emerald-glow",
+    usedByChipClass:
+      "border-emerald-glow/45 bg-emerald-glow/10 text-emerald-glow hover:border-emerald-glow hover:bg-emerald-glow/20 hover:text-ink-primary",
+    svgPrimaryToken: "var(--color-emerald-glow)",
+    svgSecondaryToken: "var(--color-cyan-glow)",
+  },
+  orchestrator: {
+    selectedCardClass:
+      "border-2 border-violet-glow bg-violet-glow/12 shadow-lg",
+    idleCardClass:
+      "border border-violet-glow/40 bg-void-950/90 hover:border-violet-glow/85",
+    dimmedCardClass:
+      "border border-glass-border bg-void-950/85 hover:border-violet-glow/65",
+    orderBadgeSelectedClass: "bg-violet-deep text-ink-primary",
+    orderBadgeIdleClass:
+      "border border-violet-glow/45 bg-violet-glow/12 text-violet-glow",
+    commandPillClass:
+      "rounded-md border border-violet-glow/45 bg-violet-glow/12 px-2 py-0.5 font-mono text-xs font-semibold text-violet-glow",
+    guideHeaderBadgeClass:
+      "border-violet-glow/45 bg-violet-glow/15 text-violet-glow",
+    guideCommandBadgeClass:
+      "border-violet-glow/45 bg-violet-glow/12 text-violet-glow",
+    analogyBoxClass: "border-violet-glow/35 bg-violet-glow/10",
+    analogyLabelClass: "text-violet-glow",
+    computePipActiveClass: "bg-violet-glow",
+    usedByChipClass:
+      "border-violet-glow/45 bg-violet-glow/10 text-violet-glow hover:border-violet-glow hover:bg-violet-glow/20 hover:text-ink-primary",
+    svgPrimaryToken: "var(--color-violet-glow)",
+    svgSecondaryToken: "var(--color-cyan-glow)",
+  },
+  workflows: {
+    selectedCardClass:
+      "border-2 border-cyan-glow bg-gradient-to-br from-cyan-glow/12 to-emerald-glow/10 shadow-lg",
+    idleCardClass:
+      "border border-cyan-glow/40 bg-void-950/90 hover:border-emerald-glow/80",
+    dimmedCardClass:
+      "border border-glass-border bg-void-950/85 hover:border-cyan-glow/65",
+    orderBadgeSelectedClass: "bg-cyan-deep text-ink-primary",
+    orderBadgeIdleClass:
+      "border border-emerald-glow/40 bg-cyan-glow/12 text-cyan-glow",
+    commandPillClass:
+      "rounded-md border border-emerald-glow/45 bg-cyan-glow/12 px-2 py-0.5 font-mono text-xs font-semibold text-cyan-glow",
+    guideHeaderBadgeClass:
+      "border-emerald-glow/45 bg-cyan-glow/15 text-cyan-glow",
+    guideCommandBadgeClass:
+      "border-emerald-glow/45 bg-cyan-glow/12 text-emerald-glow",
+    analogyBoxClass: "border-cyan-glow/35 bg-emerald-glow/10",
+    analogyLabelClass: "text-cyan-glow",
+    computePipActiveClass: "bg-emerald-glow",
+    usedByChipClass:
+      "border-cyan-glow/45 bg-cyan-glow/10 text-cyan-glow hover:border-emerald-glow hover:bg-emerald-glow/15 hover:text-ink-primary",
+    svgPrimaryToken: "var(--color-cyan-glow)",
+    svgSecondaryToken: "var(--color-emerald-glow)",
+  },
+  swarm: {
+    selectedCardClass:
+      "border-2 border-cyan-glow bg-cyan-glow/15 shadow-lg",
+    idleCardClass:
+      "border border-cyan-glow/55 bg-void-950/90 hover:border-cyan-glow",
+    dimmedCardClass:
+      "border border-cyan-glow/30 bg-void-950/85 hover:border-cyan-glow",
+    orderBadgeSelectedClass: "bg-cyan-deep text-ink-primary",
+    orderBadgeIdleClass:
+      "border border-cyan-glow/60 bg-cyan-glow/15 text-cyan-glow",
+    commandPillClass:
+      "rounded-tl-md rounded-br-md rounded-tr-xs rounded-bl-xs border border-cyan-glow/60 bg-cyan-glow/15 px-2 py-0.5 font-mono text-xs font-bold text-cyan-glow",
+    guideHeaderBadgeClass:
+      "border-cyan-glow/60 bg-cyan-glow/15 text-cyan-glow",
+    guideCommandBadgeClass:
+      "rounded-tl-md rounded-br-md rounded-tr-xs rounded-bl-xs border-cyan-glow/60 bg-cyan-glow/15 text-cyan-glow",
+    analogyBoxClass: "border-cyan-glow/45 bg-cyan-glow/10",
+    analogyLabelClass: "text-cyan-glow",
+    computePipActiveClass: "bg-cyan-glow",
+    usedByChipClass:
+      "border-cyan-glow/55 bg-cyan-glow/15 text-cyan-glow hover:border-cyan-glow hover:bg-cyan-glow/25 hover:text-ink-primary",
+    svgPrimaryToken: "var(--color-cyan-glow)",
+    svgSecondaryToken: "var(--color-emerald-glow)",
+  },
+  boost: {
+    selectedCardClass:
+      "border-2 border-rose-glow bg-rose-glow/15 shadow-lg",
+    idleCardClass:
+      "border border-rose-glow/55 bg-void-950/90 hover:border-rose-glow",
+    dimmedCardClass:
+      "border border-rose-glow/30 bg-void-950/85 hover:border-rose-glow",
+    orderBadgeSelectedClass:
+      "border border-rose-glow bg-rose-glow/25 text-ink-primary",
+    orderBadgeIdleClass:
+      "border border-rose-glow/60 bg-rose-glow/15 text-rose-glow",
+    commandPillClass:
+      "rounded-tl-md rounded-br-md rounded-tr-xs rounded-bl-xs border border-rose-glow/60 bg-rose-glow/15 px-2 py-0.5 font-mono text-xs font-bold text-rose-glow",
+    guideHeaderBadgeClass:
+      "border-rose-glow/60 bg-rose-glow/15 text-rose-glow",
+    guideCommandBadgeClass:
+      "rounded-tl-md rounded-br-md rounded-tr-xs rounded-bl-xs border-rose-glow/60 bg-rose-glow/15 text-rose-glow",
+    analogyBoxClass: "border-rose-glow/45 bg-rose-glow/10",
+    analogyLabelClass: "text-rose-glow",
+    computePipActiveClass: "bg-rose-glow",
+    usedByChipClass:
+      "border-rose-glow/55 bg-rose-glow/15 text-rose-glow hover:border-rose-glow hover:bg-rose-glow/25 hover:text-ink-primary",
+    svgPrimaryToken: "var(--color-rose-glow)",
+    svgSecondaryToken: "var(--color-amber-glow)",
+  },
+  teamwork: {
+    selectedCardClass:
+      "border-2 border-amber-glow bg-amber-glow/15 shadow-lg",
+    idleCardClass:
+      "border border-amber-glow/55 bg-void-950/90 hover:border-amber-glow",
+    dimmedCardClass:
+      "border border-amber-glow/30 bg-void-950/85 hover:border-amber-glow",
+    orderBadgeSelectedClass:
+      "border border-amber-glow bg-amber-glow/25 text-ink-primary",
+    orderBadgeIdleClass:
+      "border border-amber-glow/60 bg-amber-glow/15 text-amber-glow",
+    commandPillClass:
+      "rounded-tl-md rounded-br-md rounded-tr-xs rounded-bl-xs border border-amber-glow/60 bg-amber-glow/15 px-2 py-0.5 font-mono text-xs font-bold text-amber-glow",
+    guideHeaderBadgeClass:
+      "border-amber-glow/60 bg-amber-glow/15 text-amber-glow",
+    guideCommandBadgeClass:
+      "rounded-tl-md rounded-br-md rounded-tr-xs rounded-bl-xs border-amber-glow/60 bg-amber-glow/15 text-amber-glow",
+    analogyBoxClass: "border-amber-glow/45 bg-amber-glow/10",
+    analogyLabelClass: "text-amber-glow",
+    computePipActiveClass: "bg-amber-glow",
+    usedByChipClass:
+      "border-amber-glow/55 bg-amber-glow/15 text-amber-glow hover:border-amber-glow hover:bg-amber-glow/25 hover:text-ink-primary",
+    svgPrimaryToken: "var(--color-amber-glow)",
+    svgSecondaryToken: "var(--color-emerald-glow)",
+  },
+};
+
 const BUILDING_BLOCK_GROUPS: readonly {
   category: BuildingBlockCategory;
   title: string;
@@ -108,14 +299,13 @@ function AgentModeSchematic({
   modeId: AgentModeId;
   active: boolean;
 }) {
-  const accent = active ? "var(--color-cyan-glow)" : "var(--color-ink-secondary)";
-  const secondaryAccent = active
-    ? "var(--color-violet-glow)"
-    : "var(--color-ink-muted)";
+  const modeStyle = AGENT_MODE_VISUAL_STYLES[modeId];
+  const accent = modeStyle.svgPrimaryToken;
+  const secondaryAccent = modeStyle.svgSecondaryToken;
   const successAccent = "var(--color-emerald-glow)";
   const boxFill = "var(--color-void-900)";
   const boxStroke = active
-    ? "var(--color-cyan-glow)"
+    ? accent
     : "var(--color-glass-border-strong)";
 
   switch (modeId) {
@@ -418,6 +608,7 @@ function AgentModeSchematic({
       );
 
     case "swarm":
+      // Electric Cyan parallel V-formation / linked-nodes schematic
       return (
         <svg
           viewBox="0 0 180 54"
@@ -425,76 +616,100 @@ function AgentModeSchematic({
           aria-hidden="true"
           fill="none"
         >
-          {[10, 52, 94].map((xPos, idx) => (
-            <g key={xPos}>
+          {/* V-formation connecting rails */}
+          <path
+            d="M30 27 L58 11 L92 11 M30 27 L92 27 M30 27 L58 43 L92 43"
+            stroke={accent}
+            strokeWidth="1.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          {/* Parallel forward formation chevrons */}
+          <path
+            d="M14 21 L22 27 L14 33 M22 21 L30 27 L22 33"
+            stroke={accent}
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          {/* 3 linked parallel worker nodes */}
+          {[
+            { y: 5, label: "W1" },
+            { y: 21, label: "W2" },
+            { y: 37, label: "W3" },
+          ].map((node) => (
+            <g key={node.label}>
               <rect
-                x={xPos}
-                y="6"
+                x="56"
+                y={node.y}
                 width="34"
-                height="18"
-                rx="4.5"
+                height="12"
+                rx="3.5"
                 fill={boxFill}
                 stroke={accent}
                 strokeWidth="1.4"
               />
               <text
-                x={xPos + 17}
-                y="18"
+                x="73"
+                y={node.y + 8.5}
                 textAnchor="middle"
                 fill="var(--color-ink-primary)"
-                fontSize="7.5"
+                fontSize="7"
                 fontWeight="700"
                 fontFamily="var(--font-mono)"
               >
-                W{idx + 1}
+                {node.label}
               </text>
               <line
-                x1={xPos + 17}
-                y1="24"
-                x2={xPos + 17}
-                y2="34"
+                x1="90"
+                y1={node.y + 6}
+                x2="108"
+                y2="27"
                 stroke={accent}
                 strokeWidth="1.3"
               />
             </g>
           ))}
+          {/* Shared Swarm Board hub */}
           <rect
-            x="10"
-            y="34"
-            width="118"
-            height="14"
-            rx="4"
-            fill={boxFill}
-            stroke={secondaryAccent}
-            strokeWidth="1.4"
+            x="108"
+            y="16"
+            width="28"
+            height="22"
+            rx="5"
+            fill={accent}
+            fillOpacity="0.18"
+            stroke={accent}
+            strokeWidth="1.5"
           />
           <text
-            x="69"
-            y="44"
+            x="122"
+            y="29.5"
             textAnchor="middle"
-            fill={secondaryAccent}
-            fontSize="7.5"
+            fill={accent}
+            fontSize="6.5"
             fontWeight="700"
             fontFamily="var(--font-mono)"
           >
-            SHARED BOARD
+            SYNC
           </text>
           <line
-            x1="128"
-            y1="41"
-            x2="140"
-            y2="31"
+            x1="136"
+            y1="27"
+            x2="146"
+            y2="27"
             stroke={successAccent}
-            strokeWidth="1.4"
+            strokeWidth="1.5"
           />
+          {/* Cross-check verifier shield */}
           <path
-            d="M156 12 L169 17 V28 C169 36 163 41 156 44 C149 41 143 36 143 28 V17 Z"
+            d="M158 13 L170 17.5 V27.5 C170 35 164.5 39.5 158 42.5 C151.5 39.5 146 35 146 27.5 V17.5 Z"
             fill={boxFill}
             stroke={successAccent}
             strokeWidth="1.5"
           />
           <path
-            d="M151 28 L155 32 L162 24"
+            d="M153.5 27.5 L157 31 L163.5 23.5"
             stroke={successAccent}
             strokeWidth="1.8"
             strokeLinecap="round"
@@ -504,6 +719,7 @@ function AgentModeSchematic({
       );
 
     case "boost":
+      // High-energy Rose forward speed-chevron burst schematic
       return (
         <svg
           viewBox="0 0 180 54"
@@ -511,59 +727,90 @@ function AgentModeSchematic({
           aria-hidden="true"
           fill="none"
         >
-          {[4, 20, 36].map((yPos, idx) => (
-            <g key={yPos}>
+          {/* 3 converging specialist lanes */}
+          {[
+            { y: 6, label: "B1" },
+            { y: 21, label: "B2" },
+            { y: 36, label: "B3" },
+          ].map((brain) => (
+            <g key={brain.label}>
               <rect
-                x="12"
-                y={yPos}
-                width="48"
-                height="14"
-                rx="4"
+                x="10"
+                y={brain.y}
+                width="30"
+                height="12"
+                rx="3.5"
                 fill={boxFill}
-                stroke={secondaryAccent}
+                stroke={accent}
                 strokeWidth="1.4"
               />
               <text
-                x="36"
-                y={yPos + 10}
+                x="25"
+                y={brain.y + 8.5}
                 textAnchor="middle"
                 fill="var(--color-ink-primary)"
-                fontSize="7.5"
+                fontSize="7"
                 fontWeight="700"
                 fontFamily="var(--font-mono)"
               >
-                BRAIN {idx + 1}
+                {brain.label}
               </text>
               <line
-                x1="60"
-                y1={yPos + 7}
-                x2="112"
+                x1="40"
+                y1={brain.y + 6}
+                x2="66"
                 y2="27"
                 stroke={accent}
                 strokeWidth="1.4"
               />
             </g>
           ))}
-          <circle
-            cx="140"
-            cy="27"
-            r="18"
-            fill={boxFill}
+          {/* Triple forward speed-chevron burst */}
+          <path
+            d="M68 15 L80 27 L68 39"
             stroke={accent}
-            strokeWidth="1.5"
+            strokeOpacity="0.55"
+            strokeWidth="2.1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
+          <path
+            d="M80 13 L94 27 L80 41"
+            stroke={accent}
+            strokeOpacity="0.8"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M93 11 L109 27 L93 43"
+            stroke={accent}
+            strokeWidth="2.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          {/* High-energy core burst + bolt */}
           <circle
-            cx="140"
+            cx="142"
             cy="27"
-            r="10"
-            stroke={secondaryAccent}
-            strokeWidth="1.4"
+            r="17"
+            fill={accent}
+            fillOpacity="0.16"
+            stroke={accent}
+            strokeWidth="1.6"
           />
-          <circle cx="140" cy="27" r="3.5" fill={successAccent} />
+          <path
+            d="M144 15 L135 28 H142 L139.5 39 L150 25.5 H143 L144 15 Z"
+            fill={accent}
+            stroke="var(--color-ink-primary)"
+            strokeWidth="1"
+            strokeLinejoin="round"
+          />
         </svg>
       );
 
     case "teamwork":
+      // Warm Amber 3-specialist shared-blueprint collaboration schematic
       return (
         <svg
           viewBox="0 0 220 54"
@@ -571,70 +818,132 @@ function AgentModeSchematic({
           aria-hidden="true"
           fill="none"
         >
+          {/* Scoping ASK intake */}
           <rect
             x="6"
-            y="14"
-            width="40"
-            height="24"
+            y="16"
+            width="34"
+            height="22"
             rx="10"
             fill={boxFill}
             stroke={accent}
-            strokeWidth="1.4"
+            strokeWidth="1.5"
           />
           <text
-            x="26"
-            y="29"
+            x="23"
+            y="29.5"
             textAnchor="middle"
             fill="var(--color-ink-primary)"
-            fontSize="7.5"
+            fontSize="7"
             fontWeight="700"
             fontFamily="var(--font-mono)"
           >
             ASK
           </text>
-          <line x1="46" y1="26" x2="58" y2="26" stroke={accent} strokeWidth="1.4" />
+          <line x1="40" y1="27" x2="54" y2="27" stroke={accent} strokeWidth="1.5" />
+
+          {/* Left specialist nodes (ARCH + BUILD) */}
           <rect
-            x="58"
-            y="14"
-            width="42"
-            height="24"
-            rx="5"
+            x="54"
+            y="5"
+            width="38"
+            height="14"
+            rx="4"
             fill={boxFill}
-            stroke={secondaryAccent}
+            stroke={accent}
             strokeWidth="1.4"
           />
           <text
-            x="79"
-            y="29"
+            x="73"
+            y="14.5"
             textAnchor="middle"
-            fill={secondaryAccent}
-            fontSize="7.5"
+            fill="var(--color-ink-primary)"
+            fontSize="6.8"
+            fontWeight="700"
+            fontFamily="var(--font-mono)"
+          >
+            ARCH
+          </text>
+          <rect
+            x="54"
+            y="35"
+            width="38"
+            height="14"
+            rx="4"
+            fill={boxFill}
+            stroke={accent}
+            strokeWidth="1.4"
+          />
+          <text
+            x="73"
+            y="44.5"
+            textAnchor="middle"
+            fill="var(--color-ink-primary)"
+            fontSize="6.8"
+            fontWeight="700"
+            fontFamily="var(--font-mono)"
+          >
+            BUILD
+          </text>
+
+          {/* Collaboration spokes into shared Amber blueprint diamond */}
+          <line x1="92" y1="12" x2="108" y2="21" stroke={accent} strokeWidth="1.4" />
+          <line x1="92" y1="42" x2="108" y2="33" stroke={accent} strokeWidth="1.4" />
+          <path
+            d="M120 7 L139 27 L120 47 L101 27 Z"
+            fill={accent}
+            fillOpacity="0.22"
+            stroke={accent}
+            strokeWidth="1.8"
+            strokeLinejoin="round"
+          />
+          <text
+            x="120"
+            y="29.5"
+            textAnchor="middle"
+            fill="var(--color-ink-primary)"
+            fontSize="6.8"
             fontWeight="700"
             fontFamily="var(--font-mono)"
           >
             SPEC
           </text>
-          <line x1="100" y1="26" x2="112" y2="26" stroke={accent} strokeWidth="1.4" />
-          {[112, 132, 152].map((xPos, idx) => (
-            <rect
-              key={xPos}
-              x={xPos}
-              y="10"
-              width="16"
-              height="32"
-              rx="4"
-              fill={boxFill}
-              stroke={accent}
-              strokeWidth="1.3"
-            >
-              <title>{`Team column ${idx + 1}`}</title>
-            </rect>
-          ))}
-          <line x1="168" y1="26" x2="180" y2="26" stroke={successAccent} strokeWidth="1.4" />
+
+          {/* 3rd specialist (QA) + verified delivery */}
+          <line x1="139" y1="27" x2="148" y2="27" stroke={accent} strokeWidth="1.4" />
           <rect
-            x="180"
-            y="14"
-            width="34"
+            x="148"
+            y="17"
+            width="28"
+            height="20"
+            rx="4"
+            fill={boxFill}
+            stroke={accent}
+            strokeWidth="1.4"
+          />
+          <text
+            x="162"
+            y="29.5"
+            textAnchor="middle"
+            fill={accent}
+            fontSize="7"
+            fontWeight="700"
+            fontFamily="var(--font-mono)"
+          >
+            QA
+          </text>
+          <line
+            x1="176"
+            y1="27"
+            x2="186"
+            y2="27"
+            stroke={successAccent}
+            strokeWidth="1.5"
+          />
+          <rect
+            x="186"
+            y="15"
+            width="28"
             height="24"
             rx="6"
             fill={boxFill}
@@ -642,7 +951,7 @@ function AgentModeSchematic({
             strokeWidth="1.5"
           />
           <path
-            d="M191 26 L195 30 L204 21"
+            d="M194.5 27 L198.5 31 L206 22.5"
             stroke={successAccent}
             strokeWidth="2"
             strokeLinecap="round"
@@ -681,6 +990,10 @@ export function AntigravityArchitectureExplorer({
           (block) => block.id === selection.id,
         ) ?? ANTIGRAVITY_BUILDING_BLOCKS[0])
       : null;
+
+  const selectedModeStyle: AgentModeVisualStyle | null = selectedMode
+    ? AGENT_MODE_VISUAL_STYLES[selectedMode.id]
+    : null;
 
   const activeModeBlockSet = new Set<BuildingBlockId>(
     selectedMode ? selectedMode.buildingBlockIds : [],
@@ -781,6 +1094,7 @@ export function AntigravityArchitectureExplorer({
                 const isDimmedByBlock =
                   selection.kind === "block" && !isPoweredBySelectedBlock;
                 const isWidestMode = mode.id === "teamwork";
+                const modeStyle = AGENT_MODE_VISUAL_STYLES[mode.id];
 
                 return (
                   <button
@@ -792,12 +1106,12 @@ export function AntigravityArchitectureExplorer({
                       isWidestMode ? "sm:col-span-2 xl:col-span-2" : ""
                     } ${
                       isSelected
-                        ? "border-2 border-cyan-glow bg-cyan-glow/15 shadow-lg"
+                        ? modeStyle.selectedCardClass
                         : isPoweredBySelectedBlock
                           ? "border border-emerald-glow/60 bg-emerald-glow/10 hover:border-cyan-glow/70"
                           : isDimmedByBlock
-                            ? "border border-glass-border bg-void-950/60 opacity-60 hover:border-cyan-glow/60 hover:opacity-100"
-                            : "border border-glass-border-strong bg-void-950/90 hover:border-cyan-glow/60"
+                            ? modeStyle.dimmedCardClass
+                            : modeStyle.idleCardClass
                     }`}
                   >
                     <div>
@@ -805,13 +1119,13 @@ export function AntigravityArchitectureExplorer({
                         <span
                           className={`inline-flex items-center rounded-md px-1.5 py-0.5 font-mono text-xs font-bold ${
                             isSelected
-                              ? "bg-cyan-deep text-ink-primary"
-                              : "border border-glass-border bg-void-900 text-cyan-glow"
+                              ? modeStyle.orderBadgeSelectedClass
+                              : modeStyle.orderBadgeIdleClass
                           }`}
                         >
                           {String(mode.order).padStart(2, "0")}
                         </span>
-                        <span className="truncate rounded-md border border-glass-border bg-void-900/90 px-1.5 py-0.5 font-mono text-xs text-ink-secondary">
+                        <span className={`truncate ${modeStyle.commandPillClass}`}>
                           {mode.commandHint}
                         </span>
                       </div>
@@ -991,10 +1305,12 @@ export function AntigravityArchitectureExplorer({
         className="flex min-w-0 flex-col lg:col-span-4"
       >
         <div className="glass-panel-elevated flex flex-1 flex-col justify-between gap-4 rounded-2xl p-5">
-          {selectedMode ? (
+          {selectedMode && selectedModeStyle ? (
             <div className="space-y-4">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-glow/40 bg-cyan-glow/15 px-2.5 py-0.5 font-mono text-xs font-semibold text-cyan-glow">
+                <span
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 font-mono text-xs font-semibold ${selectedModeStyle.guideHeaderBadgeClass}`}
+                >
                   <Sparkles className="h-3 w-3 shrink-0" aria-hidden="true" />
                   LAYER 2 · AGENT MODE GUIDE
                 </span>
@@ -1008,13 +1324,19 @@ export function AntigravityArchitectureExplorer({
                   <h3 className="text-xl font-bold text-ink-primary">
                     {selectedMode.name}
                   </h3>
-                  <span className="rounded-lg border border-glass-border-strong bg-void-900 px-2 py-0.5 font-mono text-xs font-semibold text-cyan-glow">
+                  <span
+                    className={`rounded-lg border px-2 py-0.5 font-mono text-xs font-semibold ${selectedModeStyle.guideCommandBadgeClass}`}
+                  >
                     {selectedMode.commandHint}
                   </span>
                 </div>
 
-                <div className="mt-3 rounded-xl border border-cyan-glow/35 bg-cyan-glow/10 p-3">
-                  <p className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-cyan-glow">
+                <div
+                  className={`mt-3 rounded-xl border p-3 ${selectedModeStyle.analogyBoxClass}`}
+                >
+                  <p
+                    className={`inline-flex items-center gap-1.5 font-mono text-xs font-semibold ${selectedModeStyle.analogyLabelClass}`}
+                  >
                     <Lightbulb className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                     Plain-English Analogy
                   </p>
@@ -1060,7 +1382,7 @@ export function AntigravityArchitectureExplorer({
                         key={pip}
                         className={`h-2 flex-1 rounded-full ${
                           pip <= selectedMode.computeLevel
-                            ? "bg-cyan-glow"
+                            ? selectedModeStyle.computePipActiveClass
                             : "bg-void-800"
                         }`}
                         aria-hidden="true"
@@ -1220,21 +1542,24 @@ export function AntigravityArchitectureExplorer({
                   Used By These Agent Modes (Click to inspect):
                 </p>
                 <div className="mt-2 flex flex-wrap gap-1.5">
-                  {modesUsingSelectedBlock.map((mode) => (
-                    <button
-                      key={mode.id}
-                      type="button"
-                      onClick={() =>
-                        setSelection({ kind: "mode", id: mode.id })
-                      }
-                      className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-cyan-glow/45 bg-cyan-glow/10 px-2.5 py-1 text-xs font-semibold text-cyan-glow transition-colors hover:bg-cyan-glow/20 hover:text-ink-primary"
-                    >
-                      <span className="font-mono text-xs">
-                        {String(mode.order).padStart(2, "0")}
-                      </span>
-                      <span>{mode.name}</span>
-                    </button>
-                  ))}
+                  {modesUsingSelectedBlock.map((mode) => {
+                    const chipStyle = AGENT_MODE_VISUAL_STYLES[mode.id];
+                    return (
+                      <button
+                        key={mode.id}
+                        type="button"
+                        onClick={() =>
+                          setSelection({ kind: "mode", id: mode.id })
+                        }
+                        className={`inline-flex cursor-pointer items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-semibold transition-colors ${chipStyle.usedByChipClass}`}
+                      >
+                        <span className="font-mono text-xs">
+                          {String(mode.order).padStart(2, "0")}
+                        </span>
+                        <span>{mode.name}</span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 

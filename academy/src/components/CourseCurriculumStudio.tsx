@@ -29,6 +29,7 @@ import type {
   LearnerProgress,
   LearningDepthMode,
 } from "@/lib/schemas";
+import { CourseEmblem, getCourseVisualTheme } from "./CourseEmblem";
 import { CourseIllustrationBanner } from "./CourseIllustrationBanner";
 import { Eli5MicrolearningCard } from "./Eli5MicrolearningCard";
 import { MermaidDiagram } from "./MermaidDiagram";
@@ -130,6 +131,10 @@ export function CourseCurriculumStudio({
 
   const activeCourse =
     courses.find((course) => course.id === activeCourseId) ?? courses[0] ?? null;
+
+  const activeCourseTheme = activeCourse
+    ? getCourseVisualTheme(activeCourse.slug, activeCourse.number)
+    : null;
 
   useEffect(() => {
     if (!progressModalOpen) return;
@@ -327,6 +332,7 @@ export function CourseCurriculumStudio({
         >
           {courses.map((course) => {
             const isSelected = activeCourse?.id === course.id;
+            const theme = getCourseVisualTheme(course.slug, course.number);
             const completed = course.steps.filter((s) =>
               completedStepIds.includes(s.id),
             ).length;
@@ -345,58 +351,75 @@ export function CourseCurriculumStudio({
                 type="button"
                 aria-pressed={isSelected}
                 onClick={() => handleSelectCourse(course)}
-                className={`flex min-w-0 cursor-pointer flex-col justify-between rounded-2xl p-4 text-left transition-all hover:-translate-y-0.5 hover:border-cyan-glow/70 hover:bg-void-900/80 ${
+                className={`flex min-w-0 cursor-pointer flex-col overflow-hidden rounded-2xl text-left transition-all hover:-translate-y-0.5 hover:bg-void-900/80 ${
                   isSelected
-                    ? "border-2 border-cyan-glow bg-void-900/95 shadow-xl"
-                    : "glass-panel"
+                    ? `${theme.activeBorderClass} bg-void-900/95 shadow-xl`
+                    : `glass-panel ${theme.borderClass}`
                 }`}
               >
-                <div>
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="font-mono text-xs font-semibold text-cyan-glow">
-                      Course {String(course.number).padStart(2, "0")}
-                    </span>
-                    <span className="rounded-full border border-glass-border bg-void-900/80 px-2 py-0.5 font-mono text-xs capitalize text-ink-secondary">
-                      {course.level}
-                    </span>
-                  </div>
-                  <h3 className="mt-2 text-base font-bold text-ink-primary">
-                    {cardTitle}
-                  </h3>
-                  <p className="mt-1 line-clamp-2 text-xs text-ink-secondary">
-                    {cardDescription}
-                  </p>
-                </div>
-
-                <div className="mt-4 space-y-2.5">
-                  <div className="space-y-1.5">
-                    <div className="flex items-center justify-between font-mono text-xs text-ink-muted">
-                      <span className="inline-flex items-center gap-1">
-                        <Clock className="h-3 w-3" aria-hidden="true" />
-                        {course.estimatedMinutes} min
-                      </span>
-                      <span className="text-emerald-glow">
-                        {completed}/{course.steps.length} ({pct}%)
-                      </span>
+                <span
+                  className={`block h-1 w-full shrink-0 ${theme.topBarClass}`}
+                  aria-hidden="true"
+                />
+                <div className="flex flex-1 flex-col justify-between p-4">
+                  <div>
+                    <div className="flex items-start justify-between gap-2.5">
+                      <div className="flex min-w-0 items-center gap-2.5">
+                        <CourseEmblem
+                          slug={course.slug}
+                          courseNumber={course.number}
+                          size="md"
+                        />
+                        <div className="flex min-w-0 flex-col gap-1">
+                          <span
+                            className={`inline-flex w-fit items-center rounded-full border px-2 py-0.5 font-mono text-xs font-semibold ${theme.badgeClass}`}
+                          >
+                            Course {String(course.number).padStart(2, "0")}
+                          </span>
+                          <span className="w-fit rounded-full border border-glass-border bg-void-900/80 px-2 py-0.5 font-mono text-xs capitalize text-ink-secondary">
+                            {course.level}
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-void-950">
-                      <div
-                        className="h-full rounded-full bg-emerald-glow transition-all duration-300"
-                        style={{ width: `${pct}%` }}
-                      />
-                    </div>
+                    <h3 className="mt-3 text-base font-bold text-ink-primary">
+                      {cardTitle}
+                    </h3>
+                    <p className="mt-1 line-clamp-2 text-xs text-ink-secondary">
+                      {cardDescription}
+                    </p>
                   </div>
 
-                  <div className="flex items-center justify-end border-t border-glass-border pt-2.5">
-                    {isSelected ? (
-                      <span className="inline-flex items-center gap-1 rounded-full border border-emerald-glow/60 bg-emerald-glow/15 px-3 py-1 font-mono text-xs font-semibold text-emerald-glow">
-                        Viewing Now ✓
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center gap-1 rounded-full border border-cyan-glow/50 bg-cyan-glow/15 px-3 py-1 font-mono text-xs font-semibold text-cyan-glow">
-                        Open Course →
-                      </span>
-                    )}
+                  <div className="mt-4 space-y-2.5">
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between font-mono text-xs text-ink-muted">
+                        <span className="inline-flex items-center gap-1">
+                          <Clock className="h-3 w-3" aria-hidden="true" />
+                          {course.estimatedMinutes} min
+                        </span>
+                        <span className="text-emerald-glow">
+                          {completed}/{course.steps.length} ({pct}%)
+                        </span>
+                      </div>
+                      <div className="h-1.5 w-full overflow-hidden rounded-full bg-void-950">
+                        <div
+                          className="h-full rounded-full bg-emerald-glow transition-all duration-300"
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-end border-t border-glass-border pt-2.5">
+                      {isSelected ? (
+                        <span className="inline-flex items-center gap-1 rounded-full border border-emerald-glow/60 bg-emerald-glow/15 px-3 py-1 font-mono text-xs font-semibold text-emerald-glow">
+                          Viewing Now ✓
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 rounded-full border border-cyan-glow/50 bg-cyan-glow/15 px-3 py-1 font-mono text-xs font-semibold text-cyan-glow">
+                          Open Course →
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               </button>
@@ -475,17 +498,28 @@ export function CourseCurriculumStudio({
           </div>
         )}
 
-        {activeCourse && (
+        {activeCourse && activeCourseTheme && (
           <div
             aria-label={activeDisplayTitle}
             className="overflow-hidden rounded-3xl border-2 border-cyan-glow/45 bg-void-900/70 shadow-2xl"
           >
+            <span
+              className={`block h-1 w-full ${activeCourseTheme.topBarClass}`}
+              aria-hidden="true"
+            />
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-cyan-glow/30 bg-cyan-glow/10 px-5 py-3.5">
-              <span className="font-mono text-xs font-bold tracking-wide text-cyan-glow sm:text-sm">
-                CURRENTLY OPEN · COURSE{" "}
-                {String(activeCourse.number).padStart(2, "0")} ·{" "}
-                {activeDisplayTitle}
-              </span>
+              <div className="flex min-w-0 items-center gap-2.5">
+                <CourseEmblem
+                  slug={activeCourse.slug}
+                  courseNumber={activeCourse.number}
+                  size="sm"
+                />
+                <span className="font-mono text-xs font-bold tracking-wide text-cyan-glow sm:text-sm">
+                  CURRENTLY OPEN · COURSE{" "}
+                  {String(activeCourse.number).padStart(2, "0")} ·{" "}
+                  {activeDisplayTitle}
+                </span>
+              </div>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-glow/50 bg-void-950/80 px-3 py-1 font-mono text-xs font-semibold text-emerald-glow">
                 <CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" />
                 {courseStats.completed}/{courseStats.total} steps (
@@ -499,7 +533,9 @@ export function CourseCurriculumStudio({
                   <div className="glass-panel flex flex-col justify-between gap-4 rounded-2xl p-5 lg:col-span-7">
                     <div>
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="font-mono text-xs font-semibold text-cyan-glow">
+                        <span
+                          className={`inline-flex items-center rounded-full border px-2.5 py-0.5 font-mono text-xs font-semibold ${activeCourseTheme.badgeClass}`}
+                        >
                           COURSE {String(activeCourse.number).padStart(2, "0")}
                         </span>
                         <span className="rounded-full border border-glass-border bg-void-900/80 px-2.5 py-0.5 font-mono text-xs capitalize text-ink-secondary">
@@ -514,12 +550,21 @@ export function CourseCurriculumStudio({
                           </span>
                         ))}
                       </div>
-                      <h3 className="mt-2 text-xl font-bold text-ink-primary">
-                        {activeDisplayTitle}
-                      </h3>
-                      <p className="mt-1.5 text-sm leading-relaxed text-ink-secondary">
-                        {activeDisplaySubtitle}
-                      </p>
+                      <div className="mt-3 flex items-start gap-3.5">
+                        <CourseEmblem
+                          slug={activeCourse.slug}
+                          courseNumber={activeCourse.number}
+                          size="lg"
+                        />
+                        <div className="min-w-0">
+                          <h3 className="text-xl font-bold text-ink-primary">
+                            {activeDisplayTitle}
+                          </h3>
+                          <p className="mt-1.5 text-sm leading-relaxed text-ink-secondary">
+                            {activeDisplaySubtitle}
+                          </p>
+                        </div>
+                      </div>
                     </div>
 
                     <div className="rounded-xl border border-glass-border bg-void-900/60 p-3.5">
@@ -554,7 +599,9 @@ export function CourseCurriculumStudio({
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="font-mono text-xs font-semibold text-cyan-glow">
+                        <span
+                          className={`inline-flex items-center rounded-full border px-2.5 py-0.5 font-mono text-xs font-semibold ${activeCourseTheme.badgeClass}`}
+                        >
                           COURSE {String(activeCourse.number).padStart(2, "0")}
                         </span>
                         {activeCourse.tags.map((tag) => (
@@ -566,12 +613,21 @@ export function CourseCurriculumStudio({
                           </span>
                         ))}
                       </div>
-                      <h3 className="mt-1.5 text-xl font-bold text-ink-primary">
-                        {activeDisplayTitle}
-                      </h3>
-                      <p className="mt-1 text-sm text-ink-secondary">
-                        {activeDisplaySubtitle}
-                      </p>
+                      <div className="mt-2.5 flex items-start gap-3.5">
+                        <CourseEmblem
+                          slug={activeCourse.slug}
+                          courseNumber={activeCourse.number}
+                          size="lg"
+                        />
+                        <div className="min-w-0">
+                          <h3 className="text-xl font-bold text-ink-primary">
+                            {activeDisplayTitle}
+                          </h3>
+                          <p className="mt-1 text-sm text-ink-secondary">
+                            {activeDisplaySubtitle}
+                          </p>
+                        </div>
+                      </div>
                     </div>
 
                     <div className="min-w-44 rounded-xl border border-glass-border bg-void-900/60 p-3">
