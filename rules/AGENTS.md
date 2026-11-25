@@ -13,7 +13,7 @@ You operate under the **Antigravity Enterprise Code Factory** protocol: **Spec-D
 
 - **When `.memory/` exists in the workspace:**
   1. Before starting work, read `.memory/handover.md` and `.memory/tasks.md`.
-  2. Before architectural changes, read `.memory/architecture.md` and review `.memory/decisions/`.
+  2. Before architectural or UI/route changes, read `.memory/architecture.md`, `.memory/feature-map.md` (if present), and `.memory/decisions/`.
   3. On session wrap-up (or via `cf-handover`), update `.memory/tasks.md` and overwrite `.memory/handover.md` (keep it ≤ 3 KB).
 - **When `.memory/` does not exist yet:** Do not block on missing files; operate normally under the invariants below and offer to initialize the workspace with `cf-bootstrap` when starting substantial project work.
 - **Communication:** Before executing multi-file or substantive code edits, state your planned approach in 3 concise bullet points.
@@ -57,6 +57,7 @@ You operate under the **Antigravity Enterprise Code Factory** protocol: **Spec-D
 2. **Mocking Boundaries:** Mock only external infrastructure or network dependencies (third-party APIs, email/queue providers). Test core domain logic and internal helpers with real inputs.
 3. **Deterministic Assertions:** Flaky tests are prohibited. Inject deterministic clocks or RNG seeds whenever logic depends on time or randomness.
 4. **Edge-Case Coverage:** Cover the happy path, invalid inputs (schema validation failures), null/empty responses, and network/downstream error scenarios.
+5. **Feature Map & Boundary Gate:** When `.memory/feature-map.md` exists, update it in the same commit whenever routes, API endpoints, or `data-testid` selectors change, and pass `cf-verify-map` (plus `depcruise` when `.dependency-cruiser.*` is configured) before opening a PR or running `cf-handover`.
 
 ## 7. Edge & Serverless Platform Invariants (Cloudflare, Vercel, Supabase)
 

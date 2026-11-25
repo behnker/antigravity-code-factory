@@ -23,7 +23,9 @@ Initialize the standardized `.memory/` Memory Bank and `plans/` Spec-Driven Deve
    - `.memory/handover.md` (from [handover-template.md](./resources/handover-template.md))
    - `.memory/tasks.md` (from [tasks-template.md](./resources/tasks-template.md))
    - `.memory/architecture.md` (from [architecture-template.md](./resources/architecture-template.md))
+   - `.memory/feature-map.md` (from `../cf-verify-map/resources/feature-map-template.md`)
    - `.memory/decisions/0001-record-template.md` (from [adr-template.md](./resources/adr-template.md))
    - `plans/templates/feature-spec-template.md` (from [feature-spec-template.md](./resources/feature-spec-template.md))
-4. If the repository already has source code, offer to populate `.memory/architecture.md` by scanning the project's tech stack and directory structure.
+   - `.dependency-cruiser.cjs` *(when `package.json` is detected; from `../cf-verify-map/resources/dependency-cruiser.template.cjs`)*
+4. Remind the user to keep `.tmp/` in `.gitignore` so failure screenshots from `cf-verify-map` remain untracked. If the repository already has source code, offer to populate `.memory/architecture.md` and `.memory/feature-map.md` by scanning the project's tech stack, routes, and directory structure.
 5. Remind the user that global invariants (Security, Scalability, UI/UX, Testing) are already active via the `code-factory` plugin; project-specific overrides can optionally be added under `.agents/rules/`.

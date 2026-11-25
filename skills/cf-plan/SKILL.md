@@ -18,7 +18,7 @@ Produce a self-contained, formally locked specification before any production co
    - **System Architecture:** Mermaid sequence and/or component diagrams showing boundaries and data flow.
    - **API Contracts & Validation Schemas:** Fully typed request/response contracts (Zod / TypeScript / Pydantic / JSON Schema), pagination defaults/max limits, auth policies, and explicit error codes.
    - **Database & State Changes:** Schema additions/modifications, migration notes, foreign keys, and indexes.
-   - **UI/UX & Accessibility Specs:** Component hierarchy, state diagrams (Loading / Error / Empty), design token usage, responsive behavior, and WCAG 2.1 AA criteria.
+   - **UI/UX & Accessibility Specs:** Component hierarchy, state diagrams (Loading / Error / Empty), design token usage, responsive behavior, WCAG 2.1 AA criteria, plus stable `data-testid` selector contracts and Golden Happy Paths to sync into `.memory/feature-map.md`.
    - **Selective Autonomy & Verification Oracles:** Classify each task as **Lights-Out** (crisp machine oracle) vs. **Human-Lit** (auth, security/RLS, finance, infra, architecture) and declare the exact verification commands/schemas required before merge.
    - **Atomic Task Breakdown:** Decomposed into non-overlapping file partitions (max 3–5 concurrent worker loops) so parallel workers never edit the same file concurrently. If multiple modules share an interface/types file, list that shared interface as **Task 0 (Prerequisite)** to be completed first.
 3. If the design introduces a significant architectural choice, record an ADR in `.memory/decisions/NNNN-<slug>.md`.

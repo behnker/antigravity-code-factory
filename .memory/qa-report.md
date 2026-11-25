@@ -97,3 +97,23 @@
 - [x] All `8` courses, `53` steps, `43` prompts, `53` Mermaid diagrams, `8` studio illustrations, and Course 06 MP4 verified against Zod schemas & the 7-point ELI5 Readability Rubric.
 - [ ] **Fix B1:** Remove `opacity-55` (or raise contrast `>= 4.5:1`) on dimmed Layer 3 buttons in [`AntigravityArchitectureExplorer.tsx:939,968`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/components/AntigravityArchitectureExplorer.tsx#L939-L968).
 - [ ] **Verify B2:** Re-run `next build` and execute live `browser` visual/SVG/layout QA at **`375px`**, **`768px`**, and **`1440px`** before requesting Stage 5 HITL deploy approval.
+
+
+---
+
+# Stage 4 Dual-Axis Evaluation (`cf-eval`) — `code-factory` v2.4.0 (`cf-verify-map` + `academy/` Scope C)
+
+**Date:** 2026-11-25 (23:02 UTC)  
+**Spec & ADR:** [`plans/cf-verify-map-spec.md`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/plans/cf-verify-map-spec.md) · [`0004-feature-map-and-architecture-boundary-verification.md`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/.memory/decisions/0004-feature-map-and-architecture-boundary-verification.md)  
+**Reviewer Context:** Clean decoupled `cf-reviewer` / `cf-eval` subagent context (zero production files edited)  
+**Verdict:** **`SHIP`** *(Re-verified after clearing Blocking Defects B1 & B2 and Non-Blocking N1–N4; zero remaining blockers.)*
+
+## Executive Scorecard
+
+| Axis | Dimension | Status | Verified Evidence |
+| :--- | :--- | :---: | :--- |
+| **Axis 1** | **SSRF & Path Containment (`run-verify-map.mjs`)** | **PASS (B1 Fixed)** | `assertSameOriginPath()` ([`run-verify-map.mjs:86-107`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-verify-map/scripts/run-verify-map.mjs#L86-L107)) blocks `//evil.com`, `/\evil.com`, `/\t/evil.com`, `/\n/evil.com`, and enforces same-origin `new URL(rawPath, parsedBase).origin === parsedBase.origin`; `buildSafeScreenshotPath()` uses `path.relative()` ([`run-verify-map.mjs:270-290`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-verify-map/scripts/run-verify-map.mjs#L270-L290)) |
+| **Axis 1** | **Architecture Boundary Template (`depcruise`)** | **PASS (B2 Fixed)** | Conditional `tsConfig: { fileName: 'tsconfig.json' }` ([`dependency-cruiser.template.cjs:13,57`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-verify-map/resources/dependency-cruiser.template.cjs#L13-L57)) verified against `academy/src`: `Modules: 44`, `Violations: 0`, `Total @/ deps: 38`, `couldNotResolve: 0` |
+| **Axis 1** | **Unit & Hook Verification Oracles** | **PASS** | `node --test skills/cf-verify-map/scripts/test_run_verify_map.mjs`: **`15/15`** pass (`4` suites); `python3 -m unittest -v hooks/test_hitl_gate.py hooks/test_secret_guard.py`: **`12/12`** pass (`0.217s`); `wc -c rules/AGENTS.md`: **`8842`** B (`<= 10240`) |
+| **Axis 1** | **Full-Stack & Live Feature Map Gates (`academy/`)** | **PASS** | `verify-stack.sh academy --skip-build`: **`5 passed, 0 failed, 1 skipped`** (`tsc`, `eslint`, `61/61` Vitest, static scan, `depcruise` `44 modules / 113 deps`); `cd academy && pnpm run verify:map`: **`9/9`** checks (`375/768/1440px`, `0` console/page/network errors, `0px` overflow); `pnpm audit --audit-level=high`: `0` High/Critical CVEs (`dependency-cruiser@18.9.0` MIT, `playwright@1.65.1` Apache-2.0); `hooks/secret-guard.py`: `30/30` files allowed |
+| **Axis 2** | **Trajectory, Oracle Honesty & HITL Compliance** | **PASS** | Strict adherence to locked spec Scope C; zero weakened assertions or silenced rules (`0` `@ts-ignore` / `eslint-disable` / `as any` / `.skip`); HITL-approved `devDependencies`. *(Note: Stage B emblem changes and `.memory/handover.md` remain uncommitted in the working tree alongside Scope C; `bootstrap.sh` was audited statically without temp-dir `rm -rf` execution.)* |

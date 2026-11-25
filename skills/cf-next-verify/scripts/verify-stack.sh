@@ -178,6 +178,27 @@ else
   record_step "Static Boundary Scan" "FAIL" "client secret/service_role exposure detected"
 fi
 
+# 4b. Optional Architecture Boundary Check (dependency-cruiser)
+DEPCRUISE_CFG=""
+for candidate in ".dependency-cruiser.cjs" ".dependency-cruiser.js" ".dependency-cruiser.mjs"; do
+  if [[ -f "$candidate" ]]; then
+    DEPCRUISE_CFG="$candidate"
+    break
+  fi
+done
+
+if [[ -n "$DEPCRUISE_CFG" && -d "src" ]]; then
+  if bash -c "$PM_EXEC depcruise --version >/dev/null 2>&1"; then
+    run_step "Architecture Boundaries" "$PM_EXEC depcruise src --config $DEPCRUISE_CFG"
+  else
+    record_step "Architecture Boundaries" "SKIP" "$DEPCRUISE_CFG found, install dependency-cruiser to enable"
+  fi
+elif [[ -n "$DEPCRUISE_CFG" ]]; then
+  record_step "Architecture Boundaries" "SKIP" "$DEPCRUISE_CFG found but no src/ directory"
+else
+  record_step "Architecture Boundaries" "SKIP" "no .dependency-cruiser.* config"
+fi
+
 # 5. Production build
 if [[ "$SKIP_BUILD" -eq 1 ]]; then
   record_step "Build" "SKIP" "--skip-build specified"

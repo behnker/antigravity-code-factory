@@ -13,7 +13,9 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "arch:check": "depcruise src --config .dependency-cruiser.cjs",
+    "verify:map": "node ../skills/cf-verify-map/scripts/run-verify-map.mjs --map ../.memory/feature-map.md --all-viewports"
   },
   "dependencies": {
     "lucide-react": "^0.511.0",
@@ -36,9 +38,11 @@
     "@types/three": "^0.176.0",
     "@vitejs/plugin-react": "^4.5.0",
     "@vitest/coverage-v8": "^3.1.4",
+    "dependency-cruiser": "^18.9.0",
     "eslint": "^9.27.0",
     "eslint-config-next": "^15.3.2",
     "jsdom": "^26.1.0",
+    "playwright": "^1.65.1",
     "tailwindcss": "^4.1.7",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3",

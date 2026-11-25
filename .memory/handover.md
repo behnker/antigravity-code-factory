@@ -1,24 +1,22 @@
 # Session Handover Record
 
-**Timestamp:** 2026-11-25 04:28 UTC  
+**Timestamp:** 2026-11-25 08:01 UTC  
 **Active Model:** Gemini 4 Neon (High)  
-**Git Branch & Commit:** `main` (uncommitted working tree — ready for review/commit/deploy after user sign-off; local preview live on `http://localhost:3000`)
+**Git Branch & Commit:** `main` (`9f93a43` pushed & deployed to Vercel production; Stage B emblem upgrade ready in working tree for review/commit/re-deploy; local preview live on `http://localhost:3000`)
 
 ## 1. Executive Summary
-Completed the full **8-Course ELI5 + 4-Part Microlearning + Multimodal Academy Upgrade** (`Courses 00–07`, `53/53` ELI5 steps, `53/53` plain-English Mermaid diagrams, `8/8` concrete architectural cutaway illustrations, `43/43` prompts with `Use This Prompt When:` triggers) plus the rebuilt **Coherent 4-Layer Antigravity Operating Model** (`7 Agent Modes` + `8 Shared Building Blocks`). Stage 4 QA Verdict: **`SHIP`** (`58/58` Vitest, `12/12` Python hooks, `0` High/Critical CVEs, `1440/768/375px` live browser QA PASS).
+1. **Stage A Live in Production (`9f93a43` → `https://antigravity-academy-ten.vercel.app`):** Committed, pushed, and deployed the verified **8-Course ELI5 + Multimodal Academy** (`Courses 00–07`, `53/53` ELI5 steps & plain-English Mermaid diagrams, `8/8` concrete architectural cutaway illustrations, `43/43` prompts with `Use This Prompt When:`, and the **4-Layer 7-Mode Explorer**). Passed **5/5** live production smoke tests (`/` 200, `8` courses `[0..7]`, `39` resources, `/api/hitl/simulate` `force_ask` + `400`).
+2. **Stage B Verified Locally (`http://localhost:3000`):** Built the **8-Course Custom SVG Emblem Language** (`CourseEmblem.tsx`) + **`/swarm` (Cyan) · `/boost` (Rose) · `/teamwork` (Amber)** semantic mode color-coding across Course Cards, Active Stage Banner, Prompt Vault, and Hero Explorer (`61/61` Vitest, `100%` `CourseEmblem.tsx` coverage, `12/12` Python hooks, `5/5` verify-stack gates, `1440/768/375px` live browser QA PASS).
 
-## 2. Completed Items
-- **Spec & ADR:** Locked `plans/eli5-multimodal-academy-spec.md` + `.memory/decisions/0003-eli5-multimodal-microlearning-architecture.md` via `cf-architect`.
-- **Coherent 4-Layer Architecture Explorer:** Replaced abstract 3D dot orbit in `HeroShowcase.tsx` with `AntigravityArchitectureExplorer.tsx` + `contracts.ts` (`5` Steering Commands → `7` Agent Modes `01 Just Ask`..`07 Teamwork` with literal SVG schematics & `Use When`/`Do NOT Use When` → `8` Shared Building Blocks across `Tools & Hands`, `Memory & Knowledge`, `Safety & Guardrails`).
-- **Multimodal ELI5 UI:** Built `CourseIllustrationBanner.tsx`, `AudioExplainerBar.tsx`, `Eli5MicrolearningCard.tsx`, framed Active Course Stage, `Open Course`/`Viewing Now` & `Open Lesson`/`Close Lesson` affordances, `End of Step` progression bar, and `Start Simple (ELI5)` / `Full Pro View` mode toggle.
-- **4-Worker Swarm (`Courses 00–07`) + 8 Concrete Studio Illustrations:** Ran zero-overlap Swarm (`swarm-foundations`, `swarm-ops`, `swarm-media`, `swarm-orchestration`) + `image-generator` flat-shaded studio cutaways (`academy/public/media/illustrations/*-studio.jpg`).
-- **Decoupled QA & Live Catches (`cf-learn`):** Fixed B1 WCAG contrast (`AntigravityArchitectureExplorer.tsx`), busted `.next/cache/images/` stale artwork cache, and fixed P0 `#prompt-vault` `opacity: 0` bug (`viewport={{ amount: 0.05 }}` on ~18,000px section) — permanently codified in `.agents/rules/academy-invariants.md`.
+## 2. Production Rollback & Verification
+- **Live Production URL:** `https://antigravity-academy-ten.vercel.app` (`antigravity-academy-3sof4tuhf-nexite-os.vercel.app`)
+- **Rollback Command:** `cd academy && vercel rollback https://antigravity-academy-iai5pp4q4-nexite-os.vercel.app --yes --scope nexite-os`
 
-## 3. Key Modified Files
-- `plans/eli5-multimodal-academy-spec.md`, `.memory/decisions/0003-*.md`, `.memory/qa-report.md`, `.agents/rules/academy-invariants.md`
-- `academy/src/lib/{schemas,contracts,prompt-engine}.ts`, `academy/src/components/{AntigravityArchitectureExplorer,HeroShowcase,CourseIllustrationBanner,AudioExplainerBar,Eli5MicrolearningCard,CourseCurriculumStudio,PromptVault,AcademyShell,MermaidDiagram}.tsx`
-- `academy/content/courses/*/course.json` (Courses `00`–`07`), `academy/public/media/illustrations/*-studio.jpg`, `academy/tests/{schemas-and-prompts,components,api-routes}.test.ts`
+## 3. Key Modified Files (Stage B Pending Commit)
+- `academy/src/components/CourseEmblem.tsx` (new — 8 bespoke duotone emblems + `getCourseVisualTheme` + Course N+1 fallback)
+- `academy/src/components/{CourseCurriculumStudio,PromptVault,AntigravityArchitectureExplorer}.tsx`
+- `academy/tests/components.test.tsx` (`+3` tests → `61/61` Vitest)
 
 ## 4. Next Step Action Plan
-1. Discuss & decide on the user's proposed **Visual Icon / Emblem Language** (inspired by the uploaded `/swarm`, `/teamwork`, `/boost` graphic) for differentiating courses & modes.
-2. When approved: commit all changes, push to `origin/main`, and run HITL-gated Stage 5 Vercel production deploy (`cd academy && vercel --prod`).
+1. User reviews Stage B emblems & `/swarm`·`/boost`·`/teamwork` color-coding on `http://localhost:3000/`.
+2. On user approval: commit & push Stage B to `origin/main` and promote to `https://antigravity-academy-ten.vercel.app`.

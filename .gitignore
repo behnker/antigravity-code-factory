@@ -3,6 +3,8 @@
 *.swo
 __pycache__/
 *.pyc
+.tmp/
+academy/.tmp/
 academy/node_modules/
 academy/.next/
 academy/out/

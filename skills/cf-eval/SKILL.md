@@ -23,7 +23,7 @@ Always run `cf-eval` in a **decoupled subagent context** (`cf-reviewer` / `cf-te
 Verify machine-checkable quality gates first so human reviewers never waste cycles on mechanical issues:
 
 1. **Contract & Schema Integrity:** All external boundaries (API routes, webhooks, JSON content bundles, hook payloads) validate at runtime with Zod / Pydantic / JSON Schema. Zero unsafe `as` casts.
-2. **Build, Types & Lint:** `tsc --noEmit`, linter (0 warnings), production build (`next build` / `wrangler deploy --dry-run`), and `pnpm audit --audit-level=high` (0 High/Critical CVEs).
+2. **Build, Types, Lint & Architecture Boundaries:** `tsc --noEmit`, linter (0 warnings), `depcruise` architectural boundary rules (when `.dependency-cruiser.*` is configured), production build (`next build` / `wrangler deploy --dry-run`), and `pnpm audit --audit-level=high` (0 High/Critical CVEs).
 3. **Deterministic Test & Edge-Case Coverage:** Happy path, invalid inputs, null/empty states, downstream error states, and regression tests for previously discovered bugs.
 4. **Security & Platform Invariants:** Zero hardcoded secrets, zero `NEXT_PUBLIC_*` / `service_role` leaks, explicit Postgres RLS on new tables, parameterized queries, fail-closed hooks (never `{}` in `PreToolUse`).
 5. **Multi-Viewport & Accessibility (if UI changed):** Verify **375px**, **768px**, and **1440px** via the `browser` subagent—catching desktop-only bias, contrast `< 4.5:1`, invalid WAI-ARIA roles, CLS, and console errors.
@@ -35,7 +35,7 @@ Audit the agent's process (git diff, tool calls, `.memory/` trail, and spec adhe
 1. **Spec & Scope Discipline:** Did the agent stay strictly inside the locked `plans/<feature>-spec.md` and file partition, or did it invent unapproved routes, dependencies, or silent refactors?
 2. **Context & Token Hygiene:** Did it keep always-on rules lean, load progressive skills on demand, and avoid redundant full-file rewrites or context thrashing?
 3. **Oracle Honesty (Anti-Gaming Check):** Did the agent *weaken tests, silence lint rules, bypass hooks, or add `@ts-ignore` / `eslint-disable`* to force a green build? (Automatic **FAIL**.)
-4. **Cross-Surface Blind-Spot Check:** Did optimizing one dimension break another (e.g., improving desktop layout while breaking 375px mobile, or adding a new agent file without updating manifest/tests)?
+4. **Cross-Surface Blind-Spot Check:** Did optimizing one dimension break another (e.g., improving desktop layout while breaking 375px mobile, changing routes/selectors without updating `.memory/feature-map.md`, or adding a new agent/skill file without updating manifest/tests)?
 5. **HITL & Delegation Compliance:** Were high-blast-radius tasks (auth, security, finance, infra, deps, deploys) kept Human-Lit with explicit approval rather than run lights-out?
 
 ## Output Format: Dual-Axis Eval Verdict

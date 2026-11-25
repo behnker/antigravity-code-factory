@@ -1,9 +1,9 @@
 {
   "name": "code-factory",
   "displayName": "Enterprise Code Factory",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "logo": "assets/logo.svg",
-  "description": "Lit Software Factory & Spec-Driven Development (SDD) plugin: invariant quality gates (security, scalability, UI/UX, testing, edge/serverless, loop engineering & context economics), persistent .memory/ handovers, PreToolUse HITL and secret/leak guard hooks, 5 least-privilege personas, and a 14-skill SDLC, Loop Engineering & Dual-Axis Eval pipeline.",
+  "description": "Lit Software Factory & Spec-Driven Development (SDD) plugin: invariant quality gates (security, scalability, UI/UX, testing, edge/serverless, loop engineering & context economics), persistent .memory/ handovers & living feature maps, PreToolUse HITL and secret/leak guard hooks, 5 least-privilege personas, and a 15-skill SDLC, Feature Map Verification, Loop Engineering & Dual-Axis Eval pipeline.",
   "author": {
     "name": "Ralph Behnke",
     "url": "https://github.com/behnker"

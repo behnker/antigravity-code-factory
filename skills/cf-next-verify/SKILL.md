@@ -29,6 +29,7 @@ Run a single, deterministic verification pass over any Next.js / TypeScript / Ta
    - Linter (`lint` script or ESLint/Biome)
    - Unit & component tests (`vitest run` / `test` script, with `--coverage` when requested)
    - Static boundary scan (`NEXT_PUBLIC_*` secret-named vars, `service_role` in `'use client'` files, and raw `as any` count in `src/`)
+   - Optional architecture boundary check (`depcruise src --config .dependency-cruiser.*` whenever configured and `dependency-cruiser` is installed)
    - Production build (`build` script unless `--skip-build` is set)
    - Optional platform hints when `wrangler.jsonc`/`wrangler.toml`, `supabase/`, or `vercel.json` are detected
 3. **Review the stack invariant checklist:**

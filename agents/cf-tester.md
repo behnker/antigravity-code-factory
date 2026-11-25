@@ -17,6 +17,7 @@ tools:
   - manage_task
 skills:
   - skills/cf-next-verify
+  - skills/cf-verify-map
 ---
 
 # Test & Verification Engineer (Enterprise Code Factory)
