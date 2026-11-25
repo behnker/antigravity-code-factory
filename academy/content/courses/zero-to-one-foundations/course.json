@@ -1,0 +1,404 @@
+{
+  "id": "zero-to-one-foundations",
+  "slug": "zero-to-one-foundations",
+  "number": 0,
+  "title": "Zero to One Foundations: Software, Terminals, Git & AI Workshops",
+  "eli5Title": "Start From Scratch: How Software & AI Building Actually Work",
+  "subtitle": "A zero-jargon starting ramp for absolute beginners: learn what software files are, how the terminal and Git save points work, why AI needs a smart workshop, and how to complete your first 4-step build loop.",
+  "eli5Tagline": "Never written a line of code before? Perfect. Learn how apps, project folders, undo save points, and safe AI workshops actually work in plain English—so you can build real software with calm confidence.",
+  "illustration": {
+    "src": "/media/illustrations/zero-to-one-foundations-studio.jpg",
+    "alt": "Architectural studio cutaway of a beginner's bright, organized desk featuring a step-by-step recipe card, neatly labeled project folder drawers, glowing time-travel save checkpoints along a timeline, and crisp green checkmarks confirming finished work.",
+    "caption": "Everything a first-time builder needs on one calm desk: simple recipe instructions, tidy project folders, undo save points, and green checkmarks.",
+    "visualAnalogy": "A Beginner's Organized Desk (Recipe Card, Folder Drawers, Save Points & Checkmarks)"
+  },
+  "level": "beginner",
+  "estimatedMinutes": 30,
+  "threeScenePreset": "sdlc-orbital",
+  "accentTone": "emerald",
+  "tags": [
+    "beginner",
+    "foundations",
+    "zero-to-one",
+    "software-basics",
+    "terminal",
+    "git",
+    "ai-workshop",
+    "agents-md",
+    "skills",
+    "hooks",
+    "build-loop"
+  ],
+  "video": {
+    "title": "Zero to One: Building Your First Project With Zero Coding Experience",
+    "durationLabel": "15:30",
+    "provider": "coming_soon",
+    "posterLabel": "Course 00 Beginner Walkthrough — From Blank Desk to Your First Checked Build",
+    "chapters": [
+      {
+        "id": "z0-ch1-software-recipes",
+        "title": "What Software Actually Is (Recipes, Ingredients & Kitchens)",
+        "timestampSeconds": 0,
+        "summary": "Demystifying apps as plain text instruction files organized inside everyday folders."
+      },
+      {
+        "id": "z0-ch2-workspace-terminal",
+        "title": "Your Workspace & Terminal (Texting Your Computer Directly)",
+        "timestampSeconds": 240,
+        "summary": "Why the terminal is just a direct text-message window for running quick, repeatable checks."
+      },
+      {
+        "id": "z0-ch3-git-save-points",
+        "title": "Git & Save Points (Time-Travel Undo for Everything You Build)",
+        "timestampSeconds": 480,
+        "summary": "Taking labeled snapshots and practicing on safe side copies without ever losing progress."
+      },
+      {
+        "id": "z0-ch4-brain-vs-workshop",
+        "title": "AI Brain vs. Smart Workshop (House Rules, Bookshelf & Locks)",
+        "timestampSeconds": 690,
+        "summary": "Why setup does 90% of the work through short rules, on-demand guides, and safety locks."
+      },
+      {
+        "id": "z0-ch5-first-build-loop",
+        "title": "Your First 4-Step Build Loop (Plan, Build, Check & Save)",
+        "timestampSeconds": 810,
+        "summary": "A calm, repeatable four-step habit for turning any small idea into a working, verified result."
+      }
+    ],
+    "transcriptSummary": "Welcome to Course Zero, designed for anyone who has never built software before. We start by removing the mystery around code: every app is simply plain text recipe files organized inside folders. Next, you meet the terminal—a direct text-message box for talking to your computer—and Git, your time-travel undo button that saves safe checkpoints before any big edit. Then we explain why an AI brain alone only gets you ten percent of the way, and how three simple workshop pieces—short house rules, bookshelf guides, and safety locks—make AI dependable. Finally, you practice the four-step build loop: Plan, Build, Check, and Save."
+  },
+  "steps": [
+    {
+      "id": "z0-step-1-what-software-is",
+      "order": 1,
+      "title": "What Software Actually Is (Recipes, Ingredients & Kitchens)",
+      "stageTag": "Step 1: Software Basics",
+      "summary": "Software is not magic machinery hidden inside a black box. Every website, phone app, and tool is simply a collection of plain text instruction files (recipes), pictures or data (ingredients), and the computer program that runs them (the kitchen).",
+      "eli5": {
+        "plainTitle": "What Software Actually Is (Recipes, Ingredients & Kitchens)",
+        "oneLineHook": "Every app on your phone or laptop is just plain text recipe files neatly organized inside folders.",
+        "everydayAnalogy": "A stack of written recipe cards (files) stored inside labeled kitchen binders (folders).",
+        "simpleExplanation": "When you tap a button on a website or phone app, it feels like magic—but behind the screen, it is surprisingly simple. Software is just plain text files written in clear, step-by-step instructions, like recipe cards. Pictures, colors, and saved notes are the ingredients sitting in nearby folders. Your web browser or phone is the kitchen that reads those recipe cards and turns them into the buttons and pages you see.",
+        "whyItMatters": "Once you realize software is just readable text files inside normal folders, the fear disappears. You do not need to memorize mysterious symbols to understand what your project contains or to guide an AI helper cleanly.",
+        "roleInProtocol": "Everything in the Antigravity Code Factory lives as plain, readable files right inside your project folder—your plans, your house rules, your app pages, and your checklists—so both you and your AI always look at the exact same source of truth.",
+        "howToUseGoingForward": "Before asking an AI to change anything in a new project, spend two minutes asking it to explain the top-level folders in plain English so you always know which room holds which recipe cards.",
+        "whenToUse": "Use this mental model the very first time you open a project folder or whenever you feel overwhelmed by a long list of unfamiliar filenames.",
+        "realWorldExample": "Think of a simple lemonade stand website. One folder holds the recipe for the menu page, another holds the photos of the drinks, and a third holds the price list. Changing the lemonade price just means editing one line of text in the price file.",
+        "audioScript": "Welcome to Course Zero, Lesson One. If software has ever felt like a locked black box, take a deep breath—it is much simpler than it looks. Every website or app you have ever used is really just three everyday things. First, plain text files that work like written recipe cards telling the computer what to show and what happens when you click. Second, ingredients like photos, icons, and saved text sitting neatly in labeled folders. Third, a kitchen—like your web browser or phone—that reads those recipes and serves the finished page on your screen. Once you see software as organized text files, you can calmly direct an AI helper to read, explain, and edit any folder with you.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "How plain text recipe files and folder ingredients come together inside your browser to become a live app."
+      },
+      "keyTakeaways": [
+        "Every software project is a folder tree of plain text files (code, styles, configuration, documentation) plus static media assets (images, audio, fonts).",
+        "Separating content (ingredients), logic (recipes), and runtime (browser or server kitchen) makes projects easy to inspect and modify safely.",
+        "You can ask Antigravity to summarize any unfamiliar folder structure into plain English before making a single edit."
+      ],
+      "actionChecklist": [
+        "Open the Repo Explorer tab in Antigravity Academy and notice how every rule, guide, and course is just a readable text file.",
+        "Run the 'Explain Every File in This Folder' prompt below on any folder you want to understand.",
+        "Identify the three parts of any app you use daily: its screens (recipes), its images/text (ingredients), and where it runs (kitchen)."
+      ],
+      "mermaidDiagram": "flowchart LR\n    R[\"Recipe Cards\\n(Plain Text Instruction Files)\"] --> K[\"The Kitchen\\n(Your Browser or Phone)\"]\n    I[\"Ingredients\\n(Photos, Text & Data Folders)\"] --> K\n    K --> A[\"Live Working App\\n(Buttons & Pages You Use)\"]",
+      "repoArtifactPath": ".memory/architecture.md",
+      "promptId": "z0-prompt-explain-my-folder"
+    },
+    {
+      "id": "z0-step-2-workspace-terminal",
+      "order": 2,
+      "title": "Your Workspace & Terminal (Talking to Your Computer Directly)",
+      "stageTag": "Step 2: Workspace & Terminal",
+      "summary": "Your project workspace is simply the main folder holding your project files, and the terminal is a fast text-command box that lets you or your AI run repeatable checks, start a local preview, and verify that everything works.",
+      "eli5": {
+        "plainTitle": "Your Workspace & Terminal (Texting Your Computer Directly)",
+        "oneLineHook": "That dark text box is not scary—it is simply a direct text-message window for giving your computer clear, one-line instructions.",
+        "everydayAnalogy": "Texting a fast assistant short one-line requests instead of clicking through ten hidden menus.",
+        "simpleExplanation": "Normally, you talk to your computer by clicking icons with a mouse. The terminal is just a second way to talk to the exact same computer—by typing short one-line text messages. Your workspace is simply the main folder your project lives in. When you type a short command like asking what files are here or asking the computer to start a local preview, it replies instantly in plain text.",
+        "whyItMatters": "Clicking twenty buttons by hand is slow and easy to get wrong. A single terminal command can start your app preview, check every file for typos, and run fifty automatic tests in seconds with zero guesswork.",
+        "roleInProtocol": "In the Antigravity Code Factory, your AI helper uses the terminal to run automatic checks and show you real proof that your project works—while safety locks pause and ask your permission before any risky command can run.",
+        "howToUseGoingForward": "You never have to memorize long commands. Whenever your AI suggests a terminal command, ask it to explain in one plain sentence what the command does before you click Approve.",
+        "whenToUse": "Use the terminal whenever you want to preview your app on your own computer, check for spelling or math errors automatically, or see which files have changed.",
+        "realWorldExample": "Instead of manually clicking through twelve pages of your personal website to see if anything broke, you type one short test command into the terminal. Five seconds later, it prints a green list confirming all twelve pages loaded cleanly.",
+        "audioScript": "Let us take the mystery out of that dark text box called the terminal. Every day, you already talk to your computer by clicking folders and buttons with a mouse. The terminal is simply a direct text-message chat with that exact same computer. Instead of clicking through ten menus, you or your AI helper type a short one-line instruction—like show me what is in this folder, start a preview of my website, or run my automatic checklist. Best of all, you never need to memorize cryptic lines. Inside Antigravity, your helper suggests the right command, explains what it does in plain English, and waits for your thumbs-up before running anything important.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "How a short one-line text command tells your computer to inspect your project folder and send back a clear report."
+      },
+      "keyTakeaways": [
+        "A workspace is simply the root directory containing all files for one project so every tool and AI helper shares the same starting location.",
+        "The terminal (command line) executes deterministic, repeatable commands for inspecting folders, starting local previews, and running automated test suites.",
+        "Always read a plain-English summary of any unfamiliar command before approving it—safe read/check commands only look, while write/delete commands change files."
+      ],
+      "actionChecklist": [
+        "Learn the 4 friendly starter commands in the snippet below: where am I (`pwd`), what files are here (`ls`), what changed (`git status`), and run checks (`pnpm test`).",
+        "Practice asking your AI: 'Explain what this terminal command will do in one plain sentence before running it.'",
+        "Notice how Antigravity separates safe read-only checks from actions that modify files."
+      ],
+      "codeSnippet": {
+        "language": "bash",
+        "filename": "4 Friendly Starter Terminal Commands",
+        "code": "# 1. Show which project folder you are currently inside\npwd\n\n# 2. List the files and folders right in front of you\nls\n\n# 3. Ask Git which files changed since your last save point\ngit status\n\n# 4. Run your project's automatic checkup (read-only safety check)\npnpm test"
+      },
+      "mermaidDiagram": "flowchart LR\n    Y[\"You or AI Helper\\n(Types Short 1-Line Request)\"] --> T[\"Terminal Window\\n(Direct Text Chat With Computer)\"]\n    T --> F[\"Your Project Folder\\n(Checks Files or Starts Preview)\"]\n    F --> R[\"Clear Plain-Text Reply\\n(Green Pass or Exact Fix Note)\"]",
+      "repoArtifactPath": "skills/cf-start/SKILL.md",
+      "promptId": "z0-prompt-explain-my-folder"
+    },
+    {
+      "id": "z0-step-3-git-save-points",
+      "order": 3,
+      "title": "Git & Save Points (Time-Travel Undo for Everything You Build)",
+      "stageTag": "Step 3: Save Points (Git)",
+      "summary": "Git is a built-in time machine for your project folder. It lets you save labeled checkpoints (commits) and try new ideas on a safe side copy (a branch) so you can always rewind if an experiment goes sideways.",
+      "eli5": {
+        "plainTitle": "Time-Travel Undo: Saving Safe Checkpoints Before Every Change",
+        "oneLineHook": "Save labeled snapshots of your whole project so you can experiment freely and rewind cleanly anytime.",
+        "everydayAnalogy": "Saving your video game right before opening a tricky door so you can always reload safely.",
+        "simpleExplanation": "Imagine painting a big poster and worrying that one clumsy brushstroke will ruin hours of work. Git solves that forever. It is a built-in time machine for your project folder. Before you try a big change, you save a labeled snapshot—a save point. You can even open a separate practice copy to test a wild new idea while your working version stays completely untouched and safe.",
+        "whyItMatters": "Beginners often freeze up because they are scared of breaking what already works. With save points, mistakes become harmless—if an experiment gets messy, you can jump back to your last clean snapshot in two seconds.",
+        "roleInProtocol": "The Antigravity Code Factory relies on clean save points before every major build step and gives parallel AI helpers their own isolated practice copies so nobody ever accidentally overwrites your working app.",
+        "howToUseGoingForward": "Build one golden habit: before asking your AI to make a big change, take a quick labeled save point first—and take another one right after your checks turn green.",
+        "whenToUse": "Use a save point right before starting any new feature, right before trying a risky experiment, and immediately after finishing a working change you want to keep forever.",
+        "realWorldExample": "Your personal portfolio homepage looks great, and now you want to try a bold dark-mode theme. You save a checkpoint called 'Working light homepage' and open a practice copy. Even if the new colors look awful, one click restores your original homepage perfectly.",
+        "audioScript": "One of the biggest fears for anyone new to building software is accidentally breaking something that already works. Meet your new best friend: Git, which is simply a time-travel undo button for your entire project folder. Just like saving a video game right before entering a boss room, Git lets you record labeled save points of every file at once. Even better, you can create a safe practice copy—called a branch—to test a brand-new idea without touching your working version. If you love the result, you keep it. If not, you rewind in seconds with zero stress. Save before every big change, and you can build fearlessly.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "How save points and safe practice copies let you experiment freely while keeping your working project protected."
+      },
+      "keyTakeaways": [
+        "A commit is a labeled snapshot of your project at a known-good moment, forming a permanent timeline you can inspect or restore.",
+        "A branch is a safe, isolated practice copy where you or an AI can build and test changes without disturbing your main working version.",
+        "Reviewing `git status` and `git diff` lets you see every single line an AI changed before you accept it."
+      ],
+      "actionChecklist": [
+        "Always check `git status` before starting a new task so you know you are starting from a clean save point.",
+        "Copy the 'Save a Time-Travel Backup' prompt below whenever you want your AI to create a safe checkpoint and practice copy.",
+        "Practice writing short, human-readable checkpoint labels like 'Add welcome banner' instead of 'updates'."
+      ],
+      "codeSnippet": {
+        "language": "bash",
+        "filename": "Safe Save-Point & Practice-Copy Workflow",
+        "code": "# 1. Check which files have unsaved edits\ngit status\n\n# 2. Open a safe practice copy so your main version stays untouched\ngit checkout -b practice-new-feature\n\n# 3. Record a labeled save point after your checks pass\ngit add .\ngit commit -m \"Add starter welcome page and verify layout\""
+      },
+      "mermaidDiagram": "flowchart LR\n    S1[\"Save Point 1\\n(Working Project)\"] --> M[\"Main Safe Version\\n(Stays Untouched)\"]\n    S1 --> P[\"Practice Copy\\n(Try New Idea Safely)\"]\n    P --> C{\"Does It Work Well?\"}\n    C -->|\"Yes\"| S2[\"Save Point 2\\n(Keep Great New Work)\"]\n    C -->|\"No\"| R[\"Rewind to Save Point 1\\n(Zero Harm Done)\"]",
+      "repoArtifactPath": ".memory/handover.md",
+      "promptId": "z0-prompt-safe-save-point"
+    },
+    {
+      "id": "z0-step-4-brain-vs-workshop",
+      "order": 4,
+      "title": "AI Brain vs. Smart Workshop (Why Setup Is 90% of Success)",
+      "stageTag": "Step 4: Smart Workshop",
+      "summary": "An AI model by itself is just a fast brain in a blank room (10% of the outcome). The smart workshop around it—clear rules, safe tools, project memory, and automatic checks—delivers the other 90% of consistent, trustworthy results.",
+      "eli5": {
+        "plainTitle": "AI Brain vs. Smart Workshop (Why Setup Is 90% of Success)",
+        "oneLineHook": "A smart AI in an empty chat box guesses blindly; the same AI inside an organized workshop delivers reliably.",
+        "everydayAnalogy": "A brilliant carpenter standing in an empty hallway versus working inside a bright studio with blueprints and a measuring tape.",
+        "simpleExplanation": "Most beginners start by typing a wish into an empty chat box and hoping for the best. Sometimes it works, and sometimes the AI forgets what you wanted or invents things that break. Why? Because the AI brain is only 10% of great software building. The other 90% is the smart workshop around it—engineers call this the harness. A good workshop gives your AI blueprints, a tidy desk of project rules, safe tools, and a way to check its own work.",
+        "whyItMatters": "When an AI makes a messy mistake, you do not have to give up or keep repeating the same chat message ten times. Improving your workshop setup once makes every single future task smoother and more accurate.",
+        "roleInProtocol": "This 10% Brain / 90% Workshop principle is the heart of the entire Antigravity Academy. Course 00 gives you the beginner foundation, and Course 01 next shows you how to tune every piece of this workshop like a pro.",
+        "howToUseGoingForward": "Whenever you start a new project, spend five minutes setting up a tiny folder of house rules and a written plan before asking the AI to write any app files.",
+        "whenToUse": "Use this mindset anytime you start a brand-new idea—or whenever you feel stuck arguing with a chat window that keeps making the same silly mistake.",
+        "realWorldExample": "Suppose you ask a blank chat box to build a recipe tracker, and it picks wild neon colors and deletes your old notes. Inside a smart workshop, your 1-page rule note says 'use calm readable colors and never delete saved recipes,' and a quick checker tests every page automatically.",
+        "audioScript": "Here is the secret that turns frustrating AI chats into calm, joyful building. Picture hiring a brilliant carpenter, then locking them in an empty hallway with no blueprints, no measuring tape, and no workbench. Even the best carpenter would struggle. That is what happens when you type big requests into a blank chat box. The AI brain is only ten percent of the result. The other ninety percent is the smart workshop around it, which builders call the harness. Your workshop holds your written plan, your house rules, your safe tools, and your automatic checklists. Whenever results feel messy, do not fight the chat box—upgrade the workshop around it.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "Why combining a 10% AI brain with a 90% prepared workshop produces calm, reliable results instead of guesswork."
+      },
+      "keyTakeaways": [
+        "Great AI engineering follows the formula: Reliable Builder = AI Model (10%) + Smart Workshop / Harness (90%).",
+        "Blank-chat prompting forces the AI to guess your preferences, folder layout, and safety limits every single turn.",
+        "Adding lightweight structure—short house rules, a written plan, save points, and automated checks—multiplies accuracy immediately."
+      ],
+      "actionChecklist": [
+        "Notice the difference between chatting in a blank box versus working inside a prepared project folder.",
+        "Write down 3 non-negotiable wishes for your next project (style, safety, simplicity) before asking AI to build.",
+        "Preview how Course 01 expands this workshop with specialized helper teams and visual checks."
+      ],
+      "mermaidDiagram": "flowchart TD\n    B[\"AI Brain Alone (10%)\\nNo Rules or Checks\"] --> G[\"Hit-or-Miss Guessing\\nEasy to Break Things\"]\n    W[\"AI Brain (10%) + Smart Workshop (90%)\\nHouse Rules, Save Points & Checks\"] --> R[\"Calm, Reliable Software\\nWorks Every Time\"]",
+      "repoArtifactPath": "rules/AGENTS.md",
+      "promptId": "z0-prompt-starter-house-rules"
+    },
+    {
+      "id": "z0-step-5-rules-skills-locks",
+      "order": 5,
+      "title": "House Rules, Bookshelf Guides & Safety Locks (AGENTS.md, Skills & Hooks)",
+      "stageTag": "Step 5: Rules & Safety",
+      "summary": "Three simple files give your workshop superpowers: short always-on House Rules (`AGENTS.md`), on-demand Bookshelf Guides (`skills/`), and automatic Safety Locks (`hooks/`) that pause and ask you before risky actions.",
+      "eli5": {
+        "plainTitle": "House Rules, Bookshelf Guides & Safety Locks",
+        "oneLineHook": "Three simple folder items teach your AI how to behave, when to open a step-by-step guide, and when to stop and ask you.",
+        "everydayAnalogy": "House rules taped to the fridge, thick cookbooks on a bookshelf, and child-safety locks on the stove.",
+        "simpleExplanation": "Every safe AI workshop uses three friendly pieces you already understand from real life. First, House Rules: one short page taped to the desk that your AI reads every single time (engineers name this file AGENTS.md). Second, Bookshelf Guides: longer how-to recipes (called Skills) that sit neatly on a shelf and only open when you need that specific job. Third, Safety Locks (called Hooks): automatic guards that stop risky moves—like deleting folders or publishing live—and wait for your thumbs-up.",
+        "whyItMatters": "Without these three pieces, your AI either gets overwhelmed by too many instructions at once or accidentally runs a scary command before you are ready. Together, they keep your workspace tidy, smart, and completely under your control.",
+        "roleInProtocol": "This exact three-part setup powers the entire Antigravity Code Factory: lean House Rules in `rules/AGENTS.md`, 14 specialized Bookshelf Guides in `skills/`, and strict Safety Locks in `hooks/hitl-gate.py` and `hooks/secret-guard.py`.",
+        "howToUseGoingForward": "Start every project with a tiny 5-line House Rules file. Keep it short! Whenever you teach your AI a multi-step routine you want to reuse later, save it as a Bookshelf Guide instead of cramming it onto your main desk.",
+        "whenToUse": "Use this right after opening a new project folder—or anytime you find yourself repeating the same preference or wanting an automatic pause before risky actions.",
+        "realWorldExample": "You write 5 lines in your House Rules: 'Keep text easy to read, save a backup before big edits, and never share my password file.' Later, when an AI helper tries to run a live publish command, your Safety Lock automatically pops up and asks for your approval first.",
+        "audioScript": "You do not need complex engineering software to keep an AI helper polite, focused, and safe. Just picture three things you already know from home. First, short House Rules taped right to the fridge—in Antigravity, that is a tiny file called AGENTS dot md that your AI always remembers. Second, Bookshelf Guides—called Skills—which are detailed step-by-step booklets that stay tucked away until you actually need that specific task, keeping the AI's desk uncluttered. Third, Safety Locks—called Hooks—which act like a protective cover on a big red button, pausing automatically to ask your permission before deleting files or publishing anything live.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "How House Rules, Bookshelf Guides, and Safety Locks work together to keep your AI helpful, tidy, and safe."
+      },
+      "keyTakeaways": [
+        "House Rules (`AGENTS.md`): Always-on, short golden rules (< 10 KB) covering style, safety, and quality boundaries.",
+        "Bookshelf Guides (`skills/*/SKILL.md`): Progressive-disclosure playbooks that stay folded until a matching task triggers them.",
+        "Safety Locks (`hooks/`): Deterministic guards like `hitl-gate.py` and `secret-guard.py` that block leaks and pause for your human approval before destructive or live commands."
+      ],
+      "actionChecklist": [
+        "Open `rules/AGENTS.md` and `hooks/hitl-gate.py` in the Repo Explorer to see real examples of House Rules and Safety Locks.",
+        "Use the 'Write Simple 1-Page House Rules' prompt below to draft a starter `AGENTS.md` for your own project.",
+        "Remember the tidy-desk rule: short must-never-break rules go on the desk; long step-by-step playbooks go on the bookshelf."
+      ],
+      "codeSnippet": {
+        "language": "markdown",
+        "filename": "Starter AGENTS.md (Your 1-Page House Rules)",
+        "code": "# House Rules for My Project\n\n1. Explain every plan in plain English before editing files.\n2. Take a clean save point before making big changes.\n3. Never write passwords or secret keys into project files.\n4. Check that every page looks clean on both phone and laptop screens.\n5. Pause and ask my permission before deleting files or publishing live."
+      },
+      "mermaidDiagram": "flowchart LR\n    HR[\"House Rules (AGENTS.md)\\nShort Rules Always on Desk\"] --> AI[\"Your AI Helper\"]\n    BG[\"Bookshelf Guides (Skills)\\nOpened Only When Needed\"] --> AI\n    AI --> SL{\"Safety Locks (Hooks)\\nIs This Action Safe?\"}\n    SL -->|\"Safe Check or Edit\"| GO[\"Run Smoothly\"]\n    SL -->|\"Delete or Publish Live\"| ASK[\"Pause & Ask You First\"]",
+      "repoArtifactPath": "hooks/hitl-gate.py",
+      "promptId": "z0-prompt-starter-house-rules"
+    },
+    {
+      "id": "z0-step-6-first-build-loop",
+      "order": 6,
+      "title": "Your First 4-Step Build Loop (Plan -> Build -> Check -> Save)",
+      "stageTag": "Step 6: First Build Loop",
+      "summary": "The secret to shipping real software with zero stress is working in small, repeatable 4-step loops: Plan one tiny piece, Build only that piece, Check it visually and automatically, and Save your green checkpoint before moving on.",
+      "eli5": {
+        "plainTitle": "Your First 4-Step Build Loop: Plan, Build, Check, and Save",
+        "oneLineHook": "Never ask AI to build an entire app in one giant leap—work in small, calm 4-step loops you can actually verify.",
+        "everydayAnalogy": "Building a LEGO house one numbered bag at a time and checking each floor before starting the next.",
+        "simpleExplanation": "When beginners ask AI to build a whole giant app in one single message, things quickly turn into a tangled knot. Instead, calm builders repeat four tiny steps. Step 1, Plan: agree in plain English on one small piece to build next. Step 2, Build: let your AI create just that one piece. Step 3, Check: open it, click every button, and run your automatic checkup. Step 4, Save: record a clean save point before starting the next small piece.",
+        "whyItMatters": "Small loops mean tiny, easy-to-spot mistakes. If something looks off after one 5-minute loop, you know the exact change that caused it and can fix or rewind it effortlessly.",
+        "roleInProtocol": "This 4-step beginner loop is the miniature version of the full 8-Stage Enterprise Code Factory you will master in Course 02. Every advanced multi-agent team in this academy is simply scaling up Plan, Build, Check, and Save.",
+        "howToUseGoingForward": "Keep each loop small enough to finish and check in ten minutes. Once you complete two or three calm loops on a small idea, advance directly to Course 01 to upgrade your workshop.",
+        "whenToUse": "Use this 4-step loop every single time you add a new button, page, or feature—whether it is your very first personal page or your fiftieth project.",
+        "realWorldExample": "You want a simple daily habit tracker. Loop 1 plans, builds, checks, and saves just the title and one 'Add Habit' box. Loop 2 adds the checkmark button. Loop 3 saves your list when you refresh the page. In three calm loops, you have a real working app with zero chaos.",
+        "audioScript": "Congratulations—you are ready for the single habit that powers every great builder, from total beginner to senior engineer. Never ask an AI to build an entire dream app in one giant leap. Instead, build like you assemble a LEGO set: one numbered bag at a time using the four-step loop. First, Plan: write down one tiny goal in plain English and agree on what finished looks like. Second, Build: let your AI create just that single piece. Third, Check: look at the real screen, click the buttons, and run your automatic test. Fourth, Save: lock in a clean save point. Repeat that calm loop, and you are ready to step into Course One.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "The calm 4-step beginner habit—Plan, Build, Check, and Save—repeating smoothly until your whole project shines."
+      },
+      "keyTakeaways": [
+        "Small, verifiable loops beat giant one-shot prompts every time because errors stay isolated and trivial to fix.",
+        "A good Plan answers two simple questions before any file is edited: what exact piece are we adding, and how will we prove it works?",
+        "Completing Course 00 prepares you seamlessly for Course 01 (Smart Workshop Mastery) and Course 02 (The 8-Stage Enterprise Code Factory)."
+      ],
+      "actionChecklist": [
+        "Pick one tiny starter idea (like a personal bio card or simple checklist) that takes under 10 minutes per loop.",
+        "Copy the 'Build One Small Feature With Me Step by Step' prompt below to run your first guided loop.",
+        "Once your first loop ends on a green Save Point, mark Course 00 complete and open Course 01!"
+      ],
+      "mermaidDiagram": "flowchart LR\n    P[\"1. Plan\\nAgree on 1 Tiny Piece\"] --> B[\"2. Build\\nCreate Just That Piece\"]\n    B --> C[\"3. Check\\nClick Screen & Run Tests\"]\n    C --> D{\"All Green?\"}\n    D -->|\"Not Yet\"| B\n    D -->|\"Yes\"| S[\"4. Save\\nLock Clean Save Point\"]\n    S --> P",
+      "repoArtifactPath": "skills/cf-bootstrap/SKILL.md",
+      "promptId": "z0-prompt-first-build-loop"
+    }
+  ],
+  "prompts": [
+    {
+      "id": "z0-prompt-explain-my-folder",
+      "title": "Give Me a Plain-English Tour of Any Project Folder",
+      "eli5Title": "Explain Every File in This Folder Like I Am Brand New",
+      "stage": "research",
+      "difficulty": "beginner",
+      "skillRef": "cf-research",
+      "description": "Walks through an unfamiliar workspace using zero jargon—mapping folders to recipes, ingredients, and safe starter commands.",
+      "whenToUse": "Copy this whenever you open a brand-new or unfamiliar project folder and want a friendly, plain-English map before touching any files.",
+      "template": "Give me a zero-jargon beginner tour of the project folder `{{folder_path}}`.\n\nPlease do NOT edit any files yet. Instead, explain in warm, plain English:\n1. What this project does in 2 simple sentences.\n2. Which top-level folders hold the 'recipes' (instructions), the 'ingredients' (images/text/data), and the 'house rules'.\n3. The 2–3 safest terminal commands I can use to preview or check this project for `{{my_goal}}`.\n4. Explain any technical words immediately in everyday language.",
+      "variables": [
+        {
+          "key": "folder_path",
+          "label": "Project Folder Path",
+          "placeholder": "./my-first-project",
+          "defaultValue": "."
+        },
+        {
+          "key": "my_goal",
+          "label": "What You Want to Learn or Do",
+          "placeholder": "e.g., understand where the homepage text lives",
+          "defaultValue": "understand where the main pages live and how to preview safely"
+        }
+      ],
+      "expectedOutcome": "A warm, jargon-free guided tour of your folders and safest starter commands—with zero files modified."
+    },
+    {
+      "id": "z0-prompt-safe-save-point",
+      "title": "Create a Safe Save Point & Practice Copy Before Editing",
+      "eli5Title": "Save a Time-Travel Backup Before Changing Anything",
+      "stage": "build",
+      "difficulty": "beginner",
+      "skillRef": "cf-start",
+      "description": "Checks your current workspace status, records a labeled Git save point, and opens a safe practice branch before making any edits.",
+      "whenToUse": "Copy this right BEFORE asking your AI to make a big change or try a new design idea, so you can always rewind cleanly in seconds.",
+      "template": "Before we make any edits for `{{experiment_name}}`, help me set up a safe time-travel checkpoint:\n\n1. Run `git status` and tell me in plain English if any files have unsaved changes.\n2. If needed, help me save a clean checkpoint labeled `{{checkpoint_label}}`.\n3. Open a safe practice copy (a new Git branch) named `practice-{{branch_slug}}` so my main working project stays completely untouched.\n4. Explain each command in one plain sentence before running it.",
+      "variables": [
+        {
+          "key": "experiment_name",
+          "label": "What You Plan to Try",
+          "placeholder": "trying a new welcome banner",
+          "defaultValue": "adding a welcome card to my homepage"
+        },
+        {
+          "key": "checkpoint_label",
+          "label": "Save Point Label",
+          "placeholder": "Working homepage before banner experiment",
+          "defaultValue": "Clean working baseline before new feature"
+        },
+        {
+          "key": "branch_slug",
+          "label": "Practice Copy Name (lowercase)",
+          "placeholder": "welcome-banner",
+          "defaultValue": "welcome-card"
+        }
+      ],
+      "expectedOutcome": "A verified Git save point and isolated practice branch with every step explained clearly in plain English."
+    },
+    {
+      "id": "z0-prompt-starter-house-rules",
+      "title": "Draft My 1-Page Starter House Rules (AGENTS.md)",
+      "eli5Title": "Write Simple 1-Page House Rules for My AI Helper",
+      "stage": "spec",
+      "difficulty": "beginner",
+      "skillRef": "cf-bootstrap",
+      "description": "Creates a crisp, beginner-friendly 1-page AGENTS.md file capturing your style preferences, plain-English communication, and safety boundaries.",
+      "whenToUse": "Copy this on Day 1 of any new project so your AI always remembers your rules, keeps answers simple, and asks before risky actions.",
+      "template": "Help me draft a short, 1-page House Rules file (`AGENTS.md`) for my project `{{project_name}}`.\n\nKeep the whole file under 25 lines and include:\n1. Always explain plans in plain English before editing files.\n2. Follow my visual & tone preferences: {{style_preferences}}.\n3. Never write passwords or secret keys into project files, and always ask my permission before deleting files or publishing live.\n4. Remind us to work in small Plan -> Build -> Check -> Save loops.\n\nShow me the draft first and wait for my approval before saving it.",
+      "variables": [
+        {
+          "key": "project_name",
+          "label": "Project Name",
+          "placeholder": "My Personal Budget Helper",
+          "defaultValue": "My First Web App"
+        },
+        {
+          "key": "style_preferences",
+          "label": "Look & Feel Preferences",
+          "placeholder": "clean buttons, large readable text, works well on phones",
+          "defaultValue": "clean modern layout, easy-to-read text, and phone-friendly buttons"
+        }
+      ],
+      "expectedOutcome": "A crisp, easy-to-read 1-page `AGENTS.md` file ready for your approval so every future AI turn stays consistent and safe."
+    },
+    {
+      "id": "z0-prompt-first-build-loop",
+      "title": "Run My First Guided 4-Step Build Loop (Plan -> Build -> Check -> Save)",
+      "eli5Title": "Build One Small Feature With Me Step by Step",
+      "stage": "build",
+      "difficulty": "beginner",
+      "skillRef": "cf-plan + cf-implement",
+      "description": "Guides you calmly through one tiny, verifiable Plan -> Build -> Check -> Save cycle with plain-English pauses at every checkpoint.",
+      "whenToUse": "Copy this anytime you want to build a small feature calmly from start to finish without getting overwhelmed or letting the AI jump ahead.",
+      "template": "Let us build one small feature together using the calm 4-step loop for `{{small_feature}}`:\n\n1. **Plan:** Explain in 3–4 plain-English bullet points exactly what you will build and how we will prove it works (`{{how_we_check}}`). STOP and wait for my thumbs-up before editing any files.\n2. **Build:** After I approve, build ONLY this one small piece cleanly.\n3. **Check:** Run our automatic checkup and tell me what to click on screen to verify it.\n4. **Save:** Once everything looks great, help me record a labeled save point.",
+      "variables": [
+        {
+          "key": "small_feature",
+          "label": "One Small Feature to Build",
+          "placeholder": "a simple checklist where I can add and check off daily tasks",
+          "defaultValue": "a clean greeting card with a button that toggles light and dark mood"
+        },
+        {
+          "key": "how_we_check",
+          "label": "How We Will Know It Works",
+          "placeholder": "button clicks cleanly on phone and laptop with zero errors",
+          "defaultValue": "the card loads cleanly, the button works smoothly, and all checks pass"
+        }
+      ],
+      "expectedOutcome": "One small, working, checked feature locked into a clean save point—with you firmly in the driver's seat at every step."
+    }
+  ]
+}

@@ -1,0 +1,472 @@
+{
+  "id": "orchestration-showcase",
+  "slug": "orchestration-showcase",
+  "number": 7,
+  "title": "The 7 Agent Modes in Action: Subagents, Coordinators, Swarms, Boost & Teamwork",
+  "eli5Title": "How Teams of AI Helpers Work Together (Live Meta-Build)",
+  "subtitle": "A living meta-build case study of how this exact 8-course Academy was designed, built in parallel, and verified using all 7 Antigravity Agent Modes, Task 0 locks, 4-worker Swarms, Boost routing, and decoupled QA.",
+  "eli5Tagline": "Go behind the scenes of how this exact learning studio was built! Learn when to ask one AI helper, when to launch a 4-person parallel team, when to call in extra brainpower, and how independent inspectors prove it works.",
+  "illustration": {
+    "src": "/media/illustrations/orchestration-showcase-studio.jpg",
+    "alt": "Architectural cutaway of a bright creative agency floor: a Coordinator stands by a central planning board while four specialist desks work in parallel on distinct stations, and an independent Quality Inspector checks finished work on live screens.",
+    "caption": "Inside the live agency floor that built this Academy: one Coordinator locks the blueprint, four parallel desks build distinct courses without colliding, and an independent inspector checks the final result.",
+    "visualAnalogy": "A Bright Creative Agency Floor (Coordinator, 4 Parallel Desks & Quality Inspector)"
+  },
+  "level": "all-levels",
+  "estimatedMinutes": 35,
+  "threeScenePreset": "harness-constellation",
+  "accentTone": "cyan",
+  "tags": [
+    "orchestration",
+    "agent-modes",
+    "subagents",
+    "coordinator",
+    "swarm",
+    "boost",
+    "teamwork",
+    "meta-build",
+    "model-routing",
+    "decoupled-qa"
+  ],
+  "video": {
+    "title": "Behind the Build: All 7 Antigravity Agent Modes Building This Academy Live",
+    "durationLabel": "21:10",
+    "provider": "coming_soon",
+    "posterLabel": "Course 07 Live Meta-Build — How Teams of AI Helpers Built This Academy",
+    "chapters": [
+      {
+        "id": "ch1-seven-modes-ladder",
+        "title": "The 7 Ways to Work With AI (And When to Keep It Simple)",
+        "timestampSeconds": 0,
+        "summary": "Walking up the 7-step ladder from a quick solo chat to a full project team, and separating Modes from shared workshop tools."
+      },
+      {
+        "id": "ch2-coordinator-task0",
+        "title": "Plan First, Freeze Shared Rules & Check a Pilot Sample",
+        "timestampSeconds": 240,
+        "summary": "How locking the blueprint, shared data rules, and one pilot course first saved hours of rework across all 8 courses."
+      },
+      {
+        "id": "ch3-specialist-subagents",
+        "title": "Focused Specialist Helpers With Clean Desks & Tool Belts",
+        "timestampSeconds": 480,
+        "summary": "How separate helpers handled screen design, illustrations, automated tests, independent review, and live browser checks."
+      },
+      {
+        "id": "ch4-zero-collision-swarm",
+        "title": "Running 4 Parallel Builders With Zero File Collisions",
+        "timestampSeconds": 730,
+        "summary": "Watch the exact 4-worker Swarm map that authored Courses 00 through 07 side by side without stepping on a single file."
+      },
+      {
+        "id": "ch5-boost-model-routing",
+        "title": "When to Call In Extra Brainpower & Route Models Smartly",
+        "timestampSeconds": 980,
+        "summary": "Saving deep-thinking modes for tricky puzzles and final review while routing fast models to bounded parallel builds."
+      },
+      {
+        "id": "ch6-teamwork-and-qa",
+        "title": "Full-Scale Teamwork & Independent Proof That It Works",
+        "timestampSeconds": 1140,
+        "summary": "Scaling up with upfront interviews, catching a hidden image cache bug in live browser checks, and extending the protocol."
+      }
+    ],
+    "transcriptSummary": "In this behind-the-scenes walkthrough, we pull back the curtain on how this exact 8-course Antigravity Academy upgrade was planned, built, and double-checked. You will learn how to pick the smallest AI helper setup that fits your job across all seven modes, why freezing shared rules and checking one pilot course prevents team chaos, how four parallel builders worked side by side with zero file collisions, when to spend extra thinking power on hard puzzles, and how independent inspectors caught real bugs before launch."
+  },
+  "steps": [
+    {
+      "id": "orch-step-1-seven-agent-modes",
+      "order": 1,
+      "title": "The 7 Agent Modes Ladder (and When NOT to Over-Engineer)",
+      "stageTag": "Mode Selection",
+      "summary": "Antigravity provides 7 distinct Agent Modes (Just Ask, Subagents, Orchestrator, Workflows, Swarm, Boost, Teamwork) layered atop 8 shared Building Blocks (Code & Terminal, MCP, Browser Eye, Rules & Skills, Workspace Memory, Sandbox, Safety Hooks, Plugins). Mastery means picking the lightest mode that cleanly fits the task—never spinning up a Swarm for a 1-file tweak.",
+      "eli5": {
+        "plainTitle": "The 7 Ways to Work With AI (And When to Keep It Simple)",
+        "oneLineHook": "Do not hire a full construction crew just to hang one picture frame—match the helper size to the job.",
+        "everydayAnalogy": "Choosing between a quick text to a friend, a helper chopping onions, a pit crew, or a full building firm.",
+        "simpleExplanation": "Working with AI is a 7-step ladder from smallest to biggest: one quick chat (Just Ask), one side helper (Subagents), a planner plus builder (Orchestrator), a repeatable assembly line (Workflows), a side-by-side mini-team (Swarm), extra specialists crowding one hard puzzle (Boost), and a full project firm (Teamwork). Meanwhile, tools like a live web browser, project binder, and door locks are shared supplies every mode uses—not separate modes.",
+        "whyItMatters": "Most beginners either stay stuck in one crowded chat for huge projects—causing the AI to lose track—or over-complicate tiny 30-second fixes with giant agent teams that waste time and budget.",
+        "roleInProtocol": "This 7-mode ladder is the decision compass of the Code Factory. Before writing a single line, you pick the lightest mode that matches your task size while relying on the same always-on safety hooks, workspace memory, and browser eye underneath.",
+        "howToUseGoingForward": "Before starting any task, ask one question: can one helper finish this in two minutes? Start at step 1 (Just Ask) and only climb to Subagents, Orchestrator, Swarm, Boost, or Teamwork when the job truly demands parallel work or deeper thought.",
+        "whenToUse": "Use this ladder at the very start of every task—before typing your prompt—so you never waste ten minutes setting up a team for a 1-line edit or cram a giant 8-file build into one messy chat.",
+        "realWorldExample": "For a quick button typo on this Academy, we used Just Ask in 20 seconds. To inspect a webpage screenshot, we sent 1 Subagent. To build 8 courses at once, we climbed to a 4-worker Swarm—each job got the exact right team size.",
+        "audioScript": "Think of working with AI helpers like choosing tools for a home project. You would not hire an entire construction firm just to hang one picture frame, and you would not build a whole house with one tiny screwdriver. Antigravity gives you a clear seven-step ladder. At the bottom is Just Ask for quick questions, then Subagents for one focused side job, Orchestrator to pair a planner with a builder, Workflows for repeatable checklists, Swarm for parallel teammates working side by side, Boost for extra brainpower on one tough puzzle, and Teamwork for huge multi-day projects. Meanwhile, your browser eye, project binder, and safety locks are shared building blocks every mode uses. Always start at the simplest rung that fits your job.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "How to climb the 7-mode ladder cleanly—matching task size to helper size while sharing the same safety and memory tools."
+      },
+      "keyTakeaways": [
+        "Separate Agent Modes (1. Just Ask, 2. Subagents, 3. Orchestrator, 4. Workflows, 5. Swarm, 6. Boost, 7. Teamwork) from Shared Building Blocks (Code & Terminal, MCP Connectors, Live Browser Eye, Rules & Skills, Workspace Memory, Terminal Sandbox, Safety Hooks, Plugins & Sidecars).",
+        "When NOT to use each mode: skip Just Ask for multi-file features; skip Subagents when peers must coordinate live; skip Orchestrator for 1-line typos; skip Workflows for open-ended exploration; skip Swarm when workers share the same file; skip Boost for routine edits; skip Teamwork for 2-minute tasks.",
+        "Steering slash commands (/plan, /grill-me, /goal, /schedule, /learn) refine how any mode plans, clarifies, verifies, repeats, or locks in lessons.",
+        "In this Academy's own source code (`academy/src/lib/contracts.ts`), `ANTIGRAVITY_AGENT_MODES` and `ANTIGRAVITY_BUILDING_BLOCKS` codify this exact mental model for the interactive Hero map."
+      ],
+      "actionChecklist": [
+        "Inspect `ANTIGRAVITY_AGENT_MODES` and `ANTIGRAVITY_BUILDING_BLOCKS` in `academy/src/lib/contracts.ts` to compare each mode's `useWhen` and `doNotUseWhen` boundaries.",
+        "Audit your last 3 AI sessions and check whether a lighter mode (Just Ask / Subagent) or structured mode (Orchestrator / Swarm) would have finished faster.",
+        "Bookmark the Mode Selector Prompt below so you can classify complex requests in 30 seconds before touching files."
+      ],
+      "codeSnippet": {
+        "language": "markdown",
+        "filename": "The 7 Agent Modes Decision Ladder (Use vs. Avoid)",
+        "code": "| # | Mode | Best Used When | Do NOT Use When |\n| :-: | :--- | :--- | :--- |\n| 1 | Just Ask | Quick questions, 1-file tweaks | Multi-file features or audits |\n| 2 | Subagents | Isolated side jobs (QA, art, research) | Peers need live back-and-forth |\n| 3 | Orchestrator | Structured multi-step feature | 1-line typo fix |\n| 4 | Workflows | Repeatable batch/QA pipelines | Open-ended creative discovery |\n| 5 | Swarm | Parallel disjoint file modules | Two workers editing the same file |\n| 6 | Boost | 1 narrow, stubborn hard blocker | Routine everyday tasks |\n| 7 | Teamwork | Full multi-day end-to-end project | Small tweaks done in 2 minutes |"
+      },
+      "mermaidDiagram": "flowchart TD\n    Q[\"New Task Arrives\"] --> S1{\"Tiny 1-File Job?\"}\n    S1 -->|\"Yes\"| M1[\"1. Just Ask (1 Quick Chat)\"]\n    S1 -->|\"No\"| S2{\"One Isolated Side Job?\"}\n    S2 -->|\"Yes\"| M2[\"2. Subagent (Focused Helper)\"]\n    S2 -->|\"No\"| S3{\"Same Checklist on Many Items?\"}\n    S3 -->|\"Yes\"| M4[\"4. Workflows (Assembly Line)\"]\n    S3 -->|\"No\"| S4{\"Separate Files Built in Parallel?\"}\n    S4 -->|\"Yes\"| M5[\"5. Swarm (Mini-Team Board)\"]\n    S4 -->|\"No\"| S5{\"One Super-Hard Blocker?\"}\n    S5 -->|\"Yes\"| M6[\"6. Boost (Deep Multi-Brain Focus)\"]\n    S5 -->|\"No\"| M3[\"3. Orchestrator or 7. Teamwork (Full Plan)\"]",
+      "repoArtifactPath": "rules/AGENTS.md",
+      "promptId": "orch-prompt-mode-selector"
+    },
+    {
+      "id": "orch-step-2-coordinator-task0-lock",
+      "order": 2,
+      "title": "The Coordinator & Task 0 Lock: Plan First, Freeze Shared Files & Pilot Gate",
+      "stageTag": "Coordinator & Task 0",
+      "summary": "Before parallel building began on this Academy upgrade, cf-architect locked `plans/eli5-multimodal-academy-spec.md` and `ADR-0003`, then the Coordinator completed Task 0—freezing shared Zod contracts in `schemas.ts` and progress state—and built a single Phase 1 Pilot (Course 01) for Human Pilot sign-off before scaling to all 8 courses.",
+      "eli5": {
+        "plainTitle": "Plan First, Freeze Shared Rules & Test One Sample Before Scaling",
+        "oneLineHook": "Finish the master blueprint and test one model room before letting four builders loose on the whole house.",
+        "everydayAnalogy": "A head chef locking the menu and tasting one sample plate before the dinner rush begins.",
+        "simpleExplanation": "Imagine four painters decorating eight rooms, while someone keeps changing the paint colors halfway through! Everything would clash. So our Coordinator always starts with Step Zero: first an architect writes one clear blueprint and records why each choice was made, then the Coordinator locks the shared shape of every file so nobody edits it later. Next, we build just ONE sample course and show it to you first—fixing every design wrinkle before the whole team scales up.",
+        "whyItMatters": "Without a frozen blueprint and a single sample check, a tiny misunderstanding—like confusing button labels or cramped layouts—gets copied eight times in parallel, multiplying cleanup work instead of saving time.",
+        "roleInProtocol": "This is the Orchestrator's Separation of Concerns plus the Human Pilot Gate. In this exact build, `cf-architect` locked `plans/eli5-multimodal-academy-spec.md` and `ADR-0003`, Task 0 froze `schemas.ts`, and your Pilot review of Course 01 caught real UI and mental-model refinements before Phase 2 launched.",
+        "howToUseGoingForward": "Whenever a project has repeated units (like pages, courses, or features), always lock shared data shapes in Task 0, build and visually review ONE complete pilot unit with a human first, and only fan out a parallel team once the pilot feels right.",
+        "whenToUse": "Use a Task 0 lock plus a Human Pilot Gate anytime you plan to build 3+ similar modules, upgrade shared schemas, or launch a parallel Swarm where early misunderstandings would ripple everywhere.",
+        "realWorldExample": "During our Phase 1 Pilot of Course 01, reviewing the live page with the human revealed that beginners needed clearer Mode vs. Building Block framing and architectural studio artwork—we fixed that once on Course 01 before the 4 Swarm workers authored Courses 00 through 07.",
+        "audioScript": "Have you ever watched a group project go sideways because nobody agreed on the format before splitting up? That is why great AI coordination always begins with a Task Zero lock and a single pilot check. On this exact Academy upgrade, our architect helper first wrote the complete written blueprint and logged the big design choices. Next, the Coordinator froze the shared data rules in one place before any parallel builders started. Then, instead of rushing all eight courses at once, we built just Course One as a live pilot sample. That human pilot check caught layout and clarity improvements immediately, so when the four parallel builders launched next, every course matched the gold standard on the first try.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "How the Coordinator locks the blueprint and shared rules in Task 0, validates one live Pilot course, and only then unlocks parallel building."
+      },
+      "keyTakeaways": [
+        "Locked Blueprint & ADR First: `cf-architect` authored `plans/eli5-multimodal-academy-spec.md` and `.memory/decisions/0003-eli5-multimodal-microlearning-architecture.md` before a single TypeScript line changed.",
+        "Task 0 Shared-Contract Freeze: The Coordinator finalized `academy/src/lib/schemas.ts` (`Eli5ConceptBlockSchema`, `CourseIllustrationSchema`, URL allowlists, `number.min(0)`), `prompt-engine.ts`, and `AcademyShell.tsx` first so parallel workers never collided on shared types.",
+        "Human Pilot Gate Prevents 8x Rework: Building and auditing Course 01 (`harness-mastery`) first caught visual framing, ELI5 tone, and Agent Modes vs. Building Blocks clarity issues before Phase 2 Swarm fan-out.",
+        "Backward-Compatible Rollout: Keeping `eli5`, `eli5Tagline`, and `illustration` optional on `CourseSchema` ensured Courses 02–06 stayed 100% green and shippable during Phase 1."
+      ],
+      "actionChecklist": [
+        "Open `plans/eli5-multimodal-academy-spec.md` in the Live Repo Explorer to inspect Section 3 (frozen Zod schemas) and Section 7 (Task 0 -> Phase 1 Pilot -> Phase 2 Swarm).",
+        "Identify the shared contract files in your own repo (types, schemas, design tokens) that must always freeze in Task 0.",
+        "Add an explicit 'Pilot 1 Unit -> Human Sign-Off' gate before your next multi-module AI rollout."
+      ],
+      "codeSnippet": {
+        "language": "markdown",
+        "filename": "Academy Upgrade Execution Gates (Real Build Timeline)",
+        "code": "Stage 2B (cf-architect): Lock plans/eli5-multimodal-academy-spec.md + ADR-0003\n   |\n   v\nTask 0 (Coordinator): Freeze academy/src/lib/schemas.ts + prompt-engine.ts + AcademyShell.tsx\n   |\n   v\nPhase 1 Pilot: Build UI + Course 01 (harness-mastery) -> cf-tester + cf-reviewer + browser QA\n   |\n   v\n[HUMAN PILOT GATE] -> Caught UI & Modes vs. Building Blocks mental-model polish!\n   |\n   v\nPhase 2 Swarm Fan-Out: Launch 4 disjoint workers for Courses 00..07"
+      },
+      "mermaidDiagram": "flowchart LR\n    P[\"Architect Locks Written Blueprint\"] --> T0[\"Coordinator Freezes Shared Rules\"]\n    T0 --> P1[\"Build 1 Pilot Course First\"]\n    P1 --> HG{\"Human Pilot Check\"}\n    HG -->|\"Refine Clarity or Look\"| P1\n    HG -->|\"Approved!\"| SW[\"Launch 4-Worker Parallel Swarm\"]",
+      "repoArtifactPath": "plans/eli5-multimodal-academy-spec.md",
+      "promptId": "orch-prompt-task0-swarm"
+    },
+    {
+      "id": "orch-step-3-specialist-subagents",
+      "order": 3,
+      "title": "Specialist Subagents: Clean Contexts & Least-Privilege Tool Belts",
+      "stageTag": "Subagents",
+      "summary": "Rather than asking one bloated thread to design UI, paint artwork, write tests, review security, and audit browsers, this upgrade delegated focused side jobs to clean-context specialist subagents—`cf-frontend`, `image-generator`, `cf-tester`, `cf-reviewer`, and `browser`—each pinned to a least-privilege tool belt.",
+      "eli5": {
+        "plainTitle": "Focused Specialist Helpers With Clean Desks & Tool Belts",
+        "oneLineHook": "Hand each side job to a fresh specialist who only brings the exact tools needed—never cluttering the main desk.",
+        "everydayAnalogy": "A film set where the set designer, photographer, sound engineer, and safety officer each carry their own kit.",
+        "simpleExplanation": "If one person tries to design buttons, paint illustrations, write tests, and inspect security all in the same noisy chat, they get tired and miss mistakes. Instead, Antigravity lets you send out specialist helpers—called subagents. Each specialist starts at a sparkling-clean desk with only the tools for their role: the screen designer builds visual cards, the artist paints illustrations, the inspector reads files without editing, and the browser helper checks real phone and laptop views.",
+        "whyItMatters": "Fresh desks prevent old chat clutter from confusing the AI, and strict tool belts keep a reviewer truly independent—making it impossible for an inspector to quietly rubber-stamp or rewrite someone else's code.",
+        "roleInProtocol": "Our Code Factory ships 5 least-privilege personas (`cf-architect`, `cf-backend`, `cf-frontend`, `cf-tester`, `cf-reviewer`) plus Antigravity's built-in `browser` and `image-generator` subagents, each with explicit `subagent: true`, `mainAgent: false`, and scoped `tools:` lists.",
+        "howToUseGoingForward": "Whenever a task is self-contained—like creating artwork, writing a test suite, auditing a diff, or inspecting a live webpage—delegate it to a fresh specialist subagent instead of doing it inside your main planning conversation.",
+        "whenToUse": "Use specialist Subagents whenever you need a clean, isolated context (research, UI build, artwork, test writing, security audit, or browser visual check) and the helper only needs to report back to the Coordinator.",
+        "realWorldExample": "During our Pilot build, `cf-frontend` created `AudioExplainerBar` and `Eli5MicrolearningCard`, `image-generator` rendered the cutaway studio illustration, `cf-tester` added component tests, `cf-reviewer` graded all 7 ELI5 rules read-only, and `browser` captured real 375px, 768px, and 1440px screenshots.",
+        "audioScript": "Imagine trying to cook dinner, paint a poster, inspect electrical wiring, and take photos all on the same tiny kitchen counter. Within ten minutes, everything is covered in paint and crumbs. Specialist subagents solve that cleanly. Whenever the Coordinator needs a focused side job, it spins up a fresh helper at a spotless desk with only the tools that role needs. On this Academy build, our frontend helper built the audio and card components, our image generator painted studio cutaway art, our tester wrote automated checks, our reviewer audited every line in read-only mode, and our browser helper inspected real phone, tablet, and desktop screens. Clean desks produce sharper work every single time.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "How the Coordinator delegates five focused side jobs to clean-context specialists—each carrying only the tools its job requires."
+      },
+      "keyTakeaways": [
+        "Clean Context Advantage: Each subagent boots without the parent thread's noisy trial-and-error history, dramatically reducing 'lost in the middle' mistakes.",
+        "Least-Privilege Tool Belts: `agents/cf-reviewer.md` runs with `subagent: true`, `mainAgent: false`, `model: pro`, and sandboxed read/audit tools—never sharing authoring context with `cf-frontend` or `cf-backend`.",
+        "5 Real Subagents Used on This Upgrade: `cf-frontend` (progressive-disclosure UI components), `image-generator` (16:9 studio cutaway illustrations), `cf-tester` (Vitest schema & component suites), `cf-reviewer` (7-point ELI5 Rubric + security audit), and `browser` (3-viewport live visual inspection).",
+        "When NOT to use Subagents: If multiple workers need to talk directly to each other on a shared feed or negotiate live handoffs, graduate to Swarm mode."
+      ],
+      "actionChecklist": [
+        "Inspect `agents/cf-reviewer.md` in the Live Repo Explorer to see its explicit `subagent: true`, `model: pro`, and least-privilege `tools:` list.",
+        "Never ask the same conversation thread that wrote complex UI code to also act as its own final security reviewer.",
+        "Use the built-in `browser` subagent after every visual edit instead of assuming compiled TypeScript looks clean on mobile."
+      ],
+      "codeSnippet": {
+        "language": "yaml",
+        "filename": "Subagent Specialist Roster & Tool Belts (This Build)",
+        "code": "specialists:\n  cf-frontend:     { context: clean, tools: [read, edit, write, run_command], owns: UI components }\n  image-generator: { context: clean, tools: [generate_image], owns: 16:9 studio artwork }\n  cf-tester:       { context: clean, tools: [read, edit, write, run_command], owns: Vitest suites }\n  cf-reviewer:     { context: clean, tools: [read_file, run_command, search_web], owns: independent audit }\n  browser:         { context: clean, tools: [sandboxed_browser], owns: 375px / 768px / 1440px visual QA }"
+      },
+      "mermaidDiagram": "flowchart TD\n    C[\"Coordinator (Main Plan)\"] --> F[\"UI Specialist (Builds Screen Cards)\"]\n    C --> I[\"Illustration Artist (Paints Studio Art)\"]\n    C --> T[\"Test Writer (Checks Edge Cases)\"]\n    C --> R[\"Independent Reviewer (Read-Only Audit)\"]\n    C --> B[\"Live Browser Eye (Phone, Tablet, Desktop)\"]\n    F --> O[\"Verified Results Back to Coordinator\"]\n    I --> O\n    T --> O\n    R --> O\n    B --> O",
+      "repoArtifactPath": "agents/cf-reviewer.md",
+      "promptId": "orch-prompt-mode-selector"
+    },
+    {
+      "id": "orch-step-4-zero-collision-swarm",
+      "order": 4,
+      "title": "Running a 4-Worker Swarm With Zero Collisions (Live Meta-Build)",
+      "stageTag": "Swarm Execution",
+      "summary": "After Pilot approval, Phase 2 launched a 4-worker Antigravity Swarm under the <= 5 concurrency cap: `@swarm-foundations` (Courses 00 & 02), `@swarm-ops` (Courses 03 & 04), `@swarm-media` (Courses 05 & 06), and `@swarm-orchestration` (Course 07—literally authoring this file!) with zero overlapping files and one final Coordinator manifest sync.",
+      "eli5": {
+        "plainTitle": "Running 4 Parallel Builders With Zero File Collisions",
+        "oneLineHook": "Give four AI teammates completely separate folders, keep the team at 5 or fewer, and combine their work once at the end.",
+        "everydayAnalogy": "A race-car pit crew changing all four tires at once—each person owns one wheel and never grabs another's wrench.",
+        "simpleExplanation": "Here is the coolest secret of this course: the exact page you are reading right now was written by one member of a 4-worker team working at the exact same moment! One helper wrote Courses 00 and 02, a second upgraded Courses 03 and 04, a third upgraded Courses 05 and 06, and a fourth wrote this Course 07. Nobody was allowed to touch anyone else's files or the shared master index. Once all four posted Done on the team board, the Coordinator combined everything in one clean sweep.",
+        "whyItMatters": "If two parallel helpers edit the same file at the same time, they overwrite each other's work and create messy conflicts. Giving each worker strictly separate files turns four hours of sequential work into ten calm minutes.",
+        "roleInProtocol": "This demonstrates Antigravity's native Swarm board under Code Factory governance: `<= 5` concurrent workers, zero-overlap file partitions, local self-validation against `CourseSchema` by every worker, and a single post-swarm `pnpm run sync:resources` synthesis pass by the Coordinator.",
+        "howToUseGoingForward": "Before launching `/swarm`, draw a simple ownership table listing the exact files each worker owns and the shared files NOBODY may touch during the swarm. Cap your swarm at 3 to 5 workers so you can review every deliverable cleanly.",
+        "whenToUse": "Use `/swarm` when you have 3 to 5 genuinely independent modules (separate course files, separate feature slices, or backend + frontend + docs after Task 0 is frozen) that can finish in parallel without editing the same file.",
+        "realWorldExample": "In Phase 2 of this Academy build, `@swarm-foundations`, `@swarm-ops`, `@swarm-media`, and `@swarm-orchestration` ran concurrently on disjoint `course.json` files—zero TypeScript edits, zero manifest edits, zero merge conflicts—and each verified its own JSON before posting `[done]`.",
+        "audioScript": "Here is a fun behind-the-scenes fact: the lesson you are listening to right now was built inside a live four-worker Swarm! Think of a race-car pit crew where four people change four different tires at the exact same second without bumping elbows. While one worker built Courses Zero and Two, a second upgraded Courses Three and Four, a third upgraded Courses Five and Six, and the fourth built this Course Seven. Two simple rules kept everything peaceful: we stayed under five parallel workers, and no two workers were allowed to touch the same file or the shared master catalog. Each worker checked its own work, posted Done on the shared message board, and let the Coordinator sync everything together once at the end.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "The exact 4-worker Swarm partition that built Courses 00 through 07 in parallel with zero overlapping file edits."
+      },
+      "keyTakeaways": [
+        "Living Meta-Build Partition: `@swarm-foundations` owned Courses 00 & 02; `@swarm-ops` owned Courses 03 & 04; `@swarm-media` owned Courses 05 & 06; `@swarm-orchestration` owned Course 07 (`orchestration-showcase/course.json`).",
+        "Strict Prohibition on Shared Files During Fan-Out: No Swarm worker was allowed to edit `.ts`/`.tsx` files, `schemas.ts`, or `generated-repo-manifest.json`, or run `sync:resources` concurrently—eliminating race conditions completely.",
+        "3–5 Concurrency Cap (`rules/AGENTS.md` §8): Capping parallel loops at <= 5 preserves human review bandwidth and avoids token-quota thrashing.",
+        "Self-Check + Single Synthesis: Each worker ran a read-only `tsx` validation against `CourseSchema` before posting `@coordinator [done]`, followed by one atomic Coordinator `pnpm run sync:resources` pass."
+      ],
+      "actionChecklist": [
+        "Inspect `skills/cf-implement/references/orchestration.md` to review the Swarm zero-overlap partitioning and `workspace: \"share\"` isolation rules.",
+        "Write an explicit 'Owns / Must Not Touch' list in every Swarm worker brief before spawning workers.",
+        "Use the Task 0 + Zero-Collision Swarm prompt below whenever a project splits cleanly into 3–5 independent file groups."
+      ],
+      "codeSnippet": {
+        "language": "markdown",
+        "filename": "Live Phase 2 Swarm Board Partition (Actual Build Roster)",
+        "code": "| Worker | Owned Files (Exclusive) | Forbidden Shared Files | Local Oracle |\n| :--- | :--- | :--- | :--- |\n| @swarm-foundations | zero-to-one-foundations + code-factory-sdlc | *.ts, *.tsx, manifest.json | CourseSchema.parse |\n| @swarm-ops | pro-setup-playbook + lit-software-factory | *.ts, *.tsx, manifest.json | CourseSchema.parse |\n| @swarm-media | notebooklm-antigravity + enterprise-product-video-studio | *.ts, *.tsx, manifest.json | CourseSchema.parse |\n| @swarm-orchestration | orchestration-showcase (THIS COURSE!) | *.ts, *.tsx, manifest.json | CourseSchema.parse |\n| Coordinator (Post) | Runs pnpm run sync:resources ONCE -> unified 8-course manifest | — | Full Stage 4 QA |"
+      },
+      "mermaidDiagram": "flowchart TD\n    B[\"Coordinator Posts 4 Separate Assignments on Shared Board\"] --> W1[\"Worker 1: Courses 00 & 02\"]\n    B --> W2[\"Worker 2: Courses 03 & 04\"]\n    B --> W3[\"Worker 3: Courses 05 & 06\"]\n    B --> W4[\"Worker 4: Course 07 (This Course)\"]\n    W1 --> V[\"Each Worker Checks Own File & Posts Done\"]\n    W2 --> V\n    W3 --> V\n    W4 --> V\n    V --> S[\"Coordinator Syncs Master Catalog Once\"]",
+      "repoArtifactPath": "skills/cf-implement/references/orchestration.md",
+      "promptId": "orch-prompt-task0-swarm"
+    },
+    {
+      "id": "orch-step-5-boost-and-routing",
+      "order": 5,
+      "title": "Boost Mode & Model Routing Economics (Deep Thinkers vs. Fast Builders)",
+      "stageTag": "Boost & Routing",
+      "summary": "Not every step deserves maximum compute. Use `/boost` sparingly for narrow, high-stakes bottlenecks (race conditions, tricky architecture, stubborn bugs), route deep-reasoning `pro`/Neon models to planning and independent review, route fast `flash` models to bounded parallel builds and browser sweeps, and hot-swap stalled Swarm workers live via `swarm(action='model')`.",
+      "eli5": {
+        "plainTitle": "When to Call In Extra Brainpower & Match Speed to Each Job",
+        "oneLineHook": "Save slow, deep-thinking experts for tough puzzles and final inspections—let fast helpers zip through clear checklists.",
+        "everydayAnalogy": "Asking three senior specialists to huddle around one tough whiteboard puzzle while nimble runners handle routine deliveries.",
+        "simpleExplanation": "AI models come in different speeds and thinking depths—like senior specialists versus quick sprinters. Boost mode brings extra deep-thinking focus onto ONE tough puzzle that normal chat cannot crack. That power shines on a mysterious bug or big design choice, not simple edits. Smart teams use deep-thinking models for blueprints and final reviews, fast models for clear parallel building, and can even upgrade a stuck helper's brain mid-task without starting over.",
+        "whyItMatters": "Using maximum thinking power on every tiny edit makes your workflow painfully slow and burns through usage limits quickly. Conversely, using a lightweight fast model to design complex security rules invites subtle bugs.",
+        "roleInProtocol": "This is Model Routing Economics inside the Code Factory: `pro`/Neon handles `cf-architect`, Task 0 locks, and independent `cf-reviewer` audits; `flash` powers bounded parallel build workers and 3-viewport `browser` sweeps; `/boost` rescues true bottlenecks; and `cf-learn` turns every breakthrough into a permanent rule.",
+        "howToUseGoingForward": "Default to balanced routing: deep thinkers for planning and final checks, fast helpers for bounded execution. Reach for `/boost` only after a regular pass stalls on a genuinely hard technical or architectural knot—and always log the lesson afterward.",
+        "whenToUse": "Invoke `/boost` when you hit a stubborn bug, tricky timing glitch, or high-stakes architecture decision where standard chat loops keep spinning. Never use `/boost` for routine formatting, copy tweaks, or simple boilerplate.",
+        "realWorldExample": "When our 3D scene previously threw a subtle first-frame timing crash in the browser, deep multi-perspective debugging isolated the negative timestamp bug in one pass—whereas painting and checking 8 parallel course payloads ran rapidly on fast bounded workers.",
+        "audioScript": "Not every task needs the heaviest brain in the room. Think of a hospital or an engineering studio: you do not call three senior surgeons to hand out bandages, and you do not ask a first-day intern to plan open-heart surgery. Boost mode is Antigravity's deep-focus huddle—it concentrates intense multi-perspective thinking on one narrow, stubborn puzzle like a mysterious crash or a high-stakes security design. Use it when normal steps get stuck, not for everyday tweaks. Everywhere else, route smartly: let deep-thinking models write blueprints and run independent reviews, let fast models execute clear parallel builds and browser checks, and remember you can hot-swap a stalled teammate's model live without losing its memory.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "Routing each job to the right AI brain speed—saving Boost mode for true bottlenecks and hot-swapping models live if a worker stalls."
+      },
+      "keyTakeaways": [
+        "When to Invoke `/boost`: Stubborn root-cause bugs, concurrency/race conditions, high-stakes security or data architecture, and complex cross-cutting design trade-offs where standard loops stall.",
+        "When NOT to Invoke `/boost`: Routine copy updates, mechanical refactors, or straightforward file generation—Boost deliberately trades speed and compute for depth.",
+        "Model Routing Matrix: Route high-reasoning `pro`/Neon to `cf-architect` (Specs/ADRs), Task 0 contract locks, and `cf-reviewer` (security & ELI5 Rubric grading); route fast `flash` to bounded Swarm builders and multi-viewport `browser` sweeps.",
+        "Zero-Waste Live Hot-Swap: Antigravity's `swarm(action=\"model\")` upgrades a stalled or quota-limited waiting worker's model in place while preserving its full conversation history—never kill and restart from scratch."
+      ],
+      "actionChecklist": [
+        "Review your current `agents/cf-*.md` model routing assignments (`pro` for architect/reviewer vs. fast models for bounded builders).",
+        "After every `/boost` breakthrough, run `cf-learn` or log an ADR in `.memory/decisions/` so you never pay heavy compute twice for the same lesson.",
+        "Keep the `/boost` Blocker Prompt below handy for the next stubborn bug that survives two normal fix attempts."
+      ],
+      "codeSnippet": {
+        "language": "markdown",
+        "filename": "Model Routing & Boost Economics Playbook",
+        "code": "| Workload Class | Recommended Mode / Model | Why It Wins |\n| :--- | :--- | :--- |\n| Specs, ADRs, Task 0 Locks | Orchestrator (`pro` / Neon) | High upfront rigor prevents 8x downstream rework |\n| Independent Security & Rubric QA | Subagent `cf-reviewer` (`pro`) | Catches subtle edge cases & jargon slips |\n| Bounded Parallel Course/UI Builds | Swarm (`flash` / fast workers) | Rapid throughput inside frozen Zod contracts |\n| 375px / 768px / 1440px Visual Audits | Subagent `browser` (`flash` vision) | Fast real-screen verification across viewports |\n| 1 Narrow Stubborn Blocker / Crash | `/boost` + ADR + `cf-learn` | Deep multi-angle root cause -> permanent rule |"
+      },
+      "mermaidDiagram": "flowchart LR\n    T[\"Choose Task Complexity\"] --> A[\"Clear Blueprint or Review\"]\n    T --> B[\"Bounded Parallel Build or Screen Check\"]\n    T --> C[\"1 Stubborn High-Stakes Puzzle\"]\n    A --> M1[\"Deep Thinker Model (Pro / Neon)\"]\n    B --> M2[\"Fast Worker Model (Flash)\"]\n    C --> M3[\"Boost Mode (Multi-Brain Focus)\"]\n    M2 -->|\"If Worker Stalls\"| HS[\"Hot-Swap Model Live (Keep Memory)\"]\n    M3 --> L[\"Save Permanent Rule & Decision Note\"]",
+      "repoArtifactPath": "skills/cf-loop-engineer/SKILL.md",
+      "promptId": "orch-prompt-boost-blocker"
+    },
+    {
+      "id": "orch-step-6-teamwork-and-qa",
+      "order": 6,
+      "title": "Teamwork (/teamwork) & Decoupled Verification: Proving It Works & Making It Yours",
+      "stageTag": "Teamwork & QA",
+      "summary": "For full multi-day initiatives, `/teamwork` combines upfront scoping interviews (`/grill-me`) with autonomous multi-agent delivery—always governed by decoupled verification: `cf-tester` deterministic suites, `cf-reviewer` grading all 7 ELI5 Rubric criteria, and 3-viewport `browser` QA that caught Next.js's `.next/cache/images/` stale cache live!",
+      "eli5": {
+        "plainTitle": "Full-Scale Teamwork & Independent Proof That Everything Works",
+        "oneLineHook": "Never let a builder grade their own homework—finish big projects with independent tests, rubric grading, and live screen checks.",
+        "everydayAnalogy": "Hiring a building firm that interviews you first, builds every room, and then brings in an outside city inspector before handing over the keys.",
+        "simpleExplanation": "When you tackle a huge multi-day project—like an entire app or an 8-course academy—Teamwork mode interviews you first so nothing is guessed, then guides builders over hours or days. The secret to trusting big AI projects is independent checking: separate helpers run automatic tests, grade every lesson against a 7-point plain-English checklist, and open the real website on phone, tablet, and desktop screens—even catching sneaky visual bugs like old saved pictures refusing to refresh!",
+        "whyItMatters": "Code can pass every automated build check and still display an outdated image, broken mobile layout, or confusing jargon to real users. Independent multi-layer verification catches real-world bugs before anyone else ever sees them.",
+        "roleInProtocol": "This closes the Outer Loop of the Code Factory: `cf-tester` proves behavior, `cf-reviewer` runs `cf-eval` plus the 7-point ELI5 Readability Rubric, and `browser` inspects `375px`, `768px`, and `1440px` live—catching real production gotchas like stale `.next/cache/images/` artwork before Stage 5 human deploy approval.",
+        "howToUseGoingForward": "Make decoupled checking your non-negotiable habit on every milestone, then fork and extend this protocol as your own: add Course 08+, plug in your team's MCP connectors, or write a new custom skill whenever you spot a repeating workflow.",
+        "whenToUse": "Use `/teamwork` for multi-milestone apps, full repo migrations, or multi-day builds where upfront interviewing and sustained coordination pay off—and ALWAYS finish with independent tests, review, and live browser QA.",
+        "realWorldExample": "During our live Phase 1 Pilot visual QA, after replacing Course 01's illustration with the cleaner studio cutaway, the live `browser` subagent immediately spotted that Next.js was still serving the old artwork from `.next/cache/images/`—clearing that cache fixed a bug zero unit tests could ever have seen!",
+        "audioScript": "Now let us look at the top rung of the ladder and the golden rule that keeps every project trustworthy. Teamwork mode is built for big multi-day projects: it starts by interviewing you to clear up fuzzy goals, sets up a shared workspace, and guides a team from first blueprint to finished delivery. Yet even the best team follows one strict rule: never let a builder grade their own homework. After building, three independent checks run: automated tests verify the rules, a fresh reviewer grades every lesson against our seven-point plain-English checklist, and a live browser checks phone, tablet, and desktop screens. In fact, during this exact Academy upgrade, our browser helper caught an old cached image stuck inside the web server that no code test noticed. Now this entire protocol is yours to adapt and grow.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "How Teamwork pairs upfront interviews with three independent quality inspectors—plus how you extend the protocol for your own projects."
+      },
+      "keyTakeaways": [
+        "Upfront Interviewing Scales Safely: `/teamwork` pairs `/grill-me` scoping interviews with structured `.memory/` persistence (`<= 3 KB` `handover.md`, `tasks.md`, ADRs) so multi-hour or multi-day projects never drift off-spec.",
+        "3-Layer Decoupled Verification: (1) `cf-tester` runs deterministic Vitest + schema/API/component suites; (2) `cf-reviewer` runs Dual-Axis `cf-eval` (Output + Trajectory) and the 7-point ELI5 Readability Rubric; (3) `browser` audits `375px`, `768px`, and `1440px` live.",
+        "Real Meta-Build Catch (`.next/cache/images/`): When Course 01's illustration was upgraded on disk, automated builds passed 100%, but the live `browser` subagent immediately caught Next.js serving the stale optimized image from `.next/cache/images/`—proving why visual inspection is mandatory.",
+        "Make the Protocol Yours: Add Course 08+ under `academy/content/courses/<slug>/course.json`, author custom `skills/` or `agents/` in your own plugin, and keep Human-Lit approval gates on security, billing, and deploys."
+      ],
+      "actionChecklist": [
+        "Inspect `skills/cf-eval/references/eval-rubric.md` and `plans/eli5-multimodal-academy-spec.md` §6.3 to see the exact 7-point ELI5 Readability Rubric.",
+        "Whenever updating static Next.js `<Image>` files locally, clear `.next/cache/images/` and confirm the refreshed asset via the `browser` subagent.",
+        "Use the `/teamwork` + Decoupled QA prompt below to launch your own end-to-end project—or create Course 08 to expand this Academy!"
+      ],
+      "codeSnippet": {
+        "language": "bash",
+        "filename": "Post-Swarm Synthesis & Full Decoupled Verification Commands",
+        "code": "# 1. Single Coordinator synthesis after all 4 Swarm workers post [done]\ncd academy && pnpm run sync:resources\n\n# 2. Clear Next.js stale image optimization cache after replacing public/media/illustrations/*\nrm -rf .next/cache/images\n\n# 3. Deterministic verification stack (cf-tester + verify-stack.sh)\npnpm run typecheck && pnpm run lint && pnpm test && pnpm run build\n\n# 4. Decoupled audits: cf-reviewer (7-pt ELI5 Rubric) + browser (375px / 768px / 1440px)"
+      },
+      "mermaidDiagram": "flowchart TD\n    I[\"1. Upfront Interview (Lock Goals)\"] --> B[\"2. Teamwork & Swarm Delivery\"]\n    B --> Q1[\"Inspector A: Automated Tests & Schemas\"]\n    B --> Q2[\"Inspector B: Independent 7-Point Rubric Review\"]\n    B --> Q3[\"Inspector C: Live Browser (Phone, Tablet, Desktop)\"]\n    Q1 --> G{\"All 3 Inspectors Green?\"}\n    Q2 --> G\n    Q3 --> G\n    G -->|\"Caught Issue (Like Stale Image Cache)\"| FIX[\"Fix & Re-Verify Cleanly\"]\n    FIX --> G\n    G -->|\"Yes!\"| H[\"Human Approval -> Launch & Extend\"]",
+      "repoArtifactPath": "skills/cf-eval/references/eval-rubric.md",
+      "promptId": "orch-prompt-teamwork-delivery"
+    }
+  ],
+  "prompts": [
+    {
+      "id": "orch-prompt-mode-selector",
+      "title": "Select the Optimal Antigravity Agent Mode (1–7) Before Coding",
+      "eli5Title": "Help Me Pick the Right AI Helper Size (From 1 Quick Chat to a Full Team)",
+      "stage": "research",
+      "difficulty": "beginner",
+      "skillRef": "cf-research",
+      "description": "Evaluates a task against all 7 Antigravity Agent Modes (Just Ask, Subagents, Orchestrator, Workflows, Swarm, Boost, Teamwork) and recommends the lightest safe mode plus required Building Blocks.",
+      "whenToUse": "Copy this BEFORE starting any new task when you are unsure whether to just ask in one chat, send a side helper, or spin up a parallel team.",
+      "template": "Before editing any files for `{{task_goal}}` inside `{{workspace_path}}`, classify this work across the 7 Antigravity Agent Modes:\n\n1. Compare all 7 modes (`1. Just Ask`, `2. Subagents`, `3. Orchestrator`, `4. Workflows`, `5. Swarm`, `6. Boost`, `7. Teamwork`) and explicitly state which modes we should NOT use and why.\n2. Recommend the LIGHTEST single mode that fits cleanly within our time/compute budget (`{{budget_tier}}`).\n3. List the shared Building Blocks needed (`Code & Terminal`, `MCP Connectors`, `Live Browser Eye`, `Rules & Skills`, `Workspace Memory`, `Terminal Sandbox`, `Safety Hooks`, `Plugins`).\n4. Propose the exact first step (or `/grill-me` questions if anything is ambiguous) and wait for my go-ahead.",
+      "variables": [
+        {
+          "key": "task_goal",
+          "label": "What You Want to Build or Fix",
+          "placeholder": "e.g., upgrade 6 docs pages + add responsive mobile nav",
+          "defaultValue": "build a new multi-section feature with visual QA"
+        },
+        {
+          "key": "workspace_path",
+          "label": "Project Folder",
+          "placeholder": "./my-app",
+          "defaultValue": "."
+        },
+        {
+          "key": "budget_tier",
+          "label": "Speed / Compute Preference",
+          "placeholder": "fast-and-lean / balanced / deep-rigor",
+          "defaultValue": "balanced"
+        }
+      ],
+      "expectedOutcome": "A crisp mode recommendation explaining both the right Agent Mode and which heavier modes to avoid—preventing over-engineering before writing a single line."
+    },
+    {
+      "id": "orch-prompt-task0-swarm",
+      "title": "Lock Task 0 Contracts & Launch a Zero-Collision Swarm (<= 5 Workers)",
+      "eli5Title": "Lock Shared Rules First, Then Run a Safe Parallel AI Team With Zero Clashes",
+      "stage": "build",
+      "difficulty": "intermediate",
+      "skillRef": "cf-implement",
+      "description": "Enforces the Task 0 shared-interface freeze, optional Phase 1 Pilot gate, strict disjoint file partitions across 3–5 Swarm workers, and a single post-swarm synthesis pass.",
+      "whenToUse": "Copy this when you have 3 to 5 independent modules or files ready to build in parallel and want zero overwrite conflicts between AI teammates.",
+      "template": "Orchestrate a zero-collision parallel build for `{{milestone_name}}` using the Task 0 + Swarm protocol:\n\n1. **Task 0 (Freeze First):** Finalize and validate all shared contracts/schemas (`{{shared_contract_files}}`) before spawning any parallel workers.\n2. **Pilot Gate (Optional):** If we are repeating a new pattern across 3+ units, build and verify 1 pilot unit first for my sign-off.\n3. **Disjoint Swarm Partitions (`<= {{worker_count}}` workers):** Assign each worker an explicit exclusive file list (`{{partition_summary}}`) and forbid every worker from editing shared `.ts`/`.tsx` files or generated manifests.\n4. **Local Oracle + Single Synthesis:** Require each worker to validate its own partition locally before posting `@coordinator [done]`, then run ONE unified sync/test synthesis pass (`{{verify_cmd}}`) after all workers complete.",
+      "variables": [
+        {
+          "key": "milestone_name",
+          "label": "Milestone or Feature Name",
+          "placeholder": "e.g., academy-8-course-upgrade",
+          "defaultValue": "multi-module-upgrade"
+        },
+        {
+          "key": "shared_contract_files",
+          "label": "Shared Files to Freeze in Task 0",
+          "placeholder": "src/lib/schemas.ts, src/lib/contracts.ts",
+          "defaultValue": "src/lib/schemas.ts"
+        },
+        {
+          "key": "worker_count",
+          "label": "Max Parallel Workers (3–5)",
+          "placeholder": "4",
+          "defaultValue": "4"
+        },
+        {
+          "key": "partition_summary",
+          "label": "Non-Overlapping Worker Slices",
+          "placeholder": "Worker 1: courses 00+02; Worker 2: 03+04; Worker 3: 05+06; Worker 4: 07",
+          "defaultValue": "Worker 1: module A; Worker 2: module B; Worker 3: module C; Worker 4: docs"
+        },
+        {
+          "key": "verify_cmd",
+          "label": "Post-Swarm Verification Command",
+          "placeholder": "pnpm run sync:resources && pnpm run typecheck && pnpm test",
+          "defaultValue": "pnpm run typecheck && pnpm run lint && pnpm test && pnpm run build"
+        }
+      ],
+      "expectedOutcome": "A Task 0 contract lock followed by clean, zero-collision parallel Swarm execution and a single verified synthesis build."
+    },
+    {
+      "id": "orch-prompt-boost-blocker",
+      "title": "Run /boost on a Stubborn Blocker & Capture Permanent ADR + Rule",
+      "eli5Title": "Call In Extra AI Brainpower for One Really Tough Bug (And Lock In the Lesson)",
+      "stage": "architecture",
+      "difficulty": "senior",
+      "skillRef": "cf-loop-engineer",
+      "description": "Focuses `/boost` deep multi-perspective reasoning onto a single narrow technical or architectural blocker, verifies the root-cause fix, and persists the lesson into an ADR and invariant rule.",
+      "whenToUse": "Copy this ONLY when normal troubleshooting has stalled twice on a stubborn bug, timing glitch, or tricky architectural trade-off—not for simple everyday edits.",
+      "template": "Invoke `/boost` (deep multi-perspective reasoning) strictly on this single high-stakes blocker in `{{target_area}}`:\n\n- **Symptom & Evidence:** {{blocker_symptom}}\n- **Failed Attempts So Far:** {{failed_attempts}}\n\nExecution Rules:\n1. Generate at least 3 competing root-cause hypotheses and test each against primary code/runtime evidence before editing anything.\n2. Implement the minimal, cleanest root-cause fix with a deterministic regression test proving the failure can never recur.\n3. If this involved an architectural trade-off, log a concise ADR in `.memory/decisions/` and run `cf-learn` to add a 1-line invariant so future fast models never repeat this mistake.",
+      "variables": [
+        {
+          "key": "target_area",
+          "label": "Affected File or Subsystem",
+          "placeholder": "e.g., academy/src/components/three/HarnessConstellationScene.tsx",
+          "defaultValue": "src/"
+        },
+        {
+          "key": "blocker_symptom",
+          "label": "Exact Error or Failing Behavior",
+          "placeholder": "e.g., intermittent runtime crash on first animation frame or stale image cache",
+          "defaultValue": "intermittent runtime failure not reproduced by basic unit tests"
+        },
+        {
+          "key": "failed_attempts",
+          "label": "What Already Failed",
+          "placeholder": "e.g., restarted dev server and re-ran tsc/vitest (both green)",
+          "defaultValue": "standard single-pass fix and full typecheck/test run"
+        }
+      ],
+      "expectedOutcome": "A verified root-cause fix backed by a regression test, plus a durable ADR or invariant rule so you never pay Boost compute twice."
+    },
+    {
+      "id": "orch-prompt-teamwork-delivery",
+      "title": "Launch a Full /teamwork Project With 3-Layer Decoupled QA",
+      "eli5Title": "Run a Full End-to-End AI Project Team With Independent Quality Inspectors",
+      "stage": "test",
+      "difficulty": "senior",
+      "skillRef": "cf-qa-review",
+      "description": "Runs an end-to-end `/teamwork` project starting with a 5-question `/grill-me` scoping interview, phased execution, and mandatory decoupled verification (`cf-tester` + `cf-reviewer` + 3-viewport `browser`).",
+      "whenToUse": "Copy this when kicking off a large multi-milestone app, platform upgrade, or major refactor that needs upfront requirements alignment and rock-solid independent verification before launch.",
+      "template": "Start a governed `/teamwork` delivery for `{{project_vision}}`:\n\n1. **Upfront Interview (`/grill-me`):** Ask me up to 5 sharp scoping questions to eliminate all ambiguity before writing the spec to `plans/{{spec_slug}}-spec.md`.\n2. **Phased Delivery:** Freeze Task 0 contracts, verify 1 live Pilot slice with me, and then execute remaining independent slices with `<= 5` parallel workers.\n3. **Mandatory 3-Layer Decoupled QA (Never Grade Your Own Homework):**\n   - `cf-tester`: Run deterministic tests and production build (`{{qa_cmd}}`).\n   - `cf-reviewer`: Audit `git diff` in a clean read-only context against `rules/AGENTS.md` and `{{quality_rubric}}`.\n   - `browser`: Visually verify `{{preview_url}}` at `375px`, `768px`, and `1440px` (checking console errors, overflow, focus states, and refreshed media caches).\n4. Write `.memory/qa-report.md` and pause at the Human-Lit Release Gate before any remote deploy.",
+      "variables": [
+        {
+          "key": "project_vision",
+          "label": "End-to-End Project Goal",
+          "placeholder": "e.g., Add Course 08 + interactive team simulator to Antigravity Academy",
+          "defaultValue": "deliver a new end-to-end feature milestone with full multimodal QA"
+        },
+        {
+          "key": "spec_slug",
+          "label": "Spec Filename Slug",
+          "placeholder": "course-08-team-sim",
+          "defaultValue": "next-milestone"
+        },
+        {
+          "key": "qa_cmd",
+          "label": "Automated Verification Command",
+          "placeholder": "pnpm run typecheck && pnpm run lint && pnpm test && pnpm run build",
+          "defaultValue": "pnpm run typecheck && pnpm run lint && pnpm test && pnpm run build"
+        },
+        {
+          "key": "quality_rubric",
+          "label": "Review Rubric",
+          "placeholder": "7-point ELI5 Readability Rubric + WCAG 2.1 AA",
+          "defaultValue": "7-point ELI5 Readability Rubric + security & WCAG 2.1 AA invariants"
+        },
+        {
+          "key": "preview_url",
+          "label": "Local or Staging Preview URL",
+          "placeholder": "http://localhost:3000",
+          "defaultValue": "http://localhost:3000"
+        }
+      ],
+      "expectedOutcome": "A spec-locked, pilot-checked, independently audited `.memory/qa-report.md` ready for safe human-approved deployment."
+    }
+  ]
+}

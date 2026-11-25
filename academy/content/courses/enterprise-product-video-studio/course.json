@@ -3,7 +3,15 @@
   "slug": "enterprise-product-video-studio",
   "number": 6,
   "title": "Pro Product Video Studio with Antigravity (Code-as-Video)",
+  "eli5Title": "Turning Code Into Pro Product Videos",
   "subtitle": "Build agency-grade enterprise explainers and launch teasers like a pro video editor using the Hybrid Code-as-Video stack (Remotion + 60fps Hardware-GPU Playwright + FFmpeg + AI Assets) with frame-accurate beat sync and automated visual QA.",
+  "eli5Tagline": "Direct crisp, studio-grade product videos like a creative director—using repeatable scenes, smooth live app captures, beat-matched sound, and automatic visual checks.",
+  "illustration": {
+    "src": "/media/illustrations/product-video-studio.jpg",
+    "alt": "Architectural cutaway of a sleek video editing suite showing a wide timeline screen, glowing audio waveform monitor, studio clapperboard, phone and widescreen preview frames side by side, and a pinned storyboard wall.",
+    "caption": "Inside a Code-as-Video studio: a pinned storyboard wall, audio waveform monitor, clapperboard, master timeline screen, and side-by-side widescreen and phone previews.",
+    "visualAnalogy": "Sleek Video Editing Suite (Storyboard Wall, Audio Waveform, Timeline & Live Previews)"
+  },
   "level": "all-levels",
   "estimatedMinutes": 55,
   "threeScenePreset": "hook-pipeline",
@@ -72,6 +80,20 @@
       "title": "The Hybrid 4-Layer Code-as-Video Architecture",
       "stageTag": "Architecture",
       "summary": "Pure text-to-video AI hallucinates UI text and drifts off-brand, while raw screen recordings feel static and break every time your UI changes. Pro enterprise teams run one deterministic Code-as-Video timeline (Remotion + Playwright + FFmpeg) fed by four hybrid media layers.",
+      "eli5": {
+        "plainTitle": "How Code-as-Video Combines Four Clean Media Layers",
+        "oneLineHook": "Build your video like a neat four-track recipe so text stays razor-sharp and updates never force you to start over.",
+        "everydayAnalogy": "A four-layer cake where crisp frosting, live fillings, flavor accents, and timing all snap cleanly onto one plate.",
+        "simpleExplanation": "Pure video generators often scramble buttons and spell words wrong, while plain screen recordings look dull and break every time your app changes. Instead, pro teams build videos as four neat layers stacked on one master timeline: sharp animated titles and diagrams, smooth real app recordings with fake sample data, short creative cutaways for mood, and clear voice or music that sets the pace. You act as the Creative Director while Antigravity builds and updates the scenes.",
+        "whyItMatters": "When every scene lives as clean, reusable code instead of messy drag-and-drop clips, text is always crystal clear, your brand never drifts, and fixing a typo takes seconds instead of re-editing an entire timeline.",
+        "roleInProtocol": "This establishes the core architecture for every video in your Antigravity Video Studio. Before generating a single clip, you assign each scene to its cleanest layer so nothing gets blurry, off-brand, or stuck in manual rework.",
+        "howToUseGoingForward": "Whenever you plan a new product teaser or explainer, list your scenes first and tag each one with its layer—animated title, real app capture, short visual cutaway, or sound—before opening any editor.",
+        "whenToUse": "Use this mindset whenever you need a polished product launch teaser, website hero video, or walkthrough that needs to stay accurate as your app evolves.",
+        "realWorldExample": "You want a 45-second teaser for a mobile game or web app. Instead of fighting a blurry text-to-video generator, you put bold titles on Layer 1, silky live app footage on Layer 2, a 3-second sunset mood clip on Layer 3, and an upbeat music track on Layer 4—all locked to one master clock.",
+        "audioScript": "Welcome to Course Six, where you learn to direct studio-grade product videos without dragging tiny clips around by hand. Why do most product videos struggle? Pure video generators often misspell words and warp screens, while plain screen recordings look stiff and break the moment your app changes. The pro secret is stacking four clean layers onto one code-powered timeline. Layer one is crisp animated text and diagrams. Layer two is smooth live footage of your real app using clean sample data. Layer three is short two-to-four second artistic cutaways for mood. And layer four is clear voice and music that drives every cut. You direct the vision, and Antigravity builds every scene cleanly.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "How your story plan and locked soundtrack bring all four media layers together into checked widescreen and phone videos."
+      },
       "keyTakeaways": [
         "Layer 1 — Programmatic Motion Graphics (Remotion / SVG): Pixel-sharp UI callouts, progressive architecture diagrams, kinetic headlines, lower thirds, and intros locked to exact brand tokens.",
         "Layer 2 — Directed Product Capture (Playwright): Clean, high-DPI, privacy-safe product walkthroughs with 100% synthetic demo data and zero messy browser chrome.",
@@ -84,7 +106,7 @@
         "Verify local prerequisites: Node.js, pnpm, FFmpeg, and a cached Chromium binary for Playwright.",
         "Classify every scene in your upcoming video into one of the four media layers before generating a single asset."
       ],
-      "mermaidDiagram": "flowchart LR\n    A[\"1. Creative Brief & Storyboard Spec\"] --> B[\"2. Locked Audio & Exact Timestamps\"]\n    B --> C1[\"Track A: 60fps UI Capture (Playwright GPU)\"]\n    B --> C2[\"Track B: Motion & Diagrams (Remotion SVG)\"]\n    B --> C3[\"Track C: Visual Metaphors (AI Key Art / B-Roll)\"]\n    B --> C4[\"Track D: SFX & Music Mix (FFmpeg)\"]\n    C1 --> D[\"3. Frame-Accurate Timeline Assembly\"]\n    C2 --> D\n    C3 --> D\n    C4 --> D\n    D --> E[\"4. Keyframe Contact-Sheet QA\"]\n    E --> F[\"5. 16:9 + 9:16 + Multi-Language Masters\"]",
+      "mermaidDiagram": "flowchart LR\n    A[\"1. Story Plan\\n& Scene List\"] --> B[\"2. Locked Voice\\n& Music Clock\"]\n    B --> C1[\"Layer 1: Crisp Titles\\n& Diagrams\"]\n    B --> C2[\"Layer 2: Smooth Real\\nApp Footage\"]\n    B --> C3[\"Layer 3: Short Mood\\nCutaways\"]\n    B --> C4[\"Layer 4: Sound Effects\\n& Balanced Audio\"]\n    C1 --> D[\"3. Master Timeline\\nAssembly\"]\n    C2 --> D\n    C3 --> D\n    C4 --> D\n    D --> E[\"4. Picture-by-Picture\\nQuality Check\"]\n    E --> F[\"5. Widescreen & Phone\\nFinal Videos\"]",
       "promptId": "vid-prompt-studio-scaffold"
     },
     {
@@ -93,6 +115,20 @@
       "title": "Step 0: Reusable Studio Workspace & Brand-Token Lock",
       "stageTag": "Setup",
       "summary": "Build a reusable product-video-studio repository once so every future video inherits your exact brand palette, licensed fonts, damped spring physics, and export presets automatically—eliminating visual drift across 50+ enterprise videos.",
+      "eli5": {
+        "plainTitle": "Building Your Reusable Studio Folder & Brand Kit Once",
+        "oneLineHook": "Lock your colors, fonts, and smooth motion style once so every future video looks unmistakably like your brand.",
+        "everydayAnalogy": "Setting up a master paint box and stencil kit so every poster you make matches effortlessly.",
+        "simpleExplanation": "Before animating your first scene, build one reusable studio folder that holds your brand's exact colors, fonts, logos, and smooth motion styles. Instead of stiff, robotic straight-line movement, save a few natural spring motions—snappy for buttons, gentle for camera glides, and bold for big titles. Write down one short Brand Guide banning cheesy stock clichés like glowing blue brains or stiff handshakes so every video feels genuinely yours.",
+        "whyItMatters": "Without a shared brand kit, your first video looks sleek, your second uses the wrong shade of blue, and your fifth feels like a different company made it. Locking one studio kit once guarantees consistency across dozens of videos.",
+        "roleInProtocol": "This is Step 0 of the Video Studio workflow. Antigravity reads your real app's colors and fonts once, creates reusable building blocks like badges, device frames, and scannable code cards, and reuses them automatically across both widescreen and phone layouts.",
+        "howToUseGoingForward": "Always inspect your real product folder to pull exact colors and fonts into your studio kit before designing scenes—and reuse your saved spring motions instead of hand-tuning every single animation.",
+        "whenToUse": "Use this once when setting up a new product's video studio, or anytime your company refreshes its brand colors, fonts, or logo.",
+        "realWorldExample": "You plan to release six short feature videos this year. By spending twenty minutes setting up your shared Brand Kit folder first, all six videos automatically inherit your exact dark background, accent glow, crisp font, and bouncy badge entrances without repeating setup work.",
+        "audioScript": "Before you animate a single scene, spend a few minutes building your reusable Brand Kit. Picture a master paint box and stencil kit sitting neatly on your studio table. Inside one shared folder, you store your product's exact colors, fonts, logos, and a small set of smooth, natural spring motions—snappy for buttons, smooth for camera glides, and punchy for hero titles. You also keep a short Brand Guide that bans generic stock clichés like glowing blue brains or awkward handshakes. Set this studio kit up once, and every widescreen and phone video you create afterward automatically looks like it came from the same world-class design team.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "Pulling your real product's colors, fonts, and logos once into a reusable studio kit that powers every future video."
+      },
       "keyTakeaways": [
         "Organize cleanly into brand/ (brand-bible.md, tokens.ts, vector logos, fonts), plans/ (<slug>-spec.json), scripts/ (capture-gameplay.mjs, generate-sfx.sh, master-export.sh), src/components/, src/scenes/, and out/.",
         "Lock your Color Architecture in brand/tokens.ts: 1 dark or light canvas, 1 surface elevation, 1 high-contrast active accent, and WCAG 4.5:1 text tokens.",
@@ -109,6 +145,7 @@
         "filename": "brand/tokens.ts",
         "code": "export const SPRINGS = {\n  snappy: { damping: 18, stiffness: 190, mass: 0.9 },\n  cinematic: { damping: 24, stiffness: 95, mass: 1.1 },\n  slam: { damping: 13, stiffness: 240, mass: 0.85 },\n} as const;\n\nexport const VIDEO_SPECS = {\n  fps: 60,\n  durationInSeconds: 45,\n  durationInFrames: 45 * 60,\n  master16x9: { width: 1920, height: 1080 },\n  vertical9x16: { width: 1080, height: 1920 },\n  safeMarginX: 0.08,\n  safeMarginY: 0.07,\n} as const;"
       },
+      "mermaidDiagram": "flowchart LR\n    P[\"Your Real Product\\n(Colors, Fonts, Logos)\"] --> K[\"Reusable Studio Brand Kit\\n+ Smooth Spring Styles\"]\n    K --> B[\"Shared Building Blocks\\n(Titles, Badges, Device Frames)\"]\n    B --> V1[\"Widescreen Videos\"]\n    B --> V2[\"Phone Vertical Videos\"]",
       "promptId": "vid-prompt-studio-scaffold"
     },
     {
@@ -117,6 +154,20 @@
       "title": "Steps 1–2: Narrative Architecture & Machine-Readable Storyboard",
       "stageTag": "Spec & Story",
       "summary": "Enterprise product videos fail when they recite features in menu order. Use /grill-me to lock a 1-page Creative Brief, apply the Zoom-In / Zoom-Out storytelling arc, write lean scripts for the ear, and compile a machine-readable JSON storyboard before animating.",
+      "eli5": {
+        "plainTitle": "Planning Your Story & Scene List Before Animating",
+        "oneLineHook": "Great product videos hook viewers in seconds and reveal one clear idea at a time—never a boring tour of every menu button.",
+        "everydayAnalogy": "Sketching a comic strip on sticky notes before painting a single movie poster.",
+        "simpleExplanation": "Most product videos lose viewers because they start with a slow spinning logo and then list every menu button in order. Instead, plan your story first like a five-part comic strip: grab attention with a real problem right away, show the simple big picture, prove it live in your app, show why people can trust it, and end with one clear next step. Keep spoken lines short and natural for the ear, put only a handful of words on screen, and reveal complex diagrams one box at a time.",
+        "whyItMatters": "Fixing a confusing story on a one-page plan takes two minutes. Fixing it after you have already recorded footage and animated ten scenes wastes hours. A clear scene list keeps every second purposeful.",
+        "roleInProtocol": "This maps Stage 2 Planning straight to video creation. You run a quick interview with Antigravity to lock audience, length, and tone, then save a structured scene list detailing every scene's timing, headline, camera move, and sound cue before building starts.",
+        "howToUseGoingForward": "Never animate from a blank screen. Always lock a one-page creative brief, read your spoken script aloud with a stopwatch, and approve a numbered scene plan before writing scene code.",
+        "whenToUse": "Use this at the start of every single new video—whether a 45-second launch teaser, a 90-second homepage explainer, or a 3-minute walkthrough.",
+        "realWorldExample": "Instead of opening a security app video with an 8-second logo animation, your locked scene list starts at second zero with a bold 5-word hook ('One gap exposes everything'), reveals a 3-step visual diagram one step at a time, and jumps straight into live proof by second 25.",
+        "audioScript": "Why do so many software videos make viewers click away in five seconds? Usually they open with a slow spinning logo and then recite every button on the screen like a boring user manual. Pro directors sketch a comic strip before touching any camera. Start with a five-part story arc: open immediately with a real frustration, introduce a simple visual picture, show real proof in your app, build trust, and finish with one clear action. Write short sentences that sound great spoken out loud, keep on-screen headlines to five or seven punchy words, and reveal busy diagrams one piece at a time. Lock this scene plan first, and building becomes effortless.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "The five-act story arc that hooks viewers immediately and turns a one-page brief into a locked scene plan."
+      },
       "keyTakeaways": [
         "Lock 4 decisions upfront: Single Target Audience (C-suite vs. Architect vs. End User), One Core Transformation, Runtime Budget (45s teaser / 90–120s hero explainer / 3–5m walkthrough), and Distribution Targets.",
         "Use the 5-Act Zoom-In / Zoom-Out Arc: 1. Friction Hook (0–12s, zero 8-second logo intros) -> 2. Mental Model / Visual Metaphor (12–30s) -> 3. Concrete Product Proof (30–75s) -> 4. Enterprise Trust & Scale (75–95s) -> 5. Clear CTA (95–110s).",
@@ -133,6 +184,7 @@
         "filename": "plans/product-teaser-spec.json",
         "code": "{\n  \"slug\": \"enterprise-launch-teaser\",\n  \"fps\": 60,\n  \"totalFrames\": 2700,\n  \"scenes\": [\n    {\n      \"id\": \"S01_FrictionHook\",\n      \"startFrame\": 0,\n      \"durationFrames\": 270,\n      \"visualLayer\": \"motion_diagram\",\n      \"headline\": \"One policy gap. Total exposure.\",\n      \"cameraMotion\": \"Slow push-in 1.0x -> 1.09x\",\n      \"sfx\": \"sfx/riser.wav\"\n    }\n  ]\n}"
       },
+      "mermaidDiagram": "flowchart LR\n    A[\"1. Grab Attention\\n(Real Problem, No Slow Logo)\"] --> B[\"2. Simple Picture\\n(Clear Visual Idea)\"]\n    B --> C[\"3. Live Proof\\n(Real App in Action)\"]\n    C --> D[\"4. Trust & Scale\\n(Why It Holds Up)\"]\n    D --> E[\"5. Clear Next Step\\n(Simple Call to Action)\"]",
       "promptId": "vid-prompt-creative-brief"
     },
     {
@@ -141,6 +193,20 @@
       "title": "Step 3: Audio-First Production & Exact Frame-Level Beat Sync",
       "stageTag": "Audio & Rhythm",
       "summary": "Amateur editors animate first and cram audio underneath. Pro editors lock the voiceover and/or soundtrack first, extract exact word and beat timestamps, and convert milliseconds directly into Remotion frame numbers so every jump, cut, and headline lands on the exact syllable.",
+      "eli5": {
+        "plainTitle": "Locking Sound First So Every Cut Hits the Exact Beat",
+        "oneLineHook": "Record or choose your voice and music BEFORE animating so every jump, cut, and title lands right on the beat.",
+        "everydayAnalogy": "Choreographing a dance to the real song instead of dancing in silence and hoping the music fits later.",
+        "simpleExplanation": "Beginners animate their visuals first and try to squeeze voice or music underneath at the end—which always feels slightly off. Pro video editors flip the order: lock your voiceover or music track first! Then measure the exact moments when key words or loud beats happen and turn those times into exact picture frames. When a big title slams or a character leaps on the exact beat of a song, the whole video suddenly feels electric and alive.",
+        "whyItMatters": "Our ears notice timing slips even faster than our eyes. Landing visual action right on the beat—and keeping background sound effects gentle so they never drown out voices—is the fastest shortcut to cinema-level polish.",
+        "roleInProtocol": "This creates the single shared heartbeat for your Video Studio. By writing named beat moments once from your real audio track, Antigravity automatically syncs scene cuts, animated ripples, and subtle sound effects to the exact same clock.",
+        "howToUseGoingForward": "Always lock your spoken voice track or chosen music clip before coding scene timing. Measure your key word or chorus hits once, name them clearly, and keep extra clicks or whooshes quiet underneath.",
+        "whenToUse": "Use this right after your storyboard is approved and right before assembling your scenes—especially for launch teasers with upbeat music or explainers with tight narration.",
+        "realWorldExample": "In the Herd of Ibiza teaser playing above, measuring the soundtrack pinpointed the exact moment the singer shouts 'HEY!' twice—letting both alpaca jumps over the Disco Bus fire right on the vocal shout within a tiny fraction of a second.",
+        "audioScript": "Here is a classic trade secret that instantly separates amateur videos from studio trailers: always lock your sound before you animate. Imagine choreographing a dance routine in complete silence and then pressing play on a random song afterward—nothing would match! Instead, lock your voiceover or music track first. Measure the exact seconds where key words or musical beats hit, and turn those moments into exact frame numbers on your timeline. In the Herd of Ibiza teaser right in this course, measuring the theme song let every jump and title punch land directly on the shouted chorus beats. Keep extra sound effects quiet and subtle so your voice and music always shine.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "Locking the voice or music track first so every visual cut, action, and subtle sound effect fires on one shared clock."
+      },
       "keyTakeaways": [
         "Lock your VO (studio recording or neural speech via Gemini API / ElevenLabs) or hero soundtrack BEFORE assembling visuals.",
         "Extract word-level timestamps (Whisper/Gemini transcription -> captions.json) and musical onset energy peaks (via FFmpeg + Python RMS) to build a deterministic beat map.",
@@ -158,6 +224,7 @@
         "filename": "scripts/find-beats.py",
         "code": "import subprocess, struct, math\n\ncmd = [\n    \"ffmpeg\", \"-v\", \"error\", \"-ss\", \"40\", \"-t\", \"15\",\n    \"-i\", \"public/music/theme.mp3\", \"-ac\", \"1\", \"-ar\", \"16000\", \"-f\", \"s16le\", \"-\"\n]\nraw = subprocess.check_output(cmd)\nsamples = struct.unpack(f\"<{len(raw)//2}h\", raw)\nwin = 800  # 50ms windows @ 16kHz\nfor i in range(0, len(samples) - win, win):\n    rms = math.sqrt(sum(s*s for s in samples[i:i+win]) / win) / 32768.0\n    if rms > 0.35:\n        print(f\"{40.0 + i/16000:6.2f}s | energy={rms:.3f}\")"
       },
+      "mermaidDiagram": "flowchart LR\n    S[\"1. Lock Voiceover\\nor Music Track First\"] --> M[\"2. Measure Exact Word\\n& Beat Moments\"]\n    M --> F[\"3. Convert Times Into\\nExact Picture Frames\"]\n    F --> V[\"4. Sync Cuts, Titles &\\nSubtle Sound Effects\"]",
       "promptId": "vid-prompt-beat-sync"
     },
     {
@@ -166,6 +233,20 @@
       "title": "Step 4: Butter-Smooth 60fps UI Capture & Pro Autopilot Scripting",
       "stageTag": "Capture",
       "summary": "Default headless browser recordings look jerky because software WebGL (SwiftShader) crawls at ~6 fps and Playwright's built-in recordVideo caps at 25 fps. Pro Code-as-Video capture uses hardware GPU acceleration, native 60 fps canvas streaming, and closed-loop scripting so your product looks like a world-class expert is operating it.",
+      "eli5": {
+        "plainTitle": "Recording Butter-Smooth Live App Footage Automatically",
+        "oneLineHook": "Turn on real graphics power, load clean sample data beforehand, and script smart interactions so your app looks effortless.",
+        "everydayAnalogy": "Filming a test car on a freshly swept studio track with a pro stunt driver instead of a shaky dashboard camera in traffic.",
+        "simpleExplanation": "Ordinary automatic screen recorders often look choppy because they run without your computer's graphics chip and capture at low frame speeds. Worse, clicking blindly with random pauses makes your app look clunky and awkward. Instead, turn on real graphics acceleration, log in and load realistic fake sample data BEFORE pressing record, and write a smart script that watches the live screen so every click, scroll, or jump looks smooth, confident, and completely free of real customer information.",
+        "whyItMatters": "Choppy frame rates, spinning loading wheels, and fumbling mouse clicks instantly make a great product look cheap—and accidentally recording real customer names or passwords is a serious privacy mistake.",
+        "roleInProtocol": "This powers Layer 2 (Directed Product Capture) in your Video Studio. Because the recording script is automated and checks for zero errors before saving, you can re-shoot clean, crisp footage whenever your app gets updated.",
+        "howToUseGoingForward": "Never record your live personal account with real data. Prepare a clean fake-data demo state first, turn on hardware graphics acceleration, record smoothly at 60 frames per second, and check for zero on-screen errors automatically.",
+        "whenToUse": "Use this whenever your video shows a real website, dashboard, or interactive game—especially when smooth scrolling, animations, or crisp button clicks are front and center.",
+        "realWorldExample": "To film the Herd of Ibiza gameplay clip above, a smart script watched the live game road ahead, smoothly vaulted over an oncoming taxi at full 60-frames-per-second speed, and automatically rejected any take that had a glitch or collision.",
+        "audioScript": "Have you ever watched a software demo where the video looks jittery, a loading spinner sits on screen for four awkward seconds, and the mouse wanders around hunting for a button? That happens when you use basic screen capture with blind timers. Instead, film your app like a car commercial on a closed studio track. First, turn on your computer's real graphics chip so motion stays silky smooth at sixty frames every second. Second, finish signing in and loading realistic fake sample data before recording even starts—zero spinners and zero real customer info. Third, let a smart script watch the live screen so every click or jump lands smoothly like an expert.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "Preparing clean fake data and hardware graphics before letting a smart script film silky-smooth, error-checked app clips."
+      },
       "keyTakeaways": [
         "Always enable hardware GPU acceleration (e.g., --use-gl=angle --use-angle=metal on Apple Silicon) instead of software SwiftShader.",
         "For ultra-smooth 60 fps product/WebGL footage, capture directly via canvas.captureStream(60) + MediaRecorder (VP9 @ 12–14 Mbps) and transcode to constant-60fps H.264 with FFmpeg.",
@@ -182,6 +263,7 @@
         "filename": "scripts/capture-60fps-snippet.mjs",
         "code": "const browser = await chromium.launch({\n  headless: true,\n  args: [\n    \"--no-sandbox\",\n    \"--use-gl=angle\",\n    \"--use-angle=metal\",\n    \"--enable-webgl\",\n    \"--ignore-gpu-blocklist\",\n  ],\n});\n\n// Capture native 60fps stream directly after setup completes\nconst stream = canvas.captureStream(60);\nconst rec = new MediaRecorder(stream, {\n  mimeType: \"video/webm;codecs=vp9\",\n  videoBitsPerSecond: 14_000_000,\n});"
       },
+      "mermaidDiagram": "flowchart LR\n    A[\"1. Load Clean Fake Data\\n& Finish Setup First\"] --> B[\"2. Turn On Real\\nGraphics Power\"]\n    B --> C[\"3. Smart Script Operates\\nApp at Silky Smooth Speed\"]\n    C --> D{\"Zero Glitches or\\nErrors Found?\"}\n    D -->|\"Yes\"| E[\"Save Crisp Clip\\nfor Timeline\"]\n    D -->|\"No\"| C",
       "promptId": "vid-prompt-capture-script"
     },
     {
@@ -190,6 +272,20 @@
       "title": "Step 5: Pro Editing Craft, Motion Polish & FFmpeg Audio Mastering",
       "stageTag": "Build & Master",
       "summary": "Stacking slides in sequence creates a PowerPoint; applying editorial rhythm, audio bridges, spring choreography, and broadcast loudness normalization turns code into cinema.",
+      "eli5": {
+        "plainTitle": "Pro Editing Rhythm, Smooth Transitions & Clean Audio Volume",
+        "oneLineHook": "Keep visuals moving every few seconds, let sound lead into scene changes, and balance volume so it sounds great everywhere.",
+        "everydayAnalogy": "A skilled chef plating a dish cleanly and checking the seasoning before serving it to guests.",
+        "simpleExplanation": "Simply sticking five scenes end-to-end feels like a slideshow, not a movie. Four classic editing habits make your video feel truly professional: change something visual every three to five seconds so eyes never get bored, start the next scene's sound a split-second early so cuts feel seamless, keep all text comfortably inside safe screen margins so nothing gets clipped on phones, and level the final audio volume automatically so your video never blasts speakers or whispers too softly.",
+        "whyItMatters": "Even brilliant visuals feel amateur if a static screen drags on for twelve seconds, text gets cut off by phone buttons, or viewers have to scramble for their volume knob between quiet voices and loud music.",
+        "roleInProtocol": "This is the Finishing & Mastering step of the Video Studio. One reusable export script automatically adapts your layouts for both widescreen and phone screens, ducks background music neatly under voices, and packages the video so it starts playing instantly on the web.",
+        "howToUseGoingForward": "Before exporting any final video, check that no screen sits frozen for more than five seconds, verify your layout adapts cleanly to vertical phone screens, and run your automated audio-leveling script every time.",
+        "whenToUse": "Use this right after all your scenes are assembled and before generating your final shareable video files for websites, YouTube, LinkedIn, or mobile feeds.",
+        "realWorldExample": "You finish assembling a 90-second feature explainer. Adding a quarter-second voice lead-in before each cut, keeping text inside safe phone margins, and running the one-command volume leveling script turns it from a flat screen recording into a launch-day showstopper.",
+        "audioScript": "Putting five scenes in a row gives you a slideshow. Adding real editing rhythm turns it into cinema. Four simple habits create that pro feel. First, follow the three-to-five second rule: zoom in, highlight a step, or change camera angle every few seconds so the screen never feels frozen. Second, let the next scene's voice or sound start a fraction of a second before the picture cuts—editors call this an audio bridge, and it makes transitions feel effortless. Third, keep important words inside safe margins so phone interfaces never cover them. Finally, run one automated sound-leveling pass so your video sounds balanced and starts playing instantaneously on every device.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "Four finishing habits—fresh visual beats, smooth audio bridges, phone-safe layouts, and balanced sound—that elevate code into cinema."
+      },
       "keyTakeaways": [
         "The 3-to-5 Second Visual Beat Rule: shift something meaningful every 3–5 seconds (zoom to control, highlight diagram node, switch camera angle, slam a callout badge). Never hold a dead static screen for 10+ seconds.",
         "J-Cuts & L-Cuts: start the next scene's audio riser or VO 0.25–0.45s before the visual cut so scene transitions flow cinematically.",
@@ -205,7 +301,8 @@
         "language": "bash",
         "filename": "scripts/master-export.sh",
         "code": "ffmpeg -y -i out/teaser-16x9-raw.mp4 \\\n  -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 18 -preset medium -movflags +faststart \\\n  -af \"loudnorm=I=-14:TP=-1.0:LRA=11\" \\\n  -c:a aac -b:a 256k -ar 48000 \\\n  out/teaser-16x9-master.mp4"
-      }
+      },
+      "mermaidDiagram": "flowchart LR\n    S[\"Assembled Scenes\"] --> R[\"Fresh Visual Beat\\nEvery 3 to 5 Seconds\"]\n    R --> J[\"Audio Leads Slightly\\nInto Scene Cuts\"]\n    J --> L[\"Safe Margins for\\nWidescreen & Phone\"]\n    L --> M[\"Balanced Audio Volume\\n& Instant Web Playback\"]"
     },
     {
       "id": "vid-step-7-visual-qa-enterprise-scale",
@@ -213,6 +310,20 @@
       "title": "Steps 6–7: Keyframe Contact-Sheet QA & Enterprise Localization Scale",
       "stageTag": "QA & Scale",
       "summary": "Never render a 4K master blind. Run a deterministic visual QA contact sheet across every act before final encode, pass the silent-autoplay test, and unlock one-command quarterly UI refreshes and global multi-language renders.",
+      "eli5": {
+        "plainTitle": "Picture-by-Picture Quality Checks & Easy Global Updates",
+        "oneLineHook": "Inspect snapshot pictures of every scene in 15 seconds before rendering—and refresh or translate videos in one command later.",
+        "everydayAnalogy": "Checking photo proofs on a light table before printing a thousand magazines.",
+        "simpleExplanation": "Never wait five minutes for a full video export just to spot a clipped title on scene four. First, snap a quick contact sheet of still pictures from every scene and inspect them in fifteen seconds! Next, watch your video completely muted—since most people scroll social feeds without sound, visuals and captions must tell the whole story alone. Best of all, because your video is code, updating it after a redesign or translating it takes one clean re-render.",
+        "whyItMatters": "Catching overlapping text, cut-off labels, or missing captions on still proofs saves huge rendering time and embarrassment—and reusable code turns painful yearly video reshoots into quick afternoon refreshes.",
+        "roleInProtocol": "This is the Video Studio's Stage 4 Quality Gate and Scale Engine. Antigravity renders still proof frames automatically, inspects every single one for readability and privacy safety, and outputs widescreen, phone, and caption files together.",
+        "howToUseGoingForward": "Make the 15-second picture proof check and the Muted-Watch test mandatory before publishing any video. Keep all your text words in clean data files so translating or updating later requires zero manual re-editing.",
+        "whenToUse": "Use this right before every final video export—and again months later whenever your product gets a visual refresh or expands to new languages.",
+        "realWorldExample": "Three months after launch, your app ships a sleek new dashboard design and expands into Germany. Instead of hiring an agency to rebuild your launch video from scratch, you re-run your capture script, swap in the German script file, check the snapshot proofs, and export fresh widescreen and phone videos in minutes.",
+        "audioScript": "Never wait five minutes for a full video render just to spot a tiny cut-off word halfway through. Pro studios check photo proofs on a light table first. Have Antigravity snap a quick still picture at the middle and climax of every scene and inspect them in fifteen seconds to catch overlapping text, clipped edges, or accidental private data. Then do the silent autoplay test: watch your whole video muted, because most viewers first see it on silent social feeds. And here is the biggest payoff of building videos as code: when your app gets redesigned next quarter—or launches in three new languages—you just update the clips or words and re-render cleanly.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "Catching glitches early on still proofs, passing the silent-watch test, and reusing code for fast refreshes and translations."
+      },
       "keyTakeaways": [
         "Keyframe Contact-Sheet Audit: render PNG stills at the midpoint and climax of every scene with `remotion still` and inspect them in Antigravity to catch clipped labels, divider overlaps, sheen box edges, or wrong capture trim offsets in 15 seconds instead of after a 5-minute encode.",
         "Silent-Autoplay Test: watch the entire export muted—over 70% of LinkedIn, Slack, and enterprise portal viewers first encounter video without sound, so visuals + captions must tell the complete story alone.",
@@ -229,6 +340,7 @@
         "filename": "scripts/qa-contact-sheet.sh",
         "code": "for frame in 160 560 990 1200 1510 1860 2140 2520; do\n  pnpm exec remotion still src/index.ts Master16x9 \"out/qa-frames/f-${frame}.png\" --frame=\"${frame}\" --log=error\ndone"
       },
+      "mermaidDiagram": "flowchart TD\n    R[\"1. Snap Still Proof Pictures\\nof Every Scene\"] --> Q{\"Look Clean, Readable\\n& Privacy-Safe?\"}\n    Q -->|\"No\"| F[\"Fix Scene in Seconds\\n& Re-Check Proof\"]\n    F --> Q\n    Q -->|\"Yes\"| M[\"2. Pass Silent-Watch Test\\n+ Export All Formats\"]\n    M --> S[\"3. One-Command Future\\nRefreshes & Translations\"]",
       "promptId": "vid-prompt-visual-qa"
     }
   ],
@@ -236,10 +348,12 @@
     {
       "id": "vid-prompt-creative-brief",
       "title": "Stage 1–2: Creative Brief & Machine-Readable Storyboard",
+      "eli5Title": "Plan My Product Video Story & Scene List Before Animating",
       "stage": "spec",
       "difficulty": "beginner",
       "skillRef": "cf-grill-me",
       "description": "Interview stakeholders to lock audience, transformation, runtime, Zoom-In/Zoom-Out narrative arc, and a frame-accurate JSON storyboard spec before building a single scene.",
+      "whenToUse": "Copy this at the very start of a new video so Antigravity interviews you, drafts an easy-to-speak script, and locks a clear scene plan before building.",
       "template": "Act as a Senior Enterprise Video Creative Director. We are building a {{runtime_seconds}}-second product video for {{product_name}} aimed at {{audience}}.\n\n1. Interview me (max 5 crisp questions) to lock the single core transformation, visual tone ({{visual_style}}), and live product proof points.\n2. Draft a spoken-word script written for the ear (<= 145 WPM, sentences <= 16 words) using the 5-act Zoom-In / Zoom-Out structure.\n3. Compile a locked machine-readable storyboard at `plans/{{video_slug}}-spec.json` with exact 60fps frame ranges, visual layers (Remotion diagram / Playwright capture / AI metaphor), on-screen headlines (<= 7 words), camera motions, and SFX cues.\n4. Do not render or scaffold code until I approve the storyboard.",
       "variables": [
         {
@@ -278,9 +392,11 @@
     {
       "id": "vid-prompt-studio-scaffold",
       "title": "Step 0: Scaffold Reusable Code-as-Video Studio",
+      "eli5Title": "Set Up My Reusable Brand-Locked Video Studio Folder",
       "stage": "architecture",
       "difficulty": "intermediate",
       "description": "Initialize a clean Remotion + Playwright + FFmpeg studio repository locked to your product's real color palette, fonts, spring physics, and 16:9 + 9:16 responsive compositions.",
+      "whenToUse": "Copy this once per product to build a reusable video folder with your real brand colors, fonts, smooth springs, and widescreen plus phone layouts.",
       "template": "Scaffold a reusable Code-as-Video studio at `{{studio_path}}` using Remotion (60 fps), TypeScript, Playwright, QRCode, and FFmpeg (MIT/Apache-2.0 only).\n\n1. Inspect `{{product_repo_path}}` (read-only) and extract the real brand hex palette, font files, logos, and assets into `brand/tokens.ts`, `brand/brand-bible.md`, and `public/`.\n2. Create reusable motion primitives (`FontLoader`, `FilmGrainOverlay`, `StampBadge`, `QrCodeCard`) using damped spring physics (no linear easing) and WCAG 4.5:1 contrast inside 10% title-safe zones.\n3. Register both responsive `16x9` (1920x1080) and `9x16` (1080x1920) compositions in `src/Root.tsx` plus an FFmpeg `-14 LUFS` + `+faststart` mastering script at `scripts/master-export.sh`.\n4. Ask for my approval before installing npm dependencies.",
       "variables": [
         {
@@ -301,9 +417,11 @@
     {
       "id": "vid-prompt-capture-script",
       "title": "Step 4: 60fps Hardware-GPU Pro UI Capture Script",
+      "eli5Title": "Record Butter-Smooth Live App Footage Automatically",
       "stage": "build",
       "difficulty": "senior",
       "description": "Build a Playwright script using hardware Metal/WebGL acceleration and closed-loop state awareness so product footage looks like an expert operator—zero stutter, zero PII, zero fumbles.",
+      "whenToUse": "Copy this when you need crisp, stutter-free clips of your real app or game using safe fake data and smart automated clicks—zero loading spinners.",
       "template": "Write `scripts/capture-product.mjs` to capture silky-smooth 60 fps product clips from `{{app_url}}` for scenes `{{scene_list}}`.\n\nRequirements:\n1. Launch Chromium with hardware GPU acceleration (`--use-gl=angle --use-angle=metal` on macOS, never software SwiftShader) and verify ~60 rAF FPS.\n2. Seed 100% synthetic enterprise demo data and finish all navigation BEFORE recording begins (zero loading spinners or teleports in the clip).\n3. Use smooth, closed-loop interactions (reading live DOM/app state rather than blind timeouts) and record at native 60 fps (`canvas.captureStream(60)` for WebGL or high-DPI viewport capture).\n4. Log exact millisecond timestamps of key hero interactions into `public/clips/clip-metadata.json` and assert zero console errors or failed interactions before exiting.",
       "variables": [
         {
@@ -324,9 +442,11 @@
     {
       "id": "vid-prompt-beat-sync",
       "title": "Step 3: Audio Beat-Map & Frame-Exact Sync",
+      "eli5Title": "Match My Video Cuts & Big Moments to the Exact Music Beat",
       "stage": "build",
       "difficulty": "intermediate",
       "description": "Analyze your soundtrack or voiceover to find exact millisecond peaks and align hero visual cuts, jumps, and title slams within 1 frame of the audio.",
+      "whenToUse": "Copy this right after picking your soundtrack or voiceover so key jumps, scene changes, and headlines land right on the beat.",
       "template": "Analyze `{{audio_file}}` using FFmpeg + Python RMS onset detection (and/or word-level transcription) to locate exact timestamps for the key vocal hooks or beat drops around `{{target_window_sec}}`.\n\n1. Choose the optimal `soundtrackStartSeconds` offset so the main chorus or vocal hook lands directly on our hero product climax scene (`{{climax_scene}}`).\n2. Compute exact 60 fps frame numbers (`Math.round((hitSec - startSec) * 60)`) and wire them into `src/compositions/` and the climax scene so visual impacts, beat rings, and transitions fire on the exact syllable.\n3. Keep micro-SFX subtle (-18 to -24 dB) and clear of vocals so lyrics/narration stay crystal clear.",
       "variables": [
         {
@@ -353,10 +473,12 @@
     {
       "id": "vid-prompt-visual-qa",
       "title": "Step 6: Keyframe Contact-Sheet Visual QA & Master Render",
+      "eli5Title": "Run a Picture-by-Picture Visual Check & Export Final Videos",
       "stage": "test",
       "difficulty": "intermediate",
       "skillRef": "cf-qa-review",
       "description": "Render PNG stills at the midpoint and climax of every scene, audit them visually for overlaps, contrast, and capture timing, fix defects, and master 16:9 + 9:16 exports to -14 LUFS.",
+      "whenToUse": "Copy this right before your final render to inspect snapshot proofs of every scene, fix any clipped text, and export balanced widescreen and phone masters.",
       "template": "Run a full pre-master Visual QA pass on `{{composition_id}}` before encoding the final MP4s:\n\n1. Run `pnpm run typecheck` and render PNG keyframes at the midpoint and impact frame of every scene into `out/qa-frames/` using `remotion still`.\n2. Visually inspect EVERY rendered PNG for text overlap, clipped borders, contrast < 4.5:1, safe-margin violations, unintended menu frames inside UI clips, or shader/gradient edge artifacts.\n3. Fix all defects, re-verify the affected stills, then render both `16:9` and `9:16` H.264 masters and normalize audio to `-14 LUFS` / `-1.0 dBTP` with `+faststart` via `scripts/master-export.sh`.",
       "variables": [
         {

@@ -1,27 +1,24 @@
 # Session Handover Record
 
-**Timestamp:** 2026-11-25 01:43 UTC  
+**Timestamp:** 2026-11-25 04:28 UTC  
 **Active Model:** Gemini 4 Neon (High)  
-**Git Branch & Commit:** `main` (`4423c54`, synced with `origin/main`; only `.memory/` modified)
+**Git Branch & Commit:** `main` (uncommitted working tree — ready for review/commit/deploy after user sign-off; local preview live on `http://localhost:3000`)
 
 ## 1. Executive Summary
-Completed **`code-factory` v2.3.0** (Vibe Coding whitepapers + Lit Software Factory & Loop Engineering protocol, `cf-loop-engineer`, `cf-eval`, Courses 01–04) alongside Courses 05–06 (`2e31d5d`, `4423c54`) and deployed all **6 courses & 37 resources** live to **https://antigravity-academy-ten.vercel.app**. Tests green: `29/29` Vitest, `12/12` Python hooks.
+Completed the full **8-Course ELI5 + 4-Part Microlearning + Multimodal Academy Upgrade** (`Courses 00–07`, `53/53` ELI5 steps, `53/53` plain-English Mermaid diagrams, `8/8` concrete architectural cutaway illustrations, `43/43` prompts with `Use This Prompt When:` triggers) plus the rebuilt **Coherent 4-Layer Antigravity Operating Model** (`7 Agent Modes` + `8 Shared Building Blocks`). Stage 4 QA Verdict: **`SHIP`** (`58/58` Vitest, `12/12` Python hooks, `0` High/Critical CVEs, `1440/768/375px` live browser QA PASS).
 
 ## 2. Completed Items
-- **Lit Factory Protocol (`0a4cda9`, `v2.3.0`):** Synthesized Google/Kaggle 5-Day Vibe Coding Whitepapers + Osmani's Fall 2026 O'Reilly Radar arc in `.memory/research-vibe-coding-lit-factory.md`; added `rules/AGENTS.md` Section 8 (`8.5 KB`), `skills/cf-loop-engineer/`, `skills/cf-eval/`, updated `cf-plan`, `cf-qa-review`, `orchestration.md`, `plugin.json`, and `sync-resources.ts`.
-- **Courses 01–06 Live (`0a4cda9`, `2e31d5d`, `4423c54`):** Enriched Courses 01–03, added Courses 04 (`lit-software-factory`), 05 (`notebooklm-antigravity`), and 06 (`enterprise-product-video-studio` + `/media/gt-alpaca-teaser-16x9.mp4`), plus Mermaid strict-SVG fix.
-- **Vercel Deploy & Verification:** Aliased `antigravity-academy-iai5pp4q4-nexite-os.vercel.app` → `https://antigravity-academy-ten.vercel.app`; 5/5 smoke tests pass (`/` 200, 6 courses, 37 resources, `/api/hitl/simulate` `force_ask` + 400), `29/29` Vitest, `12/12` Python hooks, `0` High/Critical CVEs. Rollback: `cd academy && vercel rollback https://antigravity-academy-b12a4z41p-nexite-os.vercel.app --yes --scope nexite-os`.
+- **Spec & ADR:** Locked `plans/eli5-multimodal-academy-spec.md` + `.memory/decisions/0003-eli5-multimodal-microlearning-architecture.md` via `cf-architect`.
+- **Coherent 4-Layer Architecture Explorer:** Replaced abstract 3D dot orbit in `HeroShowcase.tsx` with `AntigravityArchitectureExplorer.tsx` + `contracts.ts` (`5` Steering Commands → `7` Agent Modes `01 Just Ask`..`07 Teamwork` with literal SVG schematics & `Use When`/`Do NOT Use When` → `8` Shared Building Blocks across `Tools & Hands`, `Memory & Knowledge`, `Safety & Guardrails`).
+- **Multimodal ELI5 UI:** Built `CourseIllustrationBanner.tsx`, `AudioExplainerBar.tsx`, `Eli5MicrolearningCard.tsx`, framed Active Course Stage, `Open Course`/`Viewing Now` & `Open Lesson`/`Close Lesson` affordances, `End of Step` progression bar, and `Start Simple (ELI5)` / `Full Pro View` mode toggle.
+- **4-Worker Swarm (`Courses 00–07`) + 8 Concrete Studio Illustrations:** Ran zero-overlap Swarm (`swarm-foundations`, `swarm-ops`, `swarm-media`, `swarm-orchestration`) + `image-generator` flat-shaded studio cutaways (`academy/public/media/illustrations/*-studio.jpg`).
+- **Decoupled QA & Live Catches (`cf-learn`):** Fixed B1 WCAG contrast (`AntigravityArchitectureExplorer.tsx`), busted `.next/cache/images/` stale artwork cache, and fixed P0 `#prompt-vault` `opacity: 0` bug (`viewport={{ amount: 0.05 }}` on ~18,000px section) — permanently codified in `.agents/rules/academy-invariants.md`.
 
-## 3. Failed Approaches & Dead Ends
-- **`share.gemini.google` direct read:** Redirects to `accounts.google.com`; user must sign in in the browser pane before resuming the `browser` subagent.
-- **NotebookLM consumer API/MCP:** No official API; use `gdrive`/`gdocs`/`gslides` plugins and local exports instead of cookie-auth MCPs.
-- **Playwright `recordVideo` + SwiftShader & `gemini-3.1-flash-image` 503:** Replaced with `--use-angle=metal` + `canvas.captureStream(60)` and Remotion SVG.
+## 3. Key Modified Files
+- `plans/eli5-multimodal-academy-spec.md`, `.memory/decisions/0003-*.md`, `.memory/qa-report.md`, `.agents/rules/academy-invariants.md`
+- `academy/src/lib/{schemas,contracts,prompt-engine}.ts`, `academy/src/components/{AntigravityArchitectureExplorer,HeroShowcase,CourseIllustrationBanner,AudioExplainerBar,Eli5MicrolearningCard,CourseCurriculumStudio,PromptVault,AcademyShell,MermaidDiagram}.tsx`
+- `academy/content/courses/*/course.json` (Courses `00`–`07`), `academy/public/media/illustrations/*-studio.jpg`, `academy/tests/{schemas-and-prompts,components,api-routes}.test.ts`
 
-## 4. Key Modified Files
-- `rules/AGENTS.md`, `plugin.json`, `skills/cf-{loop-engineer,eval,plan,qa-review,implement}/*`
-- `academy/content/courses/*/course.json` (Courses 01–06), `academy/scripts/sync-resources.ts`, `academy/tests/api-routes.test.ts`
-- `.memory/{research-vibe-coding-lit-factory,tasks,handover}.md`
-
-## 5. Next Step Action Plan
-1. Optionally commit `.memory/handover.md` and `.memory/tasks.md` for a clean working tree.
-2. Start **`code-factory` v3.0 Phase 1** (`.memory/research.md`): two-stage `PostToolUse` → `PreInvocation` lint bridge and `SessionStart` `.memory/` auto-injection, or add `/media/*.mp4` videos to Courses 01–05.
+## 4. Next Step Action Plan
+1. Discuss & decide on the user's proposed **Visual Icon / Emblem Language** (inspired by the uploaded `/swarm`, `/teamwork`, `/boost` graphic) for differentiating courses & modes.
+2. When approved: commit all changes, push to `origin/main`, and run HITL-gated Stage 5 Vercel production deploy (`cd academy && vercel --prod`).

@@ -17,6 +17,7 @@ function normalizeProgress(progress: LearnerProgress): LearnerProgress {
     bookmarkedPromptIds: deduplicateStrings(progress.bookmarkedPromptIds),
     promptVariableValues: progress.promptVariableValues,
     activeHarnessMode: progress.activeHarnessMode,
+    learningDepthMode: progress.learningDepthMode,
     updatedAt: progress.updatedAt,
   };
 }
@@ -28,6 +29,7 @@ export function createDefaultProgress(nowIso?: string): LearnerProgress {
     bookmarkedPromptIds: [],
     promptVariableValues: {},
     activeHarnessMode: "code-factory-v3",
+    learningDepthMode: "eli5",
     updatedAt: nowIso ?? new Date().toISOString(),
   };
 }

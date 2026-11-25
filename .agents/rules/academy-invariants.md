@@ -10,6 +10,7 @@ Permanent project-local rules distilled from Stage 1–5 discovery, QA review, a
 ## 2. Glassmorphism Accessibility & WAI-ARIA Integrity
 - **Verify contrast mathematically on tinted glass & CTA tokens:** Keep normal-text contrast `>= 4.5:1` (e.g., `--color-cyan-deep` must remain `<= #0369a1` when paired with `#f8fafc`). Never use literal hex colors in component markup or CSS gradients—reference `@theme` tokens via `var(--color-*)`.
 - **Valid WAI-ARIA Roles Only:** Never place non-tab cards or buttons inside `role="tablist"`. Use `role="group"` + `aria-pressed` for filter/course selectors unless every `role="tab"` is explicitly paired via `id` / `aria-controls` / `aria-labelledby` with a `role="tabpanel"`.
+- **Never Gate Tall Sections Behind Fractional `whileInView` Thresholds:** Never wrap multi-screen sections (e.g., `CourseCurriculumStudio`, `PromptVault`, `repo-hitl`) in `motion` `initial={{ opacity: 0 }}` + numeric `viewport={{ amount: 0.05 }}`—when a section exceeds ~16,000px tall, `5%` exceeds viewport height so `IntersectionObserver` never fires and the section stays invisible forever. Render tall sections directly visible, or use `amount: "some"` only on compact single-screen blocks.
 
 ## 3. Dependency & License Hygiene
 - **Verify licenses in Stage 1 before installing:** Reject proprietary EULAs (e.g., GSAP Standard License) in favor of MIT/Apache-2.0/BSD/ISC packages (`motion`, `three`, `mermaid`, `zod`).

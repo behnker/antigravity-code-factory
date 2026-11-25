@@ -3,9 +3,17 @@
   "slug": "harness-mastery",
   "number": 1,
   "title": "Mastering the Agent Harness: Antigravity vs. Claude Code & Plugging the Gaps",
+  "eli5Title": "Building a Smart Workshop Around Your AI",
   "subtitle": "Master the 10% Model / 90% Harness equation from The New Software Lifecycle: Antigravity's 4 surfaces, 3-tier orchestration, fail-closed hooks, Context Economics, and upgrades that leapfrog Claude Code.",
+  "eli5Tagline": "An AI brain is only 10% of the magic. Learn how to build a simple, safe workshop around it—rules, safety alarms, checklists, and helper teams—so it builds reliable software every time.",
+  "illustration": {
+    "src": "/media/illustrations/harness-mastery-studio.jpg",
+    "alt": "Architectural cutaway of a modern builder studio: a person at a clean workbench with a 1-page checklist, a live phone-tablet-desktop screen ahead, a flow whiteboard and binder bookshelf on the left, and a tool pegboard plus green traffic-light safety door on the right.",
+    "caption": "Every part of a smart AI workshop in one room: short desk checklist, bookshelf guides, tool wall, traffic-light safety door, and live phone/tablet/desktop screen checks.",
+    "visualAnalogy": "A Well-Organized Studio (Rules, Bookshelf, Tools, Safety Door & Live Screen)"
+  },
   "level": "all-levels",
-  "estimatedMinutes": 65,
+  "estimatedMinutes": 35,
   "threeScenePreset": "harness-constellation",
   "accentTone": "cyan",
   "tags": [
@@ -24,40 +32,40 @@
     "title": "Harness Deep Dive: Inside Antigravity vs. Claude Code",
     "durationLabel": "18:40",
     "provider": "coming_soon",
-    "posterLabel": "Course 01 Studio Walkthrough — 4 Surfaces, 12 Dimensions & Code Factory v3.0 Upgrades",
+    "posterLabel": "Course 01 Studio Walkthrough — Building a Smart Workshop Around Your AI",
     "chapters": [
       {
         "id": "ch1-harness-vs-model",
-        "title": "Harness vs. Model: 4 Surfaces & 3-Tier Orchestration",
+        "title": "Why Your AI Needs a Smart Workshop (10% Brain, 90% Setup)",
         "timestampSeconds": 0,
-        "summary": "Why engineering reliability depends more on tool loops, hooks, and sandboxing than raw LLM weights alone."
+        "summary": "Why reliable results come from rules, tools, and safety checks around the AI—not just a smarter brain."
       },
       {
         "id": "ch2-head-to-head",
-        "title": "12-Dimension Head-to-Head: Antigravity vs. Claude Code",
+        "title": "Comparing Two Workshops Honestly: Antigravity vs. Claude Code",
         "timestampSeconds": 285,
-        "summary": "Evidence-backed comparison of where Antigravity leads decisively and where Claude Code sets the bar."
+        "summary": "Where Antigravity already shines and what clever tricks we borrow from terminal-only tools."
       },
       {
         "id": "ch3-plugging-gaps",
-        "title": "Plugging the 4 Core Gaps with Code Factory v3.0",
+        "title": "4 Easy Upgrades That Catch Mistakes Automatically",
         "timestampSeconds": 610,
-        "summary": "Two-stage PostToolUse to PreInvocation bridge, Git-Shadow checkpoints, Unix-socket sidecar, and LSP-over-MCP."
+        "summary": "Instant spellcheck notes, magic undo snapshots, quiet background logging, and code reading glasses."
       },
       {
         "id": "ch4-exceeding",
-        "title": "Leapfrogging Terminal Harnesses with run_workflow & MCP Apps",
+        "title": "Running a Team of Helpers at the Same Time",
         "timestampSeconds": 890,
-        "summary": "Typed Python async orchestration, live swarm model hot-swapping, and interactive Mission Control panes."
+        "summary": "Repeatable quality pipelines, swapping a stuck helper's brain live, and visual progress boards."
       },
       {
         "id": "ch5-context-economics",
-        "title": "Context Engineering & Routing Economics (Days 2-3 Skills + MCP)",
+        "title": "Keeping Your AI's Desk Tidy (Sharper Answers, Lower Cost)",
         "timestampSeconds": 1060,
-        "summary": "Static rules vs. progressive-disclosure skills and model routing as direct quality and financial levers."
+        "summary": "Short desk rules vs. bookshelf guides, plus matching fast vs. deep-thinking AI models to each job."
       }
     ],
-    "transcriptSummary": "In this studio walkthrough we dissect Google Antigravity as an engineering agent harness—separating the orchestration runtime, tool loop, lifecycle hooks, memory architecture, and sandbox containment from the underlying model weights. Grounded in our live repository research (.memory/research.md), we evaluate all 12 harness dimensions against Anthropic's Claude Code. You will inspect the real silent tools: frontmatter footgun we uncovered in agents/cf-*.md, learn why returning {} from Antigravity's PreToolUse hook fails closed, and build the exact four upgrades that close every parity gap: a two-stage PostToolUse to PreInvocation feedback bridge, non-destructive Git-Shadow checkpoints, a <10ms Unix-socket sidecar daemon, and a companion LSP-over-MCP plugin. Finally, we harness Antigravity's asymmetric superpowers—embedded Python run_workflow pipelines with JSON-schema finish gates, swarm model hot-swapping, and MCP App Mission Control—to exceed terminal-only harnesses."
+    "transcriptSummary": "In this walkthrough we explain how to turn a raw AI model into a reliable software-building workshop. You will learn why the setup around the AI matters more than the AI brain alone, how to compare tools honestly, how safety locks and tool belts protect your computer, how four simple add-ons catch typos in two seconds, how to run a team of AI helpers side by side, and how keeping your AI's desk tidy gives you sharper answers at a lower cost."
   },
   "steps": [
     {
@@ -66,6 +74,20 @@
       "title": "Harness vs. Model: Antigravity's 4 Surfaces & 3-Tier Orchestration",
       "stageTag": "Foundations",
       "summary": "As Google & Kaggle's 'The New SDLC With Vibe Coding' and Addy Osmani's 'The New Software Lifecycle' establish: Agent = Model (10%) + Harness (90%). Production reliability comes from tools, hooks, sandboxes, context budgets, and Antigravity's 4 surfaces atop 3 orchestration tiers.",
+      "eli5": {
+        "plainTitle": "Why Your AI Needs a Smart Workshop (10% Brain, 90% Setup)",
+        "oneLineHook": "Even the smartest chef cannot cook in an empty room—the setup around your AI does 90% of the work.",
+        "everydayAnalogy": "A master chef (the AI brain) inside an organized smart kitchen (the workshop).",
+        "simpleExplanation": "Imagine hiring the smartest chef in the world, then putting them in an empty room with no stove, no recipe card, and no smoke alarm. They still could not make dinner! In AI software building, the AI brain is the chef—and that is only 10% of the result. The other 90% is the smart workshop around it: clear rules, safe tools, safety alarms, and helper teammates.",
+        "whyItMatters": "When an AI makes a messy mistake, people usually blame the AI brain. Nine times out of ten, the real problem is a cluttered workshop with missing rules, wrong tools, and zero safety checks before work is saved.",
+        "roleInProtocol": "This is the #1 idea behind the entire Antigravity Code Factory. Instead of crossing your fingers and hoping a chat prompt works, the workshop gives your AI a rulebook, safe hands, a live browser to check its own work, and teammates when a job gets big.",
+        "howToUseGoingForward": "Before asking AI to build something new, spend two minutes checking your workshop first: make sure your house rules are clear, pick the right helper size (1 helper for small jobs, a team for big ones), and whenever a bug happens, upgrade your rules so it never repeats.",
+        "whenToUse": "Use this mindset on Day 1 of ANY new project—or anytime an AI keeps repeating the same mistake. Stop rewriting the same chat message five times; instead, add one clear rule or check to your workshop.",
+        "realWorldExample": "You want to build a simple personal budget app. Instead of typing 'build me a budget app' into a blank chat, you first drop a 5-line rule note in your folder ('use clean buttons, check every form, never delete my saved data') and let one helper plan while another checks the screen.",
+        "audioScript": "Welcome to Lesson One. Here is the single most important idea in this whole academy. Imagine hiring the smartest chef in the world, then putting them in an empty room with no stove, no knives, no recipe card, and no smoke alarm. Even a genius chef cannot cook dinner there. When you build software with AI, the AI brain is the chef, and that is only about ten percent of getting great results. The other ninety percent is the smart workshop around it, which engineers call the harness. Your workshop gives the AI clear house rules, safe tools, smoke alarms before risky moves, and extra helpers when a job gets big. Use this mindset every time you start a project or notice the AI slipping up: do not just yell at the chef—upgrade the kitchen so every future build gets easier and safer.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "How you direct your AI inside a smart workshop—choosing 1 helper or a team while safety checks protect every step."
+      },
       "keyTakeaways": [
         "Agent = Model (10%) + Harness (90%): Most real-world agent failures are harness failures (noisy context, missing tools, weak oracles, unguarded shell commands), not model intelligence failures.",
         "Antigravity spans 4 surfaces: Electron Mission Control (Antigravity 2.0), VS Code IDE (Tab/Supercomplete, Inline Cmd+I, Diff Overlays), agy TUI CLI, and the async google-antigravity Python SDK.",
@@ -77,7 +99,7 @@
         "Toggle between 'Raw Antigravity' and 'Antigravity + Code Factory v3.0' in the 3D Harness Constellation above.",
         "Map your team's daily tasks to the right tier: 1-off research -> Subagent; parallel feature modules -> Swarm; repeatable multi-gate pipelines -> run_workflow."
       ],
-      "mermaidDiagram": "flowchart TD\n    U[\"Engineer (IDE / App / CLI / SDK)\"] --> O[\"Orchestrator Core (20k Rules Budget)\"]\n    O --> T1[\"Tier 1: Subagents (define_subagent + Reactive Wakeup)\"]\n    O --> T2[\"Tier 2: Swarm Board (share/branch + Live Model Hot-Swap)\"]\n    O --> T3[\"Tier 3: run_workflow (Python Async + JSON Schema Gate)\"]\n    T1 --> S[\"OS Terminal Sandbox + PreToolUse Hooks\"]\n    T2 --> S\n    T3 --> S\n    S --> V[\"Browser Eye + Artifacts + MCP Apps\"]",
+      "mermaidDiagram": "flowchart TD\n    U[\"You (The Director)\"] --> K[\"Smart Workshop (Rules + Tools + Safety)\"]\n    K --> T1[\"1 Specialist Helper (Quick Focused Job)\"]\n    K --> T2[\"Team Board / Swarm (Helpers Side by Side)\"]\n    K --> T3[\"Saved Assembly Line (Repeatable Recipe)\"]\n    T1 --> S[\"Safe Practice Room + Safety Alarms\"]\n    T2 --> S\n    T3 --> S\n    S --> V[\"Visual Check in Browser + Finished App\"]",
       "repoArtifactPath": ".memory/research.md",
       "promptId": "hm-prompt-harness-audit"
     },
@@ -87,6 +109,20 @@
       "title": "Head-to-Head Reality Check: Antigravity vs. Claude Code",
       "stageTag": "Benchmark",
       "summary": "An honest staff-engineer appraisal across 12 harness dimensions reveals complementary philosophies. Antigravity is an agent-first, multi-surface visual orchestration platform; Claude Code is a precision-engineered UNIX terminal harness with deeper built-in hooks, native LSP, and auto-memory.",
+      "eli5": {
+        "plainTitle": "Comparing Two AI Workshops Honestly (Keep the Best of Both)",
+        "oneLineHook": "No tool is perfect out of the box—score your setup honestly so you keep its strengths and plug its weak spots.",
+        "everydayAnalogy": "Comparing a bright movie-studio control room against a razor-sharp pocket knife.",
+        "simpleExplanation": "Different AI tools have different superpowers. Think of Antigravity like a bright visual control room where you can direct a team of helpers and watch a live web browser test your app. Think of Claude Code like a super-fast pocket knife built for typing quick commands in a plain text window. Both are great—and neither is perfect at everything right out of the box.",
+        "whyItMatters": "Beginners often jump from tool to tool chasing hype. When you know honestly what your current workshop already does best—and the exact few things it is missing—you can add those missing pieces calmly instead of starting over.",
+        "roleInProtocol": "This step gives us our 12-point Workshop Report Card. By grading Antigravity honestly, the Code Factory protocol pinpoints the exact four add-ons that give you Antigravity's visual teamwork PLUS the tight safety and memory tricks of text-only tools.",
+        "howToUseGoingForward": "Whenever you join an existing project or feel your AI workflow slowing down, run a quick 5-minute Workshop Health Check to spot your top two bottlenecks and fix those first.",
+        "whenToUse": "Use this whenever you open an existing project folder for the first time, or when your AI feels sluggish, forgetful, or error-prone and you want a clear checklist of what is missing.",
+        "realWorldExample": "You inherit a small website folder from a friend. You run the Workshop Health Check prompt and immediately see two gaps: there is no rulebook explaining how to run tests, and no safety alarm preventing accidental live publishes. Fixing just those two cuts errors in half.",
+        "audioScript": "Let us compare two popular AI workshops honestly, with zero hype. Picture comparing a bright movie-studio control room against a razor-sharp pocket knife. Antigravity is the visual control room: right out of the box, it excels at running teams of helpers side by side, checking real web pages in a built-in browser, and showing visual diagrams. Claude Code is the fast pocket knife in a text window: out of the box, it shines at automatic mini-checks after every edit and automatic memory notes. Here is the great news: you do not have to give up visual superpowers to get tight safety checks. By grading your workshop honestly, you keep what already wins and plug just the four small gaps that matter most.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "How the Code Factory combines Antigravity's visual teamwork with the sharpest ideas from text-window tools."
+      },
       "keyTakeaways": [
         "Where Antigravity leads decisively: 3-tier multi-agent orchestration (run_workflow + swarm), built-in multimodal Browser subagent with tamper-resistant BROWSER_HOST_FACTS, Artifacts/Generative UI/MCP Apps, and declarative sidecar.json daemons.",
         "Where Claude Code leads out of the box: 25–30+ lifecycle hook events with 5 handler types (command/http/prompt/agent/mcp_tool), native LSP & Glob/Grep tools, built-in Auto Memory (MEMORY.md) + PreCompact hooks, MDM/GPO managed settings, and hard maxBudgetUsd circuit breakers.",
@@ -97,6 +133,7 @@
         "Compare the Raw Antigravity score against Antigravity + Code Factory v3.0 across each dimension.",
         "Identify the top 2 harness bottlenecks currently slowing down your primary repository."
       ],
+      "mermaidDiagram": "flowchart LR\n    A[\"Antigravity Strengths\\n(Teams, Live Browser, Visual Studio)\"] --> M[\"Workshop Upgrade Plan\"]\n    B[\"Best Ideas From Text-Window Tools\\n(Auto-Checks, Memory, Undo Safety)\"] --> M\n    M --> W[\"One Unified Workshop\\n(Visual Power + Tight Safety)\"]",
       "repoArtifactPath": ".memory/research.md",
       "promptId": "hm-prompt-harness-audit"
     },
@@ -106,6 +143,20 @@
       "title": "Critical Audit: Fixing the Silent tools: Footgun & Fail-Closed PreToolUse Hooks",
       "stageTag": "Security & Guardrails",
       "summary": "Direct codebase inspection of Code Factory v2.1.0 uncovered two subtle, high-impact Antigravity internals that every plugin author must master: omitted tools: in custom agents/*.md silently downgrade workers to read-only, and returning {} from a PreToolUse hook fails closed.",
+      "eli5": {
+        "plainTitle": "Safety Locks & Tool Belts (Keeping Your Computer Safe)",
+        "oneLineHook": "Give each AI helper only the tools their job needs, and put a strict door guard in front of risky actions.",
+        "everydayAnalogy": "A workshop door guard who locks the door unless you show a clear colored pass.",
+        "simpleExplanation": "Every AI helper needs two clear safety rules. First, a written tool belt: if a helper is only supposed to review your plan, give them reading glasses, not a hammer—and remember to list a builder's tools explicitly, or Antigravity quietly takes their hammer away! Second, a door guard: before any risky command runs, the guard must reply clearly—Allow, Ask Me First, or Block. If the guard ever leaves a blank note, the door locks shut automatically to stay safe.",
+        "whyItMatters": "Without clear tool belts and strict door guards, a tiny mistake can either leave your builders stuck unable to save files, or accidentally delete important folders or publish unfinished work to the internet.",
+        "roleInProtocol": "This is your workshop's security shield. It splits multi-step commands apart and checks every single piece before anything runs—so safe daily checks run automatically while big moves like deleting files or publishing live always pause for your thumbs-up.",
+        "howToUseGoingForward": "Whenever you create a new custom helper, explicitly list the exact tools it needs. And before running any new project with risky deploy or delete commands, confirm your safety guard pauses and asks you first.",
+        "whenToUse": "Use this BEFORE letting an AI run terminal commands on an important project, whenever you create a new custom helper role, or when you want extra protection around passwords, live websites, or databases.",
+        "realWorldExample": "You ask an AI helper to test a website update. It tries to run a safe practice test AND publish live in one combined command. Your door guard splits the two steps apart, lets the practice test pass, and pauses to ask your permission before publishing live.",
+        "audioScript": "Now let us look at how to keep your computer safe while letting AI move fast. Imagine a workshop with two simple rules: tool belts and a door guard. First, every specialist helper gets a written tool belt listing only what their job needs. A reviewer only gets reading tools; a builder gets editing tools. If you forget to write that list, Antigravity plays it safe and hides their building tools. Second, a door guard checks every terminal command before it runs, even splitting combined commands into separate pieces. Safe checks pass right through, risky moves like deleting folders or publishing live pause to ask you first, and if anything looks broken or blank, the door locks shut automatically.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "How the door guard inspects every step of an action—letting safe checks run fast while pausing risky moves for you."
+      },
       "keyTakeaways": [
         "Silent tools: Footgun: In Antigravity's agent spec, omitting `tools:` in `agents/cf-*.md` defaults the subagent to a tiny read-only set. Always declare explicit `subagent: true`, `mainAgent: false`, and least-privilege `tools:` lists.",
         "Fail-Closed PreToolUse Contract: Never return `{}` from a `PreToolUse` hook—Antigravity treats an empty object as a hard deny. Always emit an explicit `decision`: `allow`, `ask`, `force_ask`, or `deny`.",
@@ -122,6 +173,7 @@
         "filename": "hooks.json (Code Factory v3.0 Multi-Event Target)",
         "code": "{\n  \"hooks\": {\n    \"SessionStart\": [\n      { \"hooks\": [{ \"type\": \"command\", \"command\": \"python3 $PLUGIN_ROOT/hooks/session-hydrate.py\" }] }\n    ],\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"run_command\",\n        \"hooks\": [{ \"type\": \"command\", \"command\": \"python3 $PLUGIN_ROOT/hooks/hitl-gate.py\" }]\n      },\n      {\n        \"matcher\": \"edit_file|write_file\",\n        \"hooks\": [{ \"type\": \"command\", \"command\": \"python3 $PLUGIN_ROOT/hooks/secret-guard.py\" }]\n      }\n    ],\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"edit_file|write_file\",\n        \"hooks\": [{ \"type\": \"command\", \"command\": \"python3 $PLUGIN_ROOT/hooks/post-edit-lint.py\" }]\n      }\n    ],\n    \"PreInvocation\": [\n      { \"hooks\": [{ \"type\": \"command\", \"command\": \"python3 $PLUGIN_ROOT/hooks/inject-feedback.py\" }] }\n    ],\n    \"Stop\": [\n      { \"hooks\": [{ \"type\": \"command\", \"command\": \"python3 $PLUGIN_ROOT/hooks/stop-verify-gate.py\" }] }\n    ]\n  }\n}"
       },
+      "mermaidDiagram": "flowchart LR\n    A[\"Helper Requests an Action\"] --> B[\"Split Combined Steps Apart\"]\n    B --> C{\"Door Guard Checks Each Step\"}\n    C -->|\"Safe Read or Test\"| D[\"Allow Automatically\"]\n    C -->|\"Risky Publish or Delete\"| E[\"Pause and Ask You First\"]\n    C -->|\"Blank or Broken Note\"| F[\"Lock Door Safely\"]",
       "repoArtifactPath": "hooks/hitl-gate.py",
       "promptId": "hm-prompt-fix-agents-frontmatter"
     },
@@ -131,6 +183,20 @@
       "title": "Plugging the 4 Core Gaps: Feedback Bridge, Git-Shadow, Sidecar & LSP-over-MCP",
       "stageTag": "Architecture",
       "summary": "Because Antigravity's PostToolUse hook cannot return context directly and hooks run synchronously, we plug all four structural parity gaps cleanly using zero-dependency Python stdlib patterns plus an optional companion LSP plugin.",
+      "eli5": {
+        "plainTitle": "4 Easy Upgrades That Fix Tiny Mistakes in 2 Seconds",
+        "oneLineHook": "Add an instant spellcheck note, a magic undo button, a quiet background logger, and smart reading glasses.",
+        "everydayAnalogy": "A sticky-note tray, a magic undo button, a quiet helper, and reading glasses on your desk.",
+        "simpleExplanation": "Four small add-ons make your workshop feel effortless. First, a sticky-note tray: right after the AI edits one file, a 2-second checker spots typos and hands the AI a sticky note so it fixes them on its very next breath. Second, a hidden save-point button so you can always rewind cleanly. Third, a quiet background helper that logs notes without slowing you down. Fourth, smart reading glasses so the AI can jump straight to matching pieces in big folders.",
+        "whyItMatters": "Tiny typos are harmless if caught two seconds after you type them—but miserable if you only discover twenty of them an hour later. Instant feedback and automatic save points keep projects calm and predictable.",
+        "roleInProtocol": "These four modular add-ons turn Antigravity into a self-correcting workshop. Instead of you acting as a human spellchecker, the workshop catches small mistakes automatically before you even look at the screen.",
+        "howToUseGoingForward": "Add these upgrades one at a time as your projects grow. Start with the 2-second single-file checker first—it delivers the biggest instant boost in accuracy without slowing you down.",
+        "whenToUse": "Use this once you are comfortable with basic building and want your AI to automatically catch and fix typos, formatting slips, or broken links right after every single file edit.",
+        "realWorldExample": "Your AI edits a button label and accidentally leaves off a closing bracket. Within two seconds, the sticky-note checker hands back a 1-line note ('missing bracket on line 14'). On its very next step, the AI fixes it automatically before you ever see an error screen.",
+        "audioScript": "How do you turn a good AI workshop into one that fixes its own tiny mistakes? Picture adding four simple helpers to your desk. First, a sticky-note tray: the moment the AI saves a file, a fast two-second checker scans just that one file and leaves a short note for the AI's very next thought so typos vanish immediately. Second, an automatic undo snapshot right before big changes so you can rewind without fear. Third, a quiet background helper that writes activity logs without making you wait. And fourth, smart reading glasses so the AI finds matching files across large projects instantly. Start with the fast sticky-note checker whenever you want smoother, cleaner builds.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "The sticky-note loop: right after an edit, a 2-second checker leaves a short note so the AI fixes typos immediately."
+      },
       "keyTakeaways": [
         "Gap 1 — Two-Stage PostToolUse -> PreInvocation Bridge: PostToolUse runs a fast (<2s) single-file lint/typecheck and writes compact diagnostics to `$PLUGIN_DATA/feedback/<cid>.json`; PreInvocation drains and injects them via `injectSteps.systemMessage`.",
         "Gap 2 — Git-Shadow Checkpoints: Before the first mutating tool call per turn, run non-destructive `git stash create` and log `{stepIdx, sha}` to `$PLUGIN_DATA/checkpoints/<cid>.jsonl`—capturing even shell-mutated files.",
@@ -147,7 +213,7 @@
         "filename": "hooks/inject-feedback.py (Two-Stage PreInvocation Bridge)",
         "code": "#!/usr/bin/env python3\nimport json, os, pathlib, sys\n\ndef main() -> int:\n    payload = json.loads(sys.stdin.read() or \"{}\")\n    cid = payload.get(\"conversationId\", \"default\")\n    data_dir = pathlib.Path(os.environ.get(\"PLUGIN_DATA\", \"/tmp/cf-data\"))\n    fb_path = data_dir / \"feedback\" / f\"{cid}.json\"\n\n    if not fb_path.exists():\n        print(json.dumps({}))\n        return 0\n\n    diagnostics = json.loads(fb_path.read_text(encoding=\"utf-8\"))\n    fb_path.unlink(missing_ok=True)\n\n    summary = \"\\n\".join(diagnostics.get(\"errors\", [])[:10])\n    print(json.dumps({\n        \"injectSteps\": [{\n            \"systemMessage\": f\"[Code Factory Post-Edit Gate] Fix these lint/type issues immediately:\\n{summary}\"\n        }]\n    }))\n    return 0\n\nif __name__ == \"__main__\":\n    raise SystemExit(main())"
       },
-      "mermaidDiagram": "sequenceDiagram\n    participant Agent as Antigravity Agent\n    participant Post as PostToolUse Hook\n    participant Store as PLUGIN_DATA/feedback\n    participant Pre as PreInvocation Hook\n    participant Sidecar as Unix-Socket Sidecar\n    Agent->>Post: edit_file (src/api.ts)\n    Post->>Sidecar: Fire-and-forget audit (<10ms)\n    Post->>Post: Single-file eslint/tsc (<2s)\n    Post->>Store: Write compact diagnostics JSON\n    Post-->>Agent: Return {}\n    Agent->>Pre: Next model invocation\n    Pre->>Store: Read & delete pending feedback\n    Pre-->>Agent: injectSteps.systemMessage (Diagnostics)\n    Agent->>Agent: Deterministically self-corrects edit",
+      "mermaidDiagram": "sequenceDiagram\n    participant Helper as AI Builder\n    participant Checker as Fast 2-Sec Checker\n    participant Tray as Sticky-Note Tray\n    participant NextTurn as Next AI Step\n    participant Bg as Quiet Logger\n    Helper->>Checker: Saves one edited file\n    Checker->>Bg: Sends quick log note\n    Checker->>Checker: Checks just that file in under 2 seconds\n    Checker->>Tray: Drops short fix-it note\n    Helper->>NextTurn: Starts next thought\n    NextTurn->>Tray: Reads and clears note\n    NextTurn->>Helper: Fixes typo automatically",
       "repoArtifactPath": "agents/cf-backend.md",
       "promptId": "hm-prompt-feedback-bridge"
     },
@@ -157,6 +223,20 @@
       "title": "Exceeding Claude Code: Typed run_workflow Pipelines, Swarm Hot-Swap & MCP Apps",
       "stageTag": "Leapfrog",
       "summary": "Once parity gaps are closed, Antigravity's native primitives let you build engineering automation impossible in terminal-only harnesses: Python-orchestrated parallel QA loops with JSON-schema finish contracts, live swarm model hot-switching, and a visual Mission Control side pane.",
+      "eli5": {
+        "plainTitle": "Running a Team of Helpers at the Same Time",
+        "oneLineHook": "Check security, tests, and phone/desktop screens all at once—and upgrade a stuck helper's brain without starting over.",
+        "everydayAnalogy": "A choreographed relay team with a live scoreboard and a head coach ready to tag in.",
+        "simpleExplanation": "Once your single-helper workshop is humming, Antigravity lets you scale up like a real engineering team. You can run three quality checks at the exact same time and refuse to stamp 'Done' until all three are green. Even better: if a fast helper gets stuck on a hard puzzle, you can swap in a deeper-thinking AI brain mid-conversation without losing a single note of what it already learned.",
+        "whyItMatters": "Checking a finished app one manual step at a time is slow and easy to forget. Running an automated team check catches hidden phone-screen glitches, security slips, and broken tests simultaneously in minutes.",
+        "roleInProtocol": "This powers the final Quality Gate of the Code Factory. Before you ever publish a feature, three independent helpers inspect the work in parallel—a security reviewer, an automated test runner, and a live browser checking phone, tablet, and desktop views.",
+        "howToUseGoingForward": "Whenever you finish building a feature—big or small—run the 3-way parallel Quality Check instead of only eyeballing it on your laptop screen. Use fast models for routine parallel work and deep thinkers for tricky reviews.",
+        "whenToUse": "Use this RIGHT AFTER you finish building a feature and BEFORE sharing or publishing it—or anytime you have 3+ separate tasks that can safely run at the same time on different files.",
+        "realWorldExample": "You finish a new sign-up page. You trigger one Quality Check prompt: Helper 1 runs all automated tests, Helper 2 checks for security leaks, and Helper 3 opens a real browser at phone, tablet, and desktop widths to confirm no buttons get cut off. All three finish together and hand you one clear Pass/Fail card.",
+        "audioScript": "Once your basic workshop is working smoothly, Antigravity unlocks team superpowers that a simple chat box cannot match. First, you can run three quality checks at the exact same time: an automated test runner, an independent safety reviewer, and a real live web browser inspecting phone, tablet, and desktop sizes. The checklist refuses to stamp Done until every single check passes. Second, if a fast helper gets stuck on a tricky problem, you can upgrade its brain to a deeper-thinking model right in the middle of the conversation without losing its memory. Use this three-way parallel check every time you finish a feature and want senior-level confidence before publishing.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "How three independent helpers check your finished work at the same time before stamping it ready for you."
+      },
       "keyTakeaways": [
         "Typed `run_workflow` pipelines replace fragile prose delegation with real Python `parallel()`, `pipeline()`, `phase()`, and `trajectory()` error mining, refusing to exit until a JSON-schema `finish` contract passes.",
         "Live `swarm` model hot-switching (`swarm(action='model')`) preserves full conversation history when swapping a stalled worker from `flash` to `pro`—zero wasted tokens or lost context.",
@@ -173,6 +253,7 @@
         "filename": "workflows/cf_qa_gate.py (Typed run_workflow Self-Healing Gate)",
         "code": "# Conceptual Antigravity run_workflow Stage 4 QA Pipeline\nfrom antigravity_workflow import agent, parallel, finish\n\nQA_SCHEMA = {\n    \"type\": \"object\",\n    \"required\": [\"passed\", \"blocking_defects\", \"viewports_verified\"],\n    \"properties\": {\n        \"passed\": {\"type\": \"boolean\"},\n        \"blocking_defects\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}},\n        \"viewports_verified\": {\"type\": \"array\", \"items\": {\"type\": \"integer\"}}\n    }\n}\n\nresults = parallel([\n    agent(\"cf-reviewer\", \"Audit git diff against rules/AGENTS.md invariants\"),\n    agent(\"browser\", \"Verify 375px, 768px, 1440px layouts & zero console errors\"),\n    agent(\"self\", \"Run pnpm typecheck && pnpm lint && pnpm test && pnpm build\")\n])\n\nfinish(schema=QA_SCHEMA, inputs=results)"
       },
+      "mermaidDiagram": "flowchart TD\n    S[\"Finished Feature Ready for Check\"] --> P1[\"Helper 1: Safety & Rule Review\"]\n    S --> P2[\"Helper 2: Live Browser (Phone, Tablet, Desktop)\"]\n    S --> P3[\"Helper 3: Automated Tests & Build\"]\n    P1 --> G{\"Did All 3 Pass?\"}\n    P2 --> G\n    P3 --> G\n    G -->|\"Yes\"| OK[\"Stamp Ready for Your Approval\"]\n    G -->|\"No\"| FIX[\"Send Exact Fix List Back to Builder\"]",
       "repoArtifactPath": "skills/cf-implement/references/orchestration.md",
       "promptId": "hm-prompt-run-workflow-qa"
     },
@@ -182,6 +263,20 @@
       "title": "Context Engineering & Routing Economics: Static Rules vs. Progressive Skills",
       "stageTag": "Context Economics",
       "summary": "Combining Google/Kaggle Day 2 (Tools & MCP), Day 3 (Agent Skills), and Addy Osmani's 'The New Software Lifecycle': context engineering has a shape, and it decides both your accuracy and your bill. Keep static rules lean, load skills dynamically, and route models by cognitive load.",
+      "eli5": {
+        "plainTitle": "Keeping Your AI's Desk Tidy (Sharper Answers, Lower Cost)",
+        "oneLineHook": "Keep only 1 short page of golden rules on the AI's desk, store big guides on a bookshelf, and match model speed to each task.",
+        "everydayAnalogy": "A 1-page cheat sheet taped to your desk while thick cookbooks wait neatly on the bookshelf.",
+        "simpleExplanation": "Every AI has a desk with limited space—that space is its working memory. If you pile fifty thick manuals on the desk for every message, the AI gets distracted, misses details buried in the middle, and costs extra money every turn. Instead, keep one short page of must-never-break rules on the desk, store long step-by-step guides on a bookshelf (Skills) that only open when needed, and write a tiny handover note when switching sessions.",
+        "whyItMatters": "A cluttered desk makes AI forgetful, slow, and expensive. A tidy desk keeps every answer sharp and focused while cutting wasted token spend dramatically.",
+        "roleInProtocol": "This keeps the Code Factory fast even on giant projects: core house rules stay under one short file, specialized how-to playbooks open only when relevant, session handover notes stay under one page, and we route quick tasks to fast models while saving deep thinkers for planning and final review.",
+        "howToUseGoingForward": "Keep your main rulebook short and punchy. Anytime a guide grows longer than a few paragraphs, move it into a Skill folder on the bookshelf—and when a chat gets long (around 15–20 turns), save a short handover note and start fresh.",
+        "whenToUse": "Use this whenever your AI starts forgetting earlier instructions, your rulebook grows past 2 pages, your chats feel sluggish after 15+ messages, or your AI usage bill climbs faster than expected.",
+        "realWorldExample": "You notice your AI keeps ignoring your color palette halfway through a long 30-message chat. You move your detailed video and deployment guides into bookshelf Skills, trim your desk rules to 1 crisp page, save a 10-line handover note, and start a fresh chat—instantly restoring crisp, accurate answers.",
+        "audioScript": "Picture your AI's working memory as the top of a wooden desk. There is only so much space on it. If you stack fifty manuals and old chat logs on that desk for every single question, the AI loses focus, forgets rules buried in the middle, and spends extra time and money reading clutter. Smart builders keep three tidy layers. One short page of golden house rules stays on the desk at all times. Longer step-by-step playbooks wait on a neat bookshelf as Skills that only open when needed. And a tiny handover note summarizes what is done when you start a fresh chat. Use this cleanup habit whenever a chat feels long or your AI starts forgetting simple rules.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "Keeping the AI's desk tidy: short golden rules stay open, big guides sit on the shelf until needed, and each job uses the right model speed."
+      },
       "keyTakeaways": [
         "Static vs. Dynamic Split on This Repo: Always-on rules/AGENTS.md stays lean (< 10 KB of hard invariants), while 14 progressive-disclosure skills/cf-*/SKILL.md files and deep references/ manuals load strictly when triggered.",
         "Solve the Goldilocks Problem: Bloated system prompts trigger 'lost in the middle' degradation and burn tokens every turn; crisp <= 3 KB .memory/handover.md records keep sessions sharp across model switches.",
@@ -198,6 +293,7 @@
         "filename": "Project_Antigravity Context & Model Routing Budget",
         "code": "| Layer | Mechanism | Loaded When | Budget Target on This Repo |\n| :--- | :--- | :--- | :--- |\n| Static Invariants | rules/AGENTS.md + .agents/rules/ | Every turn | <= 10 KB (hard cap 24 KB / 20k tokens) |\n| Dynamic Playbooks | 14x skills/cf-*/SKILL.md + references/ | Progressive disclosure | Name+desc only until matched |\n| Session State | .memory/handover.md + tasks.md | Session start / wrap-up | handover.md <= 3 KB |\n| Model Routing | agents/cf-*.md frontmatter | Per subagent role | pro: architect/reviewer; flash: browser/workers |"
       },
+      "mermaidDiagram": "flowchart LR\n    D[\"Always on the Desk\\n(1-Page Golden Rules)\"] --> AI[\"Sharp, Focused AI\"]\n    S[\"On the Bookshelf\\n(Guides Opened Only When Needed)\"] --> AI\n    H[\"Short Handover Note\\n(What Is Done + What Is Next)\"] --> AI\n    AI --> R1[\"Deep Thinker Model\\n(Planning & Final Review)\"]\n    AI --> R2[\"Fast Helper Model\\n(Parallel Builds & Screen Checks)\"]",
       "repoArtifactPath": "rules/AGENTS.md",
       "promptId": "hm-prompt-context-economics"
     }
@@ -206,10 +302,12 @@
     {
       "id": "hm-prompt-harness-audit",
       "title": "Run a 12-Dimension Harness Gap Audit on Any Repository",
+      "eli5Title": "Check My Project Workshop for Missing Rules & Safety Gaps",
       "stage": "research",
       "difficulty": "beginner",
       "skillRef": "cf-research",
       "description": "Evaluates a target repository's current AI tooling setup against all 12 Antigravity harness dimensions and produces a prioritized upgrade roadmap.",
+      "whenToUse": "Copy this on Day 1 when opening any new or existing project folder, or whenever your AI keeps repeating mistakes and you want a plain checklist of what setup pieces are missing.",
       "template": "Run Stage 1 (`cf-research`) to audit the AI agent harness setup in `{{target_repo}}`.\n\n1. Inspect existing rules, hooks, custom agents, MCP configs, and CI scripts.\n2. Score the repository across the 12 harness dimensions (Surfaces, Tools, Hooks, Orchestration, Memory, LSP, Sandboxing, Governance, Browser/UI, Sidecars, CI/CD, Plugins).\n3. Flag any silent config footguns (such as omitted `tools:` in custom agents or fail-closed `{}` PreToolUse hooks).\n4. Write a concise upgrade roadmap to `.memory/research.md` tailored to our primary goal: {{audit_goal}}.",
       "variables": [
         {
@@ -230,10 +328,12 @@
     {
       "id": "hm-prompt-fix-agents-frontmatter",
       "title": "Harden Custom Subagent Least-Privilege Frontmatter",
+      "eli5Title": "Give Every AI Helper the Exact Tool Belt Their Job Needs",
       "stage": "architecture",
       "difficulty": "intermediate",
       "skillRef": "cf-plan",
       "description": "Fixes the silent read-only `tools:` footgun across custom `agents/*.md` files by adding explicit `subagent`, `mainAgent`, and least-privilege `tools:` declarations.",
+      "whenToUse": "Copy this whenever you add custom helper roles to your project—or if a builder helper gets stuck unable to edit files because its tool list was left blank.",
       "template": "Audit every custom agent definition under `{{agents_dir}}` against the Antigravity agent specification.\n\nFor each agent:\n- Explicitly add `subagent: true` and `mainAgent: false`.\n- Assign a least-privilege `tools:` list: read-only research/review personas (`{{readonly_agents}}`) get `read_file`, `search_web`, and spec/report write scope only; implementation personas (`{{builder_agents}}`) receive `read_file`, `edit_file`, `write_file`, and `run_command`.\n- Summarize every permission change in a table and wait for my approval before modifying files.",
       "variables": [
         {
@@ -260,10 +360,12 @@
     {
       "id": "hm-prompt-feedback-bridge",
       "title": "Build the Two-Stage PostToolUse -> PreInvocation Lint Bridge",
+      "eli5Title": "Add the 2-Second Auto-Spellcheck Sticky Note After Every Edit",
       "stage": "build",
       "difficulty": "senior",
       "skillRef": "cf-implement",
       "description": "Implements the deterministic two-stage hook bridge so Antigravity automatically lints modified files after every edit and injects compact errors before the next turn.",
+      "whenToUse": "Copy this when your project has an automated code checker (like ESLint) and you want your AI to spot and fix typos two seconds after saving a file—automatically.",
       "template": "Implement the Two-Stage `PostToolUse` -> `PreInvocation` feedback bridge in `hooks/` using Python 3 standard library only.\n\nRequirements:\n1. `hooks/post-edit-lint.py` triggers on `edit_file|write_file`, checks ONLY the single modified file using `{{linter_cmd}}` with a hard `{{timeout_ms}}ms` timeout, and writes compact diagnostics to `$PLUGIN_DATA/feedback/<conversationId>.json`.\n2. `hooks/inject-feedback.py` triggers on `PreInvocation`, atomically reads and deletes any pending feedback file, and returns `{\"injectSteps\": [{\"systemMessage\": \"...\"}]}`.\n3. Add deterministic Python unit tests covering clean edits, lint failures, timeouts, and missing files.",
       "variables": [
         {
@@ -284,10 +386,12 @@
     {
       "id": "hm-prompt-hitl-guard",
       "title": "Extend Fail-Closed PreToolUse Guardrails for Secrets & Deployments",
+      "eli5Title": "Add a Safety Alarm Before Risky Publish or Delete Commands",
       "stage": "build",
       "difficulty": "intermediate",
       "skillRef": "cf-implement",
       "description": "Expands `hooks/hitl-gate.py` with custom organization safety patterns and secret-write blocking while preserving fail-closed semantics.",
+      "whenToUse": "Copy this BEFORE connecting your project to live hosting, cloud storage, or secret API keys so the AI can never accidentally publish live or leak passwords.",
       "template": "Extend our fail-closed `PreToolUse` safety gate (`hooks/hitl-gate.py`) for `{{feature_name}}`:\n\n1. Add a high-impact `force_ask` regex rule blocking unapproved `{{blocked_command_class}}` commands with segment-aware splitting (`&&`, `||`, `;`, `|`).\n2. Add a companion `edit_file|write_file` guard that hard-denies (`decision: \"deny\"`) writes to `.env.production`, `~/.ssh/*`, or payloads matching hardcoded secret patterns.\n3. Verify that malformed stdin fails closed to `\"ask\"` and never emits `{}`.\n4. Update `hooks/test_hitl_gate.py` with positive, negative, and chained-command unit tests.",
       "variables": [
         {
@@ -308,10 +412,12 @@
     {
       "id": "hm-prompt-run-workflow-qa",
       "title": "Launch a Typed Parallel Stage 4 QA Workflow",
+      "eli5Title": "Run a 3-Helper Quality Check (Tests + Safety + Phone/Desktop Screens)",
       "stage": "test",
       "difficulty": "senior",
       "skillRef": "cf-qa-review",
       "description": "Orchestrates parallel independent security review, static checks, and multi-viewport browser QA using Antigravity's `run_workflow` primitive.",
+      "whenToUse": "Copy this RIGHT AFTER finishing a feature and BEFORE sharing or publishing it, so three independent helpers verify your tests, security, and mobile/desktop layouts at once.",
       "template": "Execute a parallel Stage 4 QA pipeline for `{{app_url}}` targeting `{{feature_name}}`:\n\n1. Run static checks (`{{test_cmd}}`) in one worker.\n2. Launch `cf-reviewer` in a clean read-only context to audit our git diff against `rules/AGENTS.md` invariants.\n3. Launch the built-in `browser` subagent to visually audit `{{app_url}}` across 375px, 768px, and 1440px viewports, verifying zero console errors, zero horizontal overflow, and WCAG 2.1 AA focus states.\n4. Synthesize all findings into `.memory/qa-report.md` with an explicit Pass/Fail clearance decision.",
       "variables": [
         {
@@ -338,10 +444,12 @@
     {
       "id": "hm-prompt-context-economics",
       "title": "Audit Static vs. Dynamic Context & Model Routing Economics",
+      "eli5Title": "Tidy Up My AI's Desk Rules & Cut Wasted AI Cost",
       "stage": "optimise",
       "difficulty": "intermediate",
       "skillRef": "cf-loop-engineer",
       "description": "Applies Day 2-3 Agent Skills & Osmani's Context Economics to slim always-on rules, extract progressive-disclosure skills, and optimize pro vs. flash model routing.",
+      "whenToUse": "Copy this whenever your project rulebook grows too long, your AI starts forgetting instructions mid-chat, or you want to lower your AI cost by routing easy jobs to faster models.",
       "template": "Audit the Context Engineering and Model Routing economics of `{{repo_path}}`:\n\n1. Measure all always-on static rules (`AGENTS.md`, `rules/*.md`, `.agents/rules/*.md`) and flag any file exceeding `{{max_static_kb}} KB` or containing multi-step procedures better moved into progressive-disclosure `skills/<name>/SKILL.md` + `references/`.\n2. Inspect `.memory/handover.md` (must stay <= 3 KB) and MCP server tool surface area to eliminate unused context bloat.\n3. Propose a concrete Model Routing table assigning `pro` (architecture, locked specs, independent `cf-reviewer` audits) vs. `flash` (bounded parallel builds, test runs, `browser` viewport checks) for `{{primary_workflow}}`.",
       "variables": [
         {

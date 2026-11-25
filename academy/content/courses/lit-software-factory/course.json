@@ -3,7 +3,15 @@
   "slug": "lit-software-factory",
   "number": 4,
   "title": "Lit Software Factories & Practical Loop Engineering",
+  "eli5Title": "Staying in the Driver's Seat: Smart Loops & Quality Checks",
   "subtitle": "Graduate from ad-hoc vibe coding to a governed Lit Software Factory: master the 5-part Vibe Coding whitepapers, Context Economics, Outer-Loop Accountability, Dual-Axis Evals, and Practical Loop Engineering on this repo.",
+  "eli5Tagline": "Move beyond crossed-fingers AI coding into a bright, human-guided workshop: tidy memory habits, clear automation boundaries, double-checked quality grades, and calm automatic loops.",
+  "illustration": {
+    "src": "/media/illustrations/lit-software-factory-studio.jpg",
+    "alt": "Architectural cutaway of a brightly lit factory control booth: a calm human supervisor watches three glass assembly lanes with green quality gauges, an independent inspector desk, and a clear manual release lever.",
+    "caption": "A Lit Software Factory in one glance: fast glass assembly lanes inside, bright green quality gauges, an independent inspector, and a human supervisor holding the release lever.",
+    "visualAnalogy": "A Brightly Lit Factory Control Booth With Green Quality Gauges and a Release Lever"
+  },
   "level": "all-levels",
   "estimatedMinutes": 65,
   "threeScenePreset": "sdlc-orbital",
@@ -65,6 +73,20 @@
       "title": "From Vibe Coding to Agentic Engineering: The 5-Part Whitepaper Architecture",
       "stageTag": "Foundations",
       "summary": "Google and Kaggle's May-June 2026 5-part series maps the complete journey from ad-hoc vibe coding to enterprise agentic engineering. Translation friction has collapsed: writing syntax is cheap, while harness design (90%), context, security, and spec-driven verification define production engineering.",
+      "eli5": {
+        "plainTitle": "Graduating From Casual AI Guessing to Reliable Building",
+        "oneLineHook": "Typing code is now fast and cheap—real reliability comes from clear plans, safe tools, security checks, and real tests.",
+        "everydayAnalogy": "Moving from sketching a treehouse on a napkin to building a real house with blueprints, building permits, and inspections.",
+        "simpleExplanation": "Casual AI coding—sometimes called vibe coding—is fun for a quick weekend toy: you ask for something, glance at the screen, and hope it works. Real, trustworthy software takes five clear layers working together: a smart workshop around the AI, safe app tools, organized skills and memory, automatic security and quality checks, and a clear written plan before anything goes live.",
+        "whyItMatters": "When writing code becomes ten times faster, bugs and hidden security flaws can pile up ten times faster too. Moving from casual guessing to structured building lets you keep all the speed without waking up to broken apps.",
+        "roleInProtocol": "This five-layer roadmap from Google and Kaggle's AI Agents Intensive maps one-for-one onto this repository: global rules, safe tool connectors, progressive-disclosure skills, fail-closed security hooks, and spec-driven verification before launch.",
+        "howToUseGoingForward": "Use casual experimenting only for throwaway sketches. The moment you care about keeping or sharing what you build, switch to writing a short plan first, turning on safety checks, and verifying with real tests.",
+        "whenToUse": "Use this mindset whenever a quick AI prototype starts turning into a real product, website, or tool that you or other people will actually rely on.",
+        "realWorldExample": "You quickly sketch a family meal planner in ten minutes. Before sharing it with friends, you add a 1-page plan, check that nobody can view another person's list, and run a test check on both phone and laptop screens.",
+        "audioScript": "Welcome to staying in the driver's seat as an AI builder. Imagine the difference between sketching a treehouse on a napkin and building a real home with blueprints, safe tools, and a home inspection. Casual AI coding is wonderful for fast experiments, where you type an idea and accept whatever looks okay at a glance. But trustworthy software needs five simple layers working together: a smart workshop around the AI, safe connected tools, tidy guides and memory, automatic safety and quality checks, and a clear plan before launch. Now that generating code is super fast, these five layers are what turn rough prototypes into dependable software you are proud to share.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "The five steady steps that turn a casual AI sketch into trustworthy, launch-ready software."
+      },
       "keyTakeaways": [
         "Day 1 ('The New SDLC With Vibe Coding'): Vibe coding accepts outputs that 'seem to work'; Agentic Engineering enforces locked specs, AGENTS.md invariants, CI gates, and evals.",
         "Day 2 ('Agent Tools & Interoperability') + Day 3 ('Agent Skills'): Typed MCP servers, sandboxes, long-term memory, and progressive-disclosure skills transform an LLM into a composable system.",
@@ -76,7 +98,7 @@
         "Map each of the 5 Kaggle whitepaper days to its concrete counterpart inside this repository (`rules/`, `hooks/`, `agents/`, `skills/`, `academy/`).",
         "Identify where your current workflow still relies on ad-hoc 'vibe coding' instead of locked specs and automated oracles."
       ],
-      "mermaidDiagram": "flowchart LR\n    D1[\"Day 1: New SDLC\\n(Agent = 10% Model + 90% Harness)\"] --> D2[\"Day 2: Tools & MCP\\n(Interoperability & Sandboxes)\"]\n    D2 --> D3[\"Day 3: Agent Skills\\n(Memory & Progressive Disclosure)\"]\n    D3 --> D4[\"Day 4: Security & Evals\\n(HITL, Guardrails, cf-eval)\"]\n    D4 --> D5[\"Day 5: Spec-Driven Prod\\n(Cloud Deploy & Outer Loop)\"]",
+      "mermaidDiagram": "flowchart LR\n    S1[\"1. Smart Workshop\\n(Rules + Setup)\"] --> S2[\"2. Safe Tools\\n(Practice Room + App Plugs)\"]\n    S2 --> S3[\"3. Tidy Skills & Memory\\n(Guides Opened When Needed)\"]\n    S3 --> S4[\"4. Security & Checks\\n(Locks + Quality Grades)\"]\n    S4 --> S5[\"5. Clear Plan to Launch\\n(Verified & Ready to Share)\"]",
       "repoArtifactPath": ".memory/research-vibe-coding-lit-factory.md",
       "promptId": "lsf-prompt-context-audit"
     },
@@ -86,6 +108,20 @@
       "title": "Context Engineering Economics: Static Rules, Progressive Skills & Routing",
       "stageTag": "Context Economics",
       "summary": "In Addy Osmani's 'The New Software Lifecycle', context engineering has a shape—and it directly controls both reasoning quality and API cost. Overstuffing static prompts causes lost-in-the-middle drift, while progressive-disclosure Agent Skills and smart model routing scale affordably.",
+      "eli5": {
+        "plainTitle": "Spending Your AI's Attention and Budget Wisely",
+        "oneLineHook": "Keep your AI's desk uncluttered and match fast helpers to routine jobs while saving deep thinkers for big decisions.",
+        "everydayAnalogy": "Hiring a senior architect for blueprints and fast carpenters for framing—while keeping only today's checklist on the table.",
+        "simpleExplanation": "Every word your AI reads on every turn uses both attention and budget. If you dump giant manuals and fifty old messages into every prompt, the AI gets foggy in the middle and costs far more than necessary. Smart builders keep one short page of golden rules always open, store long checklists in bookshelf guides that open only when needed, save tiny handover summaries, and match fast models to routine jobs while saving deeper-thinking models for planning and final review.",
+        "whyItMatters": "A clean information budget gives you two wins at once: noticeably sharper, more accurate answers and a much smaller bill as your projects grow bigger.",
+        "roleInProtocol": "This governs Context Engineering Economics across the Code Factory: lean rules/AGENTS.md invariants, 14 progressive-disclosure skills, <= 3 KB handover notes, and explicit per-persona model routing (deep thinkers for architect/reviewer, fast models for parallel workers).",
+        "howToUseGoingForward": "Whenever your main rule sheet grows bulky, move step-by-step recipes into bookshelf Skills. Keep session handover notes under one page, and assign fast models to clear, bounded chores while reserving deep-thinking models for plans and final audits.",
+        "whenToUse": "Use this whenever a project grows past a few files, your AI starts missing rules buried in long prompts, or you want faster results at lower cost.",
+        "realWorldExample": "Instead of sending a 40-page manual to a slow, pricey model just to fix button alignment, you use a fast helper with one tiny style guide—and save your deep-thinking reviewer to inspect the finished feature for hidden security risks.",
+        "audioScript": "Think of your AI's attention like a workday budget. If you hand a team fifty pages of old notes before every single question, everyone loses focus and you pay extra for reading clutter. Smart builders shape their information cleanly in three ways. Keep one short sheet of golden rules on the desk. Tuck detailed step-by-step playbooks onto a bookshelf so they only open when a matching job comes up. And save a brief one-page handover note instead of dragging endless chat logs forward. Finally, match the right brain to each job: use fast, nimble models for clear routine tasks and save deep-thinking models for blueprints and final reviews. Your answers get sharper while your costs drop.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "Shaping what your AI reads and matching fast vs. deep-thinking models keeps quality high and costs low."
+      },
       "keyTakeaways": [
         "Static Context Discipline: Keep always-on `rules/AGENTS.md` lean (<= 10 KB of hard invariants, well under Antigravity's 24 KB / 20k-token cap) so every turn stays high-signal.",
         "Dynamic Progressive Disclosure: Move heavy checklists, rubrics, and project examples into `skills/cf-*/SKILL.md` + `references/` so only matching skills consume tokens.",
@@ -102,6 +138,7 @@
         "filename": "agents/cf-reviewer.md (Least-Privilege + Model Routing)",
         "code": "---\nname: cf-reviewer\nsubagent: true\nmainAgent: false\nmodel: pro\ncommandExecutionPolicy: sandbox\ntools:\n  - read_file\n  - write_file\n  - run_command\n  - manage_task\n  - search_web\n---"
       },
+      "mermaidDiagram": "flowchart LR\n    R[\"Short Desk Rules\\n(Always Open)\"] --> M[\"Focused AI Attention\"]\n    B[\"Bookshelf Guides\\n(Open Only When Needed)\"] --> M\n    N[\"1-Page Handover Note\\n(Fresh Session Memory)\"] --> M\n    M --> Deep[\"Deep Thinker\\n(Blueprints & Final Review)\"]\n    M --> Fast[\"Fast Helper\\n(Routine Chores & Screen Checks)\"]",
       "repoArtifactPath": "rules/AGENTS.md",
       "promptId": "lsf-prompt-context-audit"
     },
@@ -111,6 +148,20 @@
       "title": "Software Factories, Light and Dark: Loop -> Harness -> Factory",
       "stageTag": "Factory Model",
       "summary": "In 'Software Factories, Light and Dark', the unit of engineering work evolves from a manual diff to Loop -> Harness -> Factory. Generation is wide and cheap; verification is the narrow neck. A Dark Factory ships unreviewed architectural debt, whereas a Lit Factory pairs fast inner loops with strategic human governance.",
+      "eli5": {
+        "plainTitle": "Brightly Lit Workshops vs. Runaway Dark Factories",
+        "oneLineHook": "Fast building only helps if your quality checks keep up—keep the lights on and decide clearly what can run on autopilot.",
+        "everydayAnalogy": "A sunlit, glass-walled bakery with visible quality gauges versus a pitch-black factory shipping boxes nobody ever tasted.",
+        "simpleExplanation": "When AI builds software at lightning speed, the real bottleneck is no longer writing—it is checking whether the work is actually good. A Dark Factory lets bots build and ship in the shadows with nobody watching, which quickly piles up invisible mistakes. A Lit Factory uses the exact same fast helpers inside, but keeps the lights wide open: you set the plan up front, let safe chores with clear tests run automatically, and keep sensitive decisions under human eyes.",
+        "whyItMatters": "Without a clear line between safe autopilot chores and human-checked work, either you get overwhelmed approving everything or silent bugs and security holes sneak straight to your users.",
+        "roleInProtocol": "This defines Selective Autonomy in our Code Factory specs: short, verifiable tasks (docs, unit tests, lint fixes, schema-checked JSON) earn Lights-Out status, while login, security, billing, hooks, and architecture stay strictly Human-Lit.",
+        "howToUseGoingForward": "Before starting any milestone, split tasks into two clear columns: safe autopilot jobs backed by an automated check, and sensitive human-checked jobs that always wait for your review.",
+        "whenToUse": "Use this during planning for any multi-step project so both you and your AI helpers know upfront which tasks can run autonomously and which must pause for you.",
+        "realWorldExample": "Updating spelling in help docs and running automated style fixes happen smoothly on autopilot because tests catch any slip—while changing how user passwords or credit cards work always pauses in the Human-Lit lane for your careful review.",
+        "audioScript": "Imagine two very different factories. A Dark Factory turns off the lights and lets robots build and ship boxes nonstop without a single person checking inside. It looks blazingly fast until broken products pile up on customers' doorsteps. A Lit Factory keeps every glass wall bright. It still uses super-fast AI helpers inside, because writing code is no longer the slow part—checking quality is. You draw one clear line before work begins. Safe, tidy chores with crystal-clear automated checks—like docs, formatting, and unit tests—can run smoothly on autopilot. Sensitive work—like logins, payments, security locks, and big design changes—always stays brightly lit under your direct supervision.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "How a Lit Factory separates safe autopilot chores from human-supervised work—funneling both through clear quality checks."
+      },
       "keyTakeaways": [
         "Verification Is the Narrow Neck: Accelerating code generation without scaling automated verification oracles simply buries human reviewers under larger PR piles.",
         "Dark Factory Anti-Pattern: Shipping autonomous agent outputs verified purely by machines feels fast until silent technical debt, flawed product assumptions, or security gaps compound.",
@@ -122,7 +173,7 @@
         "Review the Selective Autonomy table in `skills/cf-loop-engineer/references/project-examples.md`.",
         "Run the Selective Autonomy Matrix prompt below to draw explicit delegation boundaries for your next milestone."
       ],
-      "mermaidDiagram": "flowchart TD\n    U[\"Upstream Human Judgment\\n(Intent, Spec, ADR, Oracles)\"] --> L[\"Inner Agent Loops\\n(Max 3-5 Concurrent)\"]\n    L --> LO[\"Lights-Out Tier\\n(Docs, Tests, Lint, Zod JSON)\"]\n    L --> HL[\"Human-Lit Tier\\n(Auth, Security/RLS, Hooks, Finance, Deploy)\"]\n    LO --> V[\"Verification Narrow Neck\\n(cf-next-verify + cf-eval + cf-reviewer + browser)\"]\n    HL --> V\n    V --> O[\"Outer-Loop Human Verdict\\n(Quality / Verdict / Answerability)\"]",
+      "mermaidDiagram": "flowchart TD\n    Plan[\"Your Clear Plan & Success Checks\"] --> Lanes[\"Fast AI Work Lanes (At Most 3 to 5)\"]\n    Lanes --> Auto[\"Autopilot Lane\\n(Docs, Formatting, Unit Tests)\"]\n    Lanes --> Human[\"Human-Supervised Lane\\n(Logins, Security, Money, Live Launch)\"]\n    Auto --> Gate[\"Quality Check Bottleneck\\n(Automated Tests + Independent Reviewer + Live Screen)\"]\n    Human --> Gate\n    Gate --> Release[\"Your Clear Human Release Decision\"]",
       "repoArtifactPath": "skills/cf-plan/SKILL.md",
       "promptId": "lsf-prompt-autonomy-matrix"
     },
@@ -132,6 +183,20 @@
       "title": "Human Judgment Relocates: Owning the Outer Loop",
       "stageTag": "Outer Loop",
       "summary": "Synthesizing 'Own the Outer Loop' and 'Human Judgment Doesn't Leave the Software Factory, It Relocates': human judgment leaves mechanical syntax typing and relocates upstream into architecture and downstream into release governance across three pillars: Quality, Verdict, and Answerability.",
+      "eli5": {
+        "plainTitle": "Your New Superpower: Guiding Quality, Verdict, and Ownership",
+        "oneLineHook": "Human judgment does not disappear when AI writes code—it moves up to setting the standards and making the final call.",
+        "everydayAnalogy": "A film director who sets the vision, reviews the final cut, and proudly signs the credits—without holding every camera.",
+        "simpleExplanation": "When AI handles the repetitive typing, your job does not vanish—it gets more important. You step into the driver's seat around the outside of the work, owning three clear things: Quality (setting up the rules and checks before building starts), Verdict (looking at real proof like test results and screenshots to say Ship or Fix), and Ownership (being able to explain what changed, why it is safe, and how to undo it if needed).",
+        "whyItMatters": "Tools cannot take responsibility when a live website breaks or a customer's data leaks—people do. Owning the clear proof and undo plan keeps you calm, confident, and genuinely in control of everything you ship.",
+        "roleInProtocol": "This powers the Stage 4 Outer-Loop Sign-Off Gate in the Code Factory: every release records clear evidence in qa-report.md, an explicit SHIP/REVISE/BLOCK decision, and a plain Answerability Statement plus rollback command in handover.md.",
+        "howToUseGoingForward": "Before launching any change, ask yourself three quick questions: Did our checks pass? Can I explain in two sentences what this change does and why it is safe? And do I know the exact one-step way to undo it?",
+        "whenToUse": "Use this checklist right before sharing a new feature, deploying a website update, or approving a big batch of AI-generated changes.",
+        "realWorldExample": "Before publishing a new checkout button, you review the green test summary and phone/desktop screenshots, write a 2-line note explaining the update and its one-click undo step, and then confidently press publish.",
+        "audioScript": "People sometimes worry that if AI writes the code, human judgment stops mattering. In truth, human judgment never leaves the workshop—it simply moves to a higher seat, just like a film director who stops hauling heavy cables so they can guide the story and approve the final cut. In a Lit Software Factory, you own three simple pillars. First is Quality: designing the rules and checklists up front. Second is Verdict: looking at real proof like test reports and live screenshots to decide whether to ship or revise. Third is Ownership: knowing what changed, why it is safe, and exactly how to undo it in one step. Keep those three pillars, and you are always calmly in charge.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "Your three leadership pillars around the outside of AI building: setting standards, checking proof, and owning the launch."
+      },
       "keyTakeaways": [
         "Pillar 1 — Quality: Engineers design and maintain the deterministic harness (rules/AGENTS.md, hitl-gate.py, secret-guard.py, Vitest, Zod schemas, WCAG contrast tokens) before delegating loops.",
         "Pillar 2 — Verdict: Engineers inspect structured verification evidence (.memory/qa-report.md, browser screenshots, audit logs) and make the explicit SHIP / REVISE / BLOCK call.",
@@ -143,6 +208,7 @@
         "Check `.agents/rules/academy-invariants.md` to see how past defects were promoted into permanent Lit Factory guardrails.",
         "Ensure every staging or production deploy records an explicit rollback command and Answerability Statement in `.memory/handover.md`."
       ],
+      "mermaidDiagram": "flowchart LR\n    P1[\"1. Quality\\n(Set Rules & Safety Checks First)\"] --> Work[\"AI Builds Inside Safe Lanes\"]\n    Work --> P2[\"2. Verdict\\n(Inspect Real Proof: Ship or Fix)\"]\n    P2 --> P3[\"3. Ownership\\n(Explain Change + Know Undo Step)\"]\n    P3 --> Ship[\"Confident, Reversible Launch\"]",
       "repoArtifactPath": "skills/cf-qa-review/SKILL.md",
       "promptId": "lsf-prompt-autonomy-matrix"
     },
@@ -152,6 +218,20 @@
       "title": "Agentic Code Quality & Dual-Axis Verification (cf-eval)",
       "stageTag": "Dual-Axis Eval",
       "summary": "Manual line-by-line review hits a physical wall when agents write thousands of lines in minutes ('Agentic Code Quality'). Move quality into the harness and enforce the golden rule of 'Practical Loop Engineering': never let the generator grade its own homework. Evaluate BOTH Output Quality and Execution Trajectory via `cf-eval`.",
+      "eli5": {
+        "plainTitle": "Double-Checking Both the Result and How the AI Got There",
+        "oneLineHook": "Never let the builder grade its own homework—have a fresh inspector check both the finished app and whether any shortcuts were taken.",
+        "everydayAnalogy": "A driving examiner who checks both that you parked neatly inside the lines AND that you did not run a red light getting there.",
+        "simpleExplanation": "When an AI writes hundreds of lines in minutes, reading every single line by hand is exhausting—and asking the same builder if its work looks good is like letting a student grade their own exam. Instead, a fresh independent inspector checks two separate things: first, does the finished result pass every test, security check, and phone/desktop screen check? Second, did the builder follow the rules honestly without deleting tests or cutting corners?",
+        "whyItMatters": "An eager AI can sometimes make a test turn green by quietly weakening the test instead of fixing the real bug. Checking both the final result AND the path taken catches clever shortcuts before they ever reach users.",
+        "roleInProtocol": "This is the Dual-Axis Evaluation skill (cf-eval) in the Code Factory: clean-context cf-reviewer and cf-tester grade both Axis 1 (Output Quality) and Axis 2 (Execution Trajectory / Oracle Honesty), catching real issues like contrast bugs or broken layouts.",
+        "howToUseGoingForward": "Always separate the helper that builds from the helper that grades. Require your reviewer to confirm that no tests were weakened, no safety checks were silenced, and phone, tablet, and desktop views were all checked.",
+        "whenToUse": "Use this after completing any meaningful feature, bug fix, or multi-file edit—right before merging or publishing.",
+        "realWorldExample": "On this very Academy website, a separate reviewer caught three things the builder missed: a button color that was too faint to read, a tiny phone-screen layout bug, and a package license restriction—fixing all three before launch.",
+        "audioScript": "Imagine taking a driving test where the examiner only looks at whether your car ended up in a parking spot, without noticing you ran two red lights to get there. That is why great AI quality checks look at two separate things—and why you never let the builder grade its own homework. Always invite a fresh, independent inspector to check Axis One, the finished result: do all tests pass, is it secure, and does it look great on phone, tablet, and desktop screens? Then check Axis Two, the journey: did the builder follow your plan honestly, without deleting failing tests or silencing warnings to fake a passing grade? Checking both guarantees honest, rock-solid quality.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "Independent two-axis grading: checking both the finished product and whether the builder followed the rules honestly."
+      },
       "keyTakeaways": [
         "Axis 1 — Output Quality: Deterministic checks (`tsc`, `eslint`, `vitest`, `next build`, `pnpm audit --audit-level=high`), runtime Zod boundaries, fail-closed hooks, and 375/768/1440px browser checks.",
         "Axis 2 — Execution Trajectory: Audit spec/partition adherence, anti-gaming oracle honesty (zero weakened tests, `@ts-ignore`, or silenced lint rules), cross-viewport blind spots, and HITL compliance.",
@@ -168,6 +248,7 @@
         "filename": "skills/cf-eval/references/eval-rubric.md (Excerpt)",
         "code": "| Dimension | Axis | Automatic Fail Trigger |\n| :--- | :--- | :--- |\n| Static & Build Gates | Output | Any @ts-ignore, disabled lint without ADR, failing build |\n| Security & CVEs | Output | Hardcoded secret, {} in PreToolUse, missing RLS |\n| Multi-Viewport & WCAG | Output | Desktop-only check, horizontal overflow, contrast < 4.5:1 |\n| Oracle Honesty | Trajectory | Weakening assertions or deleting failing tests to turn CI green |\n| Selective Autonomy | Trajectory | Unapproved prod deploy, force push, or silent dependency install |"
       },
+      "mermaidDiagram": "flowchart TD\n    Done[\"Builder Finishes Work\"] --> Fresh[\"Fresh Independent Inspector\"]\n    Fresh --> A1[\"Check 1: Finished Result\\n(Tests, Security, Phone/Tablet/Desktop)\"]\n    Fresh --> A2[\"Check 2: Honest Journey\\n(Followed Plan, Zero Shortcuts or Weakened Tests)\"]\n    A1 --> V{\"Both Clean?\"}\n    A2 --> V\n    V -->|\"Yes\"| OK[\"Ready to Ship\"]\n    V -->|\"No\"| Fix[\"Clear Fix List Sent Back\"]",
       "repoArtifactPath": "skills/cf-eval/SKILL.md",
       "promptId": "lsf-prompt-dual-axis-eval"
     },
@@ -177,6 +258,20 @@
       "title": "Practical Loop Engineering (cf-loop-engineer): Goals, Schedules & Cloud Graduation",
       "stageTag": "Loop Engineering",
       "summary": "Put the entire framework to work daily with `skills/cf-loop-engineer`: pick `/goal` for finite oracle-backed deliverables, `/schedule` for recurring read-only hygiene loops, `/teamwork` for disjoint parallel swarms (max 3-5 concurrent loops), and graduate specs directly into governed cloud deployments (Day 5).",
+      "eli5": {
+        "plainTitle": "Putting Smart Loops to Work Every Week (From Sketch to Live)",
+        "oneLineHook": "Combine finish-line Goals, weekly health scans, and a 3–5 loop cap to take ideas smoothly from your laptop to live users.",
+        "everydayAnalogy": "A calm air-traffic tower guiding 3–5 planes cleanly to the runway while automated weather radar runs on the hour.",
+        "simpleExplanation": "Now all the pieces click together into a smooth everyday system. When you have a clear finish line with an automated check, launch a Goal loop with a three-try safety brake so it fixes itself until verified. Set up a gentle weekly Schedule that scans for outdated packages or cluttered notes without making surprise edits. Keep at most three to five loops running at once, and graduate verified work cleanly from your laptop to the live cloud with your final thumbs-up.",
+        "whyItMatters": "Combining bounded automatic loops with calm human final approval lets one person or a small team maintain live software reliably—catching maintenance issues early without constant late-night firefighting.",
+        "roleInProtocol": "This brings the entire Lit Software Factory together through skills/cf-loop-engineer: oracle-backed /goal runs, read-only /schedule hygiene sweeps, <= 5 parallel swarm caps, and HITL-governed cloud deployment.",
+        "howToUseGoingForward": "Start with one weekly read-only health schedule and one well-defined /goal loop backed by your automated test command. Once both feel effortless, scale up to 3–5 parallel helpers working on separate files.",
+        "whenToUse": "Use this when you are ready to move from one-off AI sessions into a repeatable weekly rhythm that keeps live projects healthy, tested, and easy to ship.",
+        "realWorldExample": "You launch a finish-line Goal to update all course files and verify every test passes—with a 3-try stop rule and an independent final inspector. Once all gauges turn green, you approve the live cloud publish in one calm click.",
+        "audioScript": "Now let us put the entire Lit Software Factory together into a calm weekly system. Think of an air-traffic tower guiding three to five planes cleanly to the runway while automatic weather radar sweeps every hour. Use a finish-line Goal when you have a clear automated check that proves the job is done, protected by a three-retry safety brake and a separate final reviewer. Set up one gentle weekly Schedule that checks for security updates and tidy notes in read-only mode, so you hear about tiny issues early with zero surprises. Keep active loops at three to five, and graduate verified builds straight from your laptop to live users with your confident final approval.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "Bringing Goals, weekly health scans, a 3–5 cap, and human-approved cloud launches together in one smooth cycle."
+      },
       "keyTakeaways": [
         "Goals (`/goal`) = Run-Until-Done: Requires a machine-checkable completion oracle upfront, a 3-retry circuit breaker, and independent `cf-reviewer` verification before completion.",
         "Loops (`/schedule`) = Recurring Cadence: Ideal for weekly CVE audits, `.memory/handover.md` (<= 3 KB) size checks, and manifest drift detection—kept strictly read-only or PR-draft bounded.",
@@ -193,6 +288,7 @@
         "filename": "Project_Antigravity Bounded /goal Example",
         "code": "/goal Converge academy/ to zero High/Critical CVEs and verified 4-course readiness:\n1. Run `cd academy && pnpm run sync:resources && pnpm audit --audit-level=high`.\n2. Validate every `academy/content/courses/*/course.json` against `CourseSchema`.\n3. Run `cf-next-verify` (tsc, eslint, vitest, next build) + Python hook unittests.\n4. Invoke clean-context `cf-reviewer` (`cf-eval`) before reporting completion.\nCircuit breaker: Stop after 3 failed retries and report the exact blocker."
       },
+      "mermaidDiagram": "flowchart LR\n    G[\"Finish-Line Goal\\n(Test-Backed + 3-Try Brake)\"] --> Check[\"Independent Quality Check\"]\n    W[\"Weekly Health Scan\\n(Read-Only Checkup)\"] --> Digest[\"Calm Weekly Report\"]\n    Check --> Approve[\"Human Final Approval\"]\n    Approve --> Live[\"Live Cloud Launch\\n(With Clear Undo Plan)\"]",
       "repoArtifactPath": "skills/cf-loop-engineer/SKILL.md",
       "promptId": "lsf-prompt-goal-oracle"
     }
@@ -201,10 +297,12 @@
     {
       "id": "lsf-prompt-context-audit",
       "title": "Run a Static vs. Dynamic Context & Harness 90/10 Audit",
+      "eli5Title": "Tidy Up My AI's Desk Rules & Model Budget",
       "stage": "research",
       "difficulty": "beginner",
       "skillRef": "cf-research",
       "description": "Audits a repository through the Agent = Model (10%) + Harness (90%) lens and optimizes static rules vs. progressive-disclosure skills and model routing.",
+      "whenToUse": "Copy this when your project rules feel bloated, your AI forgets instructions mid-chat, or you want faster, lower-cost answers by splitting desk rules from bookshelf guides.",
       "template": "Audit `{{target_repo}}` using the **Agent = Model (10%) + Harness (90%)** and **Context Engineering Economics** framework from `.memory/research-vibe-coding-lit-factory.md`:\n\n1. Measure always-on static context (`AGENTS.md`, `rules/`, `.agents/rules/`) against our `<= 10 KB` target (hard cap 24 KB / 20k tokens).\n2. Identify bloated static instructions that should move into progressive-disclosure `skills/<name>/SKILL.md` + `references/`.\n3. Audit MCP servers (Day 2), Hooks (Day 4: fail-closed `PreToolUse`, secret guards), and subagent `model:` routing (`pro` vs. `flash`).\n4. Output a prioritized harness-upgrade plan focused on `{{optimization_goal}}`.",
       "variables": [
         {
@@ -225,10 +323,12 @@
     {
       "id": "lsf-prompt-autonomy-matrix",
       "title": "Classify Selective Autonomy & Outer-Loop Gates for a Feature Spec",
+      "eli5Title": "Decide What Can Run on Autopilot vs. What Needs My Approval",
       "stage": "spec",
       "difficulty": "intermediate",
       "skillRef": "cf-plan",
       "description": "Applies 'Software Factories, Light and Dark' and 'Own the Outer Loop' to classify Lights-Out vs. Human-Lit tasks and define upfront verification oracles.",
+      "whenToUse": "Copy this right before building a new feature so you and your AI agree upfront on which routine tasks can run automatically and which sensitive tasks must pause for your review.",
       "template": "Before implementing `{{feature_name}}`, apply our **Lit Software Factory** protocol (`rules/AGENTS.md` Section 8 + `cf-plan`):\n\n1. Partition the work into non-overlapping tasks (max `{{max_loops}}` concurrent loops).\n2. Classify every task as **Lights-Out** (crisp machine oracle: docs, tests, lint, validated JSON) or **Human-Lit** (auth, security/RLS, finance, secrets/hooks, infra, architecture).\n3. Define the exact **Verification Oracle** (command, Zod schema, or 3-viewport browser assertion) for every task *before* any code is written.\n4. Define the **Outer-Loop Sign-Off** checklist (Quality, Verdict, Answerability + rollback plan).",
       "variables": [
         {
@@ -249,10 +349,12 @@
     {
       "id": "lsf-prompt-dual-axis-eval",
       "title": "Execute Decoupled Dual-Axis Evaluation (Output + Trajectory) via cf-eval",
+      "eli5Title": "Have a Fresh Inspector Grade Both My Result and Honesty",
       "stage": "test",
       "difficulty": "senior",
       "skillRef": "cf-eval",
       "description": "Grades a completed implementation in a clean context across both Output Quality and Execution Trajectory—enforcing 'Never let the generator grade its own homework'.",
+      "whenToUse": "Copy this after finishing any feature or big edit to get an honest, independent check of tests, security, phone/desktop views, and whether any shortcuts were taken.",
       "template": "Invoke `cf-reviewer` in a fresh, decoupled context to run `skills/cf-eval/SKILL.md` on `{{diff_scope}}` against `{{spec_path}}`:\n\n1. **Axis 1 (Output Quality):** Verify static checks (`tsc`, `eslint`, `vitest`, `next build`), `pnpm audit --audit-level=high`, runtime Zod validation, fail-closed hooks, and 375/768/1440px browser evidence.\n2. **Axis 2 (Execution Trajectory):** Audit spec/partition compliance, oracle honesty (confirm zero weakened assertions, `@ts-ignore`, or disabled lint rules), cross-surface blind spots, and Human-Lit compliance.\n3. **Outer-Loop Deliverable:** Write an Answerability Statement (what changed, why it is safe, exact rollback command) and issue a clear `SHIP` / `REVISE` / `BLOCK` verdict.",
       "variables": [
         {
@@ -273,10 +375,12 @@
     {
       "id": "lsf-prompt-goal-oracle",
       "title": "Launch an Oracle-Backed /goal Convergence Loop (cf-loop-engineer)",
+      "eli5Title": "Run a Safe Finish-Line Goal With a 3-Try Safety Brake",
       "stage": "build",
       "difficulty": "intermediate",
       "skillRef": "cf-loop-engineer",
       "description": "Starts a finite, self-correcting /goal loop with an explicit machine-checkable completion oracle, 3-retry circuit breaker, and independent verifier sign-off.",
+      "whenToUse": "Copy this when you have a clear automated test that defines 'done' and want the AI to keep fixing issues until verified—stopping safely if stuck three times.",
       "template": "/goal Complete `{{deliverable_goal}}` in `{{target_dir}}` under `cf-loop-engineer` governance:\n\n1. Work strictly within the approved scope and invariants (`rules/AGENTS.md` + `.agents/rules/`).\n2. Verify completion using this exact independent oracle: `{{oracle_cmd}}`.\n3. Circuit breaker: If the oracle fails 3 consecutive times, stop immediately and report root-cause diagnostics instead of thrashing.\n4. Once the oracle passes, invoke clean-context `cf-reviewer` (`cf-eval`) to grade output and trajectory before reporting done.",
       "variables": [
         {
@@ -303,10 +407,12 @@
     {
       "id": "lsf-prompt-schedule-hygiene",
       "title": "Create a Read-Only Recurring /schedule Factory Hygiene Loop",
+      "eli5Title": "Set Up a Gentle Weekly Read-Only Project Health Scan",
       "stage": "optimise",
       "difficulty": "beginner",
       "skillRef": "cf-loop-engineer",
       "description": "Configures a recurring cron-style /schedule loop to detect CVE advisories, rules/handover budget bloat, and manifest drift without risky auto-merges.",
+      "whenToUse": "Copy this to schedule an automatic weekly checkup for security updates, tidy notes, and drift—reporting findings cleanly without making surprise edits.",
       "template": "/schedule {{cron_cadence}}: Run a read-only Lit Software Factory hygiene sweep on `{{repo_name}}`:\n\n1. Run `{{audit_cmd}}` and flag any newly disclosed High or Critical CVEs.\n2. Check static context hygiene: confirm `rules/AGENTS.md` <= 12 KB and `.memory/handover.md` <= 3072 bytes.\n3. Verify generated resource manifests and course schemas match current `skills/`, `agents/`, `hooks/`, and `academy/content/courses/` with zero drift.\n4. Output a concise P0/P1 drift digest only. Strictly read-only: do NOT edit files, add dependencies, or run `git push`.",
       "variables": [
         {

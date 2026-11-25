@@ -15,6 +15,65 @@ export function isAllowedVideoUrl(url: string): boolean {
   return ALLOWED_VIDEO_URL_PATTERNS.some((pattern) => pattern.test(url));
 }
 
+/**
+ * Explicit allowlist for local editorial course illustrations (Security Invariant).
+ * Prevents untrusted remote origins, javascript: URIs, or directory traversal.
+ */
+export const ALLOWED_IMAGE_URL_PATTERNS: readonly RegExp[] = [
+  /^\/media\/illustrations\/[A-Za-z0-9._-]+\.(?:png|webp|jpg|jpeg|svg)$/,
+];
+
+/**
+ * Explicit allowlist for local spoken audio explainers (Security Invariant).
+ */
+export const ALLOWED_AUDIO_URL_PATTERNS: readonly RegExp[] = [
+  /^\/media\/audio\/[A-Za-z0-9._-]+\.(?:mp3|wav|ogg|m4a)$/,
+];
+
+export function isAllowedImageUrl(url: string): boolean {
+  if (url.includes("..")) return false;
+  return ALLOWED_IMAGE_URL_PATTERNS.some((pattern) => pattern.test(url));
+}
+
+export function isAllowedAudioUrl(url: string): boolean {
+  if (url.includes("..")) return false;
+  return ALLOWED_AUDIO_URL_PATTERNS.some((pattern) => pattern.test(url));
+}
+
+export const LearningDepthModeSchema = z.enum(["eli5", "pro"]);
+
+export const CourseIllustrationSchema = z.object({
+  src: z.string().min(1).refine(isAllowedImageUrl, {
+    message:
+      "Illustration src must match /media/illustrations/<filename>.(png|webp|jpg|jpeg|svg).",
+  }),
+  alt: z.string().min(1).max(280),
+  caption: z.string().min(1).max(240),
+  visualAnalogy: z.string().min(1).max(160),
+});
+
+export const Eli5ConceptBlockSchema = z.object({
+  plainTitle: z.string().min(1).max(120).optional(),
+  oneLineHook: z.string().min(1).max(200).optional(),
+  everydayAnalogy: z.string().min(1).max(160),
+  simpleExplanation: z.string().min(1).max(500),
+  whyItMatters: z.string().min(1).max(500),
+  roleInProtocol: z.string().min(1).max(500),
+  howToUseGoingForward: z.string().min(1).max(500),
+  whenToUse: z.string().min(1).max(400).optional(),
+  realWorldExample: z.string().min(1).max(500),
+  audioScript: z.string().min(1).max(1400),
+  audioUrl: z
+    .string()
+    .refine(isAllowedAudioUrl, {
+      message:
+        "Audio URL must match /media/audio/<filename>.(mp3|wav|ogg|m4a).",
+    })
+    .optional(),
+  estimatedMinutes: z.number().int().min(1).max(30).default(5),
+  diagramCaption: z.string().min(1).max(240).optional(),
+});
+
 export const PaginationQuerySchema = z.object({
   limit: z.coerce.number().int().min(1).max(100).default(20),
   offset: z.coerce.number().int().min(0).default(0),
@@ -44,10 +103,12 @@ export const PromptVariableSchema = z.object({
 export const PromptCardSchema = z.object({
   id: z.string().min(1),
   title: z.string().min(1).max(120),
+  eli5Title: z.string().min(1).max(120).optional(),
   stage: SdlcStageKeySchema,
   difficulty: DifficultyLevelSchema,
   skillRef: z.string().optional(),
   description: z.string().min(1).max(400),
+  whenToUse: z.string().min(1).max(300).optional(),
   template: z.string().min(1).max(4000),
   variables: z.array(PromptVariableSchema).default([]),
   expectedOutcome: z.string().min(1).max(400),
@@ -92,6 +153,7 @@ export const LessonStepSchema = z.object({
   title: z.string().min(1).max(120),
   stageTag: z.string().min(1).max(40),
   summary: z.string().min(1).max(600),
+  eli5: Eli5ConceptBlockSchema.optional(),
   keyTakeaways: z.array(z.string().min(1)).min(1),
   actionChecklist: z.array(z.string().min(1)).min(1),
   codeSnippet: CodeSnippetSchema.optional(),
@@ -104,9 +166,12 @@ export const LessonStepSchema = z.object({
 export const CourseSchema = z.object({
   id: z.string().regex(/^[a-z0-9-]+$/),
   slug: z.string().regex(/^[a-z0-9-]+$/),
-  number: z.number().int().min(1),
+  number: z.number().int().min(0),
   title: z.string().min(1).max(140),
+  eli5Title: z.string().min(1).max(140).optional(),
   subtitle: z.string().min(1).max(260),
+  eli5Tagline: z.string().min(1).max(260).optional(),
+  illustration: CourseIllustrationSchema.optional(),
   level: z.enum(["beginner", "intermediate", "senior", "all-levels"]),
   estimatedMinutes: z.number().int().min(5).max(600),
   threeScenePreset: z.enum(["harness-constellation", "sdlc-orbital", "hook-pipeline"]),
@@ -187,6 +252,7 @@ export const LearnerProgressSchema = z.object({
   bookmarkedPromptIds: z.array(z.string()).default([]),
   promptVariableValues: z.record(z.string(), z.record(z.string(), z.string())).default({}),
   activeHarnessMode: z.enum(["raw", "code-factory-v3"]).default("code-factory-v3"),
+  learningDepthMode: LearningDepthModeSchema.default("eli5"),
   updatedAt: z.string(),
 });
 
@@ -206,6 +272,10 @@ export const HarnessDimensionSchema = z.object({
   winnerWithCodeFactory: z.enum(["antigravity", "claude-code", "tie"]),
 });
 
+export type LearningDepthMode = z.infer<typeof LearningDepthModeSchema>;
+export type CourseIllustration = z.infer<typeof CourseIllustrationSchema>;
+export type Eli5ConceptBlock = z.infer<typeof Eli5ConceptBlockSchema>;
+export type Eli5ConceptBlockInput = z.input<typeof Eli5ConceptBlockSchema>;
 export type PaginationQuery = z.infer<typeof PaginationQuerySchema>;
 export type SdlcStageKey = z.infer<typeof SdlcStageKeySchema>;
 export type DifficultyLevel = z.infer<typeof DifficultyLevelSchema>;

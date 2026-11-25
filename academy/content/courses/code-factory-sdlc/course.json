@@ -3,7 +3,15 @@
   "slug": "code-factory-sdlc",
   "number": 2,
   "title": "The Enterprise Code Factory: 8-Stage SDLC Reference Model (Live Meta-Build)",
+  "eli5Title": "From Rough Idea to Live App: The 8-Station Assembly Line",
   "subtitle": "Operationalize The New SDLC With Vibe Coding and Lit Software Factories (Loop -> Harness -> Factory) across all 8 stages—with live artifacts, Dual-Axis Evals, and Outer-Loop governance built on this repo.",
+  "eli5Tagline": "See how a calm, well-run software factory turns an idea into a live app across 8 clear stations—checking safety first, locking blueprints, building side by side, verifying on real screens, and improving every round.",
+  "illustration": {
+    "src": "/media/illustrations/code-factory-sdlc-studio.jpg",
+    "alt": "Architectural cutaway of a bright 8-station software factory floor flowing left to right: Research Desk, Blueprint Interview Table, Floor-Plan Board, Parallel Build Workbenches, Quality Inspection Screen, Private Release Gate, Feedback Triage Desk, and Learning Wall.",
+    "caption": "All 8 stations of a trustworthy software factory in one cutaway view—from checking ingredients at the Research Desk to shipping safely through the Release Gate.",
+    "visualAnalogy": "An 8-Station Factory Floor (Research Desk -> Blueprint -> Build Benches -> Quality Screen -> Release Gate)"
+  },
   "level": "all-levels",
   "estimatedMinutes": 80,
   "threeScenePreset": "sdlc-orbital",
@@ -67,6 +75,20 @@
       "title": "Stage 1 — Research: Discovery, Trade-Offs & License Auditing",
       "stageTag": "Stage 1: Research",
       "summary": "In 'The New SDLC With Vibe Coding' and 'Human Judgment Doesn't Leave the Software Factory, It Relocates', generation is cheap while intent and risk discovery move upstream. Stage 1 (`cf-research`) inspects the workspace, audits licenses/CVEs, and maps trade-offs in `.memory/research*.md`.",
+      "eli5": {
+        "plainTitle": "Station 1: Look Before You Leap (Research & Safety Check)",
+        "oneLineHook": "Before building a single piece, inspect what already exists and check that every borrowed tool is free and safe to use.",
+        "everydayAnalogy": "Checking your pantry and reading food labels carefully before you start cooking dinner.",
+        "simpleExplanation": "When AI can build pages in minutes, the biggest mistake is rushing straight into building the wrong thing—or grabbing a borrowed tool that has hidden legal strings or safety bugs. Station 1 pauses for ten calm minutes first. Your helper inspects what is already in your project folder, compares two or three sensible ways to solve your goal, checks every tool's permission label, and writes a clear summary note for you to approve.",
+        "whyItMatters": "Catching a bad tool choice or folder conflict on Day 1 takes five minutes to swap. Discovering that same problem a week later after building twenty pages means painful rewrites and wasted time.",
+        "roleInProtocol": "This is the front door of the 8-Station Code Factory. During the real build of this very Academy, Station 1 spotted a restricted animation library license before line one was written and swapped in a free, open alternative automatically.",
+        "howToUseGoingForward": "Start every new project or major feature with a quick Research check that compares options and verifies permissions—and never let building begin until you read and approve that short summary.",
+        "whenToUse": "Use this at the very beginning of any new project, before adding a new outside tool or plugin, or whenever you want to compare two or three ways to solve a problem safely.",
+        "realWorldExample": "While planning this very Academy website, our Station 1 check noticed a popular animation helper had a paid commercial license restriction. It flagged the risk immediately and picked a clean open-source option instead—saving hours of rework before a single page existed.",
+        "audioScript": "Welcome to Course Two, Station One: Look Before You Leap. Imagine deciding to cook a big meal without opening the fridge or reading the labels on the jars. You might grab expired milk or realize halfway through that you are missing a pan. Building software with AI is the exact same. Because AI can create files so quickly, smart builders pause at Station One first. Your helper inspects your existing folders, compares two or three clean options, checks that every outside tool is free and safe, and hands you a short summary note. Only after you give a calm thumbs-up does the factory move to Station Two.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "How Station 1 inspects your folder, checks tool permissions, and pauses for your thumbs-up before anyone writes code."
+      },
       "keyTakeaways": [
         "Human Judgment Moves Upstream: Because agents eliminate syntax translation friction, engineers focus first on problem intent, architecture constraints, and risk boundaries before a single line is generated.",
         "Live Meta-Build Win: During Stage 1 of Antigravity Academy, dependency inspection flagged GSAP's proprietary Webflow Standard License and immediately replaced it with MIT-licensed `motion` before any code was written.",
@@ -78,7 +100,7 @@
         "Verify every new package has a permissive license (MIT/Apache-2.0/BSD/ISC) and zero known High/Critical CVEs.",
         "Require explicit human sign-off on architectural trade-offs before opening Stage 2."
       ],
-      "mermaidDiagram": "flowchart LR\n    A[\"Idea / Goal\"] --> B[\"cf-research (Codebase + Tooling Audit)\"]\n    B --> C[\"License & CVE Gate (Reject GSAP -> Pick MIT Motion)\"]\n    C --> D[\".memory/research.md\"]\n    D --> E{\"Senior Engineer Sign-Off\"}",
+      "mermaidDiagram": "flowchart LR\n    A[\"Your Idea or Goal\"] --> B[\"Inspect Existing Folder & Tools\"]\n    B --> C[\"Check Safety & Free-to-Use Labels\"]\n    C --> D[\"Write 1-Page Research Summary\"]\n    D --> E{\"Your Human Thumbs-Up\"}\n    E -->|\"Approved\"| F[\"Move to Station 2 Blueprint\"]",
       "repoArtifactPath": ".memory/research-academy-platform.md",
       "promptId": "cf-prompt-bootstrap-research"
     },
@@ -88,6 +110,20 @@
       "title": "Stage 2 — Spec: Interrogating Ambiguity & Locking Contracts",
       "stageTag": "Stage 2: Spec",
       "summary": "Ambiguous requirements turn autonomous factories into Dark Factories shipping the wrong intent. Stage 2 pairs `cf-grill-me` (up to 5 sharp decision questions) with `cf-plan` to lock Zod contracts, Selective Autonomy tiers (Lights-Out vs. Human-Lit), and verification oracles in `plans/<feature>-spec.md`.",
+      "eli5": {
+        "plainTitle": "Station 2: Ask 5 Sharp Questions & Lock the Exact Blueprint",
+        "oneLineHook": "Clear up fuzzy wishes upfront with five quick questions so your AI builds the exact app you pictured—not a wild guess.",
+        "everydayAnalogy": "Agreeing on exact room sizes, paint colors, and budget with a house builder before anyone swings a hammer.",
+        "simpleExplanation": "If you tell a builder 'make me a nice kitchen,' they might install purple cabinets when you wanted warm wood. Station 2 stops guesswork cold. First, your helper asks up to five sharp, friendly questions to uncover any fuzzy spots—like where information is saved, what happens when a button fails, and what we are leaving out for later. Then it writes one clear, locked blueprint listing exactly what finished looks like.",
+        "whyItMatters": "Fuzzy instructions create 'surprise software' where an AI happily builds fast in the wrong direction. Five minutes of clear questions upfront prevents hours of frustrating back-and-forth edits later.",
+        "roleInProtocol": "Station 2 turns rough wishes into a rock-solid written blueprint inside `plans/`. It also marks which parts AI can check automatically and which sensitive parts—like logins, payments, or publishing—always require a human pause.",
+        "howToUseGoingForward": "Whenever you have a new feature idea, ask your AI to interview you with up to five short questions first, then review the written blueprint and Non-Goals list before giving the green light.",
+        "whenToUse": "Use this right after Station 1 Research—or anytime your idea has open choices about appearance, saved data, user accounts, or how you will check that it works.",
+        "realWorldExample": "Before building this Academy, five quick questions locked everything in two minutes: save beginner progress right in the browser for version one, use a sleek dark studio theme, keep safety checks pure and instant, and hold off on complex user logins until version two.",
+        "audioScript": "Now we arrive at Station Two: asking sharp questions and locking the blueprint. Think of hiring someone to remodel your kitchen. If you only say make it nice, you might come home to neon green counters. So before a single tool comes out, Station Two runs a quick, friendly interview—at most five high-impact questions to clear up every gray area. Where should progress be saved? What should happen if a screen is empty or hits an error? What are we intentionally skipping for now? Once you answer, your helper locks one clear blueprint so every builder knows the exact finish line.",
+        "estimatedMinutes": 8,
+        "diagramCaption": "How five quick questions remove guesswork and produce a clear, locked blueprint before building starts."
+      },
       "keyTakeaways": [
         "Lit vs. Dark Factory Spec Discipline: Every `cf-plan` spec classifies tasks into Lights-Out (crisp machine oracle) vs. Human-Lit (auth, security/RLS, finance, infra, core architecture) and declares the exact verification oracle upfront.",
         "Live Meta-Build Win: `cf-grill-me` locked 5 decisive calls in under two minutes—Next.js App Router over raw HTML, stateless v1 `localStorage` + Zod, dark glassmorphic palette, unified `VideoStage`, and pure TypeScript HITL simulation.",
@@ -104,6 +140,7 @@
         "filename": "academy/src/lib/schemas.ts (Locked Boundary Contract)",
         "code": "export const PaginationQuerySchema = z.object({\n  limit: z.coerce.number().int().min(1).max(100).default(20),\n  offset: z.coerce.number().int().min(0).default(0),\n});\n\nexport const HitlSimulateRequestSchema = z.object({\n  commandLine: z.string().trim().min(1).max(1000),\n  bypassSandbox: z.boolean().optional().default(false),\n});"
       },
+      "mermaidDiagram": "flowchart LR\n    R[\"Approved Research Note\"] --> Q[\"Ask Up to 5 Clear Questions\"]\n    Q --> A[\"Your Simple Decisions\\n(Style, Storage & Skip-For-Now)\"]\n    A --> B[\"Locked Written Blueprint\\n(Exact Checks & Safety Rules)\"]\n    B --> G{\"You Approve Blueprint\"}\n    G -->|\"Locked\"| N[\"Move to Station 3 Floor Plan\"]",
       "repoArtifactPath": "plans/antigravity-academy-spec.md",
       "promptId": "cf-prompt-grill-and-plan"
     },
@@ -113,6 +150,20 @@
       "title": "Stage 3 — Architecture: System Maps, ADRs & Design Tokens",
       "stageTag": "Stage 3: Architecture",
       "summary": "Durable decisions belong in `.memory/decisions/` (ADRs) and `.memory/architecture.md`, not buried in ephemeral chat history. Stage 3 freezes boundaries, rejected alternatives, Tailwind v4 `@theme` design tokens, and non-overlapping file partitions.",
+      "eli5": {
+        "plainTitle": "Station 3: Draw the Floor Plan & Assign Separate Workbenches",
+        "oneLineHook": "Write down why you chose your design and give every helper their own separate room so nobody bumps elbows.",
+        "everydayAnalogy": "Drawing a house floor plan and assigning the painter, electrician, and carpenter to separate rooms.",
+        "simpleExplanation": "Chat messages scroll away and get forgotten, so Station 3 saves your big design choices in permanent project notes—explaining what you picked, what you turned down, and why. It also creates one shared color and style sheet so every page matches, and divides the upcoming building work into separate, non-overlapping zones so multiple helpers can work at once without ever editing the same file.",
+        "whyItMatters": "Without a written floor plan and separate zones, two helpers trying to build fast will accidentally overwrite each other's files, pick mismatched colors, or re-argue decisions you already settled yesterday.",
+        "roleInProtocol": "Station 3 creates your durable Decision Notes (`.memory/decisions/`) and divides the project into Step 0 (shared connections) plus clean parallel workbenches so Station 4 can run smoothly at full speed.",
+        "howToUseGoingForward": "Before letting multiple helpers work in parallel, make sure every big choice has a short 'Why We Picked This' note and each helper has a crystal-clear list of files they own—and files they must not touch.",
+        "whenToUse": "Use this whenever a project has more than two or three moving parts, when you want consistent colors across many screens, or right before launching a parallel team of helpers.",
+        "realWorldExample": "For this Academy, Station 3 saved Decision Note 0002 explaining why we kept all colors in one central style sheet and split building into four separate zones: Data & Courses, 3D Visuals, Page Layout, and Automatic Tests—zero file collisions!",
+        "audioScript": "Welcome to Station Three: drawing the floor plan and assigning separate workbenches. Imagine building a house where the painter, plumber, and carpenter all crowd into the exact same tiny closet at once—chaos! And imagine forgetting next month why you placed a wall in a certain spot. Station Three solves both problems. First, it writes down your big design choices and why you made them in permanent project notes instead of letting them vanish in old chat history. Second, it sets up one shared style palette and splits the upcoming build into clean, separate workbenches so helpers can work side by side without ever bumping elbows.",
+        "estimatedMinutes": 8,
+        "diagramCaption": "How Step 0 locks shared rules and colors first so four separate workbenches can build side by side with zero overlap."
+      },
       "keyTakeaways": [
         "Live Meta-Build Win: `ADR-0002` explicitly documents why direct imperative Three.js islands beat `@react-three/fiber` (zero React 19 peer friction + full WebGL/DPR/IntersectionObserver control) and why build-time allowlisted repo sync prevents secret leaks.",
         "Design System Invariant: All colors, typography (`Space Grotesk` + `JetBrains Mono`), and glass surfaces live in `globals.css` `@theme` tokens—zero hardcoded hex values in UI components.",
@@ -123,7 +174,7 @@
         "Check that every ADR records Context, Decision, Alternatives Considered, and Consequences.",
         "Confirm Task 0 freezes all shared TypeScript interfaces (`schemas.ts`, `contracts.ts`) before launching parallel builders."
       ],
-      "mermaidDiagram": "flowchart TD\n    T0[\"Task 0: Shared Schemas, Contracts & Design Tokens\"] --> T1[\"Task 1: Backend APIs, HITL Evaluator & Course JSON\"]\n    T0 --> T2[\"Task 2: Three.js 3D Engine Islands\"]\n    T0 --> T3[\"Task 3: Glassmorphic UI Components\"]\n    T0 --> T4[\"Task 4: Deterministic Vitest Suite\"]\n    T1 --> QA[\"Stage 5: Independent QA & Browser Audit\"]\n    T2 --> QA\n    T3 --> QA\n    T4 --> QA",
+      "mermaidDiagram": "flowchart TD\n    T0[\"Step 0: Shared Rules, Data Shapes & Color Palette\"] --> T1[\"Workbench 1: Data, Courses & Safety Checker\"]\n    T0 --> T2[\"Workbench 2: 3D Visual Scenes\"]\n    T0 --> T3[\"Workbench 3: Page Screens & Buttons\"]\n    T0 --> T4[\"Workbench 4: Automatic Test Suite\"]\n    T1 --> QA[\"Station 5: Independent Quality Inspection\"]\n    T2 --> QA\n    T3 --> QA\n    T4 --> QA",
       "repoArtifactPath": ".memory/decisions/0002-academy-nextjs-glassmorphic-architecture.md",
       "promptId": "cf-prompt-grill-and-plan"
     },
@@ -133,6 +184,20 @@
       "title": "Stage 4 — Build: Task 0 Lock & Non-Overlapping Swarm Execution",
       "stageTag": "Stage 4: Build",
       "summary": "Execution (`cf-implement`) strictly follows the locked spec. The orchestrator completes Task 0 first, then fans out clean `cf-backend` and `cf-frontend` workers onto strictly non-overlapping file partitions—preventing context rot and merge conflicts.",
+      "eli5": {
+        "plainTitle": "Station 4: Build Side by Side Without Stepping on Toes",
+        "oneLineHook": "Finish the shared connecting pieces first, then let focused helpers build their own pieces calmly at the exact same time.",
+        "everydayAnalogy": "Four friends building the four corners of a giant jigsaw puzzle at once after locking the border pieces first.",
+        "simpleExplanation": "Now the actual building happens—and because Stations 1 through 3 did the careful thinking, Station 4 feels calm instead of frantic. First, one lead helper finishes the shared connecting pieces (Step 0) so every puzzle edge matches. Next, specialist helpers fan out onto their own separate folders and build strictly what the blueprint asked for—no unapproved surprises, no messy file clashes, and quick checkups along the way.",
+        "whyItMatters": "When one exhausted AI tries to build an entire app in one giant chat, it gets tired and forgets earlier details. Fresh, focused helpers working on separate pieces build faster, stay sharper, and never overwrite each other.",
+        "roleInProtocol": "Station 4 is the engine room of the Code Factory. By separating the Planner from the Builders and keeping every helper inside its assigned files, your finished pieces snap together cleanly on the very first try.",
+        "howToUseGoingForward": "Always complete shared setup files before launching parallel helpers, and make sure every builder runs a quick local checkup before handing work over to Station 5 Quality Inspection.",
+        "whenToUse": "Use this right after your blueprint and floor plan are approved—whether you are using one focused helper for a small feature or a parallel team for a multi-part milestone.",
+        "realWorldExample": "This very Academy upgrade used Station 4 live: the lead coordinator froze the shared course blueprint first, then four separate helpers upgraded all eight courses simultaneously—each editing only its own assigned course files with zero collisions.",
+        "audioScript": "Now we reach Station Four: building side by side without stepping on anyone's toes. Picture four friends doing a giant jigsaw puzzle together. If everyone reaches for the exact same corner, elbows collide. Instead, you snap the shared border pieces into place first—we call that Step Zero—and then each friend calmly builds their own corner from the picture on the box. In our software factory, the lead helper finishes the shared connecting files first, then focused specialist helpers build their separate folders at the same time, following the locked blueprint closely. When they finish, everything snaps together cleanly for inspection.",
+        "estimatedMinutes": 10,
+        "diagramCaption": "How locking shared connecting files first lets multiple specialist helpers build separate parts cleanly in parallel."
+      },
       "keyTakeaways": [
         "Separation of Concerns: The architect who writes the spec is decoupled from the builders implementing it, and builders never invent unapproved dependencies or routes.",
         "Zero File Contention: Task 1 owns `scripts/`, `content/`, `src/lib/`, `src/data/`, and `src/app/api/`; Task 2 owns `src/components/three/`; Task 3 owns UI components; Task 4 owns `tests/`.",
@@ -143,6 +208,7 @@
         "Run `pnpm run sync:resources` to verify the allowlisted build-time manifest regenerates cleanly with zero errors.",
         "Verify local `pnpm typecheck && pnpm lint && pnpm test` before handing off to Stage 5 QA."
       ],
+      "mermaidDiagram": "flowchart LR\n    L[\"1. Lead Finishes Shared Pieces\\n(Step 0 Connections Locked)\"] --> W1[\"Helper A\\nOwns Folder A Only\"]\n    L --> W2[\"Helper B\\nOwns Folder B Only\"]\n    L --> W3[\"Helper C\\nOwns Folder C Only\"]\n    W1 --> C[\"2. Local Automatic Checkup\"]\n    W2 --> C\n    W3 --> C\n    C --> QA[\"3. Hand Off to Fresh Inspector\"]",
       "repoArtifactPath": "skills/cf-implement/references/orchestration.md",
       "promptId": "cf-prompt-swarm-implement"
     },
@@ -152,6 +218,20 @@
       "title": "Stage 5 — Test: Dual-Axis Evals (Output + Trajectory) & 3-Viewport QA",
       "stageTag": "Stage 5: Test",
       "summary": "Verification is the line between vibe coding and engineering (Day 4 Security & Eval + Agentic Code Quality). Never let the generator grade its own homework: `cf-qa-review` + `cf-eval` audit BOTH final output AND execution trajectory via decoupled `cf-reviewer`, `cf-tester`, and `browser` agents.",
+      "eli5": {
+        "plainTitle": "Station 5: Independent Quality Check (Never Grade Your Own Homework)",
+        "oneLineHook": "Bring in a fresh inspector who did not build the app to test both the finished screens and how honestly the work was done.",
+        "everydayAnalogy": "A health inspector who both tastes the finished meal AND checks that the kitchen followed every clean-hands rule.",
+        "simpleExplanation": "If you ask the same helper who built a page 'did you do a good job?' it will almost always say yes! Station 5 uses a strict rule: never let the builder grade its own homework. Three fresh inspectors step in—one runs every automated test, one reviews safety and house rules with fresh eyes, and one opens a real web browser at phone, tablet, and desktop sizes. They check BOTH the finished result AND that nobody took shortcuts or skipped checks.",
+        "whyItMatters": "This single station is the line between messy trial-and-error and trustworthy software. Fresh eyes catch subtle phone-screen clipping, hard-to-read button colors, and hidden safety gaps before a single real user ever sees them.",
+        "roleInProtocol": "Station 5 writes an official Pass/Fail Quality Report (`.memory/qa-report.md`). Station 6 Launch is strictly locked shut until every serious defect is fixed and re-checked.",
+        "howToUseGoingForward": "Never trust a builder's cheerful 'All done!' message alone. Always run an independent check covering automated tests, safety review, and real phone, tablet, and desktop screens.",
+        "whenToUse": "Use this right after building any feature and ALWAYS before sharing a preview link or publishing live to real users.",
+        "realWorldExample": "During our real Academy build, fresh Station 5 inspectors caught four issues the builders missed: a button color that was slightly too faint to read easily, a first-frame 3D animation hiccup, a screen-reader label slip, and a stale cached image—all fixed cleanly before launch!",
+        "audioScript": "Station Five is what separates quick guesswork from truly trustworthy software, and it follows one golden rule: never let a builder grade its own homework. Think of a restaurant inspector who does two separate checks—first tasting the finished dish, and second making sure the kitchen did not cut corners behind the scenes. Here, three fresh helpers step in who did not write the code. One runs every automatic test. One checks safety rules and confirms no tests were skipped. And one opens a real web browser at phone, tablet, and desktop sizes to verify every button looks crisp. Nothing reaches launch until this report is green.",
+        "estimatedMinutes": 10,
+        "diagramCaption": "How three fresh inspectors check finished quality, honest process, and phone, tablet, and desktop screens before approving launch."
+      },
       "keyTakeaways": [
         "Verification Is the Narrow Neck: Generation is wide and cheap; moving quality into the harness (strict types, Zod boundaries, `cf-next-verify`, deterministic Vitest, SAST) prevents review overload.",
         "Dual-Axis Evaluation (`cf-eval`): Grade BOTH Output Quality (tests, CVEs, contrast >= 4.5:1, valid ARIA) AND Execution Trajectory (spec adherence, zero oracle-gaming/disabled lints, zero desktop-vs-mobile blind spots).",
@@ -163,6 +243,7 @@
         "Verify all 4 Vitest suites pass deterministically with zero flaky timers or network mocks leaking.",
         "Confirm `.memory/qa-report.md` records explicit Pass clearance across security, tests, and all 3 responsive viewports."
       ],
+      "mermaidDiagram": "flowchart TD\n    F[\"Finished Build From Station 4\"] --> I1[\"Fresh Inspector 1\\nRun All Automatic Tests\"]\n    F --> I2[\"Fresh Inspector 2\\nCheck Safety & Honest Process\"]\n    F --> I3[\"Fresh Inspector 3\\nLive Browser: Phone, Tablet, Desktop\"]\n    I1 --> V{\"All 3 Checks Clean?\"}\n    I2 --> V\n    I3 --> V\n    V -->|\"Yes\"| OK[\"Signed Green Quality Report\\nUnlock Station 6 Launch\"]\n    V -->|\"No\"| FIX[\"Send Exact Fix List Back to Builder\"]",
       "repoArtifactPath": "skills/cf-qa-review/SKILL.md",
       "promptId": "cf-prompt-qa-review"
     },
@@ -172,6 +253,20 @@
       "title": "Stage 6 — Deploy: Rollback Plan, HITL Approval & Preview Smoke Tests",
       "stageTag": "Stage 6: Deploy",
       "summary": "Day 5 ('Spec-Driven Production Grade Development') graduates local agents into governed, observable cloud deployments while humans Own the Outer Loop (Quality, Verdict, Answerability). `cf-deploy-staging` + `hooks/hitl-gate.py` enforce QA clearance, rollback plans, HITL approval, and live smoke tests.",
+      "eli5": {
+        "plainTitle": "Station 6: Safe Dress Rehearsal & Undo Button Before Going Live",
+        "oneLineHook": "Write down your instant undo button first, pause for your human thumbs-up, and test a private preview link before opening the doors.",
+        "everydayAnalogy": "Running a private theater dress rehearsal with the emergency curtain rope already in hand before opening night.",
+        "simpleExplanation": "Putting your project onto the live internet is a big step, so Station 6 never rushes it. First, it checks that Station 5's Quality Report is completely green. Second, it writes down the exact one-line undo command before anything goes online. Third, a safety lock pauses and asks for your explicit human approval. Fourth, it launches a private practice preview link and runs quick live health checks to confirm every page responds fast.",
+        "whyItMatters": "Publishing straight to real users without a preview link or an undo plan turns tiny cloud glitches into stressful emergencies. A calm dress rehearsal with a ready undo button keeps launches boring and safe.",
+        "roleInProtocol": "Station 6 puts you firmly in charge of the final Launch Verdict. Automatic safety locks (`hooks/hitl-gate.py`) block unapproved live publishes so an AI can never push unfinished work to your real users behind your back.",
+        "howToUseGoingForward": "Make three rules unbreakable for every launch: green Quality Report first, written undo command second, and test a private preview link before ever flipping the public switch.",
+        "whenToUse": "Use this anytime you are ready to share a working version online—first to a private staging preview link, and later when promoting to your public live address.",
+        "realWorldExample": "Before publishing a new Academy course update, your helper checks that all tests passed, writes the exact one-line rollback command into your handover note, pauses for your 'Yes, deploy preview,' and verifies the live preview link answers within five seconds.",
+        "audioScript": "Station Six is launch day—done the calm, stress-free way. Think of opening night at a theater: you never raise the curtain for a packed crowd without a private dress rehearsal and a clear plan if a stage light flickers. First, Station Six confirms your Quality Report from Station Five is completely green. Second, it writes down your exact one-step undo button before anything leaves your computer. Third, a built-in safety lock pauses and waits for your explicit human approval. Finally, it publishes a private preview link and runs a fast live checkup so you know everything works on the real internet before inviting users in.",
+        "estimatedMinutes": 8,
+        "diagramCaption": "How Station 6 verifies green checks, prepares your undo button, pauses for your approval, and tests a private preview link."
+      },
       "keyTakeaways": [
         "Own the Outer Loop (Quality / Verdict / Answerability): Before approving any staging or production deploy, verify harness quality evidence, issue an explicit human Verdict, and be answerable for why the change is safe.",
         "Human-in-the-Loop Gate: `hooks/hitl-gate.py` enforces `force_ask` on `vercel --prod`, `wrangler deploy`, `supabase db push`, and `git push`, while `hooks/secret-guard.py` blocks accidental credential writes.",
@@ -188,6 +283,7 @@
         "filename": "Stage 6 Staging Smoke Test Commands",
         "code": "# 1. Deploy staging preview (after human approval)\ncd academy && vercel deploy\n\n# 2. Smoke-test live API contracts (<= 5000ms timeout invariant)\ncurl --max-time 5 -sf \"$STAGING_URL/api/courses?limit=5\" | jq '.total'\ncurl --max-time 5 -sf \"$STAGING_URL/api/resources?category=skill&limit=20\" | jq '.total'\ncurl --max-time 5 -sf -X POST \"$STAGING_URL/api/hitl/simulate\" \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"commandLine\":\"git push --force\"}' | jq '.decision'"
       },
+      "mermaidDiagram": "flowchart LR\n    Q[\"Green Quality Report\"] --> U[\"Write Instant Undo Plan First\"]\n    U --> H{\"Safety Lock Pauses\\nYour Human Approval\"}\n    H -->|\"Approved\"| P[\"Launch Private Preview Link\"]\n    P --> S[\"Quick Live Health Check\\n(All Pages Load Fast)\"]\n    S --> L[\"Ready to Share Safely\"]",
       "repoArtifactPath": "skills/cf-deploy-staging/SKILL.md",
       "promptId": "cf-prompt-deploy-staging"
     },
@@ -197,6 +293,20 @@
       "title": "Stage 7 — User Feedback: Structured Triage & Severity Backlog",
       "stageTag": "Stage 7: Feedback",
       "summary": "Real learners and staging telemetry always surface edge cases that unit tests miss. Stage 7 (`cf-triage`) classifies feedback and runtime logs by severity (P0–P3), isolates root causes, and queues actionable items in `.memory/tasks.md`.",
+      "eli5": {
+        "plainTitle": "Station 7: Listen to Real Users & Sort What to Fix First",
+        "oneLineHook": "Real people always spot surprises automated checks missed—sort every note calmly from urgent fixes down to future wish-list ideas.",
+        "everydayAnalogy": "A hospital front desk sorting urgent emergencies ahead of routine checkups so critical issues never wait.",
+        "simpleExplanation": "Once real people click around your preview or live app, they will always notice helpful things you never expected—a confusing button label, a glitch on a small phone, or a fun feature idea. Station 7 keeps you from panicking or patching randomly. It sorts every report calmly by urgency (from urgent broken features down to nice-to-have wishes), traces the real root cause, and adds clear next steps to your project's task list.",
+        "whyItMatters": "Trying to fix ten random comments at once creates new bugs and burnout. Calm sorting ensures urgent broken items get repaired right away while creative feature wishes queue neatly for the next planned cycle.",
+        "roleInProtocol": "Station 7 connects real-world feedback directly back into your project's task board (`.memory/tasks.md`) with exact screen sizes and steps to reproduce each issue so builders fix the true cause—not just a surface symptom.",
+        "howToUseGoingForward": "Whenever you or a user spot a glitch, write down three tiny facts: what screen size you were using, what you clicked, and what happened versus what you expected. Then sort it by urgency before editing.",
+        "whenToUse": "Use this right after sharing a staging preview with friends or teammates, after reading real user comments, or whenever an unexpected error pops up after launch.",
+        "realWorldExample": "Two testers try your preview link: Tester 1 reports that the 'Save' button stops working on phones (Urgent Fix #1), while Tester 2 wishes for keyboard shortcuts (Future Idea #3). Station 7 puts the phone button fix at the very top and saves keyboard shortcuts neatly for next week.",
+        "audioScript": "Even after careful testing, the moment real people try your app, they will spot surprises—and that is a wonderful thing! Station Seven helps you turn real feedback into calm action instead of frantic patching. Picture the front desk at a clinic: urgent injuries are treated immediately, while routine wish-list checkups get scheduled neatly for later. Here, your helper takes every user note or error alert, ranks its urgency from critical to nice-to-have, tracks down the true root cause, and writes a clear entry on your task board. You fix what matters most first and never lose a great idea.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "How Station 7 sorts real user notes by urgency, finds the true root cause, and queues clear next tasks."
+      },
       "keyTakeaways": [
         "Structured Triage beats ad-hoc patching: every bug report or UX friction point receives a severity tier (P0 Critical, P1 High, P2 Medium, P3 Enhancement) and minimal reproduction steps.",
         "Separate quick regression fixes from new features: P0/P1 bugs enter immediate remediation while new course requests queue cleanly into the multi-course backlog.",
@@ -207,6 +317,7 @@
         "Log every staging UX observation with its exact viewport width, reproduction step, and expected vs. actual behavior.",
         "Prioritize P0/P1 regressions ahead of new feature work."
       ],
+      "mermaidDiagram": "flowchart LR\n    U[\"Real User Notes & Error Alerts\"] --> S[\"Sort Calmly by Urgency\\n(Urgent Fix vs. Future Wish)\"]\n    S --> R[\"Find Exact Root Cause\\n(File, Click & Screen Size)\"]\n    R --> T[\"Update Project Task List\"]\n    T -->|\"Urgent Fix\"| NOW[\"Fix & Re-Check Immediately\"]\n    T -->|\"Future Idea\"| NEXT[\"Save for Next Planned Cycle\"]",
       "repoArtifactPath": "skills/cf-triage/SKILL.md",
       "promptId": "cf-prompt-triage-feedback"
     },
@@ -216,6 +327,20 @@
       "title": "Stage 8 — Optimise: Distill Invariants, Handover & Add Course N+1",
       "stageTag": "Stage 8: Optimise",
       "summary": "Every completed cycle should make the factory permanently smarter. Stage 8 pairs `cf-learn` (promoting bug post-mortems into permanent rules & regression tests) with `cf-handover` (writing a <= 3 KB `.memory/handover.md`) so the next conversation starts hot and can drop in Course N+1 cleanly.",
+      "eli5": {
+        "plainTitle": "Station 8: Teach the Factory New Lessons & Leave a Tidy Handover",
+        "oneLineHook": "Turn every solved snag into a permanent rule and leave a 1-page handover note so your next session starts smarter and faster.",
+        "everydayAnalogy": "Jotting a helpful margin note in your family cookbook after perfecting a recipe, then leaving a tidy note for tomorrow's cook.",
+        "simpleExplanation": "Most people finish a project, close the window, and let every hard-won lesson evaporate. Station 8 makes your workshop permanently smarter every single round. First, any tricky snag you solved gets turned into a short permanent house rule and automatic check so it can never sneak back. Second, your helper writes a tiny 1-page handover note showing what is done and what comes next—so your next chat picks up effortlessly without rereading old history.",
+        "whyItMatters": "This is how your AI workshop compounds in value over time. Instead of fixing the same bug twice or re-explaining your whole project every Monday morning, every finished cycle makes the next one faster and cleaner.",
+        "roleInProtocol": "Station 8 closes the 8-Station loop (`cf-learn` + `cf-handover`) and powers infinite expansion: dropping a new course file into this Academy automatically updates the entire site, Prompt Vault, and catalog.",
+        "howToUseGoingForward": "End every meaningful work session with two five-minute habits: add one permanent rule for any surprise you solved, and refresh your short 1-page handover note before closing the chat.",
+        "whenToUse": "Use this right after fixing a tricky bug, finishing a milestone, or wrapping up a work session before switching computers or starting a fresh chat.",
+        "realWorldExample": "After fixing a tricky stale-image cache quirk during our Academy build, Station 8 turned that lesson into a permanent 2-line rule plus an automatic check, then saved a crisp handover note so the next session launched immediately into building new courses.",
+        "audioScript": "Congratulations on reaching Station Eight—the secret weapon that makes your software factory smarter every single week. Picture perfecting a tricky bread recipe and writing a quick margin note in your cookbook so you nail it effortlessly next time, then leaving a tidy one-page note on the counter for tomorrow's baker. Station Eight does both. First, any surprise snag you solved becomes a permanent house rule and automatic check so that mistake can never return. Second, your helper saves a crisp one-page handover note of what is finished and what comes next. Close the loop cleanly, and every future build starts stronger.",
+        "estimatedMinutes": 7,
+        "diagramCaption": "How Station 8 turns solved snags into permanent rules and a 1-page handover note so every future cycle runs smarter."
+      },
       "keyTakeaways": [
         "Permanent Learning (`cf-learn`): Whenever a subtle bug is resolved (like GSAP's license or `PreToolUse` failing closed on `{}`), codify the invariant in `.agents/rules/` + a regression test so it can never recur.",
         "Context Hygiene (`cf-handover`): Keep `.memory/handover.md` strictly <= 3 KB with current git status, completed milestones, and the exact next action for instant cross-model resumption.",
@@ -226,7 +351,7 @@
         "Use the 'Add Course N+1' prompt below in your very next conversation to package any new project milestone into Course 3.",
         "Export your learner progress JSON backup from the Course Studio header before switching machines."
       ],
-      "mermaidDiagram": "flowchart LR\n    L[\"Resolved Bug / Milestone\"] --> R[\"cf-learn -> Permanent Rule + Regression Test\"]\n    R --> H[\"cf-handover -> .memory/handover.md (<= 3 KB)\"]\n    H --> C[\"New Conversation -> content/courses/<slug>/course.json\"]\n    C --> S[\"pnpm run sync:resources -> Live Academy Updated\"]\n    S --> NEXT[\"Next 8-Stage SDLC Cycle\"]",
+      "mermaidDiagram": "flowchart LR\n    L[\"Solved Snag or Finished Milestone\"] --> R[\"Save Permanent House Rule\\n+ Automatic Check\"]\n    R --> H[\"Write Tiny 1-Page Handover Note\"]\n    H --> C[\"Fresh Next Chat\\nStarts Smart Immediately\"]\n    C --> A[\"Add Next Feature or New Course\"]\n    A --> NEXT[\"Begin Next 8-Station Cycle\"]",
       "repoArtifactPath": ".memory/handover.md",
       "promptId": "cf-prompt-learn-and-add-course"
     }
@@ -235,10 +360,12 @@
     {
       "id": "cf-prompt-bootstrap-research",
       "title": "Bootstrap Code Factory & Run Stage 1 Research",
+      "eli5Title": "Inspect My Project & Check Tool Safety Before Building",
       "stage": "research",
       "difficulty": "beginner",
       "skillRef": "cf-bootstrap + cf-research",
       "description": "Initializes the `.memory/` workspace structure and kicks off a disciplined Stage 1 discovery report with license and security checks.",
+      "whenToUse": "Copy this at the very start of a brand-new feature or project to map your folders, compare options, and verify every tool is safe before writing code.",
       "template": "Run `cf-bootstrap` (if `.memory/` does not exist yet), then execute Stage 1 (`cf-research`) for `{{feature_name}}`.\n\nContext:\n- Problem statement: {{problem_statement}}\n- Target stack: {{target_stack}}\n\nDeliver `.memory/research.md` with: (1) codebase findings, (2) 2–3 architectural options & trade-offs, (3) dependency license/CVE audit (MIT/Apache-2.0/BSD preferred), and (4) upfront security & performance impacts. Stop at the Stage 1 Sign-Off Gate before designing.",
       "variables": [
         {
@@ -265,10 +392,12 @@
     {
       "id": "cf-prompt-grill-and-plan",
       "title": "Run Stage 2A Interrogation (cf-grill-me) & Lock Spec + ADR",
+      "eli5Title": "Ask Me 5 Smart Questions & Lock a Clear Written Blueprint",
       "stage": "spec",
       "difficulty": "beginner",
       "skillRef": "cf-grill-me + cf-plan",
       "description": "Surfaces hidden ambiguities with up to 5 focused questions and freezes an implementation-ready `plans/<feature>-spec.md` plus ADR.",
+      "whenToUse": "Copy this right after Station 1 Research whenever your idea still has open choices around storage, look-and-feel, or who can access what.",
       "template": "Execute Stage 2A (`cf-grill-me`) on `{{feature_name}}` using `.memory/research.md` as input.\n\nAsk me up to 5 high-impact questions to eliminate all ambiguity around {{ambiguity_focus}}. Once I answer, execute Stage 2B (`cf-plan`) to produce:\n1. A locked specification at `plans/{{feature_slug}}-spec.md` with Zod schemas, pagination bounds, error codes, UI Loading/Error/Empty/WCAG matrices, and non-overlapping Task 0..N file partitions.\n2. An Architecture Decision Record at `.memory/decisions/{{adr_filename}}`.\nDo not write production code until I approve the locked spec.",
       "variables": [
         {
@@ -301,10 +430,12 @@
     {
       "id": "cf-prompt-swarm-implement",
       "title": "Execute Stage 4 Swarm Build from a Locked Spec",
+      "eli5Title": "Build My Approved Blueprint With Parallel Specialist Helpers",
       "stage": "build",
       "difficulty": "intermediate",
       "skillRef": "cf-implement",
       "description": "Runs Task 0 shared interfaces first, then fans out parallel `cf-backend` and `cf-frontend` workers onto non-overlapping file partitions.",
+      "whenToUse": "Copy this only AFTER you have approved your written blueprint and want parallel helpers to build separate pieces cleanly without overwriting each other.",
       "template": "Execute Stage 3/4 (`cf-implement`) strictly from the locked specification at `{{spec_path}}`.\n\nExecution Protocol:\n1. Complete Task 0 (shared Zod schemas, contracts, and design tokens) first in the coordinator context.\n2. Launch parallel workers on strictly non-overlapping file partitions (`{{worker_partitions}}`).\n3. Enforce all `rules/AGENTS.md` invariants: zero hardcoded secrets, zero `any`, strict Zod validation, WCAG 2.1 AA, and deterministic unit tests.\n4. Run `{{verify_cmd}}` and confirm 100% green before moving to Stage 4 QA Review.",
       "variables": [
         {
@@ -331,10 +462,12 @@
     {
       "id": "cf-prompt-qa-review",
       "title": "Run Stage 5 Independent Security Audit & 3-Viewport Visual QA",
+      "eli5Title": "Run a Fresh Safety Review & Check Phone, Tablet, and Desktop Screens",
       "stage": "test",
       "difficulty": "intermediate",
       "skillRef": "cf-qa-review",
       "description": "Triggers `cf-reviewer` in a clean context plus the built-in `browser` subagent to audit 375px, 768px, and 1440px layouts.",
+      "whenToUse": "Copy this right after building finishes so an independent inspector checks security, tests, and real phone, tablet, and desktop screens before launch.",
       "template": "Execute Stage 4/5 (`cf-qa-review`) for `{{app_dir}}` served at `{{preview_url}}`:\n\n1. Run full static checks (`tsc --noEmit`, ESLint, Vitest coverage, production build).\n2. Invoke `cf-reviewer` in a clean context to inspect the diff against `rules/AGENTS.md` (security boundaries, XSS/injection, pagination, serverless timeouts, WCAG 2.1 AA).\n3. Invoke the `browser` subagent to inspect `{{preview_url}}` at 375px, 768px, and 1440px—verify zero console errors, zero horizontal overflow, interactive forms, and reduced-motion safety.\n4. Write the signed QA verdict to `.memory/qa-report.md`.",
       "variables": [
         {
@@ -355,10 +488,12 @@
     {
       "id": "cf-prompt-deploy-staging",
       "title": "Run Stage 6 HITL-Gated Staging Deployment & Smoke Tests",
+      "eli5Title": "Prepare My Undo Plan & Launch a Safe Private Preview Link",
       "stage": "deploy",
       "difficulty": "intermediate",
       "skillRef": "cf-deploy-staging",
       "description": "Verifies QA clearance, drafts the rollback plan, requests explicit human confirmation, deploys staging preview, and runs smoke checks.",
+      "whenToUse": "Copy this after your Quality Report is 100% green and you are ready to publish a private preview link with an undo plan and your approval.",
       "template": "Execute Stage 5/6 (`cf-deploy-staging`) for `{{app_dir}}` to `{{target_platform}}` staging preview.\n\n1. Verify `.memory/qa-report.md` shows zero blocking P0/P1 defects.\n2. Document the exact rollback procedure in `.memory/handover.md` before executing any remote deploy.\n3. Present the deployment plan and wait for my explicit human approval (HITL gate).\n4. After approval, deploy the preview build and smoke-test `{{smoke_endpoints}}` with a <= 5000ms curl timeout.",
       "variables": [
         {
@@ -385,10 +520,12 @@
     {
       "id": "cf-prompt-triage-feedback",
       "title": "Run Stage 7 Staging Feedback & Incident Triage",
+      "eli5Title": "Sort Real User Feedback From Urgent Bugs Down to Future Ideas",
       "stage": "feedback",
       "difficulty": "beginner",
       "skillRef": "cf-triage",
       "description": "Turns staging observations, user feedback, or runtime errors into severity-ranked root-cause items in `.memory/tasks.md`.",
+      "whenToUse": "Copy this whenever real users, testers, or error alerts report a surprise so you can rank urgency calmly and fix the real root cause first.",
       "template": "Execute Stage 6A/7 (`cf-triage`) on the following staging feedback for `{{feature_name}}`:\n\nObserved issue or learner feedback:\n\"{{feedback_summary}}\"\n\n1. Classify severity (P0–P3) and isolate the concrete root cause in the codebase.\n2. Check whether this violates an existing invariant in `rules/AGENTS.md`.\n3. Queue prioritized remediation steps in `.memory/tasks.md` with clear acceptance criteria.",
       "variables": [
         {
@@ -409,10 +546,12 @@
     {
       "id": "cf-prompt-learn-and-add-course",
       "title": "Stage 8 Optimise: Distill Lesson (cf-learn) & Add Course N+1",
+      "eli5Title": "Save Today's Lessons Forever, Write a Handover & Add the Next Course",
       "stage": "optimise",
       "difficulty": "senior",
       "skillRef": "cf-learn + cf-handover",
       "description": "Promotes engineering lessons into permanent rules, updates handover.md (<= 3 KB), and scaffolds a brand-new Zod-validated Course N+1 inside Antigravity Academy.",
+      "whenToUse": "Copy this at the end of a milestone to turn solved bugs into permanent rules, write a tiny handover note, or add a brand-new course.",
       "template": "Execute Stage 6B/8 (`cf-learn` + `cf-handover`) and publish **Course {{course_number}}** into Antigravity Academy:\n\n1. Distill the key engineering lesson from this session (`{{lesson_learned}}`) into a permanent invariant rule and regression test requirement.\n2. Create `academy/content/courses/{{course_slug}}/course.json` conforming strictly to `CourseSchema` (`academy/src/lib/schemas.ts`), complete with video chapters, step-by-step walkthroughs, Mermaid diagrams, real `repoArtifactPath` links, and copyable variable prompts.\n3. Run `cd academy && pnpm run sync:resources && pnpm typecheck && pnpm test` to auto-ingest the new course.\n4. Update `.memory/tasks.md` and write a concise <= 3 KB `.memory/handover.md`.",
       "variables": [
         {
@@ -439,10 +578,12 @@
     {
       "id": "cf-prompt-trajectory-eval",
       "title": "Run Dual-Axis Output + Trajectory Eval (cf-eval) in a Clean Context",
+      "eli5Title": "Grade Both the Finished App AND How Honestly It Was Built",
       "stage": "test",
       "difficulty": "senior",
       "skillRef": "cf-eval",
       "description": "Applies 'Never let the generator grade its own homework' and Day 4 Evaluation to grade both final code artifacts and execution trajectory against locked specs.",
+      "whenToUse": "Copy this before shipping an important release to run a strict independent check confirming no tests were skipped and every safety rule held.",
       "template": "Invoke `cf-reviewer` in a clean, decoupled context to execute `cf-eval` on `{{target_scope}}` against locked spec `{{spec_path}}`:\n\n1. **Axis 1 (Output Quality):** Verify `cf-next-verify` / test suite, `pnpm audit --audit-level=high` (0 High/Critical), runtime Zod boundaries, fail-closed hooks, and 375/768/1440px browser evidence.\n2. **Axis 2 (Execution Trajectory):** Check strict spec/partition adherence, anti-gaming oracle honesty (zero weakened assertions, `@ts-ignore`, or silenced lint rules), cross-viewport blind spots, and Human-Lit compliance on security/auth/deps/deploys.\n3. **Outer-Loop Deliverable:** Write an Answerability Statement (what changed, why safe, rollback command) and emit an explicit `SHIP` / `REVISE` / `BLOCK` verdict.",
       "variables": [
         {

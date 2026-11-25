@@ -3,7 +3,15 @@
   "slug": "pro-setup-playbook",
   "number": 3,
   "title": "Antigravity Pro Setup: Engineering & Content Playbook",
+  "eli5Title": "Setting Up Your Safe, Stress-Free AI Workspace",
   "subtitle": "Configure Desktop 2.0, IDE, and agy CLI like infrastructure-as-code — bounded autonomy, Selective Autonomy delegation boundaries, Practical Loop Engineering (/goal vs. /schedule), MCP servers, and daily pro operating habits.",
+  "eli5Tagline": "Set up your AI workspace once so it works safely every day—clear safety switches, organized rules for building and writing, a shared team toolbox, and calm daily habits.",
+  "illustration": {
+    "src": "/media/illustrations/pro-setup-playbook-studio.jpg",
+    "alt": "Architectural cutaway of an organized dual studio: a software building desk on the left and a writing studio on the right, linked by a central safety switchboard, a shared team toolbox wall, and a bright daily checklist board.",
+    "caption": "One organized setup for both building and writing: safety switches up front, tidy desk rules, a shared team toolbox, and a simple daily checklist.",
+    "visualAnalogy": "A Dual Builder & Writer Studio With Safety Switches and a Shared Toolbox"
+  },
   "level": "all-levels",
   "estimatedMinutes": 55,
   "threeScenePreset": "hook-pipeline",
@@ -71,6 +79,20 @@
       "title": "Architecture at a Glance: Surfaces & 5-Tier Context Precedence",
       "stageTag": "Architecture",
       "summary": "Treat AI configuration like infrastructure-as-code: safe global defaults, specialized rules per repository, and repeatable workflows packaged as Skills and Plugins. Match each task to Antigravity 2.0 Desktop, IDE, or agy CLI.",
+      "eli5": {
+        "plainTitle": "Picking the Right Desk and Knowing Which Rule Wins",
+        "oneLineHook": "Use the right workspace window for each job, and know that your local project rules always beat general ones.",
+        "everydayAnalogy": "Three rooms in one studio—a control desk, a hands-on bench, and a quick-dial phone—where local room signs override house signs.",
+        "simpleExplanation": "Antigravity gives you three ways to work with your AI helpers: a big Mission Control window for managing multiple projects and schedules, a hands-on editor for tweaking files up close, and a fast text window for quick scripts. Whenever rules exist in more than one place, the closest rule wins—just like a sticky note taped to your project desk overrides the general building handbook.",
+        "whyItMatters": "Using the wrong window makes simple jobs feel clunky, and forgetting which rule file takes priority leads to confusing surprises where the AI follows an old global setting instead of your project's instructions.",
+        "roleInProtocol": "This establishes the clean foundation of the Pro Setup Playbook: safe machine-wide defaults live in your global folder, while specialized project rules live inside each repository and override global settings automatically.",
+        "howToUseGoingForward": "Open the hands-on IDE when editing code line by line, use Desktop 2.0 to direct parallel tasks and weekly schedules, and use the agy terminal command for quick scripts—always keeping project-specific rules inside the project folder.",
+        "whenToUse": "Use this on Day 1 when installing Antigravity, or anytime you wonder why a rule changed behavior between two different project folders.",
+        "realWorldExample": "Your personal global rules say to keep answers brief, while your company website folder has its own rule file requiring step-by-step test summaries. When you open the company folder, the local rule automatically wins without breaking your personal projects.",
+        "audioScript": "Welcome to setting up your stress-free AI workspace. Think of Antigravity as one smart studio with three different rooms. The big Desktop window is your control room for juggling several projects, teams of helpers, and weekly schedules. The editor is your close-up workbench for crafting files by hand with instant autocomplete. And the fast text window is your quick-dial tool for short commands. Now here is the golden rule of how instructions work: the closest sign always wins. Just like a note taped right onto your project desk overrides a poster in the hallway, the rules saved inside a specific project folder always take priority over your general computer settings. Keep safe defaults globally, and put special rules right inside each project.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "How Antigravity checks rules from closest to farthest—your local project folder always takes first place."
+      },
       "keyTakeaways": [
         "Antigravity 2.0 Desktop excels at multi-task orchestration, parallel projects, Scheduled Tasks, and Auxiliary Pane monitoring (Subagents, Artifacts, Files Changed).",
         "Antigravity IDE excels at deep hands-on coding with Tab/Supercomplete, Tab-to-Jump, Tab-to-Import, Cmd+I / Ctrl+I Inline Command, Code Lenses, and Diagnostic Auto-Fix.",
@@ -82,7 +104,7 @@
         "Confirm which surface fits each part of your workflow (IDE for localized diffs; Desktop 2.0 for swarms & schedules; CLI for headless automation).",
         "Verify live customization discovery in Skills & Customizations or via agy /help."
       ],
-      "mermaidDiagram": "flowchart TD\n    A[\"1. Workspace Project (.agents/ + AGENTS.md)\"] --> B[\"2. Declared Repo Configs (skills.json, plugins.json)\"]\n    B --> C[\"3. Global Machine Config (~/.gemini/config/)\"]\n    C --> D[\"4. Built-in Customizations\"]\n    D --> E[\"5. Global Declared Configs\"]",
+      "mermaidDiagram": "flowchart TD\n    A[\"1. Current Project Folder\\n(Local Rules Always Win First)\"] --> B[\"2. Project Config Lists\\n(Extra Shared Tools for This Repo)\"]\n    B --> C[\"3. Your Personal Computer Defaults\\n(Global Safety & Style Settings)\"]\n    C --> D[\"4. Built-In Antigravity Defaults\\n(Out-of-the-Box Helpers)\"]\n    D --> E[\"5. Extra Computer-Wide Lists\\n(Fallback Settings)\"]",
       "repoArtifactPath": "rules/AGENTS.md",
       "promptId": "prompt-ps-eng-workspace"
     },
@@ -92,6 +114,20 @@
       "title": "Baseline Security, Permissions & Bounded Autonomy",
       "stageTag": "Guardrails",
       "summary": "Configure Global Settings once to achieve bounded autonomy and Day 4 Security Guardrails — lights-out speed on safe local verification loops while enforcing Human-Lit approval for auth, security, finance, secrets, and outbound actions.",
+      "eli5": {
+        "plainTitle": "Setting Up Safety Switches So You Can Relax",
+        "oneLineHook": "Let your AI run safe practice checks automatically while hard safety locks pause before anything risky.",
+        "everydayAnalogy": "A childproof breaker box: lights and safe outlets stay on, while heavy power tools need your physical key.",
+        "simpleExplanation": "You do not have to choose between approving every tiny mouse click or letting an AI run wild on your computer. Instead, you flip a few one-time safety switches: keep the AI inside a safe practice room for your current project, allow harmless everyday checks to run smoothly, block destructive delete commands outright, and require your personal thumbs-up before touching passwords, outside folders, money, or live websites.",
+        "whyItMatters": "If every tiny check pops up a warning, you get tired and start clicking Allow without reading—which is how accidents happen. Clear safety lanes let safe work cruise while keeping dangerous moves firmly in your hands.",
+        "roleInProtocol": "This is Bounded Autonomy in the Code Factory protocol. Safe routine checks run lights-out inside the sandbox, while sensitive work—like login systems, security rules, billing, secrets, and live launches—stays Human-Lit behind fail-closed safety hooks.",
+        "howToUseGoingForward": "Lock your global safety defaults once, keep your allowlist limited to read-only checks and local tests, and add stricter per-project overrides for live production or cloud infrastructure folders instead of loosening global rules.",
+        "whenToUse": "Do this right after installing Antigravity, before opening any real work project, and whenever you add a sensitive folder like payments, customer data, or cloud hosting.",
+        "realWorldExample": "While fixing a bug, your AI runs status checks and unit tests automatically without interrupting you. The moment it wants to install an internet package or push changes live, the safety switch pauses and asks for your clear yes.",
+        "audioScript": "Here is how to let your AI move fast without ever feeling nervous about your computer. Picture a smart breaker box in a workshop. Safe everyday outlets stay on, while heavy saws require your personal key. In Antigravity, you set up these safety switches just once. Keep the AI inside a safe practice room limited to your current folder. Let harmless checks like viewing status or running local tests pass smoothly on their own. Permanently block destructive wipe commands. And tell the system to pause and ask you before touching outside folders, internet links, passwords, or live publishing. That way you never get worn out clicking approve on harmless steps, yet nothing risky ever happens behind your back.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "Three clear safety lanes: safe local checks run automatically, risky actions pause for your approval, and destructive commands stay blocked."
+      },
       "keyTakeaways": [
         "Set Global Tool Execution Policy to proceed-in-sandbox with Terminal Sandbox Enabled to contain filesystem and network side effects; set Non-Workspace File Access and Internet Access Policy to ask (or deny on strict repos).",
         "Configure Command Allowlist for safe local loops (git status, git diff, git log, npm test, pytest, tsc --noEmit), Command Denylist for destructive ops (rm -rf, git push --force, git reset --hard, DROP TABLE), and Browser Allowlist to restrict origins on sensitive repos while staying open for editorial research.",
@@ -105,6 +141,7 @@
         "Configure Browser Allowlist (restrict origins on sensitive production repos; allow research domains on content workspaces).",
         "Enable Notifications and Keep Awake when running /goal or parallel swarms, and set stricter Project-Level Overrides on production/infra repos."
       ],
+      "mermaidDiagram": "flowchart LR\n    A[\"AI Requests an Action\"] --> B{\"Check Safety Switchboard\"}\n    B -->|\"Safe Local Check or Test\"| C[\"Green Lane: Run Inside Practice Room\"]\n    B -->|\"Passwords, Web, Outside Files, Live Deploy\"| D[\"Yellow Lane: Pause and Ask You First\"]\n    B -->|\"Permanent Wipe or Force Overwrite\"| E[\"Red Lane: Blocked Automatically\"]",
       "repoArtifactPath": "hooks/hitl-gate.py"
     },
     {
@@ -113,6 +150,20 @@
       "title": "Master the 5 Customization Primitives & Context Budget",
       "stageTag": "Primitives",
       "summary": "Choose the exact customization primitive for each job so you never bloat the model's context window or fight drifting instructions.",
+      "eli5": {
+        "plainTitle": "The 5 Building Blocks That Keep Your AI Organized",
+        "oneLineHook": "Put each instruction in the right drawer—rules, guides, bundles, locks, or tool plugs—so your AI never gets overwhelmed.",
+        "everydayAnalogy": "Five distinct kitchen stations: wall rules, recipe binders, a starter kit box, automatic timers, and power outlets.",
+        "simpleExplanation": "When people stuff every guideline, checklist, and manual into one giant file, the AI gets overwhelmed and starts forgetting things. Antigravity gives you five clean drawers instead: short always-open house rules on the desk, step-by-step guides on a bookshelf that open only when needed, team starter boxes that bundle everything together, automatic safety locks that never forget, and wall plugs that connect outside apps.",
+        "whyItMatters": "An AI's working memory has a strict size limit. Putting short rules on the desk and heavy playbooks on the bookshelf keeps answers sharp, fast, and affordable—while automatic locks enforce rules that plain text notes might slip past.",
+        "roleInProtocol": "Every piece of the Antigravity Code Factory fits neatly into one of these five buckets: lean AGENTS.md rules, progressive-disclosure Skills, a toggleable Plugin bundle, deterministic Hooks, and least-privilege MCP app connectors.",
+        "howToUseGoingForward": "Keep your main project rule file short (a few pages at most), move multi-step checklists into Skills, convert must-never-break safety checks into Hooks, and bundle shared workflows into a Plugin when more than one repo needs them.",
+        "whenToUse": "Use this mental model whenever you want to teach your AI a new habit or connect a new app, and you are deciding where that instruction belongs.",
+        "realWorldExample": "You want your AI to follow a 10-step blog review checklist and never save private API keys. Instead of cramming both into your main rule note, you put the 10-step checklist in a bookshelf Skill and enforce the secret check with an automatic safety Hook.",
+        "audioScript": "If you dump every instruction, checklist, and manual into one giant note, your AI quickly gets overwhelmed and starts skipping details. Antigravity solves this with five tidy drawers. First are house rules: short, must-follow principles taped right to the desk. Second are bookshelf guides, called Skills, that stay closed until a matching task arrives. Third are Plugins, which pack rules, guides, and helpers into one easy box you can switch on or off. Fourth are Hooks, which act like automatic door locks enforced by real code instead of polite reminders. And fifth are tool plugs that connect outside apps like calendars, docs, or databases. Put each piece in the right drawer, and your AI stays sharp and dependable.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "Choosing the right drawer for every instruction keeps your AI's working desk clean and focused."
+      },
       "keyTakeaways": [
         "Rules (AGENTS.md / GEMINI.md) walk up from CWD to .git root, load always-on, and are capped at 24 KB per file and 20,000 aggregate tokens (over-budget rules demote to path pointers).",
         "Skills (.agents/skills/<name>/SKILL.md) use progressive disclosure: only name + description load upfront; bulky reference manuals belong in skills/<name>/references/.",
@@ -125,6 +176,7 @@
         "Move multi-step runbooks and checklists out of AGENTS.md into progressive-disclosure SKILL.md folders.",
         "Audit total rules size to stay comfortably inside the 24 KB file cap and 20,000-token budget."
       ],
+      "mermaidDiagram": "flowchart TD\n    Q[\"What Do You Want to Add?\"] --> R[\"Always-On Short Rule -> Desk Rule Sheet\"]\n    Q --> S[\"Step-by-Step Playbook -> Bookshelf Guide\"]\n    Q --> H[\"Hard Safety Lock -> Automatic Code Guard\"]\n    Q --> M[\"External App Access -> App Plug Connector\"]\n    Q --> P[\"Share With Whole Team -> All-in-One Starter Box\"]",
       "repoArtifactPath": "plugin.json"
     },
     {
@@ -133,6 +185,20 @@
       "title": "Configure Your Engineering Workspace & Fail-Closed Hooks",
       "stageTag": "Engineering",
       "summary": "Commit AGENTS.md, .memory/, plans/, and .agents/hooks.json directly into every engineering repo so every teammate gets identical quality gates immediately on git clone.",
+      "eli5": {
+        "plainTitle": "Setting Up a Rock-Solid Software Project Folder",
+        "oneLineHook": "Save one short rule sheet and one automatic safety lock inside your project so every teammate gets the same guardrails.",
+        "everydayAnalogy": "A carpenter's shop manual bolted to the workbench plus a saw guard that locks automatically if anything looks off.",
+        "simpleExplanation": "When you build software with a team—or even by yourself across weeks—you want every new session to start with the exact same ground rules. Drop one short, plain-English rule sheet right inside your project folder listing how to test and build the app, where different pieces belong, and what must never be broken. Pair it with a strict safety lock that inspects commands and shuts the door safely if anything looks blank or broken.",
+        "whyItMatters": "Without project rules saved right in the folder, every teammate gets wildly different results and you waste time repeating basic commands. And a fail-closed safety lock ensures a tiny script glitch never accidentally lets a dangerous command slip through.",
+        "roleInProtocol": "This creates a self-documenting Code Factory engineering repo: committing AGENTS.md, .memory/, plans/, and .agents/hooks.json means anyone who clones the repository immediately inherits identical quality and security gates.",
+        "howToUseGoingForward": "Start every software repository by saving a crisp AGENTS.md with your exact test and build commands, enabling the PreToolUse safety gate, and adding only the official Marketplace app plugs your stack actually uses.",
+        "whenToUse": "Use this whenever you create a brand-new software project, join an existing codebase that lacks AI instructions, or want teammates to share identical guardrails.",
+        "realWorldExample": "A new teammate downloads your web app folder on Monday morning. Because your rule sheet and safety lock live right inside the folder, their AI already knows the exact test command, respects your folder boundaries, and pauses before any live deploy.",
+        "audioScript": "When you set up a software project folder, think of bolting a crisp one-page shop manual right onto the workbench and attaching a smart safety guard to the saw. Inside the project folder, you save one short rule sheet that tells the AI three things: the exact commands to test and build the app, which folders hold which kinds of code, and the non-negotiable safety rules like never hardcoding passwords. Right alongside it, you add a strict safety guard that checks commands before they run and locks shut automatically if it ever gets a broken reply. Save both files with your project, and every teammate gets the exact same calm, safe setup the moment they open the folder.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "How committing your project rule sheet and safety lock gives every teammate the same safe workflow immediately."
+      },
       "keyTakeaways": [
         "Standalone AGENTS.md files use plain Markdown (no YAML frontmatter) listing Source-of-Truth commands, Architecture Boundaries (domain/api/ui), and Non-Negotiable Invariants.",
         "Hook payloads use camelCase JSON on stdin/stdout (toolCall.args.CommandLine, conversationId).",
@@ -157,6 +223,7 @@
           "code": "# Engineering Rules — <Project Name>\n\n## 1. Commands (Source of Truth)\n- Install: `pnpm install --frozen-lockfile`\n- Typecheck: `pnpm typecheck`\n- Lint: `pnpm lint`\n- Unit Tests: `pnpm test`\n- Build: `pnpm build`\n\n## 2. Architecture & Boundaries\n- `src/domain/`: Pure business logic. Zero framework or DB imports.\n- `src/api/`: Boundary layer. Validate all external payloads with Zod before calling domain services.\n- `src/ui/`: Design tokens only; no raw hex values or magic pixel offsets.\n\n## 3. Non-Negotiable Invariants\n- **Security:** Never hardcode secrets. Parameterized queries only. Enforce auth/RLS on every new route/table.\n- **Reliability:** Explicit timeouts (<= 5000ms) on outbound HTTP calls. Paginate all list endpoints (default 20, max 100).\n- **Testing:** Every new domain module or bug fix requires deterministic unit tests (mock only external I/O).\n- **Verification:** Run `pnpm typecheck && pnpm lint && pnpm test` before claiming completion."
         }
       ],
+      "mermaidDiagram": "flowchart LR\n    Repo[\"Project Folder Opened\"] --> Rules[\"Reads Local Rule Sheet\\n(Exact Commands + Boundaries)\"]\n    Rules --> Work[\"AI Builds & Runs Local Tests\"]\n    Work --> Guard{\"Safety Lock Checks Command\"}\n    Guard -->|\"Explicit Allow\"| Run[\"Runs Safely\"]\n    Guard -->|\"Ask, Block, or Blank\"| Pause[\"Stops Safely & Asks Human\"]",
       "repoArtifactPath": "hooks.json",
       "promptId": "prompt-ps-eng-workspace"
     },
@@ -166,6 +233,20 @@
       "title": "Configure Content & Editorial Workspaces with Rigor",
       "stageTag": "Content Ops",
       "summary": "Content projects fail when driven by ad-hoc chat prompts. Apply engineering discipline to editorial repos with versioned voice rules, gold-standard examples, verified product facts, and a decoupled editorial-qa review skill.",
+      "eli5": {
+        "plainTitle": "Building a Fact-Checked Writing & Content Studio",
+        "oneLineHook": "Treat articles, scripts, and brand docs with the same care as software—real voice rules, verified facts, and a fresh editor.",
+        "everydayAnalogy": "A magazine newsroom with a style guide, a verified fact folder, and a separate copy editor at a clean desk.",
+        "simpleExplanation": "Most AI writing sounds generic and makes up statistics because people ask for a draft in a blank chat box. Instead, organize a real writing folder with a clear voice guide, two or three examples of your very best writing, a verified facts sheet, and a separate review helper. Any claim without a real source gets tagged for checking, and a fresh-eyed editor reviews the finished draft before you publish.",
+        "whyItMatters": "One invented statistic or robotic buzzword-filled intro can hurt your reader's trust instantly. Separating the writer from a fresh fact-checking editor produces crisp, authentic writing that actually sounds like your team.",
+        "roleInProtocol": "This extends Code Factory discipline beyond engineering into Content Operations—applying versioned AGENTS.md brand rules, canonical examples, mandatory [VERIFY] tags for unconfirmed facts, and a clean-context editorial-qa review skill.",
+        "howToUseGoingForward": "Store your best past pieces and real product numbers inside your content folder, tell the AI to mark uncertain claims instead of guessing, and always run a fresh-context editorial review pass before sharing or publishing.",
+        "whenToUse": "Use this for newsletters, blog posts, help docs, launch announcements, video scripts, or course lessons where brand tone and factual accuracy really matter.",
+        "realWorldExample": "You ask your writing helper to draft a customer launch guide. It follows your friendly voice rules, pulls only verified numbers from your facts sheet, flags one missing date to check, and then a fresh editor helper trims two wordy paragraphs before you export to Google Docs.",
+        "audioScript": "Great writing with AI has nothing to do with magic one-line prompts and everything to do with running a clean newsroom. When you ask a blank chat box to write an article, you usually get stiff buzzwords and guessed statistics. Instead, give your writing folder the same care as a software project. Include a clear voice guide that lists words to avoid, save two or three examples of your absolute best past writing, keep a verified facts sheet, and require the AI to flag any unchecked claim instead of inventing numbers. Finally, always hand the finished draft to a fresh editor helper who checks facts, tone, and clarity with brand-new eyes before anything goes live.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "The four-station newsroom flow: clear brief and voice guide, grounded drafting, fresh-eyed editorial QA, and polished export."
+      },
       "keyTakeaways": [
         "Structure content repos with AGENTS.md (voice, ICP, banned clichés, factual attribution), content-briefs/, drafts/, published/, and .agents/skills/{draft-longform,editorial-qa,repurpose-kit}/.",
         "Store 2–3 canonical A+ pieces inside skills/draft-longform/examples/ and verified claims inside references/product-facts.md.",
@@ -190,6 +271,7 @@
           "code": "# Editorial & Brand Rules — <Brand / Team Name>\n\n## 1. Audience & Voice\n- **Primary Reader:** Engineering leaders and senior builders (skeptical of hype; value concrete tradeoffs).\n- **Voice:** Direct, crisp, evidence-backed, practitioner-to-practitioner.\n- **Banned Patterns:** Never use filler intros (\"In today's fast-paced world...\"), vague buzzwords (\"game-changer\", \"delve\", \"unlock\"), or unverified statistics.\n\n## 2. Factual & Attribution Invariants\n- Never invent customer quotes, benchmarks, or citations. Mark unverified claims with `[VERIFY: <what to check>]`.\n- Every external statistic must include source name, year, and URL.\n\n## 3. Structural Standards\n- Lead with the takeaway or concrete problem in the first 3 lines.\n- Use scannable H2/H3 headers, short paragraphs (<= 4 lines), tables for comparisons, and concrete examples.\n- End every piece with a single clear next action or takeaway."
         }
       ],
+      "mermaidDiagram": "flowchart LR\n    B[\"1. Brief + Voice Guide\\n+ Verified Facts\"] --> D[\"2. Grounded Draft\\n(Flags Unverified Claims)\"]\n    D --> E[\"3. Fresh Editor Helper\\n(Checks Facts, Tone, Clarity)\"]\n    E -->|\"Needs Polish\"| D\n    E -->|\"Ready\"| P[\"4. Publish or Export to Docs\"]",
       "promptId": "prompt-ps-content-workspace"
     },
     {
@@ -198,6 +280,20 @@
       "title": "Connect MCP Servers & Distribute Org-Wide Team Plugins",
       "stageTag": "Distribution",
       "summary": "Stop copy-pasting prompts in Slack. Connect least-privilege Streamable HTTP MCP servers cleanly and distribute rules, skills, personas, and hooks via Git-backed team plugins.",
+      "eli5": {
+        "plainTitle": "Plugging In Your Apps and Sharing One Team Toolbox",
+        "oneLineHook": "Connect outside apps safely with read-only keys, and share your team's best rules and tools with one quick update.",
+        "everydayAnalogy": "A labeled team toolbox that syncs automatically—plus visitor badges with read-only access for external rooms.",
+        "simpleExplanation": "Copying and pasting prompts in team chat breaks down fast—everyone ends up using different outdated versions. Instead, plug external apps like databases, docs, or issue trackers into your workspace using safe, limited-permission keys and clear team-labeled names so tools never clash. Then pack all your shared rules, guides, helpers, and locks into one shared team toolbox that every teammate updates in seconds.",
+        "whyItMatters": "Shared toolboxes mean when one person discovers a smarter workflow or tighter safety lock, the entire company gets the upgrade immediately—without pasting passwords into files or dealing with conflicting tool names.",
+        "roleInProtocol": "This is the Distribution layer of the Code Factory: least-privilege Streamable HTTP MCP connectors with team-prefixed names, paired with either repo-local .agents/ sharing (Pattern A) or a Git-symlinked org-wide plugin repo (Pattern B).",
+        "howToUseGoingForward": "Always prefix custom connector names with your team name, keep passwords in environment variables rather than saved files, prefer read-only database access by default, and use one shared Git plugin repo whenever rules span multiple projects.",
+        "whenToUse": "Use this as soon as two or more people share workflows, when you manage multiple project folders, or whenever you connect Antigravity to company tools like analytics, docs, or ticket trackers.",
+        "realWorldExample": "Your team connects a read-only analytics database and internal docs hub using prefixed names and secret environment variables, then shares one toolkit repo. When you add a new release checklist on Tuesday, every teammate gets it in one second with a single sync command.",
+        "audioScript": "Stop pasting favorite prompts into team chat where they get buried and go stale within a week. There is a much calmer way to share tools across a team. First, when you plug in outside apps like a database, a docs hub, or a project board, give each connector a clear team prefix so names never collide, use read-only permissions wherever possible, and never save real passwords directly inside shared files. Second, pack your shared house rules, step-by-step guides, helpers, and safety locks into one team toolbox folder stored in version control. Each teammate links it once in under a minute, and from then on one quick update keeps everyone running the exact same best practices.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "One shared team toolbox syncs rules, guides, safety locks, and safe app connectors to every teammate automatically."
+      },
       "keyTakeaways": [
         "Prefer Streamable HTTP (url ending in /mcp) for remote MCP servers; wrap legacy HTTP+SSE (/sse) servers with a stdio bridge such as mcp-remote.",
         "Prefix every plugin MCP server name (e.g., acme-cms, not cms) because MCP server names share a single global namespace across user config and all plugins.",
@@ -222,6 +318,7 @@
           "code": "{\n  \"mcpServers\": {\n    \"acme-analytics-db\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@example/postgres-mcp-readonly\"],\n      \"env\": {\n        \"DATABASE_URL\": \"${ACME_ANALYTICS_RO_DATABASE_URL}\"\n      }\n    },\n    \"acme-cms\": {\n      \"url\": \"https://mcp.example.com/mcp\"\n    }\n  }\n}"
         }
       ],
+      "mermaidDiagram": "flowchart TD\n    Box[\"Shared Team Toolbox\\n(Rules + Guides + Locks + Safe App Plugs)\"] --> Sync[\"1-Minute Setup + Quick Sync Updates\"]\n    Sync --> Eng[\"Engineering Workspaces\\n(Same Quality Gates)\"]\n    Sync --> Ed[\"Content Workspaces\\n(Same Voice & Fact Checks)\"]\n    Sync --> New[\"New Teammate Day 1\\n(Ready Immediately)\"]",
       "promptId": "prompt-ps-team-plugin"
     },
     {
@@ -230,6 +327,20 @@
       "title": "Senior Daily Operating Habits & Day-1 Onboarding Checklist",
       "stageTag": "Operating OS",
       "summary": "Setup delivers 40% of the value; the remaining 60% comes from disciplined daily session habits — Spec -> Build -> Independent Review -> /learn — plus a crisp Day-1 smoke test for every new teammate.",
+      "eli5": {
+        "plainTitle": "The 4-Step Daily Rhythm & Friendly Day-1 Checkup",
+        "oneLineHook": "Great setup is 40% of the win—the other 60% is a calm daily habit: Plan, Build, Double-Check, and Teach Your Workshop.",
+        "everydayAnalogy": "A pilot's calm four-step flight routine plus a 5-minute pre-flight check for every new crew member.",
+        "simpleExplanation": "Even the best workshop only shines when you use a steady daily rhythm. Start every task by agreeing on a short plan before touching files. Build in one focused session per goal. Hand the finished work to a fresh reviewer helper plus a real browser check. And whenever you catch a mistake, save a tiny lesson so your workshop never makes that slip again. For new teammates, a quick seven-step Day-1 checkup confirms everything works smoothly.",
+        "whyItMatters": "Long, rambling chats slowly lose focus and repeat old errors. A short rhythm—planning first, clearing old clutter every 15 to 20 turns, saving brief handover notes, and capturing lessons—makes every week noticeably smoother than the last.",
+        "roleInProtocol": "This is the daily Operating OS of the Code Factory: Align (/grill-me and /plan) -> Build -> Verify (independent Reviewer plus multi-viewport browser checks) -> Compound (/learn), backed by crisp handover notes and a 7-step Day-1 smoke test.",
+        "howToUseGoingForward": "Keep each chat focused on one clear deliverable, compact or refresh long chats around 15 to 20 turns, save a short handover note when wrapping up, and run the /learn habit whenever you correct the same behavior twice.",
+        "whenToUse": "Use this rhythm every single workday when starting a feature or article—and run the 7-step Day-1 checkup whenever onboarding yourself or a new teammate.",
+        "realWorldExample": "On Monday morning you run a quick plan for a new pricing section, let the AI build it, have a fresh helper inspect phone and desktop screens, and save one rule note about button spacing. On Tuesday, every new button already matches automatically.",
+        "audioScript": "Setting up your workspace gives you about forty percent of the payoff. The other sixty percent comes from a calm four-step rhythm you repeat every day. Step one is Align: agree on a short plan before editing a single file. Step two is Build: keep each session focused on one clear outcome. Step three is Verify: let a fresh helper and a live browser inspect the result with new eyes. Step four is Compound: whenever you fix an annoying slip, capture a one-line lesson so your workshop remembers it forever. Keep chats tidy by summarizing every fifteen to twenty messages, save a short handover note before closing, and walk every new teammate through a friendly five-minute Day-One checkup.",
+        "estimatedMinutes": 6,
+        "diagramCaption": "The repeating 4-step daily habit that makes your workspace smarter and calmer every single week."
+      },
       "keyTakeaways": [
         "Run the 4-phase loop every day: Align (/grill-me -> /plan) -> Build (Agent Mode or /teamwork) -> Verify (clean-context Reviewer + 375/768/1440px /browser checks) -> Compound (/learn).",
         "Master key slash commands: /plan, /grill-me, /boost, /teamwork, /goal, /compact (~65% context or 15–20 turns), /learn, /schedule, and /browser.",
@@ -245,7 +356,7 @@
         "Day-1 [6/7] Run Role Smoke Test: Engineering -> run /plan on a small task and verify sandboxed tests + HITL hook triggers; Content -> run editorial-qa on a sample draft and verify Google Docs/Drive connectivity.",
         "Day-1 [7/7] Set Up 1 Recurring Automation (Optional): Use /schedule for one weekly team hygiene task (e.g., stale PR/CVE summary or content calendar check), run /compact around 15–20 turns, and update .memory/handover.md (<= 3 KB) on wrap-up."
       ],
-      "mermaidDiagram": "flowchart LR\n    A[\"1. Align\\n(/grill-me -> /plan)\"] --> B[\"2. Build\\n(Agent Mode / /teamwork)\"]\n    B --> C[\"3. Verify\\n(Fresh Reviewer + /browser)\"]\n    C --> D[\"4. Compound\\n(/learn -> Rules & Hooks)\"]\n    D --> A",
+      "mermaidDiagram": "flowchart LR\n    A[\"1. Plan Together\\n(Agree Before Editing)\"] --> B[\"2. Focused Build\\n(One Clear Goal Per Chat)\"]\n    B --> C[\"3. Fresh Double-Check\\n(Independent Review + Live Screen)\"]\n    C --> D[\"4. Save the Lesson\\n(Upgrade Your Rules So It Sticks)\"]\n    D --> A",
       "repoArtifactPath": ".memory/handover.md",
       "promptId": "prompt-ps-day1-smoketest"
     },
@@ -255,6 +366,20 @@
       "title": "Practical Loop Engineering: Goals (/goal), Schedules (/schedule) & Concurrency Caps",
       "stageTag": "Loop Engineering",
       "summary": "Operationalize Addy Osmani's 'Practical Loop Engineering' inside your daily Antigravity OS: distinguish finite Goals from recurring Cron Loops, cap concurrent agents at 3-5 so review quality stays sharp, and never let the generator grade its own homework.",
+      "eli5": {
+        "plainTitle": "Running Smart Auto-Loops Without Losing Control",
+        "oneLineHook": "Know when to run a finish-line Goal vs. a weekly Routine Check, cap active helpers at 3–5, and never let a builder grade its own work.",
+        "everydayAnalogy": "Managing a bakery: 3–5 ovens you can watch closely, a timer for baking to done, a Monday cleaning schedule, and a separate taste-tester.",
+        "simpleExplanation": "Once your daily rhythm feels natural, you can run longer automatic loops calmly. Use a Goal when you want the AI to keep working until a clear, measurable finish line is met—like all tests turning green—with an automatic stop if it gets stuck three times. Use a Schedule for gentle repeating checkups, like a Monday morning health scan. Keep at most three to five loops running at once so you can still review clearly, and always have a separate helper grade the final work.",
+        "whyItMatters": "Launching ten parallel bots at once feels productive until you drown in half-checked work and hidden bugs slip through. Capping active loops at 3 to 5 and separating builders from reviewers keeps quality sky-high without burnout.",
+        "roleInProtocol": "This puts Addy Osmani's Practical Loop Engineering into daily Code Factory practice via skills/cf-loop-engineer: oracle-backed /goal runs, read-only /schedule hygiene sweeps, a strict <= 5 concurrency cap, and decoupled cf-reviewer grading.",
+        "howToUseGoingForward": "Before starting any /goal run, write down the exact test or check that proves it is done. Keep recurring /schedule tasks read-only so they flag issues instead of making surprise edits, and never exceed 3 to 5 active loops at once.",
+        "whenToUse": "Use /goal when fixing a clear list of issues with an automated check; use /schedule for weekly health reports; and use the 3–5 cap anytime you run parallel tasks.",
+        "realWorldExample": "Every Monday at 9 AM, a read-only weekly schedule checks your project for outdated packages and overgrown rule notes, handing you a crisp 5-line report over coffee—while making zero unapproved edits.",
+        "audioScript": "Once your workspace is humming, you can safely let Antigravity run longer automatic loops for you—as long as you follow three calm rules. First, pick the right loop type. Use a Goal when there is a clear finish line that a test can verify, and add a safety breaker that pauses after three failed tries. Use a Schedule for gentle repeating checkups, like a Monday morning health scan that only reports findings without editing files. Second, cap active parallel loops at three to five so your own human review stays sharp. Third, never let the builder grade its own homework—always pass finished work to a separate reviewer before calling it done.",
+        "estimatedMinutes": 5,
+        "diagramCaption": "Choosing between a finish-line Goal and a weekly Routine Check—both protected by a 3–5 cap and an independent reviewer."
+      },
       "keyTakeaways": [
         "Goals (/goal) vs. Loops (/schedule): Use /goal for run-until-done deliverables backed by an independent oracle (e.g., zero High/Critical CVEs + green cf-next-verify); use /schedule for recurring weekly hygiene sweeps (audit, handover size, manifest drift).",
         "Respect the Human Review Ceiling (3-5 Concurrent Loops): Running 5-10 agent runs per day works smoothly when max concurrency stays <= 5; beyond that, review piles up and Dark Factory drift creeps in.",
@@ -271,6 +396,7 @@
         "filename": "Project_Antigravity Weekly /schedule Hygiene Loop",
         "code": "/schedule every Monday at 09:00: Run a read-only Code Factory hygiene sweep:\n1. Run `cd academy && pnpm audit --audit-level=high` for newly disclosed CVEs.\n2. Verify `.memory/handover.md` <= 3072 bytes and `rules/AGENTS.md` <= 12 KB.\n3. Check `generated-repo-manifest.json` against skills/, agents/, hooks/, courses/.\n4. Report actionable P0/P1 drift items only; never auto-edit or git push."
       },
+      "mermaidDiagram": "flowchart TD\n    T[\"Pick Your Loop Type\"] --> G[\"Finish-Line Goal\\n(Works Until Test Passes, Stops After 3 Retries)\"]\n    T --> S[\"Weekly Routine Check\\n(Read-Only Health Report Every Week)\"]\n    G --> Cap[\"Keep At Most 3 to 5 Active Loops\"]\n    S --> Cap\n    Cap --> Rev[\"Separate Reviewer Grades Final Result\"]\n    Rev --> You[\"Your Calm Final Approval\"]",
       "repoArtifactPath": "skills/cf-loop-engineer/references/project-examples.md",
       "promptId": "prompt-ps-loop-engineering"
     }
@@ -279,10 +405,12 @@
     {
       "id": "prompt-ps-eng-workspace",
       "title": "Scaffold Engineering AGENTS.md & .agents/ Workspace",
+      "eli5Title": "Set Up a Clean Rule Sheet & Safety Lock for My Software Folder",
       "stage": "architecture",
       "difficulty": "beginner",
       "skillRef": "cf-bootstrap",
       "description": "Generates a crisp, budget-safe engineering AGENTS.md (no YAML frontmatter, < 8 KB) plus .agents/hooks.json and starter skills tailored to your repo.",
+      "whenToUse": "Copy this when starting a new software project—or cleaning up an existing one—so your AI immediately knows your test commands, folder rules, and safety locks.",
       "template": "Inspect `{{repo_path}}` and scaffold an Antigravity Pro Engineering Workspace:\n\n1. Create a plain-Markdown `AGENTS.md` (no YAML frontmatter, <= 6 KB) documenting:\n   - Exact Source-of-Truth commands for `{{tech_stack}}` (install, typecheck, lint, test, build).\n   - Strict module boundaries (domain, API/boundary validation, UI tokens).\n   - Non-negotiable security, reliability, and testing invariants.\n2. Configure `.agents/hooks.json` with a fail-closed `PreToolUse` safety gate on `run_command` (always emitting explicit `allow` / `ask` / `force_ask` / `deny`).\n3. Recommend the top 3 Marketplace plugins and project-level sandbox overrides (`proceed-in-sandbox` vs `request-review`) for this repository.",
       "variables": [
         {
@@ -303,10 +431,12 @@
     {
       "id": "prompt-ps-content-workspace",
       "title": "Scaffold Editorial & Content Operations Workspace",
+      "eli5Title": "Set Up a Brand-Voice & Fact-Checked Writing Folder",
       "stage": "spec",
       "difficulty": "beginner",
       "skillRef": "editorial-qa",
       "description": "Sets up a versioned content repository with brand-voice AGENTS.md, factual attribution invariants, and a decoupled editorial-qa SKILL.md.",
+      "whenToUse": "Copy this before drafting newsletters, docs, or articles so your AI follows your real tone, avoids generic buzzwords, and double-checks every fact with a fresh editor.",
       "template": "Scaffold an Antigravity Content Workspace for `{{brand_name}}` targeting `{{target_audience}}`:\n\n1. Create directory structure: `content-briefs/`, `drafts/`, `published/`, and `.agents/skills/{draft-longform,editorial-qa,repurpose-kit}/`.\n2. Write `AGENTS.md` encoding:\n   - Brand voice: `{{voice_tone}}`\n   - Banned AI cliches and filler intros.\n   - Factual attribution invariant (mark any unverified stat with `[VERIFY: <claim>]`).\n3. Create `.agents/skills/editorial-qa/SKILL.md` implementing the 4-stage audit (Accuracy -> Voice & Cliche Pass -> Structure & Readability -> Ready / Needs Revision verdict) designed for a fresh reviewer subagent.",
       "variables": [
         {
@@ -333,9 +463,11 @@
     {
       "id": "prompt-ps-mcp-audit",
       "title": "Configure & Harden Team MCP Servers (Streamable HTTP)",
+      "eli5Title": "Safely Plug External Apps Into My Workspace Without Leaking Passwords",
       "stage": "architecture",
       "difficulty": "intermediate",
       "description": "Audits or generates a least-privilege mcp_config.json using Streamable HTTP, globally prefixed server names, and zero committed secrets.",
+      "whenToUse": "Copy this whenever you want to connect outside apps—like a database, docs hub, or ticket board—using clear team names and safe read-only permissions.",
       "template": "Design a clean `mcp_config.json` for `{{team_prefix}}` connecting `{{target_services}}`:\n\nConstraints:\n1. Prefix every server key with `{{team_prefix}}-` to avoid global MCP namespace collisions.\n2. Use Streamable HTTP (`url` ending in `/mcp`) for remote servers; wrap any legacy `/sse` server via `mcp-remote` stdio bridge.\n3. Never hardcode secrets — declare `${VAR}` placeholders with `variables` metadata (for plugin configs) or read-only credentials.\n4. Provide verification steps using `Additional Options (...) -> MCP Servers`.",
       "variables": [
         {
@@ -356,10 +488,12 @@
     {
       "id": "prompt-ps-team-plugin",
       "title": "Package an Org-Wide Git-Backed Antigravity Toolkit Plugin",
+      "eli5Title": "Pack Our Team's Rules & Tools Into One Shareable Toolbox",
       "stage": "build",
       "difficulty": "senior",
       "skillRef": "plugin",
       "description": "Packages shared rules, skills, subagent personas, root-level hooks.json, and MCP configs into a single Git-symlinked team plugin.",
+      "whenToUse": "Copy this when two or more teammates want to share the same rules, guides, and safety locks across projects with a quick one-minute setup.",
       "template": "Package our team's shared standards into a standalone Antigravity plugin repo named `{{plugin_name}}`:\n\n1. Create `plugin.json` (name, displayName, version `1.0.0`, description, logo, suggestedPrompts) and a clean square `assets/logo.svg` (>= 128x128).\n2. Place consolidated invariants in `rules/AGENTS.md`, root-level `hooks.json`, specialized personas in `agents/*.md` (explicitly declaring `subagent: true`, `mainAgent: false`, and least-privilege `tools:`), and workflows in `skills/*/SKILL.md`.\n3. Write a 1-minute `README.md` teammate install guide using `git clone` + `ln -s ... ~/.gemini/config/plugins/{{plugin_name}}` and `git pull` updates.",
       "variables": [
         {
@@ -374,10 +508,12 @@
     {
       "id": "prompt-ps-day1-smoketest",
       "title": "Run Day-1 Teammate Onboarding & Recurring Hygiene Smoke Test",
+      "eli5Title": "Run a Friendly 5-Minute Day-1 Setup Checkup",
       "stage": "optimise",
       "difficulty": "beginner",
       "skillRef": "cf-start",
       "description": "Verifies a new teammate's Antigravity installation, sandboxed execution, HITL hooks, plugin discovery, and optional weekly /schedule job.",
+      "whenToUse": "Copy this right after finishing setup—or when onboarding a new teammate—to confirm safety switches, rules, and connected apps all work smoothly.",
       "template": "Run a Day-1 Antigravity Pro Onboarding Smoke Test for a `{{role_track}}` teammate in `{{workspace_path}}`:\n\n1. Verify discovered plugins, rules (`AGENTS.md`), skills, and connected MCP servers.\n2. Confirm Global Safety Defaults (`proceed-in-sandbox`, Terminal Sandbox enabled, Allowlist/Denylist active).\n3. Run a safe dry-run verification test (sandboxed read-only test command + confirm `PreToolUse` HITL hook triggers on a protected command pattern without executing it).\n4. Propose 1 high-value weekly `/schedule` hygiene automation tailored to `{{role_track}}`.",
       "variables": [
         {
@@ -398,10 +534,12 @@
     {
       "id": "prompt-ps-loop-engineering",
       "title": "Design a Bounded /goal, /schedule & Selective Autonomy Plan (cf-loop-engineer)",
+      "eli5Title": "Plan My Auto-Checks, Weekly Health Scans & Human-Approval Boundaries",
       "stage": "optimise",
       "difficulty": "intermediate",
       "skillRef": "cf-loop-engineer",
       "description": "Applies Practical Loop Engineering to design a finite /goal with an independent oracle, a read-only /schedule hygiene loop, and a repo-specific Lights-Out vs. Human-Lit delegation matrix.",
+      "whenToUse": "Copy this when you want to decide which routine jobs can run automatically, which risky jobs need your thumbs-up, and set up one safe weekly health check.",
       "template": "Using `skills/cf-loop-engineer/SKILL.md`, design a Practical Loop Engineering operating plan for `{{repo_name}}`:\n\n1. **Selective Autonomy Matrix:** Classify our routine tasks into **Lights-Out** (docs, tests, lint/type fixes, validated content bundles) vs. **Human-Lit** (auth, security/RLS, billing/finance, secrets/hooks, production deploys).\n2. **Finite Goal (`/goal`):** Write a bounded `/goal` prompt for `{{goal_objective}}` with an independent machine-checkable completion oracle, a 3-retry circuit breaker, and a clean-context `cf-reviewer` grading step.\n3. **Recurring Loop (`/schedule`):** Write a read-only `{{schedule_cadence}}` hygiene prompt monitoring CVEs, static rules budget, and `.memory/handover.md` drift.",
       "variables": [
         {

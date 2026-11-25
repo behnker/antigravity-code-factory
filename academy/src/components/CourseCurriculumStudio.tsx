@@ -13,15 +13,24 @@ import {
   Copy,
   Download,
   FileCode2,
+  Film,
   GraduationCap,
+  Layers,
   PlusCircle,
   RotateCcw,
+  Sparkles,
   Terminal,
   Upload,
   X,
 } from "lucide-react";
 import { parseImportedProgress } from "@/lib/prompt-engine";
-import type { Course, LearnerProgress } from "@/lib/schemas";
+import type {
+  Course,
+  LearnerProgress,
+  LearningDepthMode,
+} from "@/lib/schemas";
+import { CourseIllustrationBanner } from "./CourseIllustrationBanner";
+import { Eli5MicrolearningCard } from "./Eli5MicrolearningCard";
 import { MermaidDiagram } from "./MermaidDiagram";
 import { VideoStage } from "./VideoStage";
 
@@ -37,6 +46,8 @@ export interface CourseCurriculumStudioProps {
   progress: LearnerProgress;
   onImportProgress: (next: LearnerProgress) => void;
   onResetProgress: () => void;
+  learningDepthMode?: LearningDepthMode;
+  onChangeLearningDepthMode?: (mode: LearningDepthMode) => void;
 }
 
 async function copyCodeSafely(text: string): Promise<boolean> {
@@ -72,10 +83,16 @@ export function CourseCurriculumStudio({
   progress,
   onImportProgress,
   onResetProgress,
+  learningDepthMode,
+  onChangeLearningDepthMode,
 }: CourseCurriculumStudioProps) {
   const [activeCourseId, setActiveCourseId] = useState<string>(
     courses[0]?.id ?? "",
   );
+  const [uncontrolledDepthMode, setUncontrolledDepthMode] =
+    useState<LearningDepthMode>(
+      learningDepthMode ?? progress.learningDepthMode ?? "eli5",
+    );
   const [expandedSteps, setExpandedSteps] = useState<Record<string, boolean>>(
     () => {
       const firstStep = courses[0]?.steps[0];
@@ -86,6 +103,9 @@ export function CourseCurriculumStudio({
     null,
   );
   const [blueprintExpanded, setBlueprintExpanded] = useState(false);
+  const [expandedComingSoonVideos, setExpandedComingSoonVideos] = useState<
+    Record<string, boolean>
+  >({});
 
   const [importJsonText, setImportJsonText] = useState("");
   const [importStatus, setImportStatus] = useState<{
@@ -93,6 +113,20 @@ export function CourseCurriculumStudio({
     message: string;
   }>({ type: "idle", message: "" });
   const [copiedExportJson, setCopiedExportJson] = useState(false);
+
+  const activeDepthMode: LearningDepthMode =
+    learningDepthMode ?? uncontrolledDepthMode;
+
+  const handleSelectDepthMode = (mode: LearningDepthMode) => {
+    setUncontrolledDepthMode(mode);
+    onChangeLearningDepthMode?.(mode);
+  };
+
+  const nextCourseNumber = useMemo(
+    () =>
+      courses.reduce((max, course) => Math.max(max, course.number), -1) + 1,
+    [courses],
+  );
 
   const activeCourse =
     courses.find((course) => course.id === activeCourseId) ?? courses[0] ?? null;
@@ -128,6 +162,44 @@ export function CourseCurriculumStudio({
   const toggleStepAccordion = (stepId: string) => {
     setExpandedSteps((prev) => ({ ...prev, [stepId]: !prev[stepId] }));
   };
+
+  const handleCompleteAndAdvance = (
+    currentStepId: string,
+    isCompleted: boolean,
+    nextStepId: string | null,
+  ) => {
+    if (!isCompleted) {
+      onToggleStepComplete(currentStepId);
+    }
+    if (nextStepId) {
+      setExpandedSteps((prev) => ({
+        ...prev,
+        [currentStepId]: false,
+        [nextStepId]: true,
+      }));
+    }
+  };
+
+  const activeDisplayTitle = activeCourse
+    ? activeDepthMode === "eli5"
+      ? (activeCourse.eli5Title ?? activeCourse.title)
+      : activeCourse.title
+    : "";
+
+  const activeDisplaySubtitle = activeCourse
+    ? activeDepthMode === "eli5" && activeCourse.eli5Tagline
+      ? activeCourse.eli5Tagline
+      : activeCourse.subtitle
+    : "";
+
+  const shouldCollapseComingSoonVideo = Boolean(
+    activeCourse &&
+      activeCourse.video.provider === "coming_soon" &&
+      activeDepthMode === "eli5",
+  );
+  const isComingSoonVideoExpanded = activeCourse
+    ? Boolean(expandedComingSoonVideos[activeCourse.id])
+    : false;
 
   const handleCopySnippet = async (snippetKey: string, code: string) => {
     const ok = await copyCodeSafely(code);
@@ -181,7 +253,7 @@ export function CourseCurriculumStudio({
     <section
       id="courses"
       aria-labelledby="courses-heading"
-      className="border-b border-glass-border py-14 sm:py-16"
+      className="py-14 sm:py-16"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
@@ -203,18 +275,53 @@ export function CourseCurriculumStudio({
             </p>
           </div>
 
-          <button
-            type="button"
-            onClick={onOpenProgressModal}
-            className="glass-pill inline-flex items-center gap-2 self-start rounded-xl px-4 py-2 text-xs font-semibold text-cyan-glow transition-colors hover:border-cyan-glow/60 lg:self-auto"
-          >
-            <Download className="h-3.5 w-3.5" aria-hidden="true" />
-            Export / Import Progress JSON
-          </button>
+          <div className="flex flex-wrap items-center gap-3 self-start lg:self-auto">
+            <div
+              role="group"
+              aria-label="Choose learning explanation depth"
+              className="glass-pill inline-flex items-center rounded-xl p-1"
+            >
+              <button
+                type="button"
+                aria-pressed={activeDepthMode === "eli5"}
+                onClick={() => handleSelectDepthMode("eli5")}
+                className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+                  activeDepthMode === "eli5"
+                    ? "bg-cyan-deep text-ink-primary"
+                    : "text-ink-secondary hover:text-ink-primary"
+                }`}
+              >
+                <Sparkles className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                Start Simple (ELI5)
+              </button>
+              <button
+                type="button"
+                aria-pressed={activeDepthMode === "pro"}
+                onClick={() => handleSelectDepthMode("pro")}
+                className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+                  activeDepthMode === "pro"
+                    ? "bg-violet-deep text-ink-primary"
+                    : "text-ink-secondary hover:text-ink-primary"
+                }`}
+              >
+                <Layers className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                Full Pro View
+              </button>
+            </div>
+
+            <button
+              type="button"
+              onClick={onOpenProgressModal}
+              className="glass-pill inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold text-cyan-glow transition-colors hover:border-cyan-glow/60"
+            >
+              <Download className="h-3.5 w-3.5" aria-hidden="true" />
+              Export / Import Progress JSON
+            </button>
+          </div>
         </div>
 
         <div
-          className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4"
+          className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4"
           role="group"
           aria-label="Select a course track"
         >
@@ -224,50 +331,72 @@ export function CourseCurriculumStudio({
               completedStepIds.includes(s.id),
             ).length;
             const pct = Math.round((completed / course.steps.length) * 100);
+            const cardTitle =
+              activeDepthMode === "eli5"
+                ? (course.eli5Title ?? course.title)
+                : course.title;
+            const cardDescription =
+              activeDepthMode === "eli5" && course.eli5Tagline
+                ? course.eli5Tagline
+                : course.subtitle;
             return (
               <button
                 key={course.id}
                 type="button"
                 aria-pressed={isSelected}
                 onClick={() => handleSelectCourse(course)}
-                className={`flex min-w-0 flex-col justify-between rounded-2xl p-4 text-left transition-all ${
+                className={`flex min-w-0 cursor-pointer flex-col justify-between rounded-2xl p-4 text-left transition-all hover:-translate-y-0.5 hover:border-cyan-glow/70 hover:bg-void-900/80 ${
                   isSelected
-                    ? "glass-panel-elevated ring-1 ring-cyan-glow/50"
-                    : "glass-panel hover:border-glass-border-strong"
+                    ? "border-2 border-cyan-glow bg-void-900/95 shadow-xl"
+                    : "glass-panel"
                 }`}
               >
                 <div>
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-mono text-xs font-semibold text-cyan-glow">
-                      Course 0{course.number}
+                      Course {String(course.number).padStart(2, "0")}
                     </span>
                     <span className="rounded-full border border-glass-border bg-void-900/80 px-2 py-0.5 font-mono text-xs capitalize text-ink-secondary">
                       {course.level}
                     </span>
                   </div>
                   <h3 className="mt-2 text-base font-bold text-ink-primary">
-                    {course.title}
+                    {cardTitle}
                   </h3>
                   <p className="mt-1 line-clamp-2 text-xs text-ink-secondary">
-                    {course.subtitle}
+                    {cardDescription}
                   </p>
                 </div>
 
-                <div className="mt-4 space-y-1.5">
-                  <div className="flex items-center justify-between font-mono text-xs text-ink-muted">
-                    <span className="inline-flex items-center gap-1">
-                      <Clock className="h-3 w-3" aria-hidden="true" />
-                      {course.estimatedMinutes} min
-                    </span>
-                    <span className="text-emerald-glow">
-                      {completed}/{course.steps.length} ({pct}%)
-                    </span>
+                <div className="mt-4 space-y-2.5">
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between font-mono text-xs text-ink-muted">
+                      <span className="inline-flex items-center gap-1">
+                        <Clock className="h-3 w-3" aria-hidden="true" />
+                        {course.estimatedMinutes} min
+                      </span>
+                      <span className="text-emerald-glow">
+                        {completed}/{course.steps.length} ({pct}%)
+                      </span>
+                    </div>
+                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-void-950">
+                      <div
+                        className="h-full rounded-full bg-emerald-glow transition-all duration-300"
+                        style={{ width: `${pct}%` }}
+                      />
+                    </div>
                   </div>
-                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-void-950">
-                    <div
-                      className="h-full rounded-full bg-emerald-glow transition-all duration-300"
-                      style={{ width: `${pct}%` }}
-                    />
+
+                  <div className="flex items-center justify-end border-t border-glass-border pt-2.5">
+                    {isSelected ? (
+                      <span className="inline-flex items-center gap-1 rounded-full border border-emerald-glow/60 bg-emerald-glow/15 px-3 py-1 font-mono text-xs font-semibold text-emerald-glow">
+                        Viewing Now ✓
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 rounded-full border border-cyan-glow/50 bg-cyan-glow/15 px-3 py-1 font-mono text-xs font-semibold text-cyan-glow">
+                        Open Course →
+                      </span>
+                    )}
                   </div>
                 </div>
               </button>
@@ -286,7 +415,8 @@ export function CourseCurriculumStudio({
                 </span>
               </div>
               <h3 className="mt-2 text-base font-bold text-ink-primary">
-                Add Course {courses.length + 1} via Future Conversation
+                Add Course {String(nextCourseNumber).padStart(2, "0")} via Future
+                Conversation
               </h3>
               <p className="mt-1 text-xs leading-relaxed text-ink-secondary">
                 Drop a new Zod-validated{" "}
@@ -347,293 +477,539 @@ export function CourseCurriculumStudio({
 
         {activeCourse && (
           <div
-            aria-label={activeCourse.title}
-            className="space-y-6"
+            aria-label={activeDisplayTitle}
+            className="overflow-hidden rounded-3xl border-2 border-cyan-glow/45 bg-void-900/70 shadow-2xl"
           >
-            <div className="glass-panel rounded-2xl p-5">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-mono text-xs font-semibold text-cyan-glow">
-                      COURSE 0{activeCourse.number}
-                    </span>
-                    {activeCourse.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-glass-border bg-void-900/70 px-2.5 py-0.5 font-mono text-xs text-ink-muted"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                  <h3 className="mt-1.5 text-xl font-bold text-ink-primary">
-                    {activeCourse.title}
-                  </h3>
-                  <p className="mt-1 text-sm text-ink-secondary">
-                    {activeCourse.subtitle}
-                  </p>
-                </div>
-
-                <div className="min-w-44 rounded-xl border border-glass-border bg-void-900/60 p-3">
-                  <div className="flex items-center justify-between font-mono text-xs">
-                    <span className="text-ink-muted">Course Progress</span>
-                    <span className="font-bold text-emerald-glow">
-                      {courseStats.percent}%
-                    </span>
-                  </div>
-                  <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-void-950">
-                    <div
-                      className="h-full rounded-full bg-emerald-glow transition-all duration-300"
-                      style={{ width: `${courseStats.percent}%` }}
-                    />
-                  </div>
-                  <p className="mt-1.5 font-mono text-xs text-ink-muted">
-                    {courseStats.completed} of {courseStats.total} steps complete
-                  </p>
-                </div>
-              </div>
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-cyan-glow/30 bg-cyan-glow/10 px-5 py-3.5">
+              <span className="font-mono text-xs font-bold tracking-wide text-cyan-glow sm:text-sm">
+                CURRENTLY OPEN · COURSE{" "}
+                {String(activeCourse.number).padStart(2, "0")} ·{" "}
+                {activeDisplayTitle}
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-glow/50 bg-void-950/80 px-3 py-1 font-mono text-xs font-semibold text-emerald-glow">
+                <CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" />
+                {courseStats.completed}/{courseStats.total} steps (
+                {courseStats.percent}%)
+              </span>
             </div>
 
-            <VideoStage
-              key={activeCourse.id}
-              video={activeCourse.video}
-              accentTone={activeCourse.accentTone}
-            />
-
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h4 className="inline-flex items-center gap-2 text-base font-bold text-ink-primary">
-                  <BookOpenCheck
-                    className="h-4 w-4 text-cyan-glow"
-                    aria-hidden="true"
-                  />
-                  Step-by-Step Interactive Lessons
-                </h4>
-                <span className="font-mono text-xs text-ink-muted">
-                  Progress auto-saves locally
-                </span>
-              </div>
-
-              {activeCourse.steps.map((step) => {
-                const isCompleted = completedStepIds.includes(step.id);
-                const isExpanded = Boolean(expandedSteps[step.id]);
-                const checkboxId = `complete-step-${step.id}`;
-                const stepSnippets = [
-                  ...(step.codeSnippet ? [step.codeSnippet] : []),
-                  ...(step.additionalCodeSnippets ?? []),
-                ];
-
-                return (
-                  <article
-                    key={step.id}
-                    className={`min-w-0 overflow-hidden rounded-2xl transition-colors ${
-                      isCompleted
-                        ? "glass-panel border-emerald-glow/35"
-                        : "glass-panel"
-                    }`}
-                  >
-                    <div className="flex items-start gap-3 p-4 sm:p-5">
-                      <div className="pt-1">
-                        <input
-                          id={checkboxId}
-                          type="checkbox"
-                          checked={isCompleted}
-                          onChange={() => onToggleStepComplete(step.id)}
-                          className="h-4 w-4 cursor-pointer rounded border-glass-border bg-void-950 accent-emerald-glow"
-                        />
-                        <label htmlFor={checkboxId} className="sr-only">
-                          Mark step {step.order}: {step.title} as complete
-                        </label>
-                      </div>
-
-                      <button
-                        type="button"
-                        onClick={() => toggleStepAccordion(step.id)}
-                        aria-expanded={isExpanded}
-                        aria-controls={`step-body-${step.id}`}
-                        className="flex min-w-0 flex-1 items-start justify-between gap-3 text-left"
-                      >
-                        <div className="min-w-0">
-                          <div className="flex flex-wrap items-center gap-2">
-                            <span className="font-mono text-xs font-semibold text-cyan-glow">
-                              Step {String(step.order).padStart(2, "0")}
-                            </span>
-                            <span className="rounded-full border border-glass-border bg-void-900/80 px-2 py-0.5 font-mono text-xs text-violet-glow">
-                              {step.stageTag}
-                            </span>
-                            {isCompleted && (
-                              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-glow/15 px-2 py-0.5 font-mono text-xs font-semibold text-emerald-glow">
-                                <CheckCircle2
-                                  className="h-3 w-3"
-                                  aria-hidden="true"
-                                />
-                                Complete
-                              </span>
-                            )}
-                          </div>
-                          <h5 className="mt-1 text-base font-bold text-ink-primary">
-                            {step.title}
-                          </h5>
-                          <p className="mt-1 text-xs leading-relaxed text-ink-secondary sm:text-sm">
-                            {step.summary}
-                          </p>
-                        </div>
-
-                        <span className="mt-1 shrink-0 text-ink-muted">
-                          {isExpanded ? (
-                            <ChevronUp className="h-4 w-4" aria-hidden="true" />
-                          ) : (
-                            <ChevronDown className="h-4 w-4" aria-hidden="true" />
-                          )}
+            <div className="space-y-6 p-4 sm:p-6">
+              {activeCourse.illustration ? (
+                <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:items-stretch">
+                  <div className="glass-panel flex flex-col justify-between gap-4 rounded-2xl p-5 lg:col-span-7">
+                    <div>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="font-mono text-xs font-semibold text-cyan-glow">
+                          COURSE {String(activeCourse.number).padStart(2, "0")}
                         </span>
-                      </button>
+                        <span className="rounded-full border border-glass-border bg-void-900/80 px-2.5 py-0.5 font-mono text-xs capitalize text-ink-secondary">
+                          {activeCourse.level}
+                        </span>
+                        {activeCourse.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full border border-glass-border bg-void-900/70 px-2.5 py-0.5 font-mono text-xs text-ink-muted"
+                          >
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
+                      <h3 className="mt-2 text-xl font-bold text-ink-primary">
+                        {activeDisplayTitle}
+                      </h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-ink-secondary">
+                        {activeDisplaySubtitle}
+                      </p>
                     </div>
 
-                    {isExpanded && (
-                      <div
-                        id={`step-body-${step.id}`}
-                        className="space-y-4 border-t border-glass-border bg-void-900/45 p-4 sm:p-5"
-                      >
-                        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                          <div className="rounded-xl border border-glass-border bg-void-950/60 p-4">
-                            <h6 className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan-glow">
-                              Key Takeaways
-                            </h6>
-                            <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-ink-secondary sm:text-sm">
-                              {step.keyTakeaways.map((item) => (
-                                <li key={item} className="flex items-start gap-2">
-                                  <span
-                                    className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-glow"
-                                    aria-hidden="true"
-                                  />
-                                  <span>{item}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                    <div className="rounded-xl border border-glass-border bg-void-900/60 p-3.5">
+                      <div className="flex items-center justify-between font-mono text-xs">
+                        <span className="text-ink-muted">Course Progress</span>
+                        <span className="font-bold text-emerald-glow">
+                          {courseStats.percent}%
+                        </span>
+                      </div>
+                      <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-void-950">
+                        <div
+                          className="h-full rounded-full bg-emerald-glow transition-all duration-300"
+                          style={{ width: `${courseStats.percent}%` }}
+                        />
+                      </div>
+                      <p className="mt-1.5 font-mono text-xs text-ink-muted">
+                        {courseStats.completed} of {courseStats.total} steps
+                        complete
+                      </p>
+                    </div>
+                  </div>
 
-                          <div className="rounded-xl border border-glass-border bg-void-950/60 p-4">
-                            <h6 className="font-mono text-xs font-semibold uppercase tracking-wider text-emerald-glow">
-                              Actionable Checklist
-                            </h6>
-                            <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-ink-primary sm:text-sm">
-                              {step.actionChecklist.map((item) => (
-                                <li key={item} className="flex items-start gap-2">
-                                  <CheckCircle2
-                                    className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-glow"
-                                    aria-hidden="true"
-                                  />
-                                  <span>{item}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                  <CourseIllustrationBanner
+                    courseTitle={activeDisplayTitle}
+                    accentTone={activeCourse.accentTone}
+                    illustration={activeCourse.illustration}
+                    className="lg:col-span-5"
+                  />
+                </div>
+              ) : (
+                <div className="glass-panel rounded-2xl p-5">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="font-mono text-xs font-semibold text-cyan-glow">
+                          COURSE {String(activeCourse.number).padStart(2, "0")}
+                        </span>
+                        {activeCourse.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full border border-glass-border bg-void-900/70 px-2.5 py-0.5 font-mono text-xs text-ink-muted"
+                          >
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
+                      <h3 className="mt-1.5 text-xl font-bold text-ink-primary">
+                        {activeDisplayTitle}
+                      </h3>
+                      <p className="mt-1 text-sm text-ink-secondary">
+                        {activeDisplaySubtitle}
+                      </p>
+                    </div>
+
+                    <div className="min-w-44 rounded-xl border border-glass-border bg-void-900/60 p-3">
+                      <div className="flex items-center justify-between font-mono text-xs">
+                        <span className="text-ink-muted">Course Progress</span>
+                        <span className="font-bold text-emerald-glow">
+                          {courseStats.percent}%
+                        </span>
+                      </div>
+                      <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-void-950">
+                        <div
+                          className="h-full rounded-full bg-emerald-glow transition-all duration-300"
+                          style={{ width: `${courseStats.percent}%` }}
+                        />
+                      </div>
+                      <p className="mt-1.5 font-mono text-xs text-ink-muted">
+                        {courseStats.completed} of {courseStats.total} steps
+                        complete
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {shouldCollapseComingSoonVideo ? (
+                <div className="space-y-3">
+                  <button
+                    type="button"
+                    aria-expanded={isComingSoonVideoExpanded}
+                    aria-controls={`coming-soon-video-${activeCourse.id}`}
+                    onClick={() =>
+                      setExpandedComingSoonVideos((prev) => ({
+                        ...prev,
+                        [activeCourse.id]: !prev[activeCourse.id],
+                      }))
+                    }
+                    className="flex w-full cursor-pointer flex-wrap items-center justify-between gap-2 rounded-2xl border border-glass-border-strong bg-void-950/85 px-4 py-3 text-left transition-colors hover:border-cyan-glow/60 hover:bg-void-900/90"
+                  >
+                    <span className="inline-flex items-center gap-2 text-xs font-semibold text-ink-primary sm:text-sm">
+                      <Film
+                        className="h-4 w-4 shrink-0 text-violet-glow"
+                        aria-hidden="true"
+                      />
+                      <span>
+                        Course Video Walkthrough (Coming Soon) ·{" "}
+                        {isComingSoonVideoExpanded
+                          ? "Hide Video Outline ↑"
+                          : "Show Chapters ↓"}
+                      </span>
+                    </span>
+                    <span className="font-mono text-xs text-ink-muted">
+                      {activeCourse.video.chapters.length} planned chapters ·{" "}
+                      {activeCourse.video.durationLabel}
+                    </span>
+                  </button>
+
+                  {isComingSoonVideoExpanded && (
+                    <div id={`coming-soon-video-${activeCourse.id}`}>
+                      <VideoStage
+                        key={activeCourse.id}
+                        video={activeCourse.video}
+                        accentTone={activeCourse.accentTone}
+                      />
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <VideoStage
+                  key={activeCourse.id}
+                  video={activeCourse.video}
+                  accentTone={activeCourse.accentTone}
+                />
+              )}
+
+              <div className="space-y-6">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <h4 className="inline-flex items-center gap-2 text-base font-bold text-ink-primary">
+                    <BookOpenCheck
+                      className="h-4 w-4 text-cyan-glow"
+                      aria-hidden="true"
+                    />
+                    Step-by-Step Interactive Lessons
+                  </h4>
+                  <span className="font-mono text-xs text-ink-muted">
+                    Click any lesson tile to open · Progress auto-saves locally
+                  </span>
+                </div>
+
+                {activeCourse.steps.map((step, stepIndex) => {
+                  const isCompleted = completedStepIds.includes(step.id);
+                  const isExpanded = Boolean(expandedSteps[step.id]);
+                  const checkboxId = `complete-step-${step.id}`;
+                  const stepSnippets = [
+                    ...(step.codeSnippet ? [step.codeSnippet] : []),
+                    ...(step.additionalCodeSnippets ?? []),
+                  ];
+                  const stepDisplayTitle =
+                    activeDepthMode === "eli5"
+                      ? (step.eli5?.plainTitle ?? step.title)
+                      : step.title;
+                  const stepDisplayHook =
+                    activeDepthMode === "eli5"
+                      ? (step.eli5?.oneLineHook ?? step.summary)
+                      : step.summary;
+                  const stepMinutes = step.eli5?.estimatedMinutes ?? 5;
+                  const nextStep = activeCourse.steps[stepIndex + 1] ?? null;
+
+                  return (
+                    <article
+                      key={step.id}
+                      className={`min-w-0 overflow-hidden rounded-2xl transition-all ${
+                        isExpanded
+                          ? "border-2 border-cyan-glow/80 border-l-4 border-l-cyan-glow bg-void-950 shadow-2xl"
+                          : isCompleted
+                            ? "border border-emerald-glow/45 bg-void-950/90 hover:border-cyan-glow/60 hover:bg-void-900/90"
+                            : "border border-glass-border-strong bg-void-950/90 hover:border-cyan-glow/60 hover:bg-void-900/90"
+                      }`}
+                    >
+                      <div
+                        className={`flex items-start gap-3 p-4 transition-colors sm:p-5 ${
+                          isExpanded
+                            ? "border-b border-cyan-glow/30 bg-cyan-glow/10"
+                            : ""
+                        }`}
+                      >
+                        <div className="pt-1">
+                          <input
+                            id={checkboxId}
+                            type="checkbox"
+                            checked={isCompleted}
+                            onChange={() => onToggleStepComplete(step.id)}
+                            className="h-4 w-4 cursor-pointer rounded border-glass-border bg-void-950 accent-emerald-glow"
+                          />
+                          <label htmlFor={checkboxId} className="sr-only">
+                            Mark step {step.order}: {stepDisplayTitle} as complete
+                          </label>
                         </div>
 
-                        {stepSnippets.map((snippet, snippetIdx) => {
-                          const snippetKey = `${step.id}:${snippet.filename}:${snippetIdx}`;
-                          const isSnippetCopied = copiedSnippetKey === snippetKey;
-                          return (
-                            <div
-                              key={snippetKey}
-                              className="min-w-0 overflow-hidden rounded-xl border border-glass-border bg-void-950/90"
-                            >
-                              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-glass-border bg-void-900/80 px-3.5 py-2">
-                                <div className="flex items-center gap-2 font-mono text-xs">
-                                  <FileCode2
-                                    className="h-3.5 w-3.5 text-cyan-glow"
+                        <button
+                          type="button"
+                          onClick={() => toggleStepAccordion(step.id)}
+                          aria-expanded={isExpanded}
+                          aria-controls={`step-body-${step.id}`}
+                          className="flex min-w-0 flex-1 cursor-pointer flex-col gap-3 text-left sm:flex-row sm:items-start sm:justify-between"
+                        >
+                          <div className="min-w-0">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <span className="font-mono text-xs font-semibold text-cyan-glow">
+                                Step {String(step.order).padStart(2, "0")}
+                              </span>
+                              <span className="rounded-full border border-glass-border bg-void-900/80 px-2 py-0.5 font-mono text-xs text-violet-glow">
+                                {step.stageTag}
+                              </span>
+                              <span className="inline-flex items-center gap-1 rounded-full border border-glass-border bg-void-900/80 px-2 py-0.5 font-mono text-xs text-ink-secondary">
+                                <Clock
+                                  className="h-3 w-3 text-emerald-glow"
+                                  aria-hidden="true"
+                                />
+                                ~{stepMinutes} min
+                              </span>
+                              {isCompleted && (
+                                <span className="inline-flex items-center gap-1 rounded-full border border-emerald-glow/40 bg-emerald-glow/15 px-2 py-0.5 font-mono text-xs font-semibold text-emerald-glow">
+                                  <CheckCircle2
+                                    className="h-3 w-3"
                                     aria-hidden="true"
                                   />
-                                  <span className="text-ink-primary">
-                                    {snippet.filename}
-                                  </span>
-                                  <span className="rounded bg-void-800 px-1.5 py-0.5 text-ink-muted">
-                                    {snippet.language}
+                                  Complete
+                                </span>
+                              )}
+                            </div>
+                            <h5 className="mt-1.5 text-base font-bold text-ink-primary sm:text-lg">
+                              {stepDisplayTitle}
+                            </h5>
+                            <p className="mt-1 text-xs leading-relaxed text-ink-secondary sm:text-sm">
+                              {stepDisplayHook}
+                            </p>
+                          </div>
+
+                          <span
+                            className={`inline-flex shrink-0 items-center gap-1.5 self-start rounded-xl border px-3 py-1.5 font-mono text-xs font-semibold transition-colors ${
+                              isExpanded
+                                ? "border-cyan-glow/60 bg-void-950/90 text-cyan-glow"
+                                : "border-cyan-glow/50 bg-cyan-glow/15 text-cyan-glow"
+                            }`}
+                          >
+                            {isExpanded ? (
+                              <>
+                                <span>Close Lesson</span>
+                                <ChevronUp
+                                  className="h-3.5 w-3.5"
+                                  aria-hidden="true"
+                                />
+                              </>
+                            ) : (
+                              <>
+                                <span>Open Lesson</span>
+                                <ChevronDown
+                                  className="h-3.5 w-3.5"
+                                  aria-hidden="true"
+                                />
+                              </>
+                            )}
+                          </span>
+                        </button>
+                      </div>
+
+                      {isExpanded && (
+                        <div id={`step-body-${step.id}`}>
+                          <div className="space-y-5 bg-void-950 p-4 sm:p-6">
+                            {step.eli5 ? (
+                              <Eli5MicrolearningCard
+                                step={step}
+                                eli5={step.eli5}
+                                learningDepthMode={activeDepthMode}
+                                copiedSnippetKey={copiedSnippetKey}
+                                onCopySnippet={(snippetKey, code) =>
+                                  void handleCopySnippet(snippetKey, code)
+                                }
+                                onJumpToPrompt={onJumpToPrompt}
+                                onJumpToResource={onJumpToResource}
+                              />
+                            ) : (
+                              <>
+                                <div className="glass-pill inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-xs text-ink-secondary">
+                                  <Layers
+                                    className="h-3.5 w-3.5 text-violet-glow"
+                                    aria-hidden="true"
+                                  />
+                                  <span>
+                                    Classic Pro View — ELI5 Beginner Guide
+                                    arriving in Phase 2
                                   </span>
                                 </div>
-                                <button
-                                  type="button"
-                                  onClick={() =>
-                                    void handleCopySnippet(
-                                      snippetKey,
-                                      snippet.code,
-                                    )
-                                  }
-                                  className="glass-pill inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium text-cyan-glow"
-                                >
-                                  {isSnippetCopied ? (
-                                    <Check
-                                      className="h-3 w-3 text-emerald-glow"
-                                      aria-hidden="true"
-                                    />
-                                  ) : (
-                                    <Copy className="h-3 w-3" aria-hidden="true" />
-                                  )}
-                                  {isSnippetCopied ? "Copied" : "Copy Snippet"}
-                                </button>
-                              </div>
-                              <pre className="max-w-full overflow-x-auto p-4 font-mono text-xs leading-relaxed text-ink-secondary">
-                                <code>{snippet.code}</code>
-                              </pre>
-                            </div>
-                          );
-                        })}
 
-                        {step.mermaidDiagram && (
-                          <MermaidDiagram
-                            chart={step.mermaidDiagram}
-                            title={`Step ${step.order} Diagram · ${step.title}`}
-                            caption={`Architectural flow for ${step.title}`}
-                          />
-                        )}
+                                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                                  <div className="rounded-xl border border-glass-border bg-void-900/60 p-4">
+                                    <h6 className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan-glow">
+                                      Key Takeaways
+                                    </h6>
+                                    <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-ink-secondary sm:text-sm">
+                                      {step.keyTakeaways.map((item) => (
+                                        <li
+                                          key={item}
+                                          className="flex items-start gap-2"
+                                        >
+                                          <span
+                                            className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-glow"
+                                            aria-hidden="true"
+                                          />
+                                          <span>{item}</span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
 
-                        {(step.promptId || step.repoArtifactPath) && (
-                          <div className="flex flex-wrap items-center gap-2 pt-1">
-                            {step.promptId && (() => {
-                              const linkedPromptId = step.promptId;
-                              return (
-                                <button
-                                  type="button"
-                                  onClick={() => onJumpToPrompt(linkedPromptId)}
-                                  className="inline-flex items-center gap-1.5 rounded-xl border border-cyan-glow/40 bg-cyan-glow/15 px-3.5 py-1.5 text-xs font-semibold text-cyan-glow transition-colors hover:bg-cyan-glow/25"
-                                >
-                                  <Terminal
-                                    className="h-3.5 w-3.5"
-                                    aria-hidden="true"
+                                  <div className="rounded-xl border border-glass-border bg-void-900/60 p-4">
+                                    <h6 className="font-mono text-xs font-semibold uppercase tracking-wider text-emerald-glow">
+                                      Actionable Checklist
+                                    </h6>
+                                    <ul className="mt-2 space-y-1.5 text-xs leading-relaxed text-ink-primary sm:text-sm">
+                                      {step.actionChecklist.map((item) => (
+                                        <li
+                                          key={item}
+                                          className="flex items-start gap-2"
+                                        >
+                                          <CheckCircle2
+                                            className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-glow"
+                                            aria-hidden="true"
+                                          />
+                                          <span>{item}</span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                </div>
+
+                                {stepSnippets.map((snippet, snippetIdx) => {
+                                  const snippetKey = `${step.id}:${snippet.filename}:${snippetIdx}`;
+                                  const isSnippetCopied =
+                                    copiedSnippetKey === snippetKey;
+                                  return (
+                                    <div
+                                      key={snippetKey}
+                                      className="min-w-0 overflow-hidden rounded-xl border border-glass-border bg-void-950/90"
+                                    >
+                                      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-glass-border bg-void-900/80 px-3.5 py-2">
+                                        <div className="flex items-center gap-2 font-mono text-xs">
+                                          <FileCode2
+                                            className="h-3.5 w-3.5 text-cyan-glow"
+                                            aria-hidden="true"
+                                          />
+                                          <span className="text-ink-primary">
+                                            {snippet.filename}
+                                          </span>
+                                          <span className="rounded bg-void-800 px-1.5 py-0.5 text-ink-muted">
+                                            {snippet.language}
+                                          </span>
+                                        </div>
+                                        <button
+                                          type="button"
+                                          onClick={() =>
+                                            void handleCopySnippet(
+                                              snippetKey,
+                                              snippet.code,
+                                            )
+                                          }
+                                          className="glass-pill inline-flex cursor-pointer items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium text-cyan-glow"
+                                        >
+                                          {isSnippetCopied ? (
+                                            <Check
+                                              className="h-3 w-3 text-emerald-glow"
+                                              aria-hidden="true"
+                                            />
+                                          ) : (
+                                            <Copy
+                                              className="h-3 w-3"
+                                              aria-hidden="true"
+                                            />
+                                          )}
+                                          {isSnippetCopied
+                                            ? "Copied"
+                                            : "Copy Snippet"}
+                                        </button>
+                                      </div>
+                                      <pre className="max-w-full overflow-x-auto p-4 font-mono text-xs leading-relaxed text-ink-secondary">
+                                        <code>{snippet.code}</code>
+                                      </pre>
+                                    </div>
+                                  );
+                                })}
+
+                                {step.mermaidDiagram && (
+                                  <MermaidDiagram
+                                    chart={step.mermaidDiagram}
+                                    title={`Step ${step.order} Diagram · ${step.title}`}
+                                    caption={`Architectural flow for ${step.title}`}
                                   />
-                                  Jump to Linked Prompt
-                                  <ArrowUpRight
-                                    className="h-3.5 w-3.5"
-                                    aria-hidden="true"
-                                  />
-                                </button>
-                              );
-                            })()}
-                            {step.repoArtifactPath && (() => {
-                              const artifactPath = step.repoArtifactPath;
-                              return (
-                                <button
-                                  type="button"
-                                  onClick={() =>
-                                    onJumpToResource(artifactPath)
-                                  }
-                                  className="inline-flex items-center gap-1.5 rounded-xl border border-violet-glow/40 bg-violet-glow/15 px-3.5 py-1.5 text-xs font-semibold text-violet-glow transition-colors hover:bg-violet-glow/25"
-                                >
-                                  <FileCode2
-                                    className="h-3.5 w-3.5"
-                                    aria-hidden="true"
-                                  />
-                                  Inspect Repo Artifact ({artifactPath})
-                                </button>
-                              );
-                            })()}
+                                )}
+
+                                {(step.promptId || step.repoArtifactPath) && (
+                                  <div className="flex flex-wrap items-center gap-2 pt-1">
+                                    {step.promptId &&
+                                      (() => {
+                                        const linkedPromptId = step.promptId;
+                                        return (
+                                          <button
+                                            type="button"
+                                            onClick={() =>
+                                              onJumpToPrompt(linkedPromptId)
+                                            }
+                                            className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-cyan-glow/40 bg-cyan-glow/15 px-3.5 py-1.5 text-xs font-semibold text-cyan-glow transition-colors hover:bg-cyan-glow/25"
+                                          >
+                                            <Terminal
+                                              className="h-3.5 w-3.5"
+                                              aria-hidden="true"
+                                            />
+                                            Jump to Linked Prompt
+                                            <ArrowUpRight
+                                              className="h-3.5 w-3.5"
+                                              aria-hidden="true"
+                                            />
+                                          </button>
+                                        );
+                                      })()}
+                                    {step.repoArtifactPath &&
+                                      (() => {
+                                        const artifactPath =
+                                          step.repoArtifactPath;
+                                        return (
+                                          <button
+                                            type="button"
+                                            onClick={() =>
+                                              onJumpToResource(artifactPath)
+                                            }
+                                            className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-violet-glow/40 bg-violet-glow/15 px-3.5 py-1.5 text-xs font-semibold text-violet-glow transition-colors hover:bg-violet-glow/25"
+                                          >
+                                            <FileCode2
+                                              className="h-3.5 w-3.5"
+                                              aria-hidden="true"
+                                            />
+                                            Inspect Repo Artifact (
+                                            {artifactPath})
+                                          </button>
+                                        );
+                                      })()}
+                                  </div>
+                                )}
+                              </>
+                            )}
                           </div>
-                        )}
-                      </div>
-                    )}
-                  </article>
-                );
-              })}
+
+                          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-glass-border bg-void-900/80 px-4 py-3.5 sm:px-5">
+                            <span className="font-mono text-xs text-ink-secondary">
+                              End of Step {String(step.order).padStart(2, "0")}{" "}
+                              · {stepDisplayTitle}
+                            </span>
+
+                            {nextStep ? (
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  handleCompleteAndAdvance(
+                                    step.id,
+                                    isCompleted,
+                                    nextStep.id,
+                                  )
+                                }
+                                className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl bg-cyan-deep px-4 py-2 text-xs font-semibold text-ink-primary transition-colors hover:bg-cyan-glow hover:text-void-950"
+                              >
+                                Mark Complete &amp; Open Step{" "}
+                                {String(nextStep.order).padStart(2, "0")} →
+                              </button>
+                            ) : isCompleted ? (
+                              <span className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-glow/50 bg-emerald-glow/15 px-4 py-2 text-xs font-semibold text-emerald-glow">
+                                Course Step Complete ✓
+                              </span>
+                            ) : (
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  handleCompleteAndAdvance(
+                                    step.id,
+                                    isCompleted,
+                                    null,
+                                  )
+                                }
+                                className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl bg-cyan-deep px-4 py-2 text-xs font-semibold text-ink-primary transition-colors hover:bg-cyan-glow hover:text-void-950"
+                              >
+                                Mark Final Step Complete ✓
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </article>
+                  );
+                })}
+              </div>
             </div>
           </div>
         )}

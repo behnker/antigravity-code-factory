@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import {
   Bookmark,
   Check,
+  Compass,
   Copy,
   FilterX,
   Search,
@@ -14,6 +15,7 @@ import { interpolatePrompt } from "@/lib/prompt-engine";
 import type {
   Course,
   DifficultyLevel,
+  LearningDepthMode,
   PromptCard,
   SdlcStageKey,
 } from "@/lib/schemas";
@@ -27,6 +29,7 @@ export interface PromptVaultProps {
   highlightedPromptId?: string | null;
   stageFilterOverride?: SdlcStageKey | "all" | null;
   onClearStageFilterOverride?: () => void;
+  learningDepthMode?: LearningDepthMode;
 }
 
 interface IndexedPrompt extends PromptCard {
@@ -87,6 +90,7 @@ export function PromptVault({
   highlightedPromptId = null,
   stageFilterOverride = null,
   onClearStageFilterOverride,
+  learningDepthMode = "eli5",
 }: PromptVaultProps) {
   const [stageFilter, setStageFilter] = useState<SdlcStageKey | "all">("all");
   const [difficultyFilter, setDifficultyFilter] = useState<
@@ -136,7 +140,9 @@ export function PromptVault({
       if (!query) return true;
       return (
         prompt.title.toLowerCase().includes(query) ||
+        (prompt.eli5Title?.toLowerCase().includes(query) ?? false) ||
         prompt.description.toLowerCase().includes(query) ||
+        (prompt.whenToUse?.toLowerCase().includes(query) ?? false) ||
         prompt.template.toLowerCase().includes(query) ||
         (prompt.skillRef?.toLowerCase().includes(query) ?? false)
       );
@@ -176,7 +182,7 @@ export function PromptVault({
     <section
       id="prompt-vault"
       aria-labelledby="prompt-vault-heading"
-      className="border-b border-glass-border py-14 sm:py-16"
+      className="py-14 sm:py-16"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
@@ -343,6 +349,14 @@ export function PromptVault({
               const isBookmarked = bookmarkedPromptIds.includes(prompt.id);
               const isHighlighted = highlightedPromptId === prompt.id;
               const isCopied = copiedPromptId === prompt.id;
+              const displayTitle =
+                learningDepthMode === "eli5"
+                  ? (prompt.eli5Title ?? prompt.title)
+                  : prompt.title;
+              const showTechnicalSubtitle =
+                learningDepthMode === "eli5" &&
+                Boolean(prompt.eli5Title) &&
+                prompt.eli5Title !== prompt.title;
 
               return (
                 <article
@@ -371,8 +385,13 @@ export function PromptVault({
                           )}
                         </div>
                         <h3 className="mt-2 text-base font-bold text-ink-primary sm:text-lg">
-                          {prompt.title}
+                          {displayTitle}
                         </h3>
+                        {showTechnicalSubtitle && (
+                          <p className="mt-0.5 font-mono text-xs text-ink-muted">
+                            {prompt.title}
+                          </p>
+                        )}
                       </div>
 
                       <button
@@ -381,10 +400,10 @@ export function PromptVault({
                         aria-pressed={isBookmarked}
                         aria-label={
                           isBookmarked
-                            ? `Remove ${prompt.title} from bookmarks`
-                            : `Bookmark ${prompt.title}`
+                            ? `Remove ${displayTitle} from bookmarks`
+                            : `Bookmark ${displayTitle}`
                         }
-                        className={`shrink-0 rounded-lg border p-2 transition-colors ${
+                        className={`shrink-0 cursor-pointer rounded-lg border p-2 transition-colors ${
                           isBookmarked
                             ? "border-amber-glow/60 bg-amber-glow/15 text-amber-glow"
                             : "border-glass-border bg-void-900/60 text-ink-muted hover:text-ink-primary"
@@ -397,7 +416,22 @@ export function PromptVault({
                       </button>
                     </div>
 
-                    <p className="mt-2 text-xs leading-relaxed text-ink-secondary sm:text-sm">
+                    {prompt.whenToUse && (
+                      <div className="mt-3 flex items-start gap-2 rounded-xl border border-emerald-glow/40 bg-emerald-glow/10 px-3.5 py-2.5">
+                        <Compass
+                          className="mt-0.5 h-4 w-4 shrink-0 text-emerald-glow"
+                          aria-hidden="true"
+                        />
+                        <p className="text-xs leading-relaxed text-ink-primary">
+                          <span className="font-mono font-semibold text-emerald-glow">
+                            Use This Prompt When:{" "}
+                          </span>
+                          {prompt.whenToUse}
+                        </p>
+                      </div>
+                    )}
+
+                    <p className="mt-2.5 text-xs leading-relaxed text-ink-secondary sm:text-sm">
                       {prompt.description}
                     </p>
 
@@ -441,7 +475,7 @@ export function PromptVault({
                           Live Interpolated Prompt
                         </span>
                         <span className="font-mono text-xs text-ink-muted">
-                          Course {prompt.courseNumber}
+                          Course {String(prompt.courseNumber).padStart(2, "0")}
                         </span>
                       </div>
                       <pre className="max-h-56 max-w-full overflow-auto whitespace-pre-wrap break-words rounded-xl border border-glass-border bg-void-950/90 p-3.5 font-mono text-xs leading-relaxed text-ink-primary">

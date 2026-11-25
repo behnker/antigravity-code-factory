@@ -9,7 +9,11 @@ import {
   loadLearnerProgress,
   saveLearnerProgress,
 } from "@/lib/prompt-engine";
-import type { LearnerProgress, SdlcStageKey } from "@/lib/schemas";
+import type {
+  LearnerProgress,
+  LearningDepthMode,
+  SdlcStageKey,
+} from "@/lib/schemas";
 import { CourseCurriculumStudio } from "./CourseCurriculumStudio";
 import { GlassNavbar } from "./GlassNavbar";
 import { HarnessComparisonLab } from "./HarnessComparisonLab";
@@ -82,6 +86,17 @@ export function AcademyShell({
       updatedAt: new Date().toISOString(),
     }));
   }, []);
+
+  const handleChangeLearningDepthMode = useCallback(
+    (mode: LearningDepthMode) => {
+      setProgress((prev) => ({
+        ...prev,
+        learningDepthMode: mode,
+        updatedAt: new Date().toISOString(),
+      }));
+    },
+    [],
+  );
 
   const handleToggleStepComplete = useCallback((stepId: string) => {
     setProgress((prev) => {
@@ -192,8 +207,9 @@ export function AcademyShell({
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.08 }}
+            viewport={{ once: true, amount: "some" }}
             transition={{ duration: 0.45 }}
+            className="border-t-2 border-glass-border-strong bg-void-900/65"
           >
             <HarnessComparisonLab
               dimensions={harnessDimensions}
@@ -205,8 +221,9 @@ export function AcademyShell({
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.08 }}
+            viewport={{ once: true, amount: "some" }}
             transition={{ duration: 0.45 }}
+            className="border-t-2 border-glass-border-strong bg-void-950"
           >
             <SdlcReferenceShowcase
               resources={manifest.resources}
@@ -215,12 +232,7 @@ export function AcademyShell({
             />
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.05 }}
-            transition={{ duration: 0.45 }}
-          >
+          <div className="border-t-2 border-glass-border-strong bg-void-900/65">
             <CourseCurriculumStudio
               courses={manifest.courses}
               completedStepIds={progress.completedStepIds}
@@ -233,15 +245,12 @@ export function AcademyShell({
               progress={progress}
               onImportProgress={handleImportProgress}
               onResetProgress={handleResetProgress}
+              learningDepthMode={progress.learningDepthMode}
+              onChangeLearningDepthMode={handleChangeLearningDepthMode}
             />
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.05 }}
-            transition={{ duration: 0.45 }}
-          >
+          <div className="border-t-2 border-glass-border-strong bg-void-950">
             <PromptVault
               courses={manifest.courses}
               bookmarkedPromptIds={progress.bookmarkedPromptIds}
@@ -251,17 +260,14 @@ export function AcademyShell({
               highlightedPromptId={highlightedPromptId}
               stageFilterOverride={stageFilterOverride}
               onClearStageFilterOverride={handleClearStageFilterOverride}
+              learningDepthMode={progress.learningDepthMode}
             />
-          </motion.div>
+          </div>
 
-          <motion.section
+          <section
             id="repo-hitl"
             aria-labelledby="repo-hitl-heading"
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.05 }}
-            transition={{ duration: 0.45 }}
-            className="py-14 sm:py-16"
+            className="border-t-2 border-glass-border-strong bg-void-900/65 py-14 sm:py-16"
           >
             <div className="mx-auto max-w-7xl space-y-8 px-4 sm:px-6 lg:px-8">
               <div className="max-w-3xl space-y-2">
@@ -291,10 +297,10 @@ export function AcademyShell({
                 onSelectResourcePath={setSelectedResourcePath}
               />
             </div>
-          </motion.section>
+          </section>
         </main>
 
-        <footer className="border-t border-glass-border bg-void-900/70 py-8">
+        <footer className="border-t-2 border-glass-border-strong bg-void-950 py-8">
           <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 text-xs text-ink-muted sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
             <div className="flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-cyan-glow" aria-hidden="true" />

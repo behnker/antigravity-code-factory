@@ -123,7 +123,7 @@ export function MermaidDiagram({
     >
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2 border-b border-glass-border pb-3">
         <div className="min-w-0">
-          <h4 className="truncate text-sm font-semibold text-ink-primary">
+          <h4 className="break-words text-sm font-semibold text-ink-primary">
             {title}
           </h4>
           <p className="font-mono text-xs text-ink-muted">
@@ -195,8 +195,8 @@ export function MermaidDiagram({
 
       <div
         ref={containerRef}
-        className={`min-h-64 w-full overflow-x-auto rounded-xl border border-glass-border bg-void-900/50 p-4 ${
-          status === "ready" ? "block" : "hidden"
+        className={`min-h-24 w-full overflow-x-auto rounded-xl border border-glass-border bg-void-900/50 p-4 ${
+          status === "ready" ? "flex items-center justify-center" : "hidden"
         }`}
       />
 
