@@ -62,6 +62,10 @@ export function MermaidDiagram({
       mermaid.initialize({
         startOnLoad: false,
         securityLevel: "strict",
+        htmlLabels: false,
+        flowchart: {
+          htmlLabels: false,
+        },
         theme: "dark",
         fontFamily: "var(--font-sans)",
         themeVariables: {

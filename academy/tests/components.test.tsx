@@ -1,9 +1,22 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { CourseCurriculumStudio } from "@/components/CourseCurriculumStudio";
+import { MermaidDiagram } from "@/components/MermaidDiagram";
 import { VideoStage } from "@/components/VideoStage";
 import { PromptVault } from "@/components/PromptVault";
 import { HitlGateSimulator } from "@/components/HitlGateSimulator";
+import { createDefaultProgress } from "@/lib/prompt-engine";
 import type { Course, PromptCard, VideoConfig } from "@/lib/schemas";
+
+const mermaidInitializeMock = vi.fn();
+const mermaidRenderMock = vi.fn();
+
+vi.mock("mermaid", () => ({
+  default: {
+    initialize: (...args: unknown[]) => mermaidInitializeMock(...args),
+    render: (...args: unknown[]) => mermaidRenderMock(...args),
+  },
+}));
 
 afterEach(() => {
   cleanup();
@@ -157,5 +170,74 @@ describe("Glassmorphic UI Components (States & WCAG)", () => {
     await waitFor(() => {
       expect(input).toHaveAttribute("aria-invalid", "true");
     });
+  });
+
+  it("MermaidDiagram disables htmlLabels for XML-strict SVG parsing and renders valid SVG", async () => {
+    mermaidInitializeMock.mockReset();
+    mermaidRenderMock.mockReset();
+    mermaidRenderMock.mockResolvedValueOnce({
+      svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 40"><text><tspan>1. Align</tspan><tspan>(/grill-me -&gt; /plan)</tspan></text></svg>',
+    });
+
+    render(
+      <MermaidDiagram
+        chart={'flowchart LR\n  A["1. Align\\n(/grill-me -> /plan)"] --> B["2. Build"]'}
+        title="Step 7 Diagram"
+      />,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByRole("img", { name: "Step 7 Diagram" })).toBeInTheDocument();
+    });
+    expect(mermaidInitializeMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        securityLevel: "strict",
+        htmlLabels: false,
+        flowchart: expect.objectContaining({ htmlLabels: false }),
+      }),
+    );
+  });
+
+  it("CourseCurriculumStudio renders both primary codeSnippet and additionalCodeSnippets", () => {
+    const courseWithMultiSnippets: Course = {
+      ...SAMPLE_COURSES[0],
+      steps: [
+        {
+          ...SAMPLE_COURSES[0].steps[0],
+          codeSnippet: {
+            language: "json",
+            filename: ".agents/hooks.json",
+            code: '{"hitl-safety-gate":{}}',
+          },
+          additionalCodeSnippets: [
+            {
+              language: "markdown",
+              filename: "AGENTS.md (Engineering Starter)",
+              code: "# Engineering Rules",
+            },
+          ],
+        },
+      ],
+    };
+
+    render(
+      <CourseCurriculumStudio
+        courses={[courseWithMultiSnippets]}
+        completedStepIds={[]}
+        onToggleStepComplete={vi.fn()}
+        onJumpToPrompt={vi.fn()}
+        onJumpToResource={vi.fn()}
+        progressModalOpen={false}
+        onOpenProgressModal={vi.fn()}
+        onCloseProgressModal={vi.fn()}
+        progress={createDefaultProgress("2026-11-24T00:00:00.000Z")}
+        onImportProgress={vi.fn()}
+        onResetProgress={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByText(".agents/hooks.json")).toBeInTheDocument();
+    expect(screen.getByText("AGENTS.md (Engineering Starter)")).toBeInTheDocument();
+    expect(screen.getAllByRole("button", { name: /copy snippet/i })).toHaveLength(2);
   });
 });

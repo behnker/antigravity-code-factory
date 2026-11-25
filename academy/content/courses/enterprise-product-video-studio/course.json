@@ -1,0 +1,372 @@
+{
+  "id": "enterprise-product-video-studio",
+  "slug": "enterprise-product-video-studio",
+  "number": 6,
+  "title": "Pro Product Video Studio with Antigravity (Code-as-Video)",
+  "subtitle": "Build agency-grade enterprise explainers and launch teasers like a pro video editor using the Hybrid Code-as-Video stack (Remotion + 60fps Hardware-GPU Playwright + FFmpeg + AI Assets) with frame-accurate beat sync and automated visual QA.",
+  "level": "all-levels",
+  "estimatedMinutes": 55,
+  "threeScenePreset": "hook-pipeline",
+  "accentTone": "violet",
+  "tags": [
+    "video-studio",
+    "code-as-video",
+    "remotion",
+    "playwright",
+    "ffmpeg",
+    "motion-design",
+    "enterprise-explainers",
+    "beat-sync",
+    "visual-qa"
+  ],
+  "video": {
+    "title": "Live Case Study: Herd of Ibiza — GT-Alpaca Edition (45s 60fps Code-as-Video Teaser)",
+    "durationLabel": "00:45",
+    "provider": "mp4",
+    "embedUrl": "/media/gt-alpaca-teaser-16x9.mp4",
+    "posterLabel": "Built 100% with Antigravity Code-as-Video (Remotion + 60fps Metal GPU Playwright + FFmpeg -14 LUFS)",
+    "chapters": [
+      {
+        "id": "vid-ch-1",
+        "title": "Act 1 · Animated Ibiza Sunset & Finca Breakout",
+        "timestampSeconds": 0,
+        "summary": "Programmatic SVG Es Vedrà sunset + parallax palms smashing into continuous 60fps gameplay on the downbeat."
+      },
+      {
+        "id": "vid-ch-2",
+        "title": "Act 2 · GTA Character Freeze-Frames & 22-Alpaca Wall",
+        "timestampSeconds": 9,
+        "summary": "Diagonal split-panel character dossiers with damped spring slams, camera shutter SFX, and staggered contact-sheet wall."
+      },
+      {
+        "id": "vid-ch-3",
+        "title": "Act 3A · Pro-Played 60fps Ibiza Taxi Vault",
+        "timestampSeconds": 21,
+        "summary": "Closed-loop Playwright autopilot vaults cleanly past the oncoming Taxi and steers toward the wandering recruit alpaca."
+      },
+      {
+        "id": "vid-ch-4",
+        "title": "Act 3B · Beat-Locked 'HEY!' Disco Bus Double-Jump",
+        "timestampSeconds": 26,
+        "summary": "Alpaca launches over the pink-and-purple Disco Bus on the exact frame of 'HEY!' #1 (0:26.75) and leaps again on 'HEY!' #2 (0:29.05)."
+      },
+      {
+        "id": "vid-ch-5",
+        "title": "Act 3C · Animated 7-Route Map & Sunset Run",
+        "timestampSeconds": 31,
+        "summary": "SVG strokeDashoffset island route map paired with live Race-the-Sunset gameplay cut directly on the chorus drop."
+      },
+      {
+        "id": "vid-ch-6",
+        "title": "Act 4 · GTA Title Reveal & Scannable QR End Card",
+        "timestampSeconds": 37,
+        "summary": "Box-art mosaic title lockup with 'GT-ALPACA EDITION' slamming on 'HEY!' #3 and deterministic SVG QR code end card."
+      }
+    ],
+    "transcriptSummary": "This live 45-second case study demonstrates the complete Antigravity Enterprise Product Video Playbook in action. Every frame was built as deterministic, version-controlled code in Remotion (60 fps), powered by real brand tokens, native 60 fps hardware-GPU Playwright gameplay captures driven by a zero-collision closed-loop autopilot, synthesized FFmpeg trailer SFX, exact millisecond beat-locking to the theme song's 'HEY!' chorus hits, keyframe contact-sheet visual QA, and broadcast -14 LUFS loudness mastering for simultaneous 16:9 widescreen and 9:16 vertical exports."
+  },
+  "steps": [
+    {
+      "id": "vid-step-1-hybrid-architecture",
+      "order": 1,
+      "title": "The Hybrid 4-Layer Code-as-Video Architecture",
+      "stageTag": "Architecture",
+      "summary": "Pure text-to-video AI hallucinates UI text and drifts off-brand, while raw screen recordings feel static and break every time your UI changes. Pro enterprise teams run one deterministic Code-as-Video timeline (Remotion + Playwright + FFmpeg) fed by four hybrid media layers.",
+      "keyTakeaways": [
+        "Layer 1 — Programmatic Motion Graphics (Remotion / SVG): Pixel-sharp UI callouts, progressive architecture diagrams, kinetic headlines, lower thirds, and intros locked to exact brand tokens.",
+        "Layer 2 — Directed Product Capture (Playwright): Clean, high-DPI, privacy-safe product walkthroughs with 100% synthetic demo data and zero messy browser chrome.",
+        "Layer 3 — Selective Generative Visuals (Gemini API Veo / Imagen): 2–4 second conceptual cutaways, abstract backdrops, and editorial metaphors — never used for readable UI text or charts.",
+        "Layer 4 — Broadcast Audio Stack (VO + SFX + FFmpeg): Locked narration or soundtrack with word/beat timestamps driving frame numbers, subtle micro-SFX (-18 to -24 dB), and -14 LUFS loudness mastering.",
+        "Beginner Superpower: With Antigravity as your operator, you direct like a Creative Director (reviewing briefs, keyframes, and live browser previews) while Antigravity authors and updates the modular scene code."
+      ],
+      "actionChecklist": [
+        "Choose a single timeline engine (Remotion) rather than juggling two parallel editors.",
+        "Verify local prerequisites: Node.js, pnpm, FFmpeg, and a cached Chromium binary for Playwright.",
+        "Classify every scene in your upcoming video into one of the four media layers before generating a single asset."
+      ],
+      "mermaidDiagram": "flowchart LR\n    A[\"1. Creative Brief & Storyboard Spec\"] --> B[\"2. Locked Audio & Exact Timestamps\"]\n    B --> C1[\"Track A: 60fps UI Capture (Playwright GPU)\"]\n    B --> C2[\"Track B: Motion & Diagrams (Remotion SVG)\"]\n    B --> C3[\"Track C: Visual Metaphors (AI Key Art / B-Roll)\"]\n    B --> C4[\"Track D: SFX & Music Mix (FFmpeg)\"]\n    C1 --> D[\"3. Frame-Accurate Timeline Assembly\"]\n    C2 --> D\n    C3 --> D\n    C4 --> D\n    D --> E[\"4. Keyframe Contact-Sheet QA\"]\n    E --> F[\"5. 16:9 + 9:16 + Multi-Language Masters\"]",
+      "promptId": "vid-prompt-studio-scaffold"
+    },
+    {
+      "id": "vid-step-2-studio-brand-kit",
+      "order": 2,
+      "title": "Step 0: Reusable Studio Workspace & Brand-Token Lock",
+      "stageTag": "Setup",
+      "summary": "Build a reusable product-video-studio repository once so every future video inherits your exact brand palette, licensed fonts, damped spring physics, and export presets automatically—eliminating visual drift across 50+ enterprise videos.",
+      "keyTakeaways": [
+        "Organize cleanly into brand/ (brand-bible.md, tokens.ts, vector logos, fonts), plans/ (<slug>-spec.json), scripts/ (capture-gameplay.mjs, generate-sfx.sh, master-export.sh), src/components/, src/scenes/, and out/.",
+        "Lock your Color Architecture in brand/tokens.ts: 1 dark or light canvas, 1 surface elevation, 1 high-contrast active accent, and WCAG 4.5:1 text tokens.",
+        "Ban linear easing: standardize damped Remotion spring presets (SNAPPY damping 18 / stiffness 190 for UI; CINEMATIC damping 24 / stiffness 95 for camera pans; SLAM damping 13 / stiffness 240 for title punches).",
+        "Enforce an Anti-Cliché Rule in brand-bible.md: ban generic stock tropes (handshakes, glowing blue AI brains, floating HUDs) in favor of authentic product visuals and original visual metaphors."
+      ],
+      "actionChecklist": [
+        "Create a dedicated product-video-studio/ workspace and install Remotion, React, TypeScript, QRCode, and Playwright (all MIT/Apache-2.0).",
+        "Extract exact hex palette and font files from your real product repository into brand/tokens.ts and public/fonts/.",
+        "Define reusable primitives (FilmGrainOverlay, StampBadge, DeviceMockup, QrCodeCard) before authoring individual scenes."
+      ],
+      "codeSnippet": {
+        "language": "typescript",
+        "filename": "brand/tokens.ts",
+        "code": "export const SPRINGS = {\n  snappy: { damping: 18, stiffness: 190, mass: 0.9 },\n  cinematic: { damping: 24, stiffness: 95, mass: 1.1 },\n  slam: { damping: 13, stiffness: 240, mass: 0.85 },\n} as const;\n\nexport const VIDEO_SPECS = {\n  fps: 60,\n  durationInSeconds: 45,\n  durationInFrames: 45 * 60,\n  master16x9: { width: 1920, height: 1080 },\n  vertical9x16: { width: 1080, height: 1920 },\n  safeMarginX: 0.08,\n  safeMarginY: 0.07,\n} as const;"
+      },
+      "promptId": "vid-prompt-studio-scaffold"
+    },
+    {
+      "id": "vid-step-3-narrative-storyboard",
+      "order": 3,
+      "title": "Steps 1–2: Narrative Architecture & Machine-Readable Storyboard",
+      "stageTag": "Spec & Story",
+      "summary": "Enterprise product videos fail when they recite features in menu order. Use /grill-me to lock a 1-page Creative Brief, apply the Zoom-In / Zoom-Out storytelling arc, write lean scripts for the ear, and compile a machine-readable JSON storyboard before animating.",
+      "keyTakeaways": [
+        "Lock 4 decisions upfront: Single Target Audience (C-suite vs. Architect vs. End User), One Core Transformation, Runtime Budget (45s teaser / 90–120s hero explainer / 3–5m walkthrough), and Distribution Targets.",
+        "Use the 5-Act Zoom-In / Zoom-Out Arc: 1. Friction Hook (0–12s, zero 8-second logo intros) -> 2. Mental Model / Visual Metaphor (12–30s) -> 3. Concrete Product Proof (30–75s) -> 4. Enterprise Trust & Scale (75–95s) -> 5. Clear CTA (95–110s).",
+        "Apply the Progressive Disclosure Rule: never drop a 20-box architecture diagram on screen all at once—reveal 1 node per beat, animate data flow to the next node, and dim inactive context.",
+        "Write for the ear (135–150 WPM, max 16 words per sentence) and obey 'Show, Don't Duplicate' (5–7 on-screen words max per card). Lock plans/<slug>-spec.json and preview style frames before coding scenes."
+      ],
+      "actionChecklist": [
+        "Run /grill-me with Antigravity to lock audience, transformation, runtime, and tone in a 1-page Creative Brief.",
+        "Write a spoken-word script under your WPM ceiling (e.g., <= 220 words for a 90s explainer; <= 80 words for a 45s teaser).",
+        "Compile plans/<video-slug>-spec.json with explicit scene IDs, frame ranges, visual layers, camera motions, and SFX cues."
+      ],
+      "codeSnippet": {
+        "language": "json",
+        "filename": "plans/product-teaser-spec.json",
+        "code": "{\n  \"slug\": \"enterprise-launch-teaser\",\n  \"fps\": 60,\n  \"totalFrames\": 2700,\n  \"scenes\": [\n    {\n      \"id\": \"S01_FrictionHook\",\n      \"startFrame\": 0,\n      \"durationFrames\": 270,\n      \"visualLayer\": \"motion_diagram\",\n      \"headline\": \"One policy gap. Total exposure.\",\n      \"cameraMotion\": \"Slow push-in 1.0x -> 1.09x\",\n      \"sfx\": \"sfx/riser.wav\"\n    }\n  ]\n}"
+      },
+      "promptId": "vid-prompt-creative-brief"
+    },
+    {
+      "id": "vid-step-4-audio-first-beat-sync",
+      "order": 4,
+      "title": "Step 3: Audio-First Production & Exact Frame-Level Beat Sync",
+      "stageTag": "Audio & Rhythm",
+      "summary": "Amateur editors animate first and cram audio underneath. Pro editors lock the voiceover and/or soundtrack first, extract exact word and beat timestamps, and convert milliseconds directly into Remotion frame numbers so every jump, cut, and headline lands on the exact syllable.",
+      "keyTakeaways": [
+        "Lock your VO (studio recording or neural speech via Gemini API / ElevenLabs) or hero soundtrack BEFORE assembling visuals.",
+        "Extract word-level timestamps (Whisper/Gemini transcription -> captions.json) and musical onset energy peaks (via FFmpeg + Python RMS) to build a deterministic beat map.",
+        "Convert audio timestamps to exact timeline frames: const impactFrame = Math.round(((songHitSec - songOffsetSec) * fps));.",
+        "Case Study Proof: In the Herd of Ibiza teaser above, RMS analysis pinpointed 'HEY!' #1 at 46.75s and 'HEY!' #2 at 49.05s (2.300s apart), letting us align both live alpaca jumps within 3 milliseconds (0.2 frames) of the vocals.",
+        "Keep SFX understated (-18 to -24 dB) and clear of key vocal hooks so sound design elevates polish without fighting narration or lyrics."
+      ],
+      "actionChecklist": [
+        "Lock your master VO or soundtrack slice (e.g., setting soundtrackStartSeconds so the chorus hits your hero product climax).",
+        "Run a quick FFmpeg + Python RMS onset script or transcription pass to record exact beat/word timestamps.",
+        "Define named frame constants (e.g., HEY_1_FRAME, HEY_2_FRAME) in your scenes so visuals, beat rings, and SFX share one clock."
+      ],
+      "codeSnippet": {
+        "language": "python",
+        "filename": "scripts/find-beats.py",
+        "code": "import subprocess, struct, math\n\ncmd = [\n    \"ffmpeg\", \"-v\", \"error\", \"-ss\", \"40\", \"-t\", \"15\",\n    \"-i\", \"public/music/theme.mp3\", \"-ac\", \"1\", \"-ar\", \"16000\", \"-f\", \"s16le\", \"-\"\n]\nraw = subprocess.check_output(cmd)\nsamples = struct.unpack(f\"<{len(raw)//2}h\", raw)\nwin = 800  # 50ms windows @ 16kHz\nfor i in range(0, len(samples) - win, win):\n    rms = math.sqrt(sum(s*s for s in samples[i:i+win]) / win) / 32768.0\n    if rms > 0.35:\n        print(f\"{40.0 + i/16000:6.2f}s | energy={rms:.3f}\")"
+      },
+      "promptId": "vid-prompt-beat-sync"
+    },
+    {
+      "id": "vid-step-5-pro-60fps-capture",
+      "order": 5,
+      "title": "Step 4: Butter-Smooth 60fps UI Capture & Pro Autopilot Scripting",
+      "stageTag": "Capture",
+      "summary": "Default headless browser recordings look jerky because software WebGL (SwiftShader) crawls at ~6 fps and Playwright's built-in recordVideo caps at 25 fps. Pro Code-as-Video capture uses hardware GPU acceleration, native 60 fps canvas streaming, and closed-loop scripting so your product looks like a world-class expert is operating it.",
+      "keyTakeaways": [
+        "Always enable hardware GPU acceleration (e.g., --use-gl=angle --use-angle=metal on Apple Silicon) instead of software SwiftShader.",
+        "For ultra-smooth 60 fps product/WebGL footage, capture directly via canvas.captureStream(60) + MediaRecorder (VP9 @ 12–14 Mbps) and transcode to constant-60fps H.264 with FFmpeg.",
+        "Run all setup, login, and synthetic enterprise data seeding BEFORE recording begins—zero loading spinners, zero mid-clip teleports, and zero customer PII.",
+        "Never drive demos with blind timers that look like a confused newbie clicking around: build a closed-loop Playwright script (or autopilot) that reads live app state, hits targets cleanly, and asserts zero errors/collisions before saving the clip."
+      ],
+      "actionChecklist": [
+        "Verify your browser reports hardware GPU rendering and ~60 rAF FPS before recording.",
+        "Seed realistic, 100% synthetic enterprise demo data (no real customer names, tokens, or 'test123' placeholders).",
+        "Add automated post-capture assertions (zero console errors, zero UI glitches, expected state transitions achieved) to your capture script."
+      ],
+      "codeSnippet": {
+        "language": "javascript",
+        "filename": "scripts/capture-60fps-snippet.mjs",
+        "code": "const browser = await chromium.launch({\n  headless: true,\n  args: [\n    \"--no-sandbox\",\n    \"--use-gl=angle\",\n    \"--use-angle=metal\",\n    \"--enable-webgl\",\n    \"--ignore-gpu-blocklist\",\n  ],\n});\n\n// Capture native 60fps stream directly after setup completes\nconst stream = canvas.captureStream(60);\nconst rec = new MediaRecorder(stream, {\n  mimeType: \"video/webm;codecs=vp9\",\n  videoBitsPerSecond: 14_000_000,\n});"
+      },
+      "promptId": "vid-prompt-capture-script"
+    },
+    {
+      "id": "vid-step-6-editing-craft-mastering",
+      "order": 6,
+      "title": "Step 5: Pro Editing Craft, Motion Polish & FFmpeg Audio Mastering",
+      "stageTag": "Build & Master",
+      "summary": "Stacking slides in sequence creates a PowerPoint; applying editorial rhythm, audio bridges, spring choreography, and broadcast loudness normalization turns code into cinema.",
+      "keyTakeaways": [
+        "The 3-to-5 Second Visual Beat Rule: shift something meaningful every 3–5 seconds (zoom to control, highlight diagram node, switch camera angle, slam a callout badge). Never hold a dead static screen for 10+ seconds.",
+        "J-Cuts & L-Cuts: start the next scene's audio riser or VO 0.25–0.45s before the visual cut so scene transitions flow cinematically.",
+        "Staggered Choreography & Safe Margins: stagger multi-element entrances by 4–6 frames (at 60 fps) with damped springs, and keep every critical label inside 8–10% title-safe margins with >= 4.5:1 contrast.",
+        "Broadcast FFmpeg Mastering: normalize integrated loudness to -14 LUFS (YouTube/web) or -16 LUFS (LMS/mobile) with true peak <= -1.0 dBTP, sidechain-duck music -18 to -22 dB under voiceover, and always write +faststart so web videos play instantaneously."
+      ],
+      "actionChecklist": [
+        "Audit every scene length against the 3–5 second visual beat rule and add J-cut audio bridges where cuts feel abrupt.",
+        "Build responsive layouts in the same Remotion components (isVertical = height > width) so 16:9 and 9:16 reflow cleanly without awkward cropping.",
+        "Run scripts/master-export.sh with FFmpeg loudnorm + faststart and verify the printed Integrated LUFS and True Peak metrics."
+      ],
+      "codeSnippet": {
+        "language": "bash",
+        "filename": "scripts/master-export.sh",
+        "code": "ffmpeg -y -i out/teaser-16x9-raw.mp4 \\\n  -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 18 -preset medium -movflags +faststart \\\n  -af \"loudnorm=I=-14:TP=-1.0:LRA=11\" \\\n  -c:a aac -b:a 256k -ar 48000 \\\n  out/teaser-16x9-master.mp4"
+      }
+    },
+    {
+      "id": "vid-step-7-visual-qa-enterprise-scale",
+      "order": 7,
+      "title": "Steps 6–7: Keyframe Contact-Sheet QA & Enterprise Localization Scale",
+      "stageTag": "QA & Scale",
+      "summary": "Never render a 4K master blind. Run a deterministic visual QA contact sheet across every act before final encode, pass the silent-autoplay test, and unlock one-command quarterly UI refreshes and global multi-language renders.",
+      "keyTakeaways": [
+        "Keyframe Contact-Sheet Audit: render PNG stills at the midpoint and climax of every scene with `remotion still` and inspect them in Antigravity to catch clipped labels, divider overlaps, sheen box edges, or wrong capture trim offsets in 15 seconds instead of after a 5-minute encode.",
+        "Silent-Autoplay Test: watch the entire export muted—over 70% of LinkedIn, Slack, and enterprise portal viewers first encounter video without sound, so visuals + captions must tell the complete story alone.",
+        "Zero-Rework Quarterly Maintenance: when your product UI ships a redesign, re-run scripts/capture-gameplay.mjs and re-render—all timing, motion graphics, voiceovers, and music mixes stay intact.",
+        "One-Command Multi-Language Localization: because copy lives in JSON/props and visuals are React components, translating a launch video into Spanish, German, or Japanese is just swapping the localized strings + VO track and letting Remotion re-render every scene cleanly."
+      ],
+      "actionChecklist": [
+        "Render a 1-still-per-scene contact sheet with `remotion still` and visually inspect every frame before running full MP4 renders.",
+        "Verify zero confidential data, real API keys, customer PII, or unlicensed media assets appear in any clip.",
+        "Export the full enterprise distribution matrix: 16:9 master, web-light 1080p embed, 9:16 vertical social cutdown, and .vtt/.srt caption sidecars."
+      ],
+      "codeSnippet": {
+        "language": "bash",
+        "filename": "scripts/qa-contact-sheet.sh",
+        "code": "for frame in 160 560 990 1200 1510 1860 2140 2520; do\n  pnpm exec remotion still src/index.ts Master16x9 \"out/qa-frames/f-${frame}.png\" --frame=\"${frame}\" --log=error\ndone"
+      },
+      "promptId": "vid-prompt-visual-qa"
+    }
+  ],
+  "prompts": [
+    {
+      "id": "vid-prompt-creative-brief",
+      "title": "Stage 1–2: Creative Brief & Machine-Readable Storyboard",
+      "stage": "spec",
+      "difficulty": "beginner",
+      "skillRef": "cf-grill-me",
+      "description": "Interview stakeholders to lock audience, transformation, runtime, Zoom-In/Zoom-Out narrative arc, and a frame-accurate JSON storyboard spec before building a single scene.",
+      "template": "Act as a Senior Enterprise Video Creative Director. We are building a {{runtime_seconds}}-second product video for {{product_name}} aimed at {{audience}}.\n\n1. Interview me (max 5 crisp questions) to lock the single core transformation, visual tone ({{visual_style}}), and live product proof points.\n2. Draft a spoken-word script written for the ear (<= 145 WPM, sentences <= 16 words) using the 5-act Zoom-In / Zoom-Out structure.\n3. Compile a locked machine-readable storyboard at `plans/{{video_slug}}-spec.json` with exact 60fps frame ranges, visual layers (Remotion diagram / Playwright capture / AI metaphor), on-screen headlines (<= 7 words), camera motions, and SFX cues.\n4. Do not render or scaffold code until I approve the storyboard.",
+      "variables": [
+        {
+          "key": "product_name",
+          "label": "Product Name",
+          "placeholder": "e.g., Herd of Ibiza / CloudGuard",
+          "defaultValue": "Acme Zero-Trust Pipeline"
+        },
+        {
+          "key": "audience",
+          "label": "Target Audience",
+          "placeholder": "e.g., Solutions Architects / Executive Buyers",
+          "defaultValue": "Enterprise Solutions Architects"
+        },
+        {
+          "key": "runtime_seconds",
+          "label": "Runtime (seconds)",
+          "placeholder": "45 / 90 / 120",
+          "defaultValue": "90"
+        },
+        {
+          "key": "visual_style",
+          "label": "Visual Style",
+          "placeholder": "e.g., Linear dark-mode tech / GTA 6 Ibiza",
+          "defaultValue": "Crisp dark-mode enterprise tech (Linear / Vercel)"
+        },
+        {
+          "key": "video_slug",
+          "label": "Video Slug",
+          "placeholder": "lowercase-kebab-case",
+          "defaultValue": "acme-pipeline-explainer"
+        }
+      ],
+      "expectedOutcome": "Produces a locked 1-page Creative Brief, ear-first script, and machine-readable plans/<video_slug>-spec.json ready for parallel production."
+    },
+    {
+      "id": "vid-prompt-studio-scaffold",
+      "title": "Step 0: Scaffold Reusable Code-as-Video Studio",
+      "stage": "architecture",
+      "difficulty": "intermediate",
+      "description": "Initialize a clean Remotion + Playwright + FFmpeg studio repository locked to your product's real color palette, fonts, spring physics, and 16:9 + 9:16 responsive compositions.",
+      "template": "Scaffold a reusable Code-as-Video studio at `{{studio_path}}` using Remotion (60 fps), TypeScript, Playwright, QRCode, and FFmpeg (MIT/Apache-2.0 only).\n\n1. Inspect `{{product_repo_path}}` (read-only) and extract the real brand hex palette, font files, logos, and assets into `brand/tokens.ts`, `brand/brand-bible.md`, and `public/`.\n2. Create reusable motion primitives (`FontLoader`, `FilmGrainOverlay`, `StampBadge`, `QrCodeCard`) using damped spring physics (no linear easing) and WCAG 4.5:1 contrast inside 10% title-safe zones.\n3. Register both responsive `16x9` (1920x1080) and `9x16` (1080x1920) compositions in `src/Root.tsx` plus an FFmpeg `-14 LUFS` + `+faststart` mastering script at `scripts/master-export.sh`.\n4. Ask for my approval before installing npm dependencies.",
+      "variables": [
+        {
+          "key": "studio_path",
+          "label": "Studio Folder Path",
+          "placeholder": "/path/to/product-video-studio",
+          "defaultValue": "../product-video-studio"
+        },
+        {
+          "key": "product_repo_path",
+          "label": "Source Product Repo",
+          "placeholder": "/path/to/your-product-repo",
+          "defaultValue": "../my-product-app"
+        }
+      ],
+      "expectedOutcome": "Creates a typechecked, brand-locked Code-as-Video studio ready to render both 16:9 and 9:16 masters."
+    },
+    {
+      "id": "vid-prompt-capture-script",
+      "title": "Step 4: 60fps Hardware-GPU Pro UI Capture Script",
+      "stage": "build",
+      "difficulty": "senior",
+      "description": "Build a Playwright script using hardware Metal/WebGL acceleration and closed-loop state awareness so product footage looks like an expert operator—zero stutter, zero PII, zero fumbles.",
+      "template": "Write `scripts/capture-product.mjs` to capture silky-smooth 60 fps product clips from `{{app_url}}` for scenes `{{scene_list}}`.\n\nRequirements:\n1. Launch Chromium with hardware GPU acceleration (`--use-gl=angle --use-angle=metal` on macOS, never software SwiftShader) and verify ~60 rAF FPS.\n2. Seed 100% synthetic enterprise demo data and finish all navigation BEFORE recording begins (zero loading spinners or teleports in the clip).\n3. Use smooth, closed-loop interactions (reading live DOM/app state rather than blind timeouts) and record at native 60 fps (`canvas.captureStream(60)` for WebGL or high-DPI viewport capture).\n4. Log exact millisecond timestamps of key hero interactions into `public/clips/clip-metadata.json` and assert zero console errors or failed interactions before exiting.",
+      "variables": [
+        {
+          "key": "app_url",
+          "label": "App URL or Local Build",
+          "placeholder": "https://app.example.com or dist/",
+          "defaultValue": "http://127.0.0.1:3000"
+        },
+        {
+          "key": "scene_list",
+          "label": "Target Scenes",
+          "placeholder": "e.g., S02_Dashboard, S06_Workflow, S07_HeroAction",
+          "defaultValue": "S02_Overview, S06_CoreWorkflow, S07_HeroAction"
+        }
+      ],
+      "expectedOutcome": "Produces smooth 60/1 fps H.264 clips in public/clips/ plus clip-metadata.json with exact interaction timestamps."
+    },
+    {
+      "id": "vid-prompt-beat-sync",
+      "title": "Step 3: Audio Beat-Map & Frame-Exact Sync",
+      "stage": "build",
+      "difficulty": "intermediate",
+      "description": "Analyze your soundtrack or voiceover to find exact millisecond peaks and align hero visual cuts, jumps, and title slams within 1 frame of the audio.",
+      "template": "Analyze `{{audio_file}}` using FFmpeg + Python RMS onset detection (and/or word-level transcription) to locate exact timestamps for the key vocal hooks or beat drops around `{{target_window_sec}}`.\n\n1. Choose the optimal `soundtrackStartSeconds` offset so the main chorus or vocal hook lands directly on our hero product climax scene (`{{climax_scene}}`).\n2. Compute exact 60 fps frame numbers (`Math.round((hitSec - startSec) * 60)`) and wire them into `src/compositions/` and the climax scene so visual impacts, beat rings, and transitions fire on the exact syllable.\n3. Keep micro-SFX subtle (-18 to -24 dB) and clear of vocals so lyrics/narration stay crystal clear.",
+      "variables": [
+        {
+          "key": "audio_file",
+          "label": "Audio Track Path",
+          "placeholder": "public/music/theme.mp3",
+          "defaultValue": "public/music/theme.mp3"
+        },
+        {
+          "key": "target_window_sec",
+          "label": "Chorus / Hook Window",
+          "placeholder": "e.g., 38s-62s",
+          "defaultValue": "38s-62s"
+        },
+        {
+          "key": "climax_scene",
+          "label": "Climax Scene ID",
+          "placeholder": "e.g., S07_HeroAction",
+          "defaultValue": "S07_HeroAction"
+        }
+      ],
+      "expectedOutcome": "Locks visual impacts and gameplay action directly to exact audio frames with broadcast-clean mix balance."
+    },
+    {
+      "id": "vid-prompt-visual-qa",
+      "title": "Step 6: Keyframe Contact-Sheet Visual QA & Master Render",
+      "stage": "test",
+      "difficulty": "intermediate",
+      "skillRef": "cf-qa-review",
+      "description": "Render PNG stills at the midpoint and climax of every scene, audit them visually for overlaps, contrast, and capture timing, fix defects, and master 16:9 + 9:16 exports to -14 LUFS.",
+      "template": "Run a full pre-master Visual QA pass on `{{composition_id}}` before encoding the final MP4s:\n\n1. Run `pnpm run typecheck` and render PNG keyframes at the midpoint and impact frame of every scene into `out/qa-frames/` using `remotion still`.\n2. Visually inspect EVERY rendered PNG for text overlap, clipped borders, contrast < 4.5:1, safe-margin violations, unintended menu frames inside UI clips, or shader/gradient edge artifacts.\n3. Fix all defects, re-verify the affected stills, then render both `16:9` and `9:16` H.264 masters and normalize audio to `-14 LUFS` / `-1.0 dBTP` with `+faststart` via `scripts/master-export.sh`.",
+      "variables": [
+        {
+          "key": "composition_id",
+          "label": "Remotion Composition ID",
+          "placeholder": "e.g., GtAlpacaTeaser16x9",
+          "defaultValue": "ProductExplainer16x9"
+        }
+      ],
+      "expectedOutcome": "Catches layout and capture bugs before full encode and produces verified -14 LUFS 16:9 and 9:16 masters."
+    }
+  ]
+}

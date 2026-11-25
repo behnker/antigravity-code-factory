@@ -93,16 +93,17 @@
       "stageTag": "Guardrails",
       "summary": "Configure Global Settings once to achieve bounded autonomy and Day 4 Security Guardrails — lights-out speed on safe local verification loops while enforcing Human-Lit approval for auth, security, finance, secrets, and outbound actions.",
       "keyTakeaways": [
-        "Set Global Tool Execution Policy to proceed-in-sandbox with Terminal Sandbox Enabled to contain filesystem and network side effects.",
+        "Set Global Tool Execution Policy to proceed-in-sandbox with Terminal Sandbox Enabled to contain filesystem and network side effects; set Non-Workspace File Access and Internet Access Policy to ask (or deny on strict repos).",
+        "Configure Command Allowlist for safe local loops (git status, git diff, git log, npm test, pytest, tsc --noEmit), Command Denylist for destructive ops (rm -rf, git push --force, git reset --hard, DROP TABLE), and Browser Allowlist to restrict origins on sensitive repos while staying open for editorial research.",
         "Apply Selective Autonomy Delegation Boundaries: docs, unit tests, lint fixes, and validated JSON bundles can run lights-out; authentication, security/RLS, finance, hooks, and infra access must remain Human-Lit.",
         "Pair hooks/hitl-gate.py (PreToolUse run_command force_ask) with hooks/secret-guard.py (PreToolUse edit_file/write_file secret & credential leak hard-deny).",
         "Use Settings -> Project Settings for repo-specific overrides (e.g., request-review for Terraform/infra repos; open web access on editorial research workspaces) rather than weakening global defaults."
       ],
       "actionChecklist": [
-        "Lock Tool Execution Policy = proceed-in-sandbox and Terminal Sandbox = Enabled in Global Settings.",
-        "Configure Command Allowlist for test/lint loops and Command Denylist for destructive commands.",
-        "Enable Notifications and Keep Awake when running /goal or parallel swarms.",
-        "Set stricter Project-Level Overrides on production engineering or infrastructure repos."
+        "Lock Tool Execution Policy = proceed-in-sandbox, Terminal Sandbox = Enabled, Non-Workspace File Access = ask, and Internet Access Policy = ask in Global Settings.",
+        "Configure Command Allowlist (git status, git diff, git log, npm test, pytest, tsc --noEmit) and Command Denylist (rm -rf, git push --force, git reset --hard, DROP TABLE).",
+        "Configure Browser Allowlist (restrict origins on sensitive production repos; allow research domains on content workspaces).",
+        "Enable Notifications and Keep Awake when running /goal or parallel swarms, and set stricter Project-Level Overrides on production/infra repos."
       ],
       "repoArtifactPath": "hooks/hitl-gate.py"
     },
@@ -149,6 +150,13 @@
         "filename": ".agents/hooks.json",
         "code": "{\n  \"hitl-safety-gate\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"run_command\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"python3 ./hooks/hitl-gate.py\",\n            \"timeout\": 10\n          }\n        ]\n      }\n    ]\n  }\n}"
       },
+      "additionalCodeSnippets": [
+        {
+          "language": "markdown",
+          "filename": "AGENTS.md (Engineering Starter)",
+          "code": "# Engineering Rules — <Project Name>\n\n## 1. Commands (Source of Truth)\n- Install: `pnpm install --frozen-lockfile`\n- Typecheck: `pnpm typecheck`\n- Lint: `pnpm lint`\n- Unit Tests: `pnpm test`\n- Build: `pnpm build`\n\n## 2. Architecture & Boundaries\n- `src/domain/`: Pure business logic. Zero framework or DB imports.\n- `src/api/`: Boundary layer. Validate all external payloads with Zod before calling domain services.\n- `src/ui/`: Design tokens only; no raw hex values or magic pixel offsets.\n\n## 3. Non-Negotiable Invariants\n- **Security:** Never hardcode secrets. Parameterized queries only. Enforce auth/RLS on every new route/table.\n- **Reliability:** Explicit timeouts (<= 5000ms) on outbound HTTP calls. Paginate all list endpoints (default 20, max 100).\n- **Testing:** Every new domain module or bug fix requires deterministic unit tests (mock only external I/O).\n- **Verification:** Run `pnpm typecheck && pnpm lint && pnpm test` before claiming completion."
+        }
+      ],
       "repoArtifactPath": "hooks.json",
       "promptId": "prompt-ps-eng-workspace"
     },
@@ -175,6 +183,13 @@
         "filename": ".agents/skills/editorial-qa/SKILL.md",
         "code": "---\nname: editorial-qa\ndescription: >-\n  Use when reviewing, editing, or finalizing any article, newsletter, docs page,\n  or script before publication to verify brand voice, factual accuracy, clarity,\n  and formatting compliance.\n---\n\n# Editorial QA Pass\n\nRun this 4-stage audit in a fresh subagent context:\n1. **Accuracy Audit:** Flag every metric, date, quote, or claim missing a verified source.\n2. **Voice & Cliche Pass:** Compare against style-guide.md; cut filler intros and hedging.\n3. **Structure & Readability:** Verify scannable headers, <= 4-line paragraphs, and clear CTA.\n4. **Output:** Return Blocking Issues, Line Edits, and Ready / Needs Revision verdict."
       },
+      "additionalCodeSnippets": [
+        {
+          "language": "markdown",
+          "filename": "AGENTS.md (Content & Editorial Starter)",
+          "code": "# Editorial & Brand Rules — <Brand / Team Name>\n\n## 1. Audience & Voice\n- **Primary Reader:** Engineering leaders and senior builders (skeptical of hype; value concrete tradeoffs).\n- **Voice:** Direct, crisp, evidence-backed, practitioner-to-practitioner.\n- **Banned Patterns:** Never use filler intros (\"In today's fast-paced world...\"), vague buzzwords (\"game-changer\", \"delve\", \"unlock\"), or unverified statistics.\n\n## 2. Factual & Attribution Invariants\n- Never invent customer quotes, benchmarks, or citations. Mark unverified claims with `[VERIFY: <what to check>]`.\n- Every external statistic must include source name, year, and URL.\n\n## 3. Structural Standards\n- Lead with the takeaway or concrete problem in the first 3 lines.\n- Use scannable H2/H3 headers, short paragraphs (<= 4 lines), tables for comparisons, and concrete examples.\n- End every piece with a single clear next action or takeaway."
+        }
+      ],
       "promptId": "prompt-ps-content-workspace"
     },
     {
@@ -200,6 +215,13 @@
         "filename": "team-plugin-install.sh",
         "code": "# Teammate 1-minute global toolkit install\ngit clone https://github.com/<org>/acme-antigravity-toolkit.git ~/tools/acme-antigravity-toolkit\nln -s ~/tools/acme-antigravity-toolkit ~/.gemini/config/plugins/acme-toolkit\n\n# Stay in sync across all workspaces\ngit -C ~/tools/acme-antigravity-toolkit pull"
       },
+      "additionalCodeSnippets": [
+        {
+          "language": "json",
+          "filename": "mcp_config.json (Stdio + Streamable HTTP)",
+          "code": "{\n  \"mcpServers\": {\n    \"acme-analytics-db\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@example/postgres-mcp-readonly\"],\n      \"env\": {\n        \"DATABASE_URL\": \"${ACME_ANALYTICS_RO_DATABASE_URL}\"\n      }\n    },\n    \"acme-cms\": {\n      \"url\": \"https://mcp.example.com/mcp\"\n    }\n  }\n}"
+        }
+      ],
       "promptId": "prompt-ps-team-plugin"
     },
     {
@@ -215,10 +237,13 @@
         "Verify every Day-1 teammate with a live smoke test (run /plan + HITL trigger on engineering; run editorial-qa on content) and optional /schedule weekly hygiene automation."
       ],
       "actionChecklist": [
-        "Run /grill-me -> /plan on your next non-trivial task before editing code or drafting content.",
-        "Launch a decoupled reviewer subagent on every major diff or long-form draft.",
-        "Run /compact around 15–20 turns and update .memory/handover.md (<= 3 KB) before closing.",
-        "Complete all 7 Day-1 onboarding checklist items and set up one recurring /schedule hygiene job."
+        "Day-1 [1/7] Install & Sign In: Install Antigravity 2.0 Desktop, Antigravity IDE, and agy CLI; authenticate with your team account.",
+        "Day-1 [2/7] Lock Global Safety Defaults: Set Tool Execution Policy = proceed-in-sandbox, Terminal Sandbox = Enabled, Non-Workspace File Access = ask, Internet Access = ask, and configure Command Allowlist/Denylist & Browser Allowlist.",
+        "Day-1 [3/7] Install Core Marketplace Plugins: Add team plugins via Customizations -> Marketplace (Google Drive/Docs/Sheets/Slides/Canva/Figma for content; Cloudflare/Vercel/Supabase/Chrome DevTools for engineering) and sign in to each provider.",
+        "Day-1 [4/7] Link Team Toolkit Plugin: Clone and symlink your shared team plugin into ~/.gemini/config/plugins/<team-plugin> (or verify repo-local .agents/ discovery).",
+        "Day-1 [5/7] Verify Live Discovery: Open Skills & Customizations in Antigravity 2.0 (or run agy /help) and confirm all expected plugins, rules, skills, and MCP servers appear without errors.",
+        "Day-1 [6/7] Run Role Smoke Test: Engineering -> run /plan on a small task and verify sandboxed tests + HITL hook triggers; Content -> run editorial-qa on a sample draft and verify Google Docs/Drive connectivity.",
+        "Day-1 [7/7] Set Up 1 Recurring Automation (Optional): Use /schedule for one weekly team hygiene task (e.g., stale PR/CVE summary or content calendar check), run /compact around 15–20 turns, and update .memory/handover.md (<= 3 KB) on wrap-up."
       ],
       "mermaidDiagram": "flowchart LR\n    A[\"1. Align\\n(/grill-me -> /plan)\"] --> B[\"2. Build\\n(Agent Mode / /teamwork)\"]\n    B --> C[\"3. Verify\\n(Fresh Reviewer + /browser)\"]\n    C --> D[\"4. Compound\\n(/learn -> Rules & Hooks)\"]\n    D --> A",
       "repoArtifactPath": ".memory/handover.md",

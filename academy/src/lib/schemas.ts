@@ -80,6 +80,12 @@ export const VideoConfigSchema = z
     }
   });
 
+export const CodeSnippetSchema = z.object({
+  language: z.string(),
+  filename: z.string(),
+  code: z.string(),
+});
+
 export const LessonStepSchema = z.object({
   id: z.string().min(1),
   order: z.number().int().min(1),
@@ -88,13 +94,8 @@ export const LessonStepSchema = z.object({
   summary: z.string().min(1).max(600),
   keyTakeaways: z.array(z.string().min(1)).min(1),
   actionChecklist: z.array(z.string().min(1)).min(1),
-  codeSnippet: z
-    .object({
-      language: z.string(),
-      filename: z.string(),
-      code: z.string(),
-    })
-    .optional(),
+  codeSnippet: CodeSnippetSchema.optional(),
+  additionalCodeSnippets: z.array(CodeSnippetSchema).optional(),
   mermaidDiagram: z.string().optional(),
   repoArtifactPath: z.string().optional(),
   promptId: z.string().optional(),

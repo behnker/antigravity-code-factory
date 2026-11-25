@@ -82,7 +82,7 @@ export function CourseCurriculumStudio({
       return firstStep ? { [firstStep.id]: true } : {};
     },
   );
-  const [copiedSnippetStepId, setCopiedSnippetStepId] = useState<string | null>(
+  const [copiedSnippetKey, setCopiedSnippetKey] = useState<string | null>(
     null,
   );
   const [blueprintExpanded, setBlueprintExpanded] = useState(false);
@@ -129,12 +129,12 @@ export function CourseCurriculumStudio({
     setExpandedSteps((prev) => ({ ...prev, [stepId]: !prev[stepId] }));
   };
 
-  const handleCopySnippet = async (stepId: string, code: string) => {
+  const handleCopySnippet = async (snippetKey: string, code: string) => {
     const ok = await copyCodeSafely(code);
     if (ok) {
-      setCopiedSnippetStepId(stepId);
+      setCopiedSnippetKey(snippetKey);
       window.setTimeout(() => {
-        setCopiedSnippetStepId((curr) => (curr === stepId ? null : curr));
+        setCopiedSnippetKey((curr) => (curr === snippetKey ? null : curr));
       }, 2000);
     }
   };
@@ -418,7 +418,10 @@ export function CourseCurriculumStudio({
                 const isCompleted = completedStepIds.includes(step.id);
                 const isExpanded = Boolean(expandedSteps[step.id]);
                 const checkboxId = `complete-step-${step.id}`;
-                const isSnippetCopied = copiedSnippetStepId === step.id;
+                const stepSnippets = [
+                  ...(step.codeSnippet ? [step.codeSnippet] : []),
+                  ...(step.additionalCodeSnippets ?? []),
+                ];
 
                 return (
                   <article
@@ -527,10 +530,14 @@ export function CourseCurriculumStudio({
                           </div>
                         </div>
 
-                        {step.codeSnippet && (() => {
-                          const snippet = step.codeSnippet;
+                        {stepSnippets.map((snippet, snippetIdx) => {
+                          const snippetKey = `${step.id}:${snippet.filename}:${snippetIdx}`;
+                          const isSnippetCopied = copiedSnippetKey === snippetKey;
                           return (
-                            <div className="min-w-0 overflow-hidden rounded-xl border border-glass-border bg-void-950/90">
+                            <div
+                              key={snippetKey}
+                              className="min-w-0 overflow-hidden rounded-xl border border-glass-border bg-void-950/90"
+                            >
                               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-glass-border bg-void-900/80 px-3.5 py-2">
                                 <div className="flex items-center gap-2 font-mono text-xs">
                                   <FileCode2
@@ -548,7 +555,7 @@ export function CourseCurriculumStudio({
                                   type="button"
                                   onClick={() =>
                                     void handleCopySnippet(
-                                      step.id,
+                                      snippetKey,
                                       snippet.code,
                                     )
                                   }
@@ -570,7 +577,7 @@ export function CourseCurriculumStudio({
                               </pre>
                             </div>
                           );
-                        })()}
+                        })}
 
                         {step.mermaidDiagram && (
                           <MermaidDiagram
