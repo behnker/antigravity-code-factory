@@ -31,8 +31,8 @@
   ],
   "video": {
     "title": "Live Walkthrough: Building Antigravity Academy with Antigravity",
-    "durationLabel": "24:15",
-    "provider": "coming_soon",
+    "durationLabel": "00:24",
+    "provider": "mp4",
     "posterLabel": "Course 02 Meta-Build Documentary — Every Real Artifact from Stage 1 to Stage 8",
     "chapters": [
       {
@@ -44,29 +44,31 @@
       {
         "id": "ch2-grill-me-and-spec",
         "title": "Stages 2–3 Spec & Architecture: Locking 5 Decisions & ADR-0002",
-        "timestampSeconds": 340,
+        "timestampSeconds": 5,
         "summary": "Turning open-ended vision into plans/antigravity-academy-spec.md with Zod schemas and zero ambiguity."
       },
       {
         "id": "ch3-swarm-build",
         "title": "Stage 4 Build: Task 0 Interfaces & Zero-Collision Swarm Partitions",
-        "timestampSeconds": 720,
+        "timestampSeconds": 10,
         "summary": "Coordinating parallel Backend, 3D Three.js, Glassmorphic UI, and Vitest workers with zero merge conflicts."
       },
       {
         "id": "ch4-qa-and-deploy",
         "title": "Stages 5–6 Test & Deploy: cf-reviewer, 3-Viewport Browser QA & Vercel HITL",
-        "timestampSeconds": 1080,
+        "timestampSeconds": 15,
         "summary": "Independent security audit, live visual checks at 375/768/1440px, and rollback-ready staging deploy."
       },
       {
         "id": "ch5-feedback-optimise",
         "title": "Stages 7–8 Feedback & Optimise: Triage, cf-learn & Adding Course N+1",
-        "timestampSeconds": 1290,
+        "timestampSeconds": 20,
         "summary": "Closing the loop with permanent invariants, <=3 KB handover.md, and appending future courses cleanly."
       }
     ],
-    "transcriptSummary": "This course is a living meta-build reference model: every single stage you study is backed by the real markdown specs, ADRs, hooks, skills, and code that built Antigravity Academy itself. Starting from Stage 1 (cf-research), you see how dependency auditing caught GSAP's proprietary EULA before a single package was installed. In Stages 2 and 3 (cf-grill-me + cf-plan), five crisp questions locked our isolated Next.js App Router architecture in ADR-0002 and froze Zod schemas in plans/antigravity-academy-spec.md. In Stage 4 (cf-implement), Task 0 froze shared interfaces so four parallel Swarm workers built the Backend APIs, Three.js 3D Engine, Glassmorphic UI, and Vitest suite without a single overlapping file edit. In Stages 5 and 6 (cf-qa-review + cf-deploy-staging), an independent cf-reviewer audited security boundaries while the browser subagent verified 375px, 768px, and 1440px viewports prior to a HITL-gated Vercel preview deploy. Finally, Stages 7 and 8 (cf-triage + cf-learn + cf-handover) show how to convert lessons into permanent rules and add Course N+1 in any future conversation."
+    "transcriptSummary": "This course is a living meta-build reference model: every single stage you study is backed by the real markdown specs, ADRs, hooks, skills, and code that built Antigravity Academy itself. Starting from Stage 1 (cf-research), you see how dependency auditing caught GSAP's proprietary EULA before a single package was installed. In Stages 2 and 3 (cf-grill-me + cf-plan), five crisp questions locked our isolated Next.js App Router architecture in ADR-0002 and froze Zod schemas in plans/antigravity-academy-spec.md. In Stage 4 (cf-implement), Task 0 froze shared interfaces so four parallel Swarm workers built the Backend APIs, Three.js 3D Engine, Glassmorphic UI, and Vitest suite without a single overlapping file edit. In Stages 5 and 6 (cf-qa-review + cf-deploy-staging), an independent cf-reviewer audited security boundaries while the browser subagent verified 375px, 768px, and 1440px viewports prior to a HITL-gated Vercel preview deploy. Finally, Stages 7 and 8 (cf-triage + cf-learn + cf-handover) show how to convert lessons into permanent rules and add Course N+1 in any future conversation.",
+    "embedUrl": "/media/code-factory-sdlc-explainer.mp4",
+    "posterSrc": "/media/illustrations/code-factory-sdlc-studio.jpg"
   },
   "steps": [
     {
@@ -434,6 +436,46 @@
       "mermaidDiagram": "flowchart LR\n    SS[\"1. SessionStart\\nLoad Handover & Git Status\"] --> PRET[\"2. PreToolUse\\nHITL, Safe Overwrite & Secret Guard\"]\n    PRET --> POST[\"3. PostToolUse\\n2-Sec Single-File Check & Track Edits\"]\n    POST --> STATE[\"Private Atomic State\\n(Per-Session 0600 JSON)\"]\n    STATE --> PREI[\"4. PreInvocation\\nDeliver Fix Notes, Turn-15 Tip & Loop Brake\"]\n    PREI --> STOP[\"5. Stop Gate\\nOne-Time Test Reminder Before Finish\"]\n    STATE --> STOP",
       "repoArtifactPath": "hooks.json",
       "promptId": "cf-prompt-v3-core-hooks"
+    },
+    {
+      "id": "cf-stage-11-phase2-automation",
+      "order": 11,
+      "title": "v3.1.0 Phase 2 — Git-Shadow Rewind, 0600 Sidecar & Typed run_workflow Pipelines",
+      "stageTag": "v3.1.0: Phase 2",
+      "summary": "Code Factory v3.1.0 closes the remaining Phase 2 harness gaps using pure Python 3 stdlib: pre-turn Git-Shadow checkpoints (`hooks/checkpoint-hook.py` + `cf-rewind` dry-run/safe restore), a `0600` Unix-socket telemetry & `.memory/auto-memory.md` sidecar (`sidecars/telemetry-memory/`), and bundled `run_workflow` SDLC pipelines (`workflows/cf-qa-gate/`, `workflows/cf-implement-spec/`).",
+      "eli5": {
+        "plainTitle": "Phase 2 Upgrades: Magic Undo Snapshots, Quiet Logger & Auto Pipelines",
+        "oneLineHook": "Save automatic pre-turn undo snapshots, log lessons quietly on the side, and run repeatable multi-helper pipelines.",
+        "everydayAnalogy": "An instant photo before every brushstroke, a quiet notebook clerk, and a pre-programmed assembly line.",
+        "simpleExplanation": "Three Phase 2 upgrades make your Code Factory smoother and safer without slowing you down. First, before the AI edits files or runs terminal commands, a tiny pre-turn camera snaps a silent undo checkpoint so cf-rewind can restore tracked files safely. Second, a quiet background helper logs events and saves verified lessons without blocking your turn. Third, bundled workflow recipes run multi-helper builds and quality checks the exact same way every time.",
+        "whyItMatters": "Built-in chat undo buttons often miss changes made by terminal commands, and writing long audit logs during a turn slows everything down. Silent pre-turn snapshots, a fast side helper, and tested pipeline scripts eliminate both headaches.",
+        "roleInProtocol": "This ships Phase 2 of Code Factory v3.1.0 across hooks, skills, sidecars, and workflows. checkpoint-hook.py pairs with cf-rewind for safe recovery, sidecars/telemetry-memory/ distills bounded .memory/auto-memory.md notes, and workflows/ packages cf-qa-gate and cf-implement-spec.",
+        "howToUseGoingForward": "Let checkpoint-hook.py guard every turn automatically, inspect or restore prior states with cf-rewind dry-run diffs first, enable the telemetry sidecar when you want automatic lesson notes, and launch workflows/cf-qa-gate/workflow.py before shipping.",
+        "whenToUse": "Use cf-rewind whenever a terminal command or multi-file edit goes sideways and you want to preview or undo tracked changes safely—and use the bundled workflows whenever you run Stage 3 parallel builds or Stage 4 QA gates.",
+        "realWorldExample": "A test command edits three config files unexpectedly. You run cf-rewind diff to inspect the exact lines changed since the turn began, then run cf-rewind restore with apply mode—which saves a safety backup first and cleanly restores your files without wiping untracked notes.",
+        "audioScript": "Welcome to Station Eleven, where Code Factory version three point one adds three calm Phase Two upgrades. First, picture taking a quick photo right before every brushstroke. Before your AI runs a terminal command or edits a file, a fast checkpoint hook snaps a hidden backup in under one hundred fifty milliseconds, capturing even shell changes. If anything goes sideways, the rewind skill lets you preview the difference first and safely restore tracked files without wiping new notes. Second, a quiet background sidecar listens on a private local socket so activity logs and short verified memory lessons save cleanly without ever slowing down your turn. Third, ready-made Python workflow recipes run parallel builds and quality gates consistently every single time.",
+        "estimatedMinutes": 7,
+        "diagramCaption": "How pre-turn Git-Shadow snapshots, the private 0600 sidecar, and bundled workflow recipes work together in Code Factory v3.1.0."
+      },
+      "keyTakeaways": [
+        "Git-Shadow Checkpoints (`hooks/checkpoint-hook.py` + `cf-rewind`): Per-turn deduplicated `git stash create` (<= 150 ms with `.git/index` & pack size guards) logs `0600` records to `$PLUGIN_DATA/checkpoints/<cid>.jsonl`; `rewind.py` defaults to `--dry-run` and takes a `pre-restore-safety` snapshot before `--apply` (`git checkout <sha> -- .`, never `git reset --hard`).",
+        "Async `0600` Sidecar (`sidecars/telemetry-memory/`): Pure Python 3 stdlib `AF_UNIX` daemon (with macOS `104`-byte `sun_path` fallback) receives `<10 ms` fail-open hook emits, rotates `telemetry-audit.jsonl`, forwards optional redacted `https://` webhooks, and distills bounded `<= 200`-line / `<= 3 KB` `.memory/auto-memory.md` lessons.",
+        "Bundled `run_workflow` Pipelines (`workflows/`): `cf-implement-spec` enforces `<= 5` strictly disjoint `workspace=\"share\"` worker partitions, `cf-qa-gate` coordinates decoupled `cf-reviewer` + `cf-tester` + optional `browser` audits, and `validate_workflows.py` validates schemas plus `ast.PyCF_ALLOW_TOP_LEVEL_AWAIT` syntax.",
+        "PostToolUse Top-Level `await` Support: `hooks/post-tool-feedback.py` validates `workflows/*.py` using `ast.PyCF_ALLOW_TOP_LEVEL_AWAIT` while keeping strict syntax checks on standard Python files."
+      ],
+      "actionChecklist": [
+        "Inspect `skills/cf-rewind/SKILL.md` and run `python3 skills/cf-rewind/scripts/rewind.py list --json` to view pre-turn checkpoints.",
+        "Run `python3 sidecars/telemetry-memory/sidecar.py status --json` and `python3 workflows/validate_workflows.py` to verify sidecar and workflow contracts.",
+        "Run `python3 -m unittest hooks/test_phase2_checkpoints.py hooks/test_phase2_sidecar_workflows.py -v` and `ruff check hooks/ sidecars/ workflows/ skills/cf-rewind/`."
+      ],
+      "codeSnippet": {
+        "language": "bash",
+        "filename": "Verify v3.1.0 Phase 2 Checkpoints, Sidecar & Workflows",
+        "code": "# 1. Preview and safely rewind using cf-rewind (dry-run is default)\npython3 skills/cf-rewind/scripts/rewind.py list --limit 10 --json\npython3 skills/cf-rewind/scripts/rewind.py diff --latest --stat\npython3 skills/cf-rewind/scripts/rewind.py restore --latest --dry-run\n\n# 2. Check 0600 telemetry sidecar & validate bundled run_workflow scripts\npython3 sidecars/telemetry-memory/sidecar.py status --json\npython3 workflows/validate_workflows.py\n\n# 3. Run Phase 2 pure-stdlib Python test suites + ruff lint\npython3 -m unittest hooks/test_phase2_checkpoints.py hooks/test_phase2_sidecar_workflows.py -v\nruff check hooks/ sidecars/ workflows/ skills/cf-rewind/"
+      },
+      "mermaidDiagram": "flowchart LR\n    T[\"Turn Starts\\nEdit or Shell Command\"] --> C[\"Pre-Turn Checkpoint\\n(git stash create, Under 150ms)\"]\n    C --> S[\"Private Checkpoint Log\\n(0600 JSONL + cf-rewind)\"]\n    T --> P[\"Post-Turn Telemetry\\n(Under 10ms Fail-Open Emit)\"]\n    P --> D[\"0600 Unix-Socket Sidecar\\n(Audit Log + Auto-Memory)\"]\n    W[\"Bundled Workflows\\n(cf-implement-spec + cf-qa-gate)\"] --> D",
+      "repoArtifactPath": "skills/cf-rewind/SKILL.md",
+      "promptId": "cf-prompt-rewind"
     }
   ],
   "prompts": [
@@ -808,6 +850,113 @@
         }
       ],
       "expectedOutcome": "A concise permanent invariant rule ready for explicit approval plus a deterministic regression test proving the resolved failure mode cannot silently recur."
+    },
+    {
+      "id": "cf-prompt-rewind",
+      "title": "Inspect & Safely Restore a Turn via Git-Shadow Rewind (cf-rewind)",
+      "eli5Title": "Preview Changes & Safely Rewind to Any Pre-Turn Save Point",
+      "stage": "build",
+      "difficulty": "beginner",
+      "skillRef": "cf-rewind",
+      "description": "Lists recent pre-turn Git-Shadow checkpoints, previews tracked file diffs with zero mutations, and safely restores a verified snapshot after recording a pre-restore safety backup.",
+      "whenToUse": "Copy this anytime a file edit or terminal command leaves your workspace messy and you want to inspect the exact diff and rewind tracked files without losing untracked notes.",
+      "template": "Use `skills/cf-rewind/SKILL.md` to inspect and safely recover workspace state for conversation `{{conversation_id}}`:\n\n1. Run `python3 skills/cf-rewind/scripts/rewind.py list --conversation-id {{conversation_id}} --limit 10 --json` to review recent pre-turn Git-Shadow checkpoints.\n2. Preview the exact tracked changes against checkpoint `{{checkpoint_id}}` with `python3 skills/cf-rewind/scripts/rewind.py diff --id {{checkpoint_id}} --stat`.\n3. Run `python3 skills/cf-rewind/scripts/rewind.py restore --id {{checkpoint_id}} {{restore_mode}}` (note: `--dry-run` is the safe non-mutating default; only pass `--apply` after confirming the diff, which saves a `pre-restore-safety` snapshot first and leaves untracked files untouched).",
+      "variables": [
+        {
+          "key": "conversation_id",
+          "label": "Conversation ID",
+          "placeholder": "default",
+          "defaultValue": "default"
+        },
+        {
+          "key": "checkpoint_id",
+          "label": "Checkpoint ID (or --latest)",
+          "placeholder": "chk-00001-abcdef",
+          "defaultValue": "chk-00001-abcdef"
+        },
+        {
+          "key": "restore_mode",
+          "label": "Restore Mode (--dry-run or --apply)",
+          "placeholder": "--dry-run",
+          "defaultValue": "--dry-run"
+        }
+      ],
+      "expectedOutcome": "A clean diff preview or verified tracked-file restoration backed by a pre-restore safety snapshot and untouched untracked files."
     }
-  ]
+  ],
+  "microLab": {
+    "id": "lab-c02-sdlc-triage",
+    "kind": "scenario-drill",
+    "title": "Micro-Lab: Enterprise Code Factory Stage & Skill Triage",
+    "eli5Title": "Hands-On Practice: Pick the Right Station on the 8-Stage Assembly Line",
+    "subtitle": "Diagnose three real production moments from our Academy & GT-Alpaca builds and route each to the right cf-* skill.",
+    "eli5Subtitle": "See real snags we hit while building real apps and pick the exact Code Factory station that fixed each one.",
+    "badgeLabel": "Course 02 · SDLC Triage Lab",
+    "estimatedMinutes": 4,
+    "scenarios": [
+      {
+        "id": "c02-q1-license",
+        "prompt": "Before writing UI code, you want to add an animation library and discover it carries a restrictive commercial EULA plus 3 Critical CVEs in an older test runner.",
+        "eli5Prompt": "Before coding, you check your tools and spot one library with strict paid legal strings and another with serious security holes.",
+        "options": [
+          {
+            "id": "stage-1-research",
+            "label": "Stage 1 (cf-research): swap to MIT/Apache-2.0 alternatives & patch CVEs before locking the spec",
+            "isCorrect": true,
+            "feedback": "Exactly how we caught GSAP's EULA in Academy and 3 Critical vitest CVEs in GT-Alpaca before writing line 1!",
+            "eli5Feedback": "Yes! Checking ingredients at Station 1 swaps unsafe packages out before any code depends on them."
+          },
+          {
+            "id": "ignore-until-prod",
+            "label": "Ship first and review licenses/CVEs after launch",
+            "isCorrect": false,
+            "feedback": "Ripping out a deeply integrated library after launch costs 10x more and exposes users to known CVEs.",
+            "eli5Feedback": "Fixing bad ingredients after the cake is baked is messy—catch them right at Station 1."
+          }
+        ]
+      },
+      {
+        "id": "c02-q2-decoupled-eval",
+        "prompt": "Implementation finishes and all local unit tests pass, yet subtle dark-mode contrast defects remain. How do you catch them reliably?",
+        "eli5Prompt": "Your builder finishes and says all unit tests are green, but dark-mode buttons might still be hard to read. What catches it?",
+        "options": [
+          {
+            "id": "stage-4-reviewer",
+            "label": "Stage 4 (cf-qa-review + cf-eval): invoke decoupled cf-reviewer + 3-viewport browser QA",
+            "isCorrect": true,
+            "feedback": "Correct! Never let the generator grade its own homework—clean-context cf-reviewer caught Pass 1 dark-ink contrast in GT-Alpaca.",
+            "eli5Feedback": "Right! A fresh inspector plus real phone/tablet/desktop screenshots catches blind spots the builder missed."
+          },
+          {
+            "id": "ask-builder-self-approve",
+            "label": "Ask the same builder turn 'Are you sure there are no bugs?'",
+            "isCorrect": false,
+            "feedback": "Self-grading suffers from confirmation bias and misses cross-viewport and spec-drift defects.",
+            "eli5Feedback": "Asking the chef to grade their own plate misses blind spots—bring in a fresh taster."
+          }
+        ]
+      },
+      {
+        "id": "c02-q3-learn",
+        "prompt": "You fix an ESM symlink bug in a skill script after dogfooding. How do you guarantee the same bug can never return?",
+        "eli5Prompt": "You just fixed a sneaky bug discovered during a real build. How do you make sure it stays fixed forever?",
+        "options": [
+          {
+            "id": "stage-6-cf-learn",
+            "label": "Stage 6B (cf-learn): upstream the fix, add a permanent invariant rule, and lock a regression test",
+            "isCorrect": true,
+            "feedback": "Spot on! That exact cf-learn loop produced code-factory v3.0.1 with 6 real symlink subprocess regression tests.",
+            "eli5Feedback": "Yes! Write down the lesson and add an automatic test so that exact mistake can never sneak back in."
+          },
+          {
+            "id": "mental-note",
+            "label": "Remember it mentally for next time without adding a test",
+            "isCorrect": false,
+            "feedback": "Unwritten lessons vanish across sessions and models. Permanent rules + tests compound quality automatically.",
+            "eli5Feedback": "Memory fades between sessions—putting the rule in writing and tests protects every future build."
+          }
+        ]
+      }
+    ]
+  }
 }

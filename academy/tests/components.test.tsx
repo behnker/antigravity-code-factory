@@ -13,6 +13,7 @@ import { Eli5MicrolearningCard } from "@/components/Eli5MicrolearningCard";
 import { FourDomainShowcase } from "@/components/FourDomainShowcase";
 import { MermaidDiagram } from "@/components/MermaidDiagram";
 import { ProofGalleryPanel } from "@/components/ProofGalleryPanel";
+import { RepoResourceExplorer } from "@/components/RepoResourceExplorer";
 import { VideoStage } from "@/components/VideoStage";
 import { PromptVault } from "@/components/PromptVault";
 import { HitlGateSimulator } from "@/components/HitlGateSimulator";
@@ -31,6 +32,7 @@ import type {
   LessonStep,
   PromptCard,
   ProofGallery,
+  RepoResource,
   VideoConfig,
 } from "@/lib/schemas";
 
@@ -2336,5 +2338,120 @@ describe("FourDomainShowcase (Step 5 Proven 4-Domain Method)", () => {
     );
     expect(screen.getByRole("alert")).toHaveTextContent(/Blocked Live URL/i);
     expect(screen.queryByRole("link", { name: /Live Deployment/i })).not.toBeInTheDocument();
+  });
+});
+
+describe("RepoResourceExplorer (v3.1.0 Sidecars & Workflows Tabs)", () => {
+  const SAMPLE_RESOURCES: RepoResource[] = [
+    {
+      id: "hook:checkpoint-hook-py",
+      category: "hook",
+      name: "checkpoint-hook.py",
+      relativePath: "hooks/checkpoint-hook.py",
+      summary: "PreToolUse git stash create checkpoint hook.",
+      content: "# checkpoint-hook.py\nprint('{\"decision\": \"allow\"}')\n",
+      sizeBytes: 512,
+      stageRef: "Lifecycle Hooks",
+    },
+    {
+      id: "sidecar:telemetry-json",
+      category: "sidecar",
+      name: "sidecar.json",
+      relativePath: "sidecars/telemetry-memory/sidecar.json",
+      summary: "0600 AF_UNIX telemetry and auto-memory sidecar manifest.",
+      content: '{"display_name": "Code Factory Telemetry & Auto-Memory"}',
+      sizeBytes: 320,
+      stageRef: "Sidecar Daemon",
+    },
+    {
+      id: "sidecar:telemetry-py",
+      category: "sidecar",
+      name: "sidecar.py",
+      relativePath: "sidecars/telemetry-memory/sidecar.py",
+      summary: "Pure Python 3 stdlib AF_UNIX telemetry daemon.",
+      content: "# sidecar.py\n",
+      sizeBytes: 2048,
+      stageRef: "Sidecar Daemon",
+    },
+    {
+      id: "workflow:qa-gate-py",
+      category: "workflow",
+      name: "cf-qa-gate/workflow.py",
+      relativePath: "workflows/cf-qa-gate/workflow.py",
+      summary: "Stage 4 parallel decoupled QA gate pipeline.",
+      content: "# cf-qa-gate workflow.py\n",
+      sizeBytes: 1536,
+      stageRef: "Bundled Workflows",
+    },
+  ];
+
+  it("renders Sidecars and Workflows category tabs with counts and filters sidecar and workflow items accurately", () => {
+    render(
+      <RepoResourceExplorer
+        resources={SAMPLE_RESOURCES}
+        syncedAt="2026-11-26T08:00:00.000Z"
+      />,
+    );
+
+    const categoryGroup = screen.getByRole("group", {
+      name: "Filter repository resources by category",
+    });
+
+    const sidecarsTab = within(categoryGroup).getByRole("button", {
+      name: /Sidecars\s*\(2\)/i,
+    });
+    const workflowsTab = within(categoryGroup).getByRole("button", {
+      name: /Workflows\s*\(1\)/i,
+    });
+    const allTab = within(categoryGroup).getByRole("button", {
+      name: /All\s*\(4\)/i,
+    });
+
+    expect(sidecarsTab).toHaveAttribute("aria-pressed", "false");
+    expect(workflowsTab).toHaveAttribute("aria-pressed", "false");
+    expect(allTab).toHaveAttribute("aria-pressed", "true");
+
+    // Click Sidecars tab -> shows only sidecar resources
+    fireEvent.click(sidecarsTab);
+    expect(sidecarsTab).toHaveAttribute("aria-pressed", "true");
+    expect(
+      screen.getAllByText("sidecars/telemetry-memory/sidecar.json").length,
+    ).toBeGreaterThanOrEqual(1);
+    expect(
+      screen.getByRole("heading", {
+        level: 4,
+        name: "sidecars/telemetry-memory/sidecar.json",
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("sidecars/telemetry-memory/sidecar.py"),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText("workflows/cf-qa-gate/workflow.py"),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("hooks/checkpoint-hook.py"),
+    ).not.toBeInTheDocument();
+
+    // Click Workflows tab -> shows only workflow resources
+    fireEvent.click(workflowsTab);
+    expect(workflowsTab).toHaveAttribute("aria-pressed", "true");
+    expect(sidecarsTab).toHaveAttribute("aria-pressed", "false");
+    expect(
+      screen.getAllByText("workflows/cf-qa-gate/workflow.py").length,
+    ).toBeGreaterThanOrEqual(1);
+    expect(
+      screen.queryByText("sidecars/telemetry-memory/sidecar.json"),
+    ).not.toBeInTheDocument();
+
+    // Click All tab -> restores all resources
+    fireEvent.click(allTab);
+    expect(allTab).toHaveAttribute("aria-pressed", "true");
+    expect(
+      screen.getAllByText("hooks/checkpoint-hook.py").length,
+    ).toBeGreaterThanOrEqual(1);
+    expect(
+      screen.getAllByText("sidecars/telemetry-memory/sidecar.json").length,
+    ).toBeGreaterThanOrEqual(1);
   });
 });

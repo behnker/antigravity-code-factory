@@ -793,7 +793,7 @@ describe("Course 08 Proof Gallery & 4-Domain Case Study URL allowlists & schemas
   });
 });
 
-describe("Filesystem-Backed 19/19 Skill Traceability & 4-Domain Regression Gate (Spec §5.3)", () => {
+describe("Filesystem-Backed 20/20 Skill Traceability & 4-Domain Regression Gate (Spec §5.3)", () => {
   const REPO_SKILLS_DIR = path.resolve(__dirname, "../../skills");
   const COURSES_DIR = path.resolve(__dirname, "../content/courses");
 
@@ -855,7 +855,7 @@ describe("Filesystem-Backed 19/19 Skill Traceability & 4-Domain Regression Gate 
     return textFields.some((field) => typeof field === "string" && field.includes(skillSlug));
   }
 
-  it("enforces 100% (19/19) standalone Prompt Vault + Curriculum step traceability and valid step.promptId resolution across all 9 courses", () => {
+  it("enforces 100% (20/20) standalone Prompt Vault + Curriculum step traceability and valid step.promptId resolution across all 9 courses", () => {
     const discoveredSkills = fs
       .readdirSync(REPO_SKILLS_DIR, { withFileTypes: true })
       .filter(
@@ -867,8 +867,8 @@ describe("Filesystem-Backed 19/19 Skill Traceability & 4-Domain Regression Gate 
       .map((entry) => entry.name)
       .sort();
 
-    expect(discoveredSkills.length).toBeGreaterThanOrEqual(19);
-    expect(discoveredSkills).toHaveLength(19);
+    expect(discoveredSkills.length).toBeGreaterThanOrEqual(20);
+    expect(discoveredSkills).toHaveLength(20);
 
     const courses = loadAllCoursesFromDisk();
     expect(courses.length).toBeGreaterThanOrEqual(9);

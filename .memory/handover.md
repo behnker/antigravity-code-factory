@@ -1,23 +1,25 @@
 # Session Handover Record
 
-**Timestamp:** 2026-11-26 06:45 UTC  
+**Timestamp:** 2026-11-26 11:50 UTC  
 **Active Model:** Gemini 4 Neon (High)  
-**Git Branch & Commit:** `main` (`code-factory` `v3.0.1`; Academy live at `https://antigravity-academy-ten.vercel.app`; GT-Alpaca Website live at `https://gt-alpaca-website.vercel.app`)
+**Git Branch & Commit:** `main` (`code-factory` `v3.1.0` Phase 2 + Academy Multimodal Polish; live at `https://antigravity-academy-ten.vercel.app`)
 
 ## 1. Executive Summary
-Completed **Steps 1–5** of the GT-Alpaca Website + Antigravity Academy Master Program AND shipped **`code-factory` `v3.0.1`** (`cf-learn` upstream dogfooding fixes): `https://gt-alpaca-website.vercel.app` is live (`12/12` smoke tests), the finalized **9-course Academy** (`Course 08` + Proof Pack `01–09` + `19/19` skills + `#four-domains`) is live at `https://antigravity-academy-ten.vercel.app` (`5/5` live smoke tests, `10/10` CDN assets), and **`157/157`** automated tests pass (`38` Node, `37` Python, `82` Vitest).
+Shipped **Academy Multimodal Polish** (`9/9` playable H.264 `+faststart` course MP4s, studio posters, live chapter sync, and `8` Interactive Micro-Labs across Courses `00–05`, `07`, `08`) and **`code-factory` `v3.1.0` Phase 2** (`cf-rewind` Git-Shadow checkpoints, `0600` `AF_UNIX` sidecar, bundled `run_workflow` pipelines), verified with **`185/185`** passing tests (`90` Vitest, `57` Python, `38` Node) and decoupled `cf-reviewer` **`SHIP`**.
 
 ## 2. Completed Items
-- **Code Factory `v3.0.0` → `v3.0.1`:** Shipped all 5 Phase 1 Core Hooks (`ffcc6b1`) + closed all GT-Alpaca dogfooding catches (`fs.realpathSync` ESM entrypoints across all 6 scripts, Next.js 16 `_global-error.html`/`_error.html` exclusion & attribute-order-agnostic canonical `<link>` in `audit-geo-seo.mjs`, and `*-text`-on-surface Light+Dark WCAG matrix in `generate-tokens.mjs` + `tokens.template.json`) with real symlink subprocess & unit regression tests (`38/38` Node).
-- **GT-Alpaca Website Live (`3b78ba7`):** `https://gt-alpaca-website.vercel.app` — `81.57%` GLB compression (`4.52 MB → 852 KB`), `30/30` Light+Dark WCAG pairs (`>= 5.75:1`), `15/15` `verify:map`, Pass 2 `cf-eval` `SHIP`, `12/12` smoke tests, Proof Pack `01–09`.
-- **Finalized 9-Course Academy Live (`f100de2`, `antigravity-academy-8o9zq1rjt-nexite-os.vercel.app`):** Course 08 (`vibe-website-factory`) w/ all 9 verified GT-Alpaca screenshots + live URL, Course 02 `cf-learn` prompt, `#four-domains` showcase (all 4 shipped domains), `19/19` filesystem-backed Skill Traceability test, Pass 2 `cf-reviewer` `SHIP`, `5/5` live smoke tests.
+- **Academy Multimodal Polish (`ADR-0009`):** Transcoded GT-Alpaca `walkthrough.webm` → `/media/gt-alpaca-walkthrough-16x9.mp4` (Course 08), rendered 7 `24s` `720p` H.264 `+faststart` Remotion explainers (Courses `00–05`, `07`), polished `VideoStage.tsx`, and built `MicroLabSchema` + `micro-lab-engine.ts` (`98.26%`) + `InteractiveMicroLab.tsx` (`96.71%`) + `completedLabIds` persistence (`9/9` `verify:map`, live 3-viewport `browser` QA).
+- **`code-factory` `v3.1.0` Phase 2 (`ADR-0008`):** Shipped `hooks/checkpoint-hook.py`, `skills/cf-rewind/`, `0600` `AF_UNIX` `sidecars/telemetry-memory/`, `workflows/{cf-qa-gate,cf-implement-spec}/`, `plugin.json` (`3.1.0`), `rules/AGENTS.md` (`9,368 B <= 10 KB`), and `20/20` Skill Traceability (`57/57` Python, `0` ruff, `2/2` workflow validation, `cf-reviewer` `SHIP`).
+- **Verification:** `185/185` tests (`90` Vitest, `57` Python, `38` Node), `0` High/Critical CVEs, `0` `depcruise` violations (`49` modules), `9/9` live 3-viewport `verify:map`.
 
 ## 3. Failed Approaches & Dead Ends
-- **Dogfooding Catches Closed:** ESLint v9 removed `--format compact` (fixed to `--format stylish`), symlinked ESM `isEntrypoint` skipped `main()` (fixed via `fs.realpathSync`), and Next.js 16 `_global-error.html` broke `audit-geo-seo.mjs` (now excluded).
+- Running `python3 -m unittest` concurrently with `verify-stack.sh` triggered `120ms` checkpoint timeouts & a `coverage/.tmp` race; sequential execution passed `185/185` cleanly.
 
 ## 4. Key Modified Files
-- `plugin.json` (`3.0.1`), `skills/{cf-design-tokens,cf-geo-seo,cf-threejs-craft,cf-verify-map}/scripts/*.mjs`, `academy/tests/api-routes.test.ts`, `.memory/{tasks,handover}.md`
+- `plans/{academy-multimodal-polish,code-factory-v3-1-phase2}-spec.md`, `.memory/{decisions/0008-*,decisions/0009-*,feature-map,qa-report,tasks,handover}.md`
+- `academy/{public/media/*.mp4,content/courses/*/course.json,src/lib/{schemas,prompt-engine,micro-lab-engine}.ts,src/components/{VideoStage,InteractiveMicroLab,CourseCurriculumStudio,AcademyShell}.tsx,tests/micro-lab-and-media.test.tsx}`
+- `plugin.json`, `hooks.json`, `rules/AGENTS.md`, `hooks/`, `sidecars/`, `skills/cf-rewind/`, `workflows/`
 
 ## 5. Next Step Action Plan
-1. Track **Track C** in `/Users/ralphb/Projects_Personal/herd_and_co` (`feat/vinyl-clay-scene-poc`): playtest the V2 vinyl-clay live scene preview, apply per-character tweaks, and roll out to `https://www.alpacas-ibiza.app`.
-2. Optional backlog: `code-factory` `v3.0.0` Phases 2–3 (`cf-rewind`, `0600` sidecar, `code-factory-lsp`, `run_workflow`).
+1. Track **Track C** in `/Users/ralphb/Projects_Personal/herd_and_co` (`feat/vinyl-clay-scene-poc`): playtest V2 vinyl-clay preview and roll out to `https://www.alpacas-ibiza.app`.
+2. Optional backlog: `code-factory-lsp` MCP plugin or Spanish (`ES`) GT-Alpaca launch cut in `product-video-studio`.

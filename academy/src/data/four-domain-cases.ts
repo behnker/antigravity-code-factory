@@ -166,15 +166,15 @@ const RAW_FOUR_DOMAIN_CASES: DomainCaseStudy[] = [
     id: "harness",
     order: 4,
     domainLabel: "App & Harness Engineering",
-    title: "Antigravity Academy + Enterprise Code Factory v3.0.0",
+    title: "Antigravity Academy + Enterprise Code Factory v3.1.0",
     eli5Title: "Self-Governing AI Harness & Interactive Academy",
     repoName: "Project_Antigravity / academy",
     status: "shipped",
     accentTone: "cyan",
     summary:
-      "Pure Python 3 stdlib 5-event lifecycle hooks (8 hook resources), 19 progressive skills (19/19 Prompt Vault coverage), and 5 least-privilege personas paired with the stateless Next.js App Router + Tailwind v4 + Zod + Mermaid + depcruise + cf-verify-map Academy (139+ verified checks, 0 High/Critical CVEs).",
+      "Pure Python 3 stdlib 5-event lifecycle hooks (9 hook resources, Git-Shadow cf-rewind), 0600 Unix-socket sidecar, bundled run_workflow pipelines, 20 progressive skills (20/20 Prompt Vault), and 5 personas paired with the stateless Next.js + Tailwind v4 + Zod + Mermaid + depcruise + cf-verify-map Academy.",
     eli5Summary:
-      "Both the safety-harness toolkit that keeps AI coding calm and reliable (5 automatic checkpoints and 19 step-by-step skills) and this interactive web Academy itself—backed by 139+ passing checks and zero high-severity vulnerabilities.",
+      "Both the safety-harness toolkit that keeps AI coding calm and reliable (5 automatic checkpoints, Git-Shadow undo, quiet memory sidecar, and 20 step-by-step skills) and this interactive web Academy itself—backed by automated checks and zero high-severity vulnerabilities.",
     stack: [
       "Next.js App Router",
       "Tailwind CSS v4",
@@ -199,12 +199,12 @@ const RAW_FOUR_DOMAIN_CASES: DomainCaseStudy[] = [
     ],
     verifiedMetrics: [
       {
-        label: "Core Hooks",
-        value: "5 lifecycle events · 8 hook resources",
+        label: "Hooks, Sidecar & Workflows",
+        value: "5 events · 9 hook files · 0600 sidecar · 2 workflows",
       },
       {
         label: "Skill & Agent Matrix",
-        value: "19/19 skills · 5 least-privilege personas",
+        value: "20/20 skills · 5 least-privilege personas",
       },
       {
         label: "Verification Suite",
@@ -215,7 +215,7 @@ const RAW_FOUR_DOMAIN_CASES: DomainCaseStudy[] = [
         value: "0 High/Critical CVEs · 0 depcruise leaks",
       },
     ],
-    proofArtifactPath: "plans/code-factory-v3-phase1-spec.md",
+    proofArtifactPath: "plans/code-factory-v3-1-phase2-spec.md",
     liveUrl: "https://antigravity-academy-ten.vercel.app",
     linkedCourseSlug: "code-factory-sdlc",
     linkedCourseNumber: 2,

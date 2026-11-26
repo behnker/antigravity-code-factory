@@ -26,15 +26,17 @@
   3. Assert zero horizontal overflow at `375px`, `768px`, and `1440px`
 
 ### 2. Multi-Course Curriculum Studio (`course-curriculum`)
-- **Directory:** `academy/src/components/CourseCurriculumStudio.tsx`, `CourseEmblem.tsx`, `Eli5MicrolearningCard.tsx`, `MermaidDiagram.tsx`, `ProofGalleryPanel.tsx`
+- **Directory:** `academy/src/components/CourseCurriculumStudio.tsx`, `CourseEmblem.tsx`, `Eli5MicrolearningCard.tsx`, `VideoStage.tsx`, `InteractiveMicroLab.tsx`, `MermaidDiagram.tsx`, `ProofGalleryPanel.tsx`
 - **Routes:** `/#courses`
 - **API Endpoints:**
   - `GET /api/courses?limit=20&offset=0` -> `200 { items[9], total: 9, limit, offset }`
 - **Key DOM Selectors:**
   - Courses section: `#courses`, `#courses-heading`
+  - Video player stage: `[data-testid="video-stage"]`, `[data-testid="video-player"]`
+  - Interactive micro-lab: `[data-testid="interactive-micro-lab"]`
 - **Golden Happy Path:**
   1. Scroll to `#courses`
-  2. Switch between Courses `00–08` (including Course `08` `vibe-website-factory` with `ProofGalleryPanel`) and verify active banner, ELI5 cards, proof cards, and Mermaid SVGs render without `parsererror` or console errors
+  2. Switch between Courses `00–08` and verify all 9 courses render native `<video>` MP4 players with allowlisted posters + chapter timelines, Courses `00–05`, `07`, and `08` render `[data-testid="interactive-micro-lab"]`, Course `08` renders `ProofGalleryPanel`, and Mermaid SVGs render without `parsererror` or console errors
 
 ### 3. Parameterized Prompt Vault (`prompt-vault`)
 - **Directory:** `academy/src/components/PromptVault.tsx`
@@ -51,7 +53,7 @@
 - **Directory:** `academy/src/components/SdlcReferenceShowcase.tsx`, `HarnessComparisonLab.tsx`, `RepoResourceExplorer.tsx`, `HitlGateSimulator.tsx`
 - **Routes:** `/#repo-hitl`
 - **API Endpoints:**
-  - `GET /api/resources?limit=20&offset=0` -> `200 { items, total, syncedAt }`
+  - `GET /api/resources?limit=20&offset=0` -> `200 { items, total, syncedAt }` (supports `category=rule|skill|agent|hook|sidecar|workflow|memory|plan|manifest` and `q` query filtering across `v3.1.0` synced artifacts)
   - `POST /api/hitl/simulate` (Body: `{ commandLine, bypassSandbox }`) -> `200 { decision, matchedRule, reason, overwrite? }` (400 on invalid input, 415 on non-JSON)
 - **Key DOM Selectors:**
   - SDLC section: `#sdlc-loop`, `#sdlc-heading`
@@ -102,6 +104,9 @@
         "#four-domains-heading",
         "#courses",
         "#courses-heading",
+        "[data-testid=\"video-stage\"]",
+        "[data-testid=\"video-player\"]",
+        "[data-testid=\"interactive-micro-lab\"]",
         "#prompt-vault",
         "#prompt-vault-search",
         "#sdlc-loop",

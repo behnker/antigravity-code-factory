@@ -8,11 +8,14 @@
 - [ ] **Track C (Fresh Conversation #2 — `herd_and_co`, branch `feat/vinyl-clay-scene-poc`):** Vinyl-Clay Live Scene Road-Test (vertical slice of V2 alpacas + Ibiza world assets in Route 1 *Morning Bell* → Vercel Preview playtest → character tweaks → full 22-alpaca production rollout to `https://www.alpacas-ibiza.app`).
 
 ## Up Next
-- [ ] **Step 6 (Backlog — `code-factory` `v3.0.0` Phases 2–3):** Git-Shadow checkpoints (`cf-rewind`), `0600` Unix-socket async sidecar, companion `code-factory-lsp` MCP plugin, and bundled `run_workflow` scripts.
-- [ ] Add video recordings (`mp4` / audio overviews) & interactive micro-labs into Courses `00–05`, `07`, & `08` (`academy/content/courses/*/course.json`) following the Course 06 `/media/*.mp4` pattern.
+- [ ] **Step 7 (Backlog — `code-factory` `v3.2.0` Phase 3):** Companion `code-factory-lsp` MCP plugin, interactive MCP App Mission Control side pane, and budget-capped `agy -p` CI runner.
 - [ ] Optional: Generate a Spanish (`ES`) launch cut or voiceover version of *Herd of Ibiza — GT-Alpaca Edition* inside `/Users/ralphb/Projects_Personal/product-video-studio`.
 
 ## Completed
+- [x] **`code-factory` `v3.1.0` Phase 2 + Academy Multimodal Polish (`cf-reviewer` `SHIP` & `VICTORY CONFIRMED`):**
+  - Locked `plans/code-factory-v3-1-phase2-spec.md` & ADR-0008 (`0008-git-shadow-checkpoints-sidecar-and-workflows.md`): shipped Git-Shadow checkpoints (`hooks/checkpoint-hook.py` + `skills/cf-rewind/`), pure-stdlib `0600` `AF_UNIX` sidecar (`sidecars/telemetry-memory/` w/ macOS `104`-byte `sun_path` fallback & bounded `.memory/auto-memory.md` distillation), bundled `run_workflow` pipelines (`workflows/cf-qa-gate/`, `workflows/cf-implement-spec/`, `workflows/validate_workflows.py`), `ast.PyCF_ALLOW_TOP_LEVEL_AWAIT` linting, `plugin.json` (`3.1.0`), `rules/AGENTS.md` (`9,368 B <= 10 KB`), and `20/20` filesystem-backed Skill Traceability (`73` synced resources).
+  - Shipped Academy Multimodal Polish (`plans/academy-multimodal-polish-spec.md`, ADR-0009): 7 Remotion course explainer `.mp4` videos + `gt-alpaca-walkthrough-16x9.mp4` (`9/9` playable H.264 `+faststart` MP4s), `VideoStage.tsx` poster & `onTimeUpdate` chapter sync, `InteractiveMicroLab.tsx`, `micro-lab-engine.ts`, and `micro-lab-and-media.test.tsx` (`0` new npm/PyPI deps).
+  - Unified verification: **`185/185`** tests (`57/57` Python hooks/sidecar/workflows, `38/38` Node plugin scripts, `90/90` Academy Vitest), `0` ruff/tsc/eslint/depcruise errors (`49` modules / `132` deps), `0` High/Critical CVEs, `9/9` live 3-viewport `verify:map`, and `next build` (`7/7` pages) PASS.
 - [x] **`code-factory` `v3.0.1` (`cf-learn` Upstream Dogfood Fixes from `gt-alpaca-website`):**
   - Locked `plans/code-factory-v3-0-1-dogfood-fixes-spec.md` and hardened ESM entrypoint checks (`isDirectExecution` via `fs.realpathSync`) across all 6 CLI scripts (`generate-tokens.mjs`, `validate-tokens.mjs`, `audit-geo-seo.mjs`, `audit-threejs.mjs`, `optimize-glb.mjs`, `run-verify-map.mjs`) with real symlink subprocess regression tests.
   - Updated `skills/cf-geo-seo/scripts/audit-geo-seo.mjs` (`collectHtmlFiles` excludes Next.js 16 `_global-error.html` & `_error.html`; `hasCanonicalLink` supports any attribute order on `<link rel="canonical">`).

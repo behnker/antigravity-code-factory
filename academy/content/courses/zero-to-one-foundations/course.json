@@ -31,8 +31,8 @@
   ],
   "video": {
     "title": "Zero to One: Building Your First Project With Zero Coding Experience",
-    "durationLabel": "15:30",
-    "provider": "coming_soon",
+    "durationLabel": "00:24",
+    "provider": "mp4",
     "posterLabel": "Course 00 Beginner Walkthrough — From Blank Desk to Your First Checked Build",
     "chapters": [
       {
@@ -44,29 +44,31 @@
       {
         "id": "z0-ch2-workspace-terminal",
         "title": "Your Workspace & Terminal (Texting Your Computer Directly)",
-        "timestampSeconds": 240,
+        "timestampSeconds": 5,
         "summary": "Why the terminal is just a direct text-message window for running quick, repeatable checks."
       },
       {
         "id": "z0-ch3-git-save-points",
         "title": "Git & Save Points (Time-Travel Undo for Everything You Build)",
-        "timestampSeconds": 480,
+        "timestampSeconds": 10,
         "summary": "Taking labeled snapshots and practicing on safe side copies without ever losing progress."
       },
       {
         "id": "z0-ch4-brain-vs-workshop",
         "title": "AI Brain vs. Smart Workshop (House Rules, Bookshelf & Locks)",
-        "timestampSeconds": 690,
+        "timestampSeconds": 15,
         "summary": "Why setup does 90% of the work through short rules, on-demand guides, and safety locks."
       },
       {
         "id": "z0-ch5-first-build-loop",
         "title": "Your First 4-Step Build Loop (Plan, Build, Check & Save)",
-        "timestampSeconds": 810,
+        "timestampSeconds": 20,
         "summary": "A calm, repeatable four-step habit for turning any small idea into a working, verified result."
       }
     ],
-    "transcriptSummary": "Welcome to Course Zero, designed for anyone who has never built software before. We start by removing the mystery around code: every app is simply plain text recipe files organized inside folders. Next, you meet the terminal—a direct text-message box for talking to your computer—and Git, your time-travel undo button that saves safe checkpoints before any big edit. Then we explain why an AI brain alone only gets you ten percent of the way, and how three simple workshop pieces—short house rules, bookshelf guides, and safety locks—make AI dependable. Finally, you practice the four-step build loop: Plan, Build, Check, and Save."
+    "transcriptSummary": "Welcome to Course Zero, designed for anyone who has never built software before. We start by removing the mystery around code: every app is simply plain text recipe files organized inside folders. Next, you meet the terminal—a direct text-message box for talking to your computer—and Git, your time-travel undo button that saves safe checkpoints before any big edit. Then we explain why an AI brain alone only gets you ten percent of the way, and how three simple workshop pieces—short house rules, bookshelf guides, and safety locks—make AI dependable. Finally, you practice the four-step build loop: Plan, Build, Check, and Save.",
+    "embedUrl": "/media/zero-to-one-foundations-explainer.mp4",
+    "posterSrc": "/media/illustrations/zero-to-one-foundations-studio.jpg"
   },
   "steps": [
     {
@@ -227,7 +229,7 @@
         "everydayAnalogy": "House rules taped to the fridge, thick cookbooks on a bookshelf, and child-safety locks on the stove.",
         "simpleExplanation": "Every safe AI workshop uses three friendly pieces you already understand from real life. First, House Rules: one short page taped to the desk that your AI reads every single time (engineers name this file AGENTS.md). Second, Bookshelf Guides: longer how-to recipes (called Skills) that sit neatly on a shelf and only open when you need that specific job. Third, Safety Locks (called Hooks): automatic guards that stop risky moves—like deleting folders or publishing live—and wait for your thumbs-up.",
         "whyItMatters": "Without these three pieces, your AI either gets overwhelmed by too many instructions at once or accidentally runs a scary command before you are ready. Together, they keep your workspace tidy, smart, and completely under your control.",
-        "roleInProtocol": "This exact three-part setup powers the entire Antigravity Code Factory: lean House Rules in `rules/AGENTS.md`, 19 specialized Bookshelf Guides in `skills/`, and a 5-event Safety & Quality Hooks layer in `hooks.json` (including `hooks/hitl-gate.py`, `hooks/secret-guard.py`, startup hydration, 2-second lint feedback, and bounded stop checks).",
+        "roleInProtocol": "This exact three-part setup powers the entire Antigravity Code Factory: lean House Rules in `rules/AGENTS.md`, 20 specialized Bookshelf Guides in `skills/` (including `cf-rewind` time-travel undo), and a 5-event Safety & Quality Hooks layer in `hooks.json` (including `hooks/hitl-gate.py`, `hooks/secret-guard.py`, `hooks/checkpoint-hook.py`, startup hydration, 2-second lint feedback, and bounded stop checks).",
         "howToUseGoingForward": "Start every project with a tiny 5-line House Rules file. Keep it short! Whenever you teach your AI a multi-step routine you want to reuse later, save it as a Bookshelf Guide instead of cramming it onto your main desk.",
         "whenToUse": "Use this right after opening a new project folder—or anytime you find yourself repeating the same preference or wanting an automatic pause before risky actions.",
         "realWorldExample": "You write 5 lines in your House Rules: 'Keep text easy to read, save a backup before big edits, and never share my password file.' Later, when an AI helper tries to run a live publish command, your Safety Lock automatically pops up and asks for your approval first.",
@@ -400,5 +402,80 @@
       ],
       "expectedOutcome": "One small, working, checked feature locked into a clean save point—with you firmly in the driver's seat at every step."
     }
-  ]
+  ],
+  "microLab": {
+    "id": "lab-c00-mode-picker",
+    "kind": "scenario-drill",
+    "title": "Micro-Lab: Choose the Right Antigravity Mode & Git Habit",
+    "eli5Title": "Hands-On Practice: Pick the Right Helper Mode for 3 Everyday Tasks",
+    "subtitle": "Match three realistic beginner scenarios to the safest Antigravity command or Git save-point habit.",
+    "eli5Subtitle": "Practice picking the right tool before you start building—just like choosing the right kitchen utensil before cooking.",
+    "badgeLabel": "Course 00 · Interactive Drill",
+    "estimatedMinutes": 3,
+    "scenarios": [
+      {
+        "id": "z0-q1-save-point",
+        "prompt": "You have a working landing page and want to experiment with a bold new layout without risking your working version.",
+        "eli5Prompt": "Your project works nicely, and you want to try a big new idea without accidentally ruining what already works.",
+        "options": [
+          {
+            "id": "git-branch",
+            "label": "Create a Git save-point commit & feature branch first",
+            "isCorrect": true,
+            "feedback": "Exactly! Committing and branching gives you instant time-travel undo before making experimental edits.",
+            "eli5Feedback": "Spot on! Saving your game and starting a fresh branch lets you experiment freely and jump back in one click."
+          },
+          {
+            "id": "edit-main-direct",
+            "label": "Edit main directly and rely on Undo (Cmd+Z) later",
+            "isCorrect": false,
+            "feedback": "Editor Undo breaks across restarts and multi-file edits. Always snapshot clean state in Git first.",
+            "eli5Feedback": "Cmd+Z forgets changes once you close the window or touch many files. A Git save point protects everything."
+          }
+        ]
+      },
+      {
+        "id": "z0-q2-right-mode",
+        "prompt": "You need a 1-line typo fix in a README header versus building a brand-new 6-file dashboard feature.",
+        "eli5Prompt": "Compare fixing one tiny typo versus building a whole new multi-page feature with rules and tests.",
+        "options": [
+          {
+            "id": "match-scale",
+            "label": "Use Just Ask for the typo; use /plan + /grill-me for the 6-file feature",
+            "isCorrect": true,
+            "feedback": "Correct! Match orchestration overhead to task size: stay lightweight on tiny tweaks, lock a blueprint on multi-file work.",
+            "eli5Feedback": "Nailed it! Ask one quick question for a tiny fix, and draw a clear blueprint before building something big."
+          },
+          {
+            "id": "swarm-everything",
+            "label": "Launch a 4-agent /swarm for both tasks to go faster",
+            "isCorrect": false,
+            "feedback": "A multi-agent swarm adds coordination cost and is overkill for a 1-line typo.",
+            "eli5Feedback": "Hiring four builders to fix one misspelled word wastes time—save teams for big, clean jobs."
+          }
+        ]
+      },
+      {
+        "id": "z0-q3-verify",
+        "prompt": "Antigravity says 'Done! I updated the login form.' What is your very next step before committing?",
+        "eli5Prompt": "Your AI helper says 'All done!' What smart habit should you run before celebrating?",
+        "options": [
+          {
+            "id": "run-checks",
+            "label": "Run automated typecheck/tests & inspect the live preview",
+            "isCorrect": true,
+            "feedback": "Yes! Never trust text claims alone—always verify with deterministic checks and a live preview.",
+            "eli5Feedback": "Great habit! Always taste-test the dish—run the quick automatic checks and look at the live screen."
+          },
+          {
+            "id": "push-blind",
+            "label": "Push straight to production without running checks",
+            "isCorrect": false,
+            "feedback": "Shipping unverified output creates a Dark Factory where regressions reach users silently.",
+            "eli5Feedback": "Sending food out without checking the plate invites surprises. One quick check catches mistakes early."
+          }
+        ]
+      }
+    ]
+  }
 }

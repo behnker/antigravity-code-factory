@@ -14,6 +14,7 @@ function normalizeProgress(progress: LearnerProgress): LearnerProgress {
   return {
     schemaVersion: 1,
     completedStepIds: deduplicateStrings(progress.completedStepIds),
+    completedLabIds: deduplicateStrings(progress.completedLabIds),
     bookmarkedPromptIds: deduplicateStrings(progress.bookmarkedPromptIds),
     promptVariableValues: progress.promptVariableValues,
     activeHarnessMode: progress.activeHarnessMode,
@@ -26,6 +27,7 @@ export function createDefaultProgress(nowIso?: string): LearnerProgress {
   return {
     schemaVersion: 1,
     completedStepIds: [],
+    completedLabIds: [],
     bookmarkedPromptIds: [],
     promptVariableValues: {},
     activeHarnessMode: "code-factory-v3",

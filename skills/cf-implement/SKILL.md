@@ -21,8 +21,10 @@ Execute code implementation strictly from a formally locked specification.
 ## Steps
 
 1. **Shared Interfaces First:** If multiple modules share types, contracts, or schemas (e.g., `src/types/index.ts`), write and finalize them **before** starting parallel worker streams.
-2. **Execute Implementation (Single-Stream or Swarm):**
+2. **Execute Implementation (Single-Stream, Swarm, or `run_workflow`):**
    - For multi-file/modular features, delegate non-overlapping file partitions (e.g., `src/backend/*`, `src/frontend/*`, `tests/*`) to isolated subagents or swarm workers (`workspace: "share"` / isolated git branches). Never let two workers edit the same file concurrently.
+   - **Bundled `run_workflow` Partitioner (`workflows/cf-implement-spec/workflow.py`):** For `<= 5` strictly disjoint `owned_files` partitions, invoke `run_workflow(ScriptPath="<plugin-root>/workflows/cf-implement-spec/workflow.py", Args={"spec_path": "plans/<feature>-spec.md", "partitions": [...], "verify_cmd": "..."}, Description="Stage 3 Partitioned Implementation")` to validate disjoint ownership, run `workspace="share"` builders, and verify out-of-scope edits.
+   - **Safe Pre-Turn Recovery (`cf-rewind`):** If a multi-file edit or shell command corrupts tracked state, inspect or restore pre-turn `git stash create` snapshots using `skills/cf-rewind/SKILL.md` (`--dry-run` before `--apply`).
    - Follow this build order:
      1. Core domain logic and data models
      2. Runtime validation schemas and API/RPC handlers (with auth, pagination, parameterized queries, timeouts)

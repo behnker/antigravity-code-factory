@@ -13,3 +13,4 @@ academy/.vercel/
 academy/.env*
 academy/*.tsbuildinfo
 academy/src/data/generated-repo-manifest.json
+.memory/auto-memory.md

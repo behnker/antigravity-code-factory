@@ -18,7 +18,7 @@ You operate under the **Antigravity Enterprise Code Factory** protocol: **Spec-D
 - **When `.memory/` does not exist yet:** Do not block on missing files; operate normally under the invariants below and offer to initialize the workspace with `cf-bootstrap` when starting substantial project work.
 - **Communication:** Before executing multi-file or substantive code edits, state your planned approach in 3 concise bullet points.
 - **Context Hygiene:** For long or complex workflows, proactively recommend `/compact` or `cf-handover` when context grows large (~65% saturation or ~15–20 turns) to preserve reasoning quality.
-- **Lifecycle Hooks (v3.0.0):** `hooks.json` enforces `SessionStart` `.memory/` hydration, fail-closed `PreToolUse` HITL (+ safe `overwrite`) & secret guards, `PostToolUse`→`PreInvocation` `<2s` lint & 5-failure loop-breaker, and a single-shot `Stop` verification gate (kill switches: `CF_*` env vars).
+- **Lifecycle Hooks, Sidecar & Workflows (v3.1.0):** `hooks.json` enforces `SessionStart` `.memory/` hydration, fail-closed `PreToolUse` HITL (+ safe `overwrite`), secret guard & `checkpoint-hook.py` (`cf-rewind` pre-turn `git stash create`), `PostToolUse`→`PreInvocation` `<2s` lint & 5-failure loop-breaker, and `Stop` verification gate (`CF_*` kill switches). `sidecars/telemetry-memory/` (`0600` Unix socket) writes audit logs & bounded `.memory/auto-memory.md`; `workflows/` bundles `cf-qa-gate` & `cf-implement-spec`.
 
 ## 3. Security Invariants
 

@@ -29,8 +29,8 @@
   ],
   "video": {
     "title": "From Vibe Coding to Lit Software Factories: Mastering the Outer Loop",
-    "durationLabel": "22:45",
-    "provider": "coming_soon",
+    "durationLabel": "00:24",
+    "provider": "mp4",
     "posterLabel": "Course 04 Capstone Studio — 5-Part Whitepapers + Fall 2026 O'Reilly Radar Arc Live on This Repo",
     "chapters": [
       {
@@ -42,29 +42,31 @@
       {
         "id": "lsf-ch-2",
         "title": "Context Engineering Economics & Model Routing",
-        "timestampSeconds": 280,
+        "timestampSeconds": 5,
         "summary": "Balancing static rules/AGENTS.md against progressive-disclosure skills and pro vs. flash routing."
       },
       {
         "id": "lsf-ch-3",
         "title": "Software Factories, Light vs. Dark & Selective Autonomy",
-        "timestampSeconds": 560,
+        "timestampSeconds": 10,
         "summary": "Why verification is the narrow neck and how to classify Lights-Out vs. Human-Lit workstreams."
       },
       {
         "id": "lsf-ch-4",
         "title": "Human Judgment Relocates: Owning the Outer Loop",
-        "timestampSeconds": 840,
+        "timestampSeconds": 15,
         "summary": "Enforcing Quality, Verdict, and Answerability across specs, ADRs, and release gates."
       },
       {
         "id": "lsf-ch-5",
         "title": "Dual-Axis Evals (cf-eval) & Practical Loop Engineering (cf-loop-engineer)",
-        "timestampSeconds": 1100,
+        "timestampSeconds": 20,
         "summary": "Grading both output and trajectory, running /goal vs. /schedule loops, and graduating prototypes to production."
       }
     ],
-    "transcriptSummary": "This capstone course synthesizes Google and Kaggle's 5-Day AI Agents Intensive Vibe Coding whitepaper series (Days 1-5 by Addy Osmani, Shubham Saboo, and Sokratis Kartakis) together with Addy Osmani's 'The New Software Lifecycle' and Fall 2026 O'Reilly Radar arc ('Own the Outer Loop', 'Software Factories, Light and Dark', 'Human Judgment Doesn't Leave the Software Factory, It Relocates', 'Agentic Code Quality', and 'Practical Loop Engineering'). Every framework concept is translated directly into runnable Code Factory v3.0.0 artifacts in this repository: Section 8 of rules/AGENTS.md, 19 progressive-disclosure skills (including cf-loop-engineer and cf-eval), 5-event lifecycle hooks (session-start.py, hitl-gate.py, secret-guard.py, post-tool-feedback.py, pre-invocation.py, and stop-gate.py backed by hook_state.py), 5 least-privilege personas, and real Project_Antigravity /goal, /schedule, and dual-axis eval case studies."
+    "transcriptSummary": "This capstone course synthesizes Google and Kaggle's 5-Day AI Agents Intensive Vibe Coding whitepaper series (Days 1-5 by Addy Osmani, Shubham Saboo, and Sokratis Kartakis) together with Addy Osmani's 'The New Software Lifecycle' and Fall 2026 O'Reilly Radar arc ('Own the Outer Loop', 'Software Factories, Light and Dark', 'Human Judgment Doesn't Leave the Software Factory, It Relocates', 'Agentic Code Quality', and 'Practical Loop Engineering'). Every framework concept is translated directly into runnable Code Factory v3.1.0 artifacts in this repository: Section 8 of rules/AGENTS.md, 20 progressive-disclosure skills (including cf-rewind, cf-loop-engineer, and cf-eval), 7 named lifecycle hooks across 5 events (session-start.py, hitl-gate.py, secret-guard.py, checkpoint-hook.py, post-tool-feedback.py, pre-invocation.py, and stop-gate.py backed by hook_state.py), the 0600 Unix-socket telemetry & auto-memory sidecar (sidecars/telemetry-memory/), bundled run_workflow pipelines (workflows/cf-qa-gate/ and workflows/cf-implement-spec/), 5 least-privilege personas, and real Project_Antigravity /goal, /schedule, and dual-axis eval case studies.",
+    "embedUrl": "/media/lit-software-factory-explainer.mp4",
+    "posterSrc": "/media/illustrations/lit-software-factory-studio.jpg"
   },
   "steps": [
     {
@@ -114,7 +116,7 @@
         "everydayAnalogy": "Hiring a senior architect for blueprints and fast carpenters for framing—while keeping only today's checklist on the table.",
         "simpleExplanation": "Every word your AI reads on every turn uses both attention and budget. If you dump giant manuals and fifty old messages into every prompt, the AI gets foggy in the middle and costs far more than necessary. Smart builders keep one short page of golden rules always open, store long checklists in bookshelf guides that open only when needed, save tiny handover summaries, and match fast models to routine jobs while saving deeper-thinking models for planning and final review.",
         "whyItMatters": "A clean information budget gives you two wins at once: noticeably sharper, more accurate answers and a much smaller bill as your projects grow bigger.",
-        "roleInProtocol": "This governs Context Engineering Economics across the Code Factory: lean rules/AGENTS.md invariants, 19 progressive-disclosure skills, <= 3 KB handover notes, and explicit per-persona model routing (deep thinkers for architect/reviewer, fast models for parallel workers).",
+        "roleInProtocol": "This governs Context Engineering Economics across the Code Factory: lean rules/AGENTS.md invariants, 20 progressive-disclosure skills, <= 3 KB handover notes, and explicit per-persona model routing (deep thinkers for architect/reviewer, fast models for parallel workers).",
         "howToUseGoingForward": "Whenever your main rule sheet grows bulky, move step-by-step recipes into bookshelf Skills. Keep session handover notes under one page, and assign fast models to clear, bounded chores while reserving deep-thinking models for plans and final audits.",
         "whenToUse": "Use this whenever a project grows past a few files, your AI starts missing rules buried in long prompts, or you want faster results at lower cost.",
         "realWorldExample": "Instead of sending a 40-page manual to a slow, pricey model just to fix button alignment, you use a fast helper with one tiny style guide—and save your deep-thinking reviewer to inspect the finished feature for hidden security risks.",
@@ -129,7 +131,7 @@
         "Model Routing Lever: Pin `pro` for `cf-architect` (specs/ADRs) and `cf-reviewer` (independent audits); route `flash` to bounded parallel workers and `browser` viewport checks."
       ],
       "actionChecklist": [
-        "Inspect `rules/AGENTS.md` Section 8 and compare its compact static footprint against the 19 progressive skills under `skills/cf-*/`.",
+        "Inspect `rules/AGENTS.md` Section 8 and compare its compact static footprint against the 20 progressive skills under `skills/cf-*/`.",
         "Check `agents/cf-*.md` frontmatter to see how each least-privilege persona pins both `tools:` and `model:`.",
         "Run the Context Economics Audit prompt below on your primary repository."
       ],
@@ -257,7 +259,7 @@
       "order": 6,
       "title": "Practical Loop Engineering (cf-loop-engineer): Goals, Schedules & Cloud Graduation",
       "stageTag": "Loop Engineering",
-      "summary": "Put the entire framework to work daily with `skills/cf-loop-engineer`: pick `/goal` for finite oracle-backed deliverables, `/schedule` for recurring read-only hygiene loops, `/teamwork` for disjoint parallel swarms (max 3-5 concurrent loops), and graduate specs directly into governed cloud deployments (Day 5).",
+      "summary": "Put the entire framework to work daily with `skills/cf-loop-engineer`, `workflows/cf-qa-gate/workflow.py`, and `sidecars/telemetry-memory/sidecar.json`: pick `/goal` for finite oracle-backed deliverables, `/schedule` for recurring read-only hygiene loops, `/teamwork` or `run_workflow` for disjoint parallel swarms (max 3-5 concurrent loops), and graduate specs into governed cloud deployments.",
       "eli5": {
         "plainTitle": "Putting Smart Loops to Work Every Week (From Sketch to Live)",
         "oneLineHook": "Combine finish-line Goals, weekly health scans, and a 3–5 loop cap to take ideas smoothly from your laptop to live users.",
@@ -273,20 +275,20 @@
         "diagramCaption": "Bringing Goals, weekly health scans, a 3–5 cap, and human-approved cloud launches together in one smooth cycle."
       },
       "keyTakeaways": [
-        "Goals (`/goal`) = Run-Until-Done: Requires a machine-checkable completion oracle upfront, a 3-retry circuit breaker, and independent `cf-reviewer` verification before completion.",
-        "Loops (`/schedule`) = Recurring Cadence: Ideal for weekly CVE audits, `.memory/handover.md` (<= 3 KB) size checks, and manifest drift detection—kept strictly read-only or PR-draft bounded.",
+        "Goals (`/goal`) & Typed `run_workflow` Gates: Require a machine-checkable completion oracle upfront, a 3-retry circuit breaker, and independent `workflows/cf-qa-gate/workflow.py` (`cf-reviewer` + `cf-tester`) verification before completion.",
+        "Loops (`/schedule`) & `sidecars/telemetry-memory/sidecar.json`: Ideal for weekly CVE audits, `.memory/handover.md` (<= 3 KB) & `.memory/auto-memory.md` (<= 200 lines / <= 3 KB) size checks, and manifest drift detection—kept strictly read-only or PR-draft bounded.",
         "Concurrency Cap (3-5 Active Loops): Running 5-10 agent workflows across a day while capping simultaneous active loops at <= 5 preserves sharp human outer-loop judgment.",
-        "Prototype-to-Production Graduation (Day 5): Every skill, hook, schema, and course built in this workspace runs locally with `cf-next-verify` and deploys cleanly to Vercel under HITL governance."
+        "Prototype-to-Production Graduation (Day 5): Every skill, hook, sidecar, workflow, schema, and course built in this workspace runs locally with `cf-next-verify` and deploys cleanly to Vercel under HITL governance."
       ],
       "actionChecklist": [
-        "Inspect all 4 runnable `Project_Antigravity` recipes in `skills/cf-loop-engineer/references/project-examples.md`.",
+        "Inspect all runnable `Project_Antigravity` recipes in `skills/cf-loop-engineer/references/project-examples.md` alongside `workflows/cf-qa-gate/workflow.py` and `sidecars/telemetry-memory/sidecar.json`.",
         "Copy the Oracle-Backed `/goal` prompt below to run a self-converging verification loop on this repository.",
         "Copy the Weekly `/schedule` Hygiene prompt below to automate continuous CVE and context-budget monitoring."
       ],
       "codeSnippet": {
         "language": "text",
-        "filename": "Project_Antigravity Bounded /goal Example",
-        "code": "/goal Converge academy/ to zero High/Critical CVEs and verified 4-course readiness:\n1. Run `cd academy && pnpm run sync:resources && pnpm audit --audit-level=high`.\n2. Validate every `academy/content/courses/*/course.json` against `CourseSchema`.\n3. Run `cf-next-verify` (tsc, eslint, vitest, next build) + Python hook unittests.\n4. Invoke clean-context `cf-reviewer` (`cf-eval`) before reporting completion.\nCircuit breaker: Stop after 3 failed retries and report the exact blocker."
+        "filename": "Project_Antigravity Bounded /goal + Sidecar + Workflow Example",
+        "code": "/goal Converge academy/ and Code Factory v3.1.0 to verified release readiness:\n1. Run `cd academy && pnpm run sync:resources && pnpm audit --audit-level=high`.\n2. Validate `academy/content/courses/*/course.json` against `CourseSchema` and `python3 workflows/validate_workflows.py`.\n3. Run `cf-next-verify` (tsc, eslint, vitest, next build), `python3 sidecars/telemetry-memory/sidecar.py status --json`, and Python hook unittests.\n4. Invoke `workflows/cf-qa-gate/workflow.py` (`cf-reviewer` + `cf-tester`) before reporting completion.\nCircuit breaker: Stop after 3 failed retries and report the exact blocker."
       },
       "mermaidDiagram": "flowchart LR\n    G[\"Finish-Line Goal\\n(Test-Backed + 3-Try Brake)\"] --> Check[\"Independent Quality Check\"]\n    W[\"Weekly Health Scan\\n(Read-Only Checkup)\"] --> Digest[\"Calm Weekly Report\"]\n    Check --> Approve[\"Human Final Approval\"]\n    Approve --> Live[\"Live Cloud Launch\\n(With Clear Undo Plan)\"]",
       "repoArtifactPath": "skills/cf-loop-engineer/SKILL.md",
@@ -436,5 +438,52 @@
       ],
       "expectedOutcome": "A recurring read-only hygiene digest catching CVE advisories, context bloat, and manifest drift before they compound."
     }
-  ]
+  ],
+  "microLab": {
+    "id": "lab-c04-loop-autonomy",
+    "kind": "loop-autonomy",
+    "title": "Micro-Lab: Selective Autonomy Matrix, Loop Ceiling & Lit Factory Simulator",
+    "eli5Title": "Hands-On Lab: Stay in the Driver's Seat (Lit vs. Dark Factory Simulator)",
+    "subtitle": "Classify four tasks into Lights-Out vs. Human-Lit, tune concurrent loops within the 3–5 ceiling, and enable decoupled verification.",
+    "eli5Subtitle": "Decide which jobs can run on autopilot, keep active loops manageable (3–5 max), and turn on an independent checker so quality never slips.",
+    "badgeLabel": "Course 04 · Lit Factory Lab",
+    "estimatedMinutes": 4,
+    "minLoops": 3,
+    "maxLoops": 5,
+    "initialLoops": 7,
+    "tasks": [
+      {
+        "id": "task-unit-tests",
+        "label": "Generate deterministic unit tests for a pure math utility",
+        "blastRadius": "low",
+        "expectedMode": "lights-out",
+        "defaultMode": "lights-out",
+        "rationale": "Crisp machine-checkable oracle (Vitest + coverage) with low blast radius."
+      },
+      {
+        "id": "task-rls-auth",
+        "label": "Modify Postgres Row Level Security (RLS) & Auth middleware",
+        "blastRadius": "high",
+        "expectedMode": "human-lit",
+        "defaultMode": "lights-out",
+        "rationale": "High security blast radius—always requires explicit human spec review & verdict."
+      },
+      {
+        "id": "task-zod-content",
+        "label": "Validate & sync Zod-checked JSON course bundles",
+        "blastRadius": "low",
+        "expectedMode": "lights-out",
+        "defaultMode": "human-lit",
+        "rationale": "Strict Zod schema + build oracle make this a great Lights-Out candidate."
+      },
+      {
+        "id": "task-prod-deploy",
+        "label": "Run irreversible DB migration & promote to Vercel Production",
+        "blastRadius": "high",
+        "expectedMode": "human-lit",
+        "defaultMode": "lights-out",
+        "rationale": "Production releases & schema migrations always stay Human-Lit with rollback plan."
+      }
+    ]
+  }
 }

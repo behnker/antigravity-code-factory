@@ -25,15 +25,18 @@ const CATEGORY_ORDER: Record<RepoResourceCategory, number> = {
   manifest: 0,
   rule: 1,
   hook: 2,
-  agent: 3,
-  skill: 4,
-  memory: 5,
-  plan: 6,
+  sidecar: 3,
+  workflow: 4,
+  agent: 5,
+  skill: 6,
+  memory: 7,
+  plan: 8,
 };
 
 const SKILL_STAGE_MAP: Record<string, string> = {
   "cf-bootstrap": "Stage 0: Bootstrap",
   "cf-start": "Session Init",
+  "cf-rewind": "Harness Recovery: Git-Shadow Rewind",
   "cf-handover": "Stage 8: Optimise & Handover",
   "cf-research": "Stage 1: Research",
   "cf-grill-me": "Stage 2A: Spec Interrogation",
@@ -112,7 +115,13 @@ function extractSummary(relativePath: string, content: string): string {
         return parsed.description.trim();
       }
       if (relativePath === "hooks.json") {
-        return "Declarative Antigravity Phase 1 Core Hooks registry binding SessionStart, PreToolUse, PostToolUse, PreInvocation, and Stop lifecycle handlers.";
+        return "Declarative Antigravity v3.1.0 Core Hooks registry binding 7 named hooks across SessionStart, PreToolUse (HITL, secret-guard, checkpoint), PostToolUse, PreInvocation, and Stop.";
+      }
+      if (relativePath.endsWith("/sidecar.json")) {
+        return "Declarative Antigravity sidecar manifest for 0600 Unix-socket telemetry and bounded .memory/auto-memory.md distillation.";
+      }
+      if (relativePath.endsWith("/workflow.json")) {
+        return "JSON Schema contract for bundled run_workflow SDLC pipeline arguments and structured finish outputs.";
       }
     } catch {
       // Fallback below
@@ -229,6 +238,9 @@ function collectResources(): RepoResource[] {
     readAllowlistedResource("hooks/secret-guard.py", "hook", "secret-guard.py (Secret Leak Guard)", "Guardrails"),
   );
   pushIfPresent(
+    readAllowlistedResource("hooks/checkpoint-hook.py", "hook", "checkpoint-hook.py (PreToolUse Git-Shadow Checkpoint)", "Lifecycle Hooks"),
+  );
+  pushIfPresent(
     readAllowlistedResource("hooks/post-tool-feedback.py", "hook", "post-tool-feedback.py (PostToolUse Feedback)", "Lifecycle Hooks"),
   );
   pushIfPresent(
@@ -304,6 +316,67 @@ function collectResources(): RepoResource[] {
     );
   }
 
+  // 3b. Sidecars: sidecars/<name>/{sidecar.json,sidecar.py}
+  const sidecarsDir = assertSafeRepoFile(REPO_ROOT, path.join(REPO_ROOT, "sidecars"));
+  if (fs.existsSync(sidecarsDir)) {
+    const sidecarDirs = fs
+      .readdirSync(sidecarsDir, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name)
+      .sort();
+    for (const dir of sidecarDirs) {
+      pushIfPresent(
+        readAllowlistedResource(
+          path.join("sidecars", dir, "sidecar.json"),
+          "sidecar",
+          `${dir}/sidecar.json (Sidecar Manifest)`,
+          "Async Telemetry & Auto-Memory",
+        ),
+      );
+      pushIfPresent(
+        readAllowlistedResource(
+          path.join("sidecars", dir, "sidecar.py"),
+          "sidecar",
+          `${dir}/sidecar.py (0600 Unix-Socket Sidecar)`,
+          "Async Telemetry & Auto-Memory",
+        ),
+      );
+    }
+  }
+
+  // 3c. Workflows: workflows/<name>/{workflow.json,workflow.py}
+  const workflowsDir = assertSafeRepoFile(REPO_ROOT, path.join(REPO_ROOT, "workflows"));
+  if (fs.existsSync(workflowsDir)) {
+    const workflowStageMap: Record<string, string> = {
+      "cf-qa-gate": "Stage 4: Typed QA Workflow",
+      "cf-implement-spec": "Stage 3: Typed Swarm Workflow",
+    };
+    const workflowDirs = fs
+      .readdirSync(workflowsDir, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name)
+      .sort();
+    for (const dir of workflowDirs) {
+      const stageRef = workflowStageMap[dir] ?? "Typed run_workflow Pipeline";
+      pushIfPresent(
+        readAllowlistedResource(
+          path.join("workflows", dir, "workflow.json"),
+          "workflow",
+          `${dir}/workflow.json (Workflow Schema)`,
+          stageRef,
+        ),
+      );
+      pushIfPresent(
+        readAllowlistedResource(
+          path.join("workflows", dir, "workflow.py"),
+          "workflow",
+          `${dir}/workflow.py (Workflow Pipeline)`,
+          stageRef,
+        ),
+      );
+    }
+  }
+
   // 4. Memory: .memory/*.md and .memory/decisions/*.md
   const memoryDir = assertSafeRepoFile(REPO_ROOT, path.join(REPO_ROOT, ".memory"));
   if (fs.existsSync(memoryDir)) {
@@ -320,6 +393,7 @@ function collectResources(): RepoResource[] {
         "feature-map.md": "Living Feature Contract",
         "tasks.md": "Milestone Backlog",
         "handover.md": "Session Handover",
+        "auto-memory.md": "Sidecar Auto-Memory",
         "qa-report.md": "Stage 4: QA Report",
       };
       pushIfPresent(
@@ -472,6 +546,8 @@ function main(): void {
       agents: countByCategory("agent"),
       rules: countByCategory("rule"),
       hooks: countByCategory("hook"),
+      sidecars: countByCategory("sidecar"),
+      workflows: countByCategory("workflow"),
       memory: countByCategory("memory"),
       plans: countByCategory("plan"),
       courses: courses.length,

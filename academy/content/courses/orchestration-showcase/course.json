@@ -30,8 +30,8 @@
   ],
   "video": {
     "title": "Behind the Build: All 7 Antigravity Agent Modes Building This Academy Live",
-    "durationLabel": "21:10",
-    "provider": "coming_soon",
+    "durationLabel": "00:24",
+    "provider": "mp4",
     "posterLabel": "Course 07 Live Meta-Build — How Teams of AI Helpers Built This Academy",
     "chapters": [
       {
@@ -43,35 +43,37 @@
       {
         "id": "ch2-coordinator-task0",
         "title": "Plan First, Freeze Shared Rules & Check a Pilot Sample",
-        "timestampSeconds": 240,
+        "timestampSeconds": 4,
         "summary": "How locking the blueprint, shared data rules, and one pilot course first saved hours of rework across all 8 courses."
       },
       {
         "id": "ch3-specialist-subagents",
         "title": "Focused Specialist Helpers With Clean Desks & Tool Belts",
-        "timestampSeconds": 480,
+        "timestampSeconds": 8,
         "summary": "How separate helpers handled screen design, illustrations, automated tests, independent review, and live browser checks."
       },
       {
         "id": "ch4-zero-collision-swarm",
         "title": "Running 4 Parallel Builders With Zero File Collisions",
-        "timestampSeconds": 730,
+        "timestampSeconds": 12,
         "summary": "Watch the exact 4-worker Swarm map that authored Courses 00 through 07 side by side without stepping on a single file."
       },
       {
         "id": "ch5-boost-model-routing",
         "title": "When to Call In Extra Brainpower & Route Models Smartly",
-        "timestampSeconds": 980,
+        "timestampSeconds": 16,
         "summary": "Saving deep-thinking modes for tricky puzzles and final review while routing fast models to bounded parallel builds."
       },
       {
         "id": "ch6-teamwork-and-qa",
         "title": "Full-Scale Teamwork & Independent Proof That It Works",
-        "timestampSeconds": 1140,
+        "timestampSeconds": 20,
         "summary": "Scaling up with upfront interviews, catching a hidden image cache bug in live browser checks, and extending the protocol."
       }
     ],
-    "transcriptSummary": "In this behind-the-scenes walkthrough, we pull back the curtain on how this exact 8-course Antigravity Academy upgrade was planned, built, and double-checked. You will learn how to pick the smallest AI helper setup that fits your job across all seven modes, why freezing shared rules and checking one pilot course prevents team chaos, how four parallel builders worked side by side with zero file collisions, when to spend extra thinking power on hard puzzles, and how independent inspectors caught real bugs before launch."
+    "transcriptSummary": "In this behind-the-scenes walkthrough, we pull back the curtain on how this exact 8-course Antigravity Academy upgrade was planned, built, and double-checked. You will learn how to pick the smallest AI helper setup that fits your job across all seven modes, why freezing shared rules and checking one pilot course prevents team chaos, how four parallel builders worked side by side with zero file collisions, when to spend extra thinking power on hard puzzles, and how independent inspectors caught real bugs before launch.",
+    "embedUrl": "/media/orchestration-showcase-explainer.mp4",
+    "posterSrc": "/media/illustrations/orchestration-showcase-studio.jpg"
   },
   "steps": [
     {
@@ -468,5 +470,60 @@
       ],
       "expectedOutcome": "A spec-locked, pilot-checked, independently audited `.memory/qa-report.md` ready for safe human-approved deployment."
     }
-  ]
+  ],
+  "microLab": {
+    "id": "lab-c07-swarm-partition",
+    "kind": "swarm-partition",
+    "title": "Micro-Lab: Zero-Collision Parallel Swarm File-Ownership Partitioner",
+    "eli5Title": "Hands-On Lab: Split Files Across AI Builders With Zero Merge Collisions",
+    "subtitle": "Eliminate overlapping write ownership across @backend, @frontend, and read-only @verifier before launching /swarm.",
+    "eli5Subtitle": "Make sure no two builders edit the exact same file at the same time—and keep the inspector (@verifier) strictly on tests!",
+    "badgeLabel": "Course 07 · Collision Detector",
+    "estimatedMinutes": 4,
+    "workers": [
+      "@backend",
+      "@frontend",
+      "@verifier"
+    ],
+    "files": [
+      {
+        "id": "f-schema",
+        "path": "src/lib/schemas.ts",
+        "role": "Shared Zod contracts & validation",
+        "recommendedWorker": "@backend",
+        "initialWorkers": [
+          "@backend",
+          "@frontend"
+        ]
+      },
+      {
+        "id": "f-api",
+        "path": "src/app/api/courses/route.ts",
+        "role": "Server API route handler",
+        "recommendedWorker": "@backend",
+        "initialWorkers": [
+          "@backend"
+        ]
+      },
+      {
+        "id": "f-ui",
+        "path": "src/components/InteractiveMicroLab.tsx",
+        "role": "Responsive WCAG 2.1 AA UI component",
+        "recommendedWorker": "@frontend",
+        "initialWorkers": [
+          "@frontend",
+          "@verifier"
+        ]
+      },
+      {
+        "id": "f-tests",
+        "path": "tests/micro-lab.test.tsx",
+        "role": "Deterministic Vitest verification suite",
+        "recommendedWorker": "@verifier",
+        "initialWorkers": [
+          "@verifier"
+        ]
+      }
+    ]
+  }
 }

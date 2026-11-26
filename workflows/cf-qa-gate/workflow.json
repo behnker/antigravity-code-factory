@@ -1,0 +1,41 @@
+{
+  "name": "cf-qa-gate",
+  "displayName": "Enterprise Code Factory Stage 4 QA Gate",
+  "version": "1.0.0",
+  "description": "Runs parallel decoupled cf-reviewer, cf-tester verification, and optional 375/768/1440px browser audit, emitting a JSON-schema SHIP/BLOCK verdict.",
+  "entry": "workflow.py",
+  "args": {
+    "type": "object",
+    "required": ["verify_cmd"],
+    "additionalProperties": false,
+    "properties": {
+      "target_dir": { "type": "string", "minLength": 1, "default": "." },
+      "spec_path": { "type": "string", "minLength": 1 },
+      "verify_cmd": { "type": "string", "minLength": 1, "maxLength": 400 },
+      "preview_url": {
+        "type": "string",
+        "pattern": "^https?://[A-Za-z0-9._-]+(:[0-9]+)?(/.*)?$"
+      },
+      "run_browser_audit": { "type": "boolean", "default": false }
+    }
+  },
+  "outputSchema": {
+    "type": "object",
+    "required": [
+      "verdict",
+      "blocking_defects",
+      "non_blocking",
+      "checks_passed",
+      "viewports_verified",
+      "answerability_statement"
+    ],
+    "properties": {
+      "verdict": { "type": "string", "enum": ["SHIP", "BLOCK"] },
+      "blocking_defects": { "type": "array", "items": { "type": "string" } },
+      "non_blocking": { "type": "array", "items": { "type": "string" } },
+      "checks_passed": { "type": "boolean" },
+      "viewports_verified": { "type": "array", "items": { "type": "integer" } },
+      "answerability_statement": { "type": "string" }
+    }
+  }
+}

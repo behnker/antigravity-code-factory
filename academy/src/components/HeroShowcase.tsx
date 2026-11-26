@@ -62,7 +62,7 @@ export function HeroShowcase({
               operating model below—see how you steer 7 escalating Agent Modes
               powered by shared Tools, Memory, and Safety Guardrails—then follow
               plain-English courses and copy-ready prompts to ship with Code
-              Factory v3.0.
+              Factory v3.1.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-1">
@@ -93,7 +93,7 @@ export function HeroShowcase({
             <div
               className="glass-panel inline-flex w-full rounded-xl p-1 sm:w-auto"
               role="group"
-              aria-label="Toggle between Raw Antigravity and Antigravity plus Code Factory v3.0"
+              aria-label="Toggle between Raw Antigravity and Antigravity plus Code Factory v3.1"
             >
               <button
                 type="button"
@@ -117,7 +117,7 @@ export function HeroShowcase({
                     : "text-ink-secondary hover:text-ink-primary"
                 }`}
               >
-                + Code Factory v3.0
+                + Code Factory v3.1
               </button>
             </div>
           </div>

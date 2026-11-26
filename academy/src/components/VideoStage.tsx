@@ -12,11 +12,17 @@ import {
   RefreshCw,
   UploadCloud,
 } from "lucide-react";
-import { isAllowedVideoUrl, type VideoConfig } from "@/lib/schemas";
+import {
+  isAllowedImageUrl,
+  isAllowedVideoUrl,
+  type VideoConfig,
+} from "@/lib/schemas";
+import { findActiveChapterForTime } from "@/lib/micro-lab-engine";
 import { formatTimestamp } from "@/lib/prompt-engine";
 
 export interface VideoStageProps {
   video: VideoConfig;
+  posterSrc?: string;
   accentTone?: "cyan" | "violet" | "emerald";
   className?: string;
 }
@@ -29,6 +35,7 @@ const ACCENT_RING_MAP = {
 
 export function VideoStage({
   video,
+  posterSrc,
   accentTone = "cyan",
   className = "",
 }: VideoStageProps) {
@@ -53,6 +60,12 @@ export function VideoStage({
     isAllowedVideoUrl(video.embedUrl);
   const isInvalidUrl = !isComingSoon && !hasValidEmbedUrl;
 
+  const candidatePoster = video.posterSrc ?? posterSrc;
+  const safePoster =
+    typeof candidatePoster === "string" && isAllowedImageUrl(candidatePoster)
+      ? candidatePoster
+      : undefined;
+
   const handleSelectChapter = (chapterId: string, seconds: number) => {
     setActiveChapterId(chapterId);
     if (video.provider === "mp4" && videoRef.current) {
@@ -63,6 +76,17 @@ export function VideoStage({
     }
   };
 
+  const handleTimeUpdate = () => {
+    if (!videoRef.current || video.chapters.length === 0) return;
+    const matched = findActiveChapterForTime(
+      video.chapters,
+      videoRef.current.currentTime,
+    );
+    if (matched && matched.id !== activeChapterId) {
+      setActiveChapterId(matched.id);
+    }
+  };
+
   const handleRetry = () => {
     setMediaLoadError(false);
     setRetrySeed((value) => value + 1);
@@ -70,6 +94,7 @@ export function VideoStage({
 
   return (
     <div
+      data-testid="video-stage"
       className={`glass-panel-elevated min-w-0 overflow-hidden rounded-2xl p-4 sm:p-6 ${className}`}
     >
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
@@ -182,10 +207,13 @@ export function VideoStage({
               <video
                 key={retrySeed}
                 ref={videoRef}
+                data-testid="video-player"
                 controls
                 playsInline
                 preload="metadata"
+                poster={safePoster}
                 src={video.embedUrl}
+                onTimeUpdate={handleTimeUpdate}
                 onError={() => setMediaLoadError(true)}
                 className="h-full w-full object-cover"
               />

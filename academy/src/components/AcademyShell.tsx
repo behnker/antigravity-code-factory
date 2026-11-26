@@ -117,6 +117,17 @@ export function AcademyShell({
     });
   }, []);
 
+  const handleMarkLabComplete = useCallback((labId: string) => {
+    setProgress((prev) => {
+      if (prev.completedLabIds.includes(labId)) return prev;
+      return {
+        ...prev,
+        completedLabIds: [...prev.completedLabIds, labId],
+        updatedAt: new Date().toISOString(),
+      };
+    });
+  }, []);
+
   const handleToggleBookmark = useCallback((promptId: string) => {
     setProgress((prev) => {
       const exists = prev.bookmarkedPromptIds.includes(promptId);
@@ -267,6 +278,8 @@ export function AcademyShell({
               onSelectCourseId={setActiveCourseId}
               completedStepIds={progress.completedStepIds}
               onToggleStepComplete={handleToggleStepComplete}
+              completedLabIds={progress.completedLabIds}
+              onMarkLabComplete={handleMarkLabComplete}
               onJumpToPrompt={handleJumpToPrompt}
               onJumpToResource={handleJumpToResource}
               progressModalOpen={progressModalOpen}

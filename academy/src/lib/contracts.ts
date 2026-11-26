@@ -356,7 +356,7 @@ export const ANTIGRAVITY_BUILDING_BLOCKS: readonly BuildingBlockSpec[] = [
     statusRaw: "leader",
     statusCodeFactory: "leader",
     rawSummary: "20k-token rules budget with progressive-disclosure skill discovery.",
-    codeFactoryUpgrade: "Lean <= 10 KB global invariants + 19 specialized Code Factory SDLC, Website Factory, Feature Map & Eval skills.",
+    codeFactoryUpgrade: "Lean <= 10 KB global invariants + 20 specialized Code Factory SDLC, Git-Shadow Rewind (cf-rewind), Website Factory, Feature Map & Eval skills.",
   },
   {
     id: "workspace-memory",
@@ -372,7 +372,7 @@ export const ANTIGRAVITY_BUILDING_BLOCKS: readonly BuildingBlockSpec[] = [
     statusRaw: "gap",
     statusCodeFactory: "leader",
     rawSummary: "No built-in auto-memory file structure out of the box.",
-    codeFactoryUpgrade: "Structured .memory/ binder auto-hydrated via v3.0.0 SessionStart hook (<= 3 KB handover.md, optional auto-memory.md, git status) + living feature-map.md + ADRs + locked plans/*-spec.md.",
+    codeFactoryUpgrade: "Structured .memory/ binder auto-hydrated via v3.1.0 SessionStart hook (<= 3 KB handover.md, 0600 sidecar-distilled auto-memory.md, git status) + living feature-map.md + ADRs + locked plans/*-spec.md.",
   },
   {
     id: "terminal-sandbox",
@@ -404,7 +404,7 @@ export const ANTIGRAVITY_BUILDING_BLOCKS: readonly BuildingBlockSpec[] = [
     statusRaw: "gap",
     statusCodeFactory: "leader",
     rawSummary: "6 synchronous lifecycle hook events (SessionStart, Pre/PostToolUse, Pre/PostInvocation, Stop); returning {} on PreToolUse fails closed.",
-    codeFactoryUpgrade: "Shipped v3.0.0 5-event Phase 1 Core Hooks: SessionStart hydration, fail-closed hitl-gate.py (with --no-pager / --max-time 5 overwrite) + secret-guard.py, PostToolUse→PreInvocation <2s lint bridge & 5-failure loop-breaker, and bounded Stop verification gate.",
+    codeFactoryUpgrade: "Shipped v3.1.0 5-event Core Hooks: SessionStart hydration, fail-closed hitl-gate.py (with --no-pager / --max-time 5 overwrite) + secret-guard.py + checkpoint-hook.py (pre-turn git stash create), PostToolUse→PreInvocation <2s lint bridge + <10ms sidecar telemetry & 5-failure loop-breaker, and bounded Stop verification gate.",
   },
   {
     id: "plugins-sidecars",
@@ -420,7 +420,7 @@ export const ANTIGRAVITY_BUILDING_BLOCKS: readonly BuildingBlockSpec[] = [
     statusRaw: "leader",
     statusCodeFactory: "leader",
     rawSummary: "Native plugin discovery (~/.gemini/config/plugins/) and declarative sidecar.json.",
-    codeFactoryUpgrade: "Globally installed code-factory plugin syncing every skill, agent, rule, and hook live.",
+    codeFactoryUpgrade: "Globally installed code-factory v3.1.0 plugin syncing 20 skills, 5 agents, lean rules, 7 lifecycle hooks, a 0600 Unix-socket sidecar.json daemon, and bundled run_workflow pipelines live.",
   },
 ];
 
@@ -521,7 +521,7 @@ export const HARNESS_NODES: readonly HarnessNodeSpec[] = [
     statusRaw: "gap",
     statusCodeFactory: "leader",
     rawSummary: "Only 6 sync command events; PostToolUse cannot inject context directly.",
-    codeFactoryUpgrade: "Shipped v3.0.0 Phase 1 Core Hooks (5 events): SessionStart hydration, fail-closed HITL force_ask + transparent overwrite, secret-guard, PostToolUse→PreInvocation <2s lint bridge + 5-failure loop-breaker, and bounded Stop verification gate.",
+    codeFactoryUpgrade: "Shipped v3.1.0 Core Hooks (5 events, 7 hooks): SessionStart hydration, fail-closed HITL force_ask + transparent overwrite, secret-guard, pre-turn checkpoint-hook.py (git stash create + cf-rewind), PostToolUse→PreInvocation <2s lint bridge + <10ms sidecar telemetry & 5-failure loop-breaker, and bounded Stop verification gate.",
     angleDeg: 102,
     orbitRadius: 3.0,
     elevation: 0.55,
@@ -577,7 +577,7 @@ export const HARNESS_NODES: readonly HarnessNodeSpec[] = [
     statusRaw: "gap",
     statusCodeFactory: "leader",
     rawSummary: "No built-in Auto Memory or PreCompact hook in base Antigravity.",
-    codeFactoryUpgrade: "Shipped v3.0.0 SessionStart .memory/ auto-hydration + PreInvocation turn-15+ compaction nudges ($PLUGIN_DATA 0600 state); Phase 2 adds a Unix-socket sidecar for async OTel & auto-memory distillation.",
+    codeFactoryUpgrade: "Shipped v3.1.0 SessionStart .memory/ auto-hydration + PreInvocation turn-15+ compaction nudges ($PLUGIN_DATA 0600 state) + 0600 Unix-socket sidecar.py daemon for <10ms async telemetry, optional HTTPS webhooks, and bounded <= 3 KB .memory/auto-memory.md distillation.",
     angleDeg: 308,
     orbitRadius: 3.2,
     elevation: 0.25,

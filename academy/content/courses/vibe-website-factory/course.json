@@ -30,9 +30,9 @@
   ],
   "video": {
     "title": "Inside the Vibe Website Factory: Building GT-Alpaca From Brief to Proof Pack 09",
-    "durationLabel": "24:00",
-    "provider": "coming_soon",
-    "posterLabel": "Course 08 Live Case Study — 6-Stage Website Factory & Proof Pack 01–09",
+    "durationLabel": "00:14",
+    "provider": "mp4",
+    "posterLabel": "Real GT-Alpaca Website Live Walkthrough (Transcoded from Proof Pack #09 walkthrough.webm)",
     "chapters": [
       {
         "id": "ch1-bootstrap-research-brief",
@@ -43,35 +43,37 @@
       {
         "id": "ch2-design-tokens-wcag",
         "title": "Stage 2A: 3-Layer W3C Design Tokens & Build-Time WCAG >= 4.5:1 (Proof 03)",
-        "timestampSeconds": 240,
+        "timestampSeconds": 3,
         "summary": "Compiling 40 primitive, 24 semantic, 6 component, and 19 dark override tokens into Tailwind v4 and verifying 30/30 Light+Dark WCAG contrast pairs after Pass 1 caught dark ink gaps."
       },
       {
         "id": "ch3-threejs-glb-craft",
         "title": "Stage 2B: Shrinking a 4.52 MB 3D Alpaca by 81.57% Without Native Binaries",
-        "timestampSeconds": 510,
+        "timestampSeconds": 5,
         "summary": "Using Meshopt, KHR_mesh_quantization, and 1024px WebP to drop avalon_poc.glb to 852 KB plus R3F PerformanceMonitor mobile guardrails."
       },
       {
         "id": "ch4-swarm-geo-seo",
         "title": "Stage 3: Partitioned Swarm Build & Tri-Layer GEO / AEO / SEO (Proofs 04–05)",
-        "timestampSeconds": 780,
+        "timestampSeconds": 8,
         "summary": "Shipping 5 crawlable SSR hub-and-spoke routes with AI-permissive robots.txt, connected JSON-LD @graph schemas, and 40–60 word AEO answers."
       },
       {
         "id": "ch5-verify-stack-and-eval",
         "title": "Stage 4: Full-Stack Gates, 3-Viewport Checks & Decoupled cf-eval (Proofs 06–08)",
-        "timestampSeconds": 1050,
+        "timestampSeconds": 10,
         "summary": "Running verify-stack, 375px/768px/1440px Feature Map checks, and a clean-context cf-reviewer dual-axis audit."
       },
       {
         "id": "ch6-hitl-launch-proof-pack",
         "title": "Stage 5: Human-Approved Launch, Live Smoke Tests & Proof Pack 09",
-        "timestampSeconds": 1260,
+        "timestampSeconds": 12,
         "summary": "Completing HITL staging deployment, verifying live endpoints with bounded curl checks, and packaging reusable Proof Pack evidence."
       }
     ],
-    "transcriptSummary": "This walkthrough follows the real six-stage Vibe Website Factory build for The Herd of Ibiza: GT-Alpaca. You will see how workspace bootstrap and grounded source research prevent made-up claims and catch critical dependency vulnerabilities early, how three-layer W3C design tokens enforce WCAG 2.1 AA contrast at compile time, how zero-native-binary GLB compression cuts a 4.52 megabyte 3D alpaca model down to 852 kilobytes, how five server-rendered routes stay readable to Google, Gemini, ChatGPT, Perplexity, and Claude, and how decoupled verification plus human-approved launch produce an honest numbered Proof Pack from 01 through 09."
+    "transcriptSummary": "This walkthrough follows the real six-stage Vibe Website Factory build for The Herd of Ibiza: GT-Alpaca. You will see how workspace bootstrap and grounded source research prevent made-up claims and catch critical dependency vulnerabilities early, how three-layer W3C design tokens enforce WCAG 2.1 AA contrast at compile time, how zero-native-binary GLB compression cuts a 4.52 megabyte 3D alpaca model down to 852 kilobytes, how five server-rendered routes stay readable to Google, Gemini, ChatGPT, Perplexity, and Claude, and how decoupled verification plus human-approved launch produce an honest numbered Proof Pack from 01 through 09.",
+    "embedUrl": "/media/gt-alpaca-walkthrough-16x9.mp4",
+    "posterSrc": "/media/illustrations/vibe-website-factory-studio.jpg"
   },
   "steps": [
     {
@@ -900,5 +902,86 @@
       ],
       "expectedOutcome": "Verified exit-0 logs across all 5 Website Factory gates, a complete honest Proof Pack 01–09 folder, and an independent cf-reviewer SHIP scorecard in .memory/qa-report.md."
     }
-  ]
+  ],
+  "microLab": {
+    "id": "lab-c08-website-factory",
+    "kind": "website-factory-lab",
+    "title": "Micro-Lab: Live WCAG Contrast, GLB Compression & GEO/AEO Gate Simulator",
+    "eli5Title": "Hands-On Lab: Test Color Readability, 3D Shrinkage & AI Search Readiness",
+    "subtitle": "Reproduce GT-Alpaca's real Pass 1 BLOCK -> Pass 2 SHIP contrast fix, test 81.57% GLB compression, and pass all 3 AI search checks.",
+    "eli5Subtitle": "Try the exact three quality checks from the GT-Alpaca launch: spot unreadable dark text, shrink a heavy 3D alpaca for phones, and open the door to AI search.",
+    "badgeLabel": "Course 08 · 3-Gate Live Lab",
+    "estimatedMinutes": 5,
+    "defaultPresetId": "pass1-dark-fail",
+    "contrastPresets": [
+      {
+        "id": "pass1-dark-fail",
+        "label": "Pass 1 BLOCK · Dark Fill Used as Text",
+        "mode": "dark",
+        "fgLabel": "pine.600 (fill)",
+        "bgLabel": "espresso.950 (dark bg)",
+        "fgHex": "#0F5E57",
+        "bgHex": "#140F0D",
+        "note": "Real GT-Alpaca Pass 1 defect caught by cf-reviewer: button fill reused as dark-mode text fails WCAG AA (< 4.5:1)."
+      },
+      {
+        "id": "pass2-dark-aaa",
+        "label": "Pass 2 SHIP · Dark primary-text Token",
+        "mode": "dark",
+        "fgLabel": "pine.300 (primary-text)",
+        "bgLabel": "espresso.950 (dark bg)",
+        "fgHex": "#6EE7D8",
+        "bgHex": "#140F0D",
+        "note": "Dedicated dark semantic *-text token clears WCAG AAA (>= 7:1) across dark background and surfaces."
+      },
+      {
+        "id": "pass2-light-aaa",
+        "label": "Pass 2 SHIP · Light accent-text Token",
+        "mode": "light",
+        "fgLabel": "terracotta.700 (accent-text)",
+        "bgLabel": "sand.50 (light bg)",
+        "fgHex": "#963A1F",
+        "bgHex": "#FAF2E6",
+        "note": "Warm Mediterranean light-mode accent text passes WCAG AA+ cleanly on sunlit sand surfaces."
+      }
+    ],
+    "rawGlbKb": 4628,
+    "glbTargetKb": 2048,
+    "glbOptimizations": [
+      {
+        "id": "meshopt-quant",
+        "label": "Meshopt + KHR_mesh_quantization",
+        "reductionFactor": 0.48,
+        "defaultEnabled": false,
+        "explanation": "Compresses 3D vertex buffers with zero native binaries required."
+      },
+      {
+        "id": "webp-1024",
+        "label": "1024px WebP Texture Transcode",
+        "reductionFactor": 0.64,
+        "defaultEnabled": false,
+        "explanation": "Shrinks embedded 2K/4K PNG textures cleanly for fast mobile GPU upload."
+      }
+    ],
+    "geoChecks": [
+      {
+        "id": "ssr-h1-copy",
+        "label": "SSR Crawlable H1 + Copy Outside <canvas>",
+        "defaultEnabled": true,
+        "explanation": "AI bots execute 0% JS—keep headings and answers in raw server HTML."
+      },
+      {
+        "id": "jsonld-graph",
+        "label": "Connected JSON-LD @graph (@id Links)",
+        "defaultEnabled": false,
+        "explanation": "Links Organization, VideoGame, WebPage, and FAQPage entities unambiguously."
+      },
+      {
+        "id": "robots-ai-allow",
+        "label": "Permissive AI robots.txt (GPTBot, ClaudeBot, PerplexityBot, Google-Extended)",
+        "defaultEnabled": false,
+        "explanation": "Ensures Gemini, ChatGPT, Perplexity, and Claude can cite your live site."
+      }
+    ]
+  }
 }

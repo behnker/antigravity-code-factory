@@ -1,0 +1,56 @@
+{
+  "name": "cf-implement-spec",
+  "displayName": "Enterprise Code Factory Stage 3 Partitioned Spec Implementer",
+  "version": "1.0.0",
+  "description": "Validates strictly disjoint file partitions (max 5 workers), runs parallel workspace='share' builders against a locked spec, checks partition scope, and runs verification.",
+  "entry": "workflow.py",
+  "args": {
+    "type": "object",
+    "required": ["spec_path", "partitions", "verify_cmd"],
+    "additionalProperties": false,
+    "properties": {
+      "spec_path": { "type": "string", "minLength": 1 },
+      "verify_cmd": { "type": "string", "minLength": 1, "maxLength": 400 },
+      "worker_workspace": {
+        "type": "string",
+        "enum": ["share", "branch"],
+        "default": "share"
+      },
+      "partitions": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 5,
+        "items": {
+          "type": "object",
+          "required": ["id", "role", "owned_files", "instructions"],
+          "additionalProperties": false,
+          "properties": {
+            "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+            "role": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "type_name": {
+              "type": "string",
+              "enum": ["cf-backend", "cf-frontend", "cf-tester", "self"],
+              "default": "self"
+            },
+            "model": {
+              "type": "string",
+              "enum": ["inherit", "flash", "flash_lite", "pro"],
+              "default": "inherit"
+            },
+            "owned_files": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "forbidden_files": {
+              "type": "array",
+              "items": { "type": "string" },
+              "default": []
+            },
+            "instructions": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    }
+  }
+}

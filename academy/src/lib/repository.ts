@@ -16,6 +16,8 @@ const EMPTY_MANIFEST: RepoManifest = {
     agents: 0,
     rules: 0,
     hooks: 0,
+    sidecars: 0,
+    workflows: 0,
     memory: 0,
     plans: 0,
     courses: 0,

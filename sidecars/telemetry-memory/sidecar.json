@@ -1,0 +1,10 @@
+{
+  "display_name": "Code Factory Telemetry & Auto-Memory",
+  "description": "Local 0600 Unix-socket daemon for non-blocking hook audit logs, optional redacted HTTPS webhook forwarding, and bounded .memory/auto-memory.md distillation.",
+  "command": "python3",
+  "args": ["sidecar.py", "serve"],
+  "restart_policy": "on-failure",
+  "env": {
+    "PYTHONUNBUFFERED": "1"
+  }
+}

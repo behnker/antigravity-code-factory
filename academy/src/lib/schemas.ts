@@ -250,6 +250,13 @@ export const VideoConfigSchema = z
     durationLabel: z.string().max(20),
     provider: z.enum(["mp4", "youtube", "vimeo", "loom", "coming_soon"]),
     embedUrl: z.string().optional(),
+    posterSrc: z
+      .string()
+      .refine(isAllowedImageUrl, {
+        message:
+          "Video posterSrc must match /media/illustrations/<filename>.(png|webp|jpg|jpeg|svg).",
+      })
+      .optional(),
     posterLabel: z.string().max(160).optional(),
     chapters: z.array(VideoChapterSchema).default([]),
     transcriptSummary: z.string().max(2000).optional(),
@@ -263,6 +270,129 @@ export const VideoConfigSchema = z
       });
     }
   });
+
+const MicroLabBaseSchema = z.object({
+  id: z.string().regex(/^[a-z0-9-]+$/).max(80),
+  title: z.string().min(1).max(140),
+  eli5Title: z.string().min(1).max(140),
+  subtitle: z.string().min(1).max(320),
+  eli5Subtitle: z.string().min(1).max(320),
+  badgeLabel: z.string().min(1).max(60),
+  estimatedMinutes: z.number().int().min(1).max(20).default(4),
+});
+
+export const ScenarioDrillOptionSchema = z.object({
+  id: z.string().regex(/^[a-z0-9-]+$/).max(60),
+  label: z.string().min(1).max(160),
+  isCorrect: z.boolean(),
+  feedback: z.string().min(1).max(360),
+  eli5Feedback: z.string().min(1).max(360),
+});
+
+export const ScenarioDrillItemSchema = z.object({
+  id: z.string().regex(/^[a-z0-9-]+$/).max(60),
+  prompt: z.string().min(1).max(360),
+  eli5Prompt: z.string().min(1).max(360),
+  options: z.array(ScenarioDrillOptionSchema).min(2).max(5),
+});
+
+export const ScenarioDrillLabSchema = MicroLabBaseSchema.extend({
+  kind: z.literal("scenario-drill"),
+  scenarios: z.array(ScenarioDrillItemSchema).min(2).max(6),
+});
+
+export const ContextBudgetModuleSchema = z.object({
+  id: z.string().regex(/^[a-z0-9-]+$/).max(60),
+  label: z.string().min(1).max(120),
+  bytes: z.number().int().min(100).max(15000),
+  defaultAlwaysOn: z.boolean(),
+  recommendedPlacement: z.enum(["always-on", "progressive-skill"]),
+  criticalSecurity: z.boolean().default(false),
+  rationale: z.string().min(1).max(280),
+});
+
+export const ContextBudgetLabSchema = MicroLabBaseSchema.extend({
+  kind: z.literal("context-budget"),
+  budgetBytes: z.number().int().min(2048).max(32768).default(10240),
+  modules: z.array(ContextBudgetModuleSchema).min(3).max(10),
+});
+
+export const LoopAutonomyTaskSchema = z.object({
+  id: z.string().regex(/^[a-z0-9-]+$/).max(60),
+  label: z.string().min(1).max(140),
+  blastRadius: z.enum(["low", "high"]),
+  expectedMode: z.enum(["lights-out", "human-lit"]),
+  defaultMode: z.enum(["lights-out", "human-lit"]),
+  rationale: z.string().min(1).max(280),
+});
+
+export const LoopAutonomyLabSchema = MicroLabBaseSchema.extend({
+  kind: z.literal("loop-autonomy"),
+  minLoops: z.number().int().min(1).max(10).default(3),
+  maxLoops: z.number().int().min(1).max(10).default(5),
+  initialLoops: z.number().int().min(1).max(10).default(7),
+  tasks: z.array(LoopAutonomyTaskSchema).min(3).max(6),
+});
+
+export const SwarmPartitionFileSchema = z.object({
+  id: z.string().regex(/^[a-z0-9-]+$/).max(60),
+  path: z.string().min(1).max(140),
+  role: z.string().min(1).max(120),
+  recommendedWorker: z.enum(["@backend", "@frontend", "@verifier"]),
+  initialWorkers: z.array(z.enum(["@backend", "@frontend", "@verifier"])).min(0).max(3),
+});
+
+export const SwarmPartitionLabSchema = MicroLabBaseSchema.extend({
+  kind: z.literal("swarm-partition"),
+  workers: z.array(z.enum(["@backend", "@frontend", "@verifier"])).min(2).max(4),
+  files: z.array(SwarmPartitionFileSchema).min(3).max(8),
+});
+
+const HEX_COLOR_VALUE_RE = /^#[0-9A-Fa-f]{6}$/;
+
+export const WebsiteContrastPresetSchema = z.object({
+  id: z.string().regex(/^[a-z0-9-]+$/).max(60),
+  label: z.string().min(1).max(120),
+  mode: z.enum(["light", "dark"]),
+  fgLabel: z.string().min(1).max(80),
+  bgLabel: z.string().min(1).max(80),
+  fgHex: z.string().regex(HEX_COLOR_VALUE_RE),
+  bgHex: z.string().regex(HEX_COLOR_VALUE_RE),
+  note: z.string().min(1).max(260),
+});
+
+export const WebsiteGlbOptimizationSchema = z.object({
+  id: z.string().regex(/^[a-z0-9-]+$/).max(60),
+  label: z.string().min(1).max(100),
+  reductionFactor: z.number().min(0.05).max(0.85),
+  defaultEnabled: z.boolean(),
+  explanation: z.string().min(1).max(240),
+});
+
+export const WebsiteGeoCheckSchema = z.object({
+  id: z.string().regex(/^[a-z0-9-]+$/).max(60),
+  label: z.string().min(1).max(120),
+  defaultEnabled: z.boolean(),
+  explanation: z.string().min(1).max(240),
+});
+
+export const WebsiteFactoryLabSchema = MicroLabBaseSchema.extend({
+  kind: z.literal("website-factory-lab"),
+  defaultPresetId: z.string().min(1).max(60),
+  contrastPresets: z.array(WebsiteContrastPresetSchema).min(2).max(6),
+  rawGlbKb: z.number().int().min(100).max(50000),
+  glbTargetKb: z.number().int().min(100).max(10000),
+  glbOptimizations: z.array(WebsiteGlbOptimizationSchema).min(2).max(5),
+  geoChecks: z.array(WebsiteGeoCheckSchema).min(2).max(5),
+});
+
+export const MicroLabSchema = z.discriminatedUnion("kind", [
+  ScenarioDrillLabSchema,
+  ContextBudgetLabSchema,
+  LoopAutonomyLabSchema,
+  SwarmPartitionLabSchema,
+  WebsiteFactoryLabSchema,
+]);
 
 export const CodeSnippetSchema = z.object({
   language: z.string(),
@@ -302,6 +432,7 @@ export const CourseSchema = z.object({
   accentTone: z.enum(["cyan", "violet", "emerald"]),
   tags: z.array(z.string().min(1)).min(1),
   video: VideoConfigSchema,
+  microLab: MicroLabSchema.optional(),
   steps: z.array(LessonStepSchema).min(1),
   prompts: z.array(PromptCardSchema).default([]),
 });
@@ -311,6 +442,8 @@ export const RepoResourceCategorySchema = z.enum([
   "skill",
   "agent",
   "hook",
+  "sidecar",
+  "workflow",
   "memory",
   "plan",
   "manifest",
@@ -336,6 +469,8 @@ export const RepoManifestSchema = z.object({
     agents: z.number().int().nonnegative(),
     rules: z.number().int().nonnegative(),
     hooks: z.number().int().nonnegative(),
+    sidecars: z.number().int().nonnegative().default(0),
+    workflows: z.number().int().nonnegative().default(0),
     memory: z.number().int().nonnegative(),
     plans: z.number().int().nonnegative(),
     courses: z.number().int().nonnegative(),
@@ -374,6 +509,7 @@ export const HitlSimulateResponseSchema = z.object({
 export const LearnerProgressSchema = z.object({
   schemaVersion: z.literal(1),
   completedStepIds: z.array(z.string()).default([]),
+  completedLabIds: z.array(z.string()).default([]),
   bookmarkedPromptIds: z.array(z.string()).default([]),
   promptVariableValues: z.record(z.string(), z.record(z.string(), z.string())).default({}),
   activeHarnessMode: z.enum(["raw", "code-factory-v3"]).default("code-factory-v3"),
@@ -424,3 +560,9 @@ export type ProofArtifact = z.infer<typeof ProofArtifactSchema>;
 export type ProofGallery = z.infer<typeof ProofGallerySchema>;
 export type DomainId = z.infer<typeof DomainIdSchema>;
 export type DomainCaseStudy = z.infer<typeof DomainCaseStudySchema>;
+export type ScenarioDrillLab = z.infer<typeof ScenarioDrillLabSchema>;
+export type ContextBudgetLab = z.infer<typeof ContextBudgetLabSchema>;
+export type LoopAutonomyLab = z.infer<typeof LoopAutonomyLabSchema>;
+export type SwarmPartitionLab = z.infer<typeof SwarmPartitionLabSchema>;
+export type WebsiteFactoryLab = z.infer<typeof WebsiteFactoryLabSchema>;
+export type MicroLab = z.infer<typeof MicroLabSchema>;

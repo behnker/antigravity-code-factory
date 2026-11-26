@@ -180,6 +180,22 @@ def build_session_start_response(payload: dict[str, Any]) -> dict[str, Any]:
     message = _truncate_utf8_bytes(
         message, MAX_TOTAL_MESSAGE_BYTES, "\n...[session context truncated to 8 KB]"
     )
+    try:
+        hook_state.emit_sidecar_event(
+            event_name="session_start",
+            conversation_id=payload.get("conversationId"),
+            project_dir=str(project_dir),
+            hook="session-start",
+            status="ok",
+            summary="SessionStart hydrated workspace memory",
+            metadata={
+                "hasHandover": bool(handover),
+                "hasAutoMemory": bool(auto_memory),
+                "hasGitStatus": bool(git_status),
+            },
+        )
+    except Exception:
+        pass
     return {
         "injectSteps": [
             {

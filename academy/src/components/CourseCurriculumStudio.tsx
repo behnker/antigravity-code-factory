@@ -32,6 +32,7 @@ import type {
 import { CourseEmblem, getCourseVisualTheme } from "./CourseEmblem";
 import { CourseIllustrationBanner } from "./CourseIllustrationBanner";
 import { Eli5MicrolearningCard } from "./Eli5MicrolearningCard";
+import { InteractiveMicroLab } from "./InteractiveMicroLab";
 import { MermaidDiagram } from "./MermaidDiagram";
 import { ProofGalleryPanel } from "./ProofGalleryPanel";
 import { VideoStage } from "./VideoStage";
@@ -42,6 +43,8 @@ export interface CourseCurriculumStudioProps {
   onSelectCourseId?: (courseId: string) => void;
   completedStepIds: string[];
   onToggleStepComplete: (stepId: string) => void;
+  completedLabIds?: string[];
+  onMarkLabComplete?: (labId: string) => void;
   onJumpToPrompt: (promptId: string) => void;
   onJumpToResource: (relativePath: string) => void;
   progressModalOpen: boolean;
@@ -81,6 +84,8 @@ export function CourseCurriculumStudio({
   onSelectCourseId,
   completedStepIds,
   onToggleStepComplete,
+  completedLabIds = [],
+  onMarkLabComplete,
   onJumpToPrompt,
   onJumpToResource,
   progressModalOpen,
@@ -696,6 +701,7 @@ export function CourseCurriculumStudio({
                       <VideoStage
                         key={activeCourse.id}
                         video={activeCourse.video}
+                        posterSrc={activeCourse.illustration?.src}
                         accentTone={activeCourse.accentTone}
                       />
                     </div>
@@ -705,7 +711,20 @@ export function CourseCurriculumStudio({
                 <VideoStage
                   key={activeCourse.id}
                   video={activeCourse.video}
+                  posterSrc={activeCourse.illustration?.src}
                   accentTone={activeCourse.accentTone}
+                />
+              )}
+
+              {activeCourse.microLab && (
+                <InteractiveMicroLab
+                  key={activeCourse.microLab.id}
+                  lab={activeCourse.microLab}
+                  learningDepthMode={activeDepthMode}
+                  isCompleted={completedLabIds.includes(
+                    activeCourse.microLab.id,
+                  )}
+                  onMarkComplete={(labId) => onMarkLabComplete?.(labId)}
                 />
               )}
 

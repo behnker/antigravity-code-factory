@@ -24,6 +24,8 @@ Read [references/project-examples.md](./references/project-examples.md) for conc
 | Multi-module feature from a locked spec | **Swarm** (`/teamwork` / `swarm`) | Task 0 shared interfaces locked; non-overlapping file partitions | **Max 3–5 concurrent loops** |
 | Repeatable multi-gate pipeline with typed outputs | **Workflow** (`run_workflow`) | JSON-schema `finish` contract + independent verifier stage | Fan-out bounded by machine & review capacity |
 
+> **Bundled Code Factory Pipelines (`workflows/`):** Use `run_workflow(ScriptPath="<plugin-root>/workflows/cf-implement-spec/workflow.py", ...)` for Stage 3 disjoint `workspace="share"` builds (`<= 5` partitions) and `run_workflow(ScriptPath="<plugin-root>/workflows/cf-qa-gate/workflow.py", ...)` for Stage 4 parallel `cf-reviewer` + `cf-tester` + `browser` `SHIP`/`BLOCK` gates. Recover failed turns safely via `cf-rewind` (`skills/cf-rewind/SKILL.md`).
+
 ## 2. Classify Selective Autonomy Before Launching
 
 Classify every task into **Lights-Out** or **Human-Lit** before starting the loop:

@@ -155,7 +155,7 @@ describe("Next.js API Route Handlers", () => {
       expect(data.error.code).toBe("INVALID_QUERY");
     });
 
-    it("reflects v3.0.0 curriculum updates in code-factory-sdlc Step 10 and harness-mastery real hook snippets", async () => {
+    it("reflects v3.0.0 & v3.1.0 curriculum updates in code-factory-sdlc Step 10/11 (cf-prompt-rewind) and harness-mastery real hook snippets", async () => {
       const req = new NextRequest("http://localhost:3000/api/courses?limit=20&offset=0");
       const res = await getCourses(req);
       expect(res.status).toBe(200);
@@ -171,6 +171,15 @@ describe("Next.js API Route Handlers", () => {
       const v3Prompt = sdlcCourse!.prompts.find((p) => p.id === "cf-prompt-v3-core-hooks");
       expect(v3Prompt).toBeDefined();
 
+      const step11 = sdlcCourse!.steps.find((s) => s.id === "cf-stage-11-phase2-automation");
+      expect(step11).toBeDefined();
+      expect(step11!.order).toBe(11);
+      expect(step11!.repoArtifactPath).toBe("skills/cf-rewind/SKILL.md");
+      expect(step11!.promptId).toBe("cf-prompt-rewind");
+      const rewindPrompt = sdlcCourse!.prompts.find((p) => p.id === "cf-prompt-rewind");
+      expect(rewindPrompt).toBeDefined();
+      expect(rewindPrompt!.skillRef).toBe("cf-rewind");
+
       const harnessCourse = data.items.find((c) => c.slug === "harness-mastery");
       expect(harnessCourse).toBeDefined();
       const hooksJsonStep = harnessCourse!.steps.find(
@@ -178,6 +187,7 @@ describe("Next.js API Route Handlers", () => {
       );
       expect(hooksJsonStep).toBeDefined();
       expect(hooksJsonStep!.codeSnippet!.code).toContain("code-factory-session-start");
+      expect(hooksJsonStep!.codeSnippet!.code).toContain("code-factory-checkpoint");
       expect(hooksJsonStep!.codeSnippet!.code).toContain("code-factory-post-tool-feedback");
       expect(hooksJsonStep!.codeSnippet!.code).toContain("code-factory-pre-invocation");
       expect(hooksJsonStep!.codeSnippet!.code).toContain("code-factory-stop-gate");
@@ -250,7 +260,7 @@ describe("Next.js API Route Handlers", () => {
       expect(skillData.items.length).toBeGreaterThanOrEqual(1);
     });
 
-    it("reflects v3.0.0 plugin manifest, all 8 hook resources, and all 19 mapped skills", async () => {
+    it("reflects v3.1.0 plugin manifest, all 9 hook resources, 2 sidecar resources, 4 workflow resources, and all 20 mapped skills", async () => {
       const manifestReq = new NextRequest(
         "http://localhost:3000/api/resources?category=manifest&limit=10&offset=0",
       );
@@ -261,7 +271,8 @@ describe("Next.js API Route Handlers", () => {
         (item: { relativePath: string }) => item.relativePath === "plugin.json",
       );
       expect(pluginJson).toBeDefined();
-      expect(JSON.parse(pluginJson.content).version).toMatch(/^3\.0\.\d+$/);
+      expect(JSON.parse(pluginJson.content).version).toMatch(/^3\.1\.\d+$/);
+      expect(JSON.parse(pluginJson.content).version).toBe("3.1.0");
 
       const hookReq = new NextRequest(
         "http://localhost:3000/api/resources?category=hook&limit=20&offset=0",
@@ -269,8 +280,8 @@ describe("Next.js API Route Handlers", () => {
       const hookRes = await getResources(hookReq);
       expect(hookRes.status).toBe(200);
       const hookData = await hookRes.json();
-      expect(hookData.total).toBe(8);
-      expect(hookData.items).toHaveLength(8);
+      expect(hookData.total).toBe(9);
+      expect(hookData.items).toHaveLength(9);
       const hookPaths = hookData.items.map(
         (item: { relativePath: string }) => item.relativePath,
       );
@@ -281,9 +292,46 @@ describe("Next.js API Route Handlers", () => {
           "hooks/session-start.py",
           "hooks/hitl-gate.py",
           "hooks/secret-guard.py",
+          "hooks/checkpoint-hook.py",
           "hooks/post-tool-feedback.py",
           "hooks/pre-invocation.py",
           "hooks/stop-gate.py",
+        ]),
+      );
+
+      const sidecarReq = new NextRequest(
+        "http://localhost:3000/api/resources?category=sidecar&limit=10&offset=0",
+      );
+      const sidecarRes = await getResources(sidecarReq);
+      expect(sidecarRes.status).toBe(200);
+      const sidecarData = await sidecarRes.json();
+      expect(sidecarData.total).toBe(2);
+      expect(sidecarData.items).toHaveLength(2);
+      expect(
+        sidecarData.items.map((item: { relativePath: string }) => item.relativePath),
+      ).toEqual(
+        expect.arrayContaining([
+          "sidecars/telemetry-memory/sidecar.json",
+          "sidecars/telemetry-memory/sidecar.py",
+        ]),
+      );
+
+      const workflowReq = new NextRequest(
+        "http://localhost:3000/api/resources?category=workflow&limit=10&offset=0",
+      );
+      const workflowRes = await getResources(workflowReq);
+      expect(workflowRes.status).toBe(200);
+      const workflowData = await workflowRes.json();
+      expect(workflowData.total).toBe(4);
+      expect(workflowData.items).toHaveLength(4);
+      expect(
+        workflowData.items.map((item: { relativePath: string }) => item.relativePath),
+      ).toEqual(
+        expect.arrayContaining([
+          "workflows/cf-qa-gate/workflow.json",
+          "workflows/cf-qa-gate/workflow.py",
+          "workflows/cf-implement-spec/workflow.json",
+          "workflows/cf-implement-spec/workflow.py",
         ]),
       );
 
@@ -300,10 +348,11 @@ describe("Next.js API Route Handlers", () => {
           stageRef?: string;
         }>
       ).filter((item) => item.relativePath.endsWith("/SKILL.md"));
-      expect(skillEntries).toHaveLength(19);
+      expect(skillEntries).toHaveLength(20);
       const skillNames = skillEntries.map((item) => item.name);
       expect(skillNames).toEqual(
         expect.arrayContaining([
+          "cf-rewind",
           "cf-website-factory",
           "cf-design-tokens",
           "cf-threejs-craft",

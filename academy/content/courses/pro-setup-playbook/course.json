@@ -29,8 +29,8 @@
   ],
   "video": {
     "title": "Antigravity Pro Setup: From Zero to Team-Wide Engineering & Content OS",
-    "durationLabel": "21:30",
-    "provider": "coming_soon",
+    "durationLabel": "00:24",
+    "provider": "mp4",
     "posterLabel": "Course 3 Studio Recording — 30–45 Minute Pro Setup & Day-1 Onboarding Walkthrough",
     "chapters": [
       {
@@ -42,35 +42,37 @@
       {
         "id": "ps-ch-2",
         "title": "Bounded Autonomy: Global Security, Sandbox & Project Overrides",
-        "timestampSeconds": 240,
+        "timestampSeconds": 4,
         "summary": "Locking proceed-in-sandbox, Terminal Sandbox, Allowlist/Denylist, and project-specific overrides for engineering vs. content repos."
       },
       {
         "id": "ps-ch-3",
         "title": "Engineering & Content Workspace Scaffolding (AGENTS.md + Skills + Hooks)",
-        "timestampSeconds": 540,
+        "timestampSeconds": 8,
         "summary": "Respecting the 24 KB / 20k-token rules budget, fail-closed PreToolUse hooks, and versioned editorial voice + fact-checking pipelines."
       },
       {
         "id": "ps-ch-4",
         "title": "MCP Servers & Git-Symlinked Team Plugin Distribution",
-        "timestampSeconds": 870,
+        "timestampSeconds": 12,
         "summary": "Streamable HTTP vs. mcp-remote bridges, global server prefixing, and rolling out an org-wide plugin with git pull."
       },
       {
         "id": "ps-ch-5",
         "title": "Daily Senior Operating Habits & Day-1 Onboarding Smoke Tests",
-        "timestampSeconds": 1080,
+        "timestampSeconds": 16,
         "summary": "The Spec -> Build -> Independent Review -> /learn loop, slash command cheat sheet, and running Day-1 verification checks."
       },
       {
         "id": "ps-ch-6",
         "title": "Practical Loop Engineering: Goals, Schedules & Delegation Boundaries",
-        "timestampSeconds": 1240,
+        "timestampSeconds": 20,
         "summary": "Applying Addy Osmani's /goal vs. /schedule discipline, 3-5 concurrent loop cap, and Selective Autonomy matrix daily."
       }
     ],
-    "transcriptSummary": "This practical operational walkthrough configures Google Antigravity across Desktop 2.0, IDE, and the agy CLI for both Engineering and Content teams. We establish bounded autonomy via proceed-in-sandbox and command allowlists/denylists, master all 5 customization primitives (Rules, Skills, Plugins, Hooks, MCP Servers) within the 24 KB per-file / 20,000-token aggregate budget, scaffold starter AGENTS.md and editorial-qa workflows, connect least-privilege Streamable HTTP MCP servers, package org-wide Git-symlinked plugins, and conclude with daily context-hygiene habits and a Day-1 teammate onboarding smoke test."
+    "transcriptSummary": "This practical operational walkthrough configures Google Antigravity across Desktop 2.0, IDE, and the agy CLI for both Engineering and Content teams. We establish bounded autonomy via proceed-in-sandbox and command allowlists/denylists, master all 5 customization primitives (Rules, Skills, Plugins, Hooks, MCP Servers) within the 24 KB per-file / 20,000-token aggregate budget, scaffold starter AGENTS.md and editorial-qa workflows, connect least-privilege Streamable HTTP MCP servers, package org-wide Git-symlinked plugins, and conclude with daily context-hygiene habits and a Day-1 teammate onboarding smoke test.",
+    "embedUrl": "/media/pro-setup-playbook-explainer.mp4",
+    "posterSrc": "/media/illustrations/pro-setup-playbook-studio.jpg"
   },
   "steps": [
     {
@@ -564,5 +566,63 @@
       ],
       "expectedOutcome": "A concrete Delegation Boundary table, an oracle-backed /goal prompt, and a safe read-only /schedule hygiene automation."
     }
-  ]
+  ],
+  "microLab": {
+    "id": "lab-c03-context-budget",
+    "kind": "context-budget",
+    "title": "Micro-Lab: <= 10 KB AGENTS.md Context Budget & Progressive Disclosure Auditor",
+    "eli5Title": "Hands-On Lab: Keep Your AI's Desk Tidy (Under 10 KB Always-On Rules)",
+    "subtitle": "Move heavy step-by-step runbooks into on-demand progressive skills while keeping core security invariants Always-On under the 10,240-byte ceiling.",
+    "eli5Subtitle": "Too many sticky notes slow your AI down! Move thick manuals to the bookshelf (on-demand skills) while keeping vital house safety rules taped to the desk.",
+    "badgeLabel": "Course 03 · Live Budget Meter",
+    "estimatedMinutes": 4,
+    "budgetBytes": 10240,
+    "modules": [
+      {
+        "id": "sec-invariants",
+        "label": "Zero-Secrets, Zod Boundaries & HITL Guardrails",
+        "bytes": 3100,
+        "defaultAlwaysOn": true,
+        "recommendedPlacement": "always-on",
+        "criticalSecurity": true,
+        "rationale": "Must load on every turn so secrets, SQL injection, and destructive commands are always blocked."
+      },
+      {
+        "id": "memory-protocol",
+        "label": "Workspace .memory/ Session & Handover Protocol",
+        "bytes": 2400,
+        "defaultAlwaysOn": true,
+        "recommendedPlacement": "always-on",
+        "criticalSecurity": false,
+        "rationale": "Short session contract keeping handovers <= 3 KB and specs synced across chats."
+      },
+      {
+        "id": "ui-test-standards",
+        "label": "WCAG 2.1 AA Tokens & Deterministic Testing Invariants",
+        "bytes": 2900,
+        "defaultAlwaysOn": true,
+        "recommendedPlacement": "always-on",
+        "criticalSecurity": false,
+        "rationale": "Compact cross-cutting quality bar needed on every frontend/backend edit."
+      },
+      {
+        "id": "threejs-100-tips",
+        "label": "100 Three.js Performance Tips & GLB Compression Playbook",
+        "bytes": 6800,
+        "defaultAlwaysOn": true,
+        "recommendedPlacement": "progressive-skill",
+        "criticalSecurity": false,
+        "rationale": "Heavy domain handbook—keep in skills/cf-threejs-craft/ so it loads only on 3D projects."
+      },
+      {
+        "id": "geo-seo-handbook",
+        "label": "Tri-Layer GEO / AEO / JSON-LD @graph Reference Templates",
+        "bytes": 5400,
+        "defaultAlwaysOn": true,
+        "recommendedPlacement": "progressive-skill",
+        "criticalSecurity": false,
+        "rationale": "Move to skills/cf-geo-seo/references/ so non-web tasks pay zero token tax."
+      }
+    ]
+  }
 }

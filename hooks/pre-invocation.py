@@ -88,6 +88,12 @@ def evaluate_pre_invocation(payload: dict[str, Any]) -> dict[str, Any]:
     invocation_num = (
         raw_inv if isinstance(raw_inv, int) and not isinstance(raw_inv, bool) else 0
     )
+    raw_steps = payload.get("initialNumSteps", 0)
+    initial_num_steps = (
+        raw_steps
+        if isinstance(raw_steps, int) and not isinstance(raw_steps, bool) and raw_steps > 0
+        else 0
+    )
 
     max_failures = _parse_optional_threshold("CF_LOOP_BREAKER_MAX", DEFAULT_LOOP_BREAKER_MAX)
     warn_turn = _parse_optional_threshold("CF_CONTEXT_WARN_TURN", DEFAULT_CONTEXT_WARN_TURN)
@@ -103,10 +109,25 @@ def evaluate_pre_invocation(payload: dict[str, Any]) -> dict[str, Any]:
         and invocation_num > 0
         and any(invocation_num >= t and t not in warned_snapshot for t in thresholds)
     )
-    if not (needs_loop_break or has_feedback or needs_warn):
+    needs_turn_advance = (
+        initial_num_steps > 0
+        and initial_num_steps != int(snapshot.get("lastInitialNumSteps", 0))
+    )
+    if not (needs_loop_break or has_feedback or needs_warn or needs_turn_advance):
         return {}
 
     def _mutate(state: dict[str, Any]) -> dict[str, Any]:
+        # 0. Track turn epoch advancement on new user turns (before early returns).
+        if (
+            initial_num_steps > 0
+            and initial_num_steps != int(state.get("lastInitialNumSteps", 0))
+        ):
+            state["lastInitialNumSteps"] = initial_num_steps
+            if int(state.get("checkpointedTurnEpoch", -1)) == int(
+                state.get("turnEpoch", 0)
+            ):
+                state["turnEpoch"] = int(state.get("turnEpoch", 0)) + 1
+
         # 1. Runaway Loop-Breaker (highest priority).
         failures = int(state.get("consecutiveFailures", 0))
         if max_failures > 0 and failures >= max_failures:
@@ -162,7 +183,22 @@ def evaluate_pre_invocation(payload: dict[str, Any]) -> dict[str, Any]:
         return {"injectSteps": steps} if steps else {}
 
     _, response = hook_state.update_state(conversation_id, _mutate)
-    return response if isinstance(response, dict) else {}
+    result = response if isinstance(response, dict) else {}
+    if result.get("terminationBehavior") == "terminate":
+        project_dir = hook_state.resolve_project_dir(payload)
+        try:
+            hook_state.emit_sidecar_event(
+                event_name="loop_breaker_triggered",
+                conversation_id=conversation_id,
+                project_dir=str(project_dir) if project_dir else "",
+                hook="pre-invocation",
+                status="terminated",
+                summary=f"Loop-breaker triggered at invocation {invocation_num}",
+                metadata={"invocationNum": invocation_num},
+            )
+        except Exception:
+            pass
+    return result
 
 
 def main() -> int:

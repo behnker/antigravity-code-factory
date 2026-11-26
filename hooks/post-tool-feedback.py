@@ -14,6 +14,7 @@ On every matched tool completion (`write_file`, `edit_file`, `write_to_file`,
 
 from __future__ import annotations
 
+import ast
 import hashlib
 import json
 import os
@@ -332,7 +333,22 @@ def run_single_file_check(
         except OSError:
             return "skip", "", ""
         try:
-            compile(source, str(target_file), "exec")
+            is_workflow_py = False
+            try:
+                rel_parts = (
+                    target_file.resolve()
+                    .relative_to(project_dir.resolve())
+                    .parts
+                )
+                is_workflow_py = "workflows" in rel_parts
+            except (OSError, ValueError):
+                is_workflow_py = False
+            if not is_workflow_py:
+                is_workflow_py = hook_state.is_within_directory(
+                    target_file, project_dir / "workflows"
+                )
+            compile_flags = ast.PyCF_ALLOW_TOP_LEVEL_AWAIT if is_workflow_py else 0
+            compile(source, str(target_file), "exec", flags=compile_flags)
         except SyntaxError as exc:
             lineno = exc.lineno or "?"
             detail = exc.msg or "syntax error"
@@ -346,8 +362,12 @@ def run_single_file_check(
             )
         ruff_bin = shutil.which("ruff")
         if ruff_bin:
+            ruff_argv = [ruff_bin, "check", "--no-fix", "--quiet"]
+            if is_workflow_py:
+                ruff_argv.append("--extend-ignore=F704")
+            ruff_argv.append(str(target_file))
             status, summary = _run_subprocess_check(
-                [ruff_bin, "check", "--no-fix", "--quiet", str(target_file)],
+                ruff_argv,
                 cwd=project_dir,
                 timeout_s=timeout_s,
             )
@@ -462,7 +482,9 @@ def process_post_tool(payload: dict[str, Any], now: float | None = None) -> None
         compute_failure_signature(tool_name, failure_target, error_str) if error_str else ""
     )
 
-    def _mutate(state: dict[str, Any]) -> None:
+    def _mutate(state: dict[str, Any]) -> list[dict[str, Any]]:
+        events_to_emit: list[dict[str, Any]] = []
+
         # 1. Runaway failure streak tracking.
         if error_str:
             if state.get("lastFailureSignature") == failure_sig:
@@ -491,6 +513,15 @@ def process_post_tool(payload: dict[str, Any], now: float | None = None) -> None
             state["lastVerificationCommand"] = hook_state.sanitize_text(
                 command_line, max_chars=256
             )
+            events_to_emit.append(
+                {
+                    "event_name": "verification_passed",
+                    "status": "ok",
+                    "tool_name": tool_name,
+                    "summary": f"Verification passed: {command_line}",
+                    "metadata": {"command": command_line},
+                }
+            )
 
         # 3. Single-file syntax/lint diagnostic queue upsert or clear.
         if rel_file_path and check_status == "error":
@@ -510,14 +541,56 @@ def process_post_tool(payload: dict[str, Any], now: float | None = None) -> None
                 }
             )
             state["pendingFeedback"] = existing[-hook_state.MAX_PENDING_FEEDBACK :]
+            events_to_emit.append(
+                {
+                    "event_name": "post_tool_lint_error",
+                    "status": "error",
+                    "tool_name": tool_name,
+                    "summary": f"{checker_name}: {rel_file_path}: {check_summary}",
+                    "metadata": {"filePath": rel_file_path, "checker": checker_name},
+                }
+            )
         elif rel_file_path and check_status == "ok":
+            prior_items = state.get("pendingFeedback") or []
+            had_prior_error = any(
+                isinstance(item, dict) and item.get("filePath") == rel_file_path
+                for item in prior_items
+            )
             state["pendingFeedback"] = [
                 item
-                for item in (state.get("pendingFeedback") or [])
+                for item in prior_items
                 if isinstance(item, dict) and item.get("filePath") != rel_file_path
             ]
+            if had_prior_error:
+                events_to_emit.append(
+                    {
+                        "event_name": "post_tool_lint_resolved",
+                        "status": "ok",
+                        "tool_name": tool_name,
+                        "summary": f"Resolved {checker_name} diagnostic on {rel_file_path}",
+                        "metadata": {"filePath": rel_file_path, "checker": checker_name},
+                    }
+                )
 
-    hook_state.update_state(conversation_id, _mutate, now=now_ts)
+        return events_to_emit
+
+    _, events_to_emit = hook_state.update_state(conversation_id, _mutate, now=now_ts)
+    if isinstance(events_to_emit, list):
+        project_dir_str = str(project_dir) if project_dir is not None else ""
+        for ev in events_to_emit:
+            try:
+                hook_state.emit_sidecar_event(
+                    event_name=ev["event_name"],
+                    conversation_id=conversation_id,
+                    project_dir=project_dir_str,
+                    hook="post-tool-feedback",
+                    tool_name=ev.get("tool_name", ""),
+                    status=ev.get("status", "ok"),
+                    summary=ev.get("summary", ""),
+                    metadata=ev.get("metadata"),
+                )
+            except Exception:
+                pass
 
 
 def main() -> int:

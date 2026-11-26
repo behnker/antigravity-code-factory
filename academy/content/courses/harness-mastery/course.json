@@ -30,8 +30,8 @@
   ],
   "video": {
     "title": "Harness Deep Dive: Inside Antigravity vs. Claude Code",
-    "durationLabel": "18:40",
-    "provider": "coming_soon",
+    "durationLabel": "00:24",
+    "provider": "mp4",
     "posterLabel": "Course 01 Studio Walkthrough — Building a Smart Workshop Around Your AI",
     "chapters": [
       {
@@ -43,29 +43,31 @@
       {
         "id": "ch2-head-to-head",
         "title": "Comparing Two Workshops Honestly: Antigravity vs. Claude Code",
-        "timestampSeconds": 285,
+        "timestampSeconds": 5,
         "summary": "Where Antigravity already shines and what clever tricks we borrow from terminal-only tools."
       },
       {
         "id": "ch3-plugging-gaps",
         "title": "4 Easy Upgrades That Catch Mistakes Automatically",
-        "timestampSeconds": 610,
+        "timestampSeconds": 10,
         "summary": "Instant spellcheck notes, magic undo snapshots, quiet background logging, and code reading glasses."
       },
       {
         "id": "ch4-exceeding",
         "title": "Running a Team of Helpers at the Same Time",
-        "timestampSeconds": 890,
+        "timestampSeconds": 15,
         "summary": "Repeatable quality pipelines, swapping a stuck helper's brain live, and visual progress boards."
       },
       {
         "id": "ch5-context-economics",
         "title": "Keeping Your AI's Desk Tidy (Sharper Answers, Lower Cost)",
-        "timestampSeconds": 1060,
+        "timestampSeconds": 20,
         "summary": "Short desk rules vs. bookshelf guides, plus matching fast vs. deep-thinking AI models to each job."
       }
     ],
-    "transcriptSummary": "In this walkthrough we explain how to turn a raw AI model into a reliable software-building workshop. You will learn why the setup around the AI matters more than the AI brain alone, how to compare tools honestly, how safety locks and tool belts protect your computer, how four simple add-ons catch typos in two seconds, how to run a team of AI helpers side by side, and how keeping your AI's desk tidy gives you sharper answers at a lower cost."
+    "transcriptSummary": "In this walkthrough we explain how to turn a raw AI model into a reliable software-building workshop. You will learn why the setup around the AI matters more than the AI brain alone, how to compare tools honestly, how safety locks and tool belts protect your computer, how four simple add-ons catch typos in two seconds, how to run a team of AI helpers side by side, and how keeping your AI's desk tidy gives you sharper answers at a lower cost.",
+    "embedUrl": "/media/harness-mastery-explainer.mp4",
+    "posterSrc": "/media/illustrations/harness-mastery-studio.jpg"
   },
   "steps": [
     {
@@ -96,7 +98,7 @@
       ],
       "actionChecklist": [
         "Inspect plugin.json and rules/AGENTS.md to see how global invariants stay lean under the 20k-token budget.",
-        "Toggle between 'Raw Antigravity' and 'Antigravity + Code Factory v3.0' in the 3D Harness Constellation above.",
+        "Toggle between 'Raw Antigravity' and 'Antigravity + Code Factory v3.1' in the 3D Harness Constellation above.",
         "Map your team's daily tasks to the right tier: 1-off research -> Subagent; parallel feature modules -> Swarm; repeatable multi-gate pipelines -> run_workflow."
       ],
       "mermaidDiagram": "flowchart TD\n    U[\"You (The Director)\"] --> K[\"Smart Workshop (Rules + Tools + Safety)\"]\n    K --> T1[\"1 Specialist Helper (Quick Focused Job)\"]\n    K --> T2[\"Team Board / Swarm (Helpers Side by Side)\"]\n    K --> T3[\"Saved Assembly Line (Repeatable Recipe)\"]\n    T1 --> S[\"Safe Practice Room + Safety Alarms\"]\n    T2 --> S\n    T3 --> S\n    S --> V[\"Visual Check in Browser + Finished App\"]",
@@ -130,7 +132,7 @@
       ],
       "actionChecklist": [
         "Explore all 12 dimensions in the interactive Harness Comparison Lab and filter by 'Guardrails' and 'Orchestration'.",
-        "Compare the Raw Antigravity score against Antigravity + Code Factory v3.0 across each dimension.",
+        "Compare the Raw Antigravity score against Antigravity + Code Factory v3.1 across each dimension.",
         "Identify the top 2 harness bottlenecks currently slowing down your primary repository."
       ],
       "mermaidDiagram": "flowchart LR\n    A[\"Antigravity Strengths\\n(Teams, Live Browser, Visual Studio)\"] --> M[\"Workshop Upgrade Plan\"]\n    B[\"Best Ideas From Text-Window Tools\\n(Auto-Checks, Memory, Undo Safety)\"] --> M\n    M --> W[\"One Unified Workshop\\n(Visual Power + Tight Safety)\"]",
@@ -170,8 +172,8 @@
       ],
       "codeSnippet": {
         "language": "json",
-        "filename": "hooks.json (Code Factory v3.0.0 5-Event Registry)",
-        "code": "{\n  \"code-factory-session-start\": {\n    \"SessionStart\": [\n      {\n        \"type\": \"command\",\n        \"command\": \"python3 ./hooks/session-start.py\",\n        \"timeout\": 5\n      }\n    ]\n  },\n  \"code-factory-hitl-gate\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"run_command\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"python3 ./hooks/hitl-gate.py\",\n            \"timeout\": 5\n          }\n        ]\n      }\n    ]\n  },\n  \"code-factory-secret-guard\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"write_file|edit_file|write_to_file|replace_file_content|multi_replace_file_content\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"python3 ./hooks/secret-guard.py\",\n            \"timeout\": 5\n          }\n        ]\n      }\n    ]\n  },\n  \"code-factory-post-tool-feedback\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"write_file|edit_file|write_to_file|replace_file_content|multi_replace_file_content|run_command\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"python3 ./hooks/post-tool-feedback.py\",\n            \"timeout\": 5\n          }\n        ]\n      }\n    ]\n  },\n  \"code-factory-pre-invocation\": {\n    \"PreInvocation\": [\n      {\n        \"type\": \"command\",\n        \"command\": \"python3 ./hooks/pre-invocation.py\",\n        \"timeout\": 5\n      }\n    ]\n  },\n  \"code-factory-stop-gate\": {\n    \"Stop\": [\n      {\n        \"type\": \"command\",\n        \"command\": \"python3 ./hooks/stop-gate.py\",\n        \"timeout\": 5\n      }\n    ]\n  }\n}"
+        "filename": "hooks.json (Code Factory v3.1.0 5-Event Registry)",
+        "code": "{\n  \"code-factory-session-start\": {\n    \"SessionStart\": [\n      {\n        \"type\": \"command\",\n        \"command\": \"python3 ./hooks/session-start.py\",\n        \"timeout\": 5\n      }\n    ]\n  },\n  \"code-factory-hitl-gate\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"run_command\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"python3 ./hooks/hitl-gate.py\",\n            \"timeout\": 5\n          }\n        ]\n      }\n    ]\n  },\n  \"code-factory-secret-guard\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"write_file|edit_file|write_to_file|replace_file_content|multi_replace_file_content\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"python3 ./hooks/secret-guard.py\",\n            \"timeout\": 5\n          }\n        ]\n      }\n    ]\n  },\n  \"code-factory-checkpoint\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"write_file|edit_file|write_to_file|replace_file_content|multi_replace_file_content|run_command\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"python3 ./hooks/checkpoint-hook.py\",\n            \"timeout\": 5\n          }\n        ]\n      }\n    ]\n  },\n  \"code-factory-post-tool-feedback\": {\n    \"PostToolUse\": [\n      {\n        \"matcher\": \"write_file|edit_file|write_to_file|replace_file_content|multi_replace_file_content|run_command\",\n        \"hooks\": [\n          {\n            \"type\": \"command\",\n            \"command\": \"python3 ./hooks/post-tool-feedback.py\",\n            \"timeout\": 5\n          }\n        ]\n      }\n    ]\n  },\n  \"code-factory-pre-invocation\": {\n    \"PreInvocation\": [\n      {\n        \"type\": \"command\",\n        \"command\": \"python3 ./hooks/pre-invocation.py\",\n        \"timeout\": 5\n      }\n    ]\n  },\n  \"code-factory-stop-gate\": {\n    \"Stop\": [\n      {\n        \"type\": \"command\",\n        \"command\": \"python3 ./hooks/stop-gate.py\",\n        \"timeout\": 5\n      }\n    ]\n  }\n}"
       },
       "mermaidDiagram": "flowchart LR\n    A[\"Helper Requests an Action\"] --> B[\"Split Combined Steps Apart\"]\n    B --> C{\"Door Guard Checks Each Step\"}\n    C -->|\"Safe Read or Test\"| D[\"Allow Automatically\"]\n    C -->|\"Risky Publish or Delete\"| E[\"Pause and Ask You First\"]\n    C -->|\"Blank or Broken Note\"| F[\"Lock Door Safely\"]",
       "repoArtifactPath": "hooks/hitl-gate.py",
@@ -198,10 +200,10 @@
         "diagramCaption": "The sticky-note loop: right after an edit, a 2-second checker leaves a short note so the AI fixes typos immediately."
       },
       "keyTakeaways": [
-        "Gap 1 — Two-Stage PostToolUse -> PreInvocation Bridge (Shipped in v3.0.0): `hooks/post-tool-feedback.py` runs a fast (<2s) single-file syntax/lint check, updates atomic `0600` per-conversation state via `hooks/hook_state.py` at `$PLUGIN_DATA/conversations/<cid>.json`, and returns `{}`; `hooks/pre-invocation.py` drains `pendingFeedback` into nested `injectSteps: [{\"systemMessage\": {\"systemMessage\": \"...\"}}]` and enforces turn-15+ compaction reminders plus a 5-failure runaway loop-breaker.",
-        "Gap 2 — Git-Shadow Checkpoints: Before the first mutating tool call per turn, run non-destructive `git stash create` and log `{stepIdx, sha}` to `$PLUGIN_DATA/checkpoints/<cid>.jsonl`—capturing even shell-mutated files.",
-        "Gap 3 — Async Unix-Socket Sidecar (`sidecar.json`): Hook shims fire-and-forget JSON in <10ms over a `0600` Unix socket to a supervised Python daemon that handles HTTP webhooks, OTel traces, and verified `.memory/auto-memory.md` distillation.",
-        "Gap 4 — Companion LSP-over-MCP (`code-factory-lsp`): Bundle pinned `mcp-language-server` + `ast-grep` MCP in an opt-in plugin so App, CLI, and Headless loops gain `goToDefinition`, `findReferences`, and structural AST queries."
+        "Gap 1 — Two-Stage PostToolUse -> PreInvocation Bridge (Shipped in v3.0.0, extended in v3.1.0): `hooks/post-tool-feedback.py` runs a fast (<2s) single-file syntax/lint check (using `PyCF_ALLOW_TOP_LEVEL_AWAIT` for `workflows/`), updates atomic `0600` per-conversation state via `hooks/hook_state.py` at `$PLUGIN_DATA/conversations/<cid>.json`, and returns `{}`; `hooks/pre-invocation.py` drains `pendingFeedback` into nested `injectSteps: [{\"systemMessage\": {\"systemMessage\": \"...\"}}]` and enforces turn-15+ compaction reminders plus a 5-failure runaway loop-breaker.",
+        "Gap 2 — Git-Shadow Checkpoints (Shipped in v3.1.0): Before the first mutating tool call per turn, `hooks/checkpoint-hook.py` runs non-destructive `git stash create` (<= 150 ms) and logs `{checkpointId, snapshotSha}` to `$PLUGIN_DATA/checkpoints/<cid>.jsonl`—enabling dry-run diff and safe `cf-rewind` restoration even for shell-mutated files.",
+        "Gap 3 — Async Unix-Socket Sidecar (Shipped in v3.1.0): Hooks emit redacted NDJSON in <10 ms over a `0600` `AF_UNIX` socket (`sidecars/telemetry-memory/sidecar.py`) with local spool fallback for rotated audit logs, opt-in HTTPS webhooks, and bounded `.memory/auto-memory.md` distillation.",
+        "Gap 4 — Companion LSP-over-MCP (`code-factory-lsp`, Phase 3): Bundle pinned `mcp-language-server` + `ast-grep` MCP in an opt-in plugin so App, CLI, and Headless loops gain `goToDefinition`, `findReferences`, and structural AST queries."
       ],
       "actionChecklist": [
         "Trace the Two-Stage Feedback Bridge diagram below to see how PostToolUse hands diagnostics to PreInvocation.",
@@ -250,11 +252,11 @@
       ],
       "codeSnippet": {
         "language": "python",
-        "filename": "workflows/cf_qa_gate.py (Typed run_workflow Self-Healing Gate)",
-        "code": "# Conceptual Antigravity run_workflow Stage 4 QA Pipeline\nfrom antigravity_workflow import agent, parallel, finish\n\nQA_SCHEMA = {\n    \"type\": \"object\",\n    \"required\": [\"passed\", \"blocking_defects\", \"viewports_verified\"],\n    \"properties\": {\n        \"passed\": {\"type\": \"boolean\"},\n        \"blocking_defects\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}},\n        \"viewports_verified\": {\"type\": \"array\", \"items\": {\"type\": \"integer\"}}\n    }\n}\n\nresults = parallel([\n    agent(\"cf-reviewer\", \"Audit git diff against rules/AGENTS.md invariants\"),\n    agent(\"browser\", \"Verify 375px, 768px, 1440px layouts & zero console errors\"),\n    agent(\"self\", \"Run pnpm typecheck && pnpm lint && pnpm test && pnpm build\")\n])\n\nfinish(schema=QA_SCHEMA, inputs=results)"
+        "filename": "workflows/cf-qa-gate/workflow.py (Typed run_workflow Stage 4 Gate)",
+        "code": "# Real Antigravity run_workflow Stage 4 QA Pipeline (workflows/cf-qa-gate/workflow.py)\n# Primitives (phase, parallel, agent, trajectory, log, args) are injected globals.\nphase(\"Collect Prior Run Trajectory\")\nrecent_cmds = await trajectory(tools=[\"run_command\"], last=15)\nfailed = [s.output for s in recent_cmds if s.status == \"ERROR\" and s.output]\n\nVERDICT_SCHEMA = {\n    \"type\": \"object\",\n    \"required\": [\"passed\", \"blocking_defects\", \"viewports_verified\"],\n    \"properties\": {\n        \"passed\": {\"type\": \"boolean\"},\n        \"blocking_defects\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}},\n        \"viewports_verified\": {\"type\": \"array\", \"items\": {\"type\": \"integer\"}}\n    }\n}\n\nphase(\"Parallel Decoupled QA\")\nreview, checks = await parallel(\n    [\"review\", \"verify\"],\n    lambda task: agent(\n        f\"Audit git diff against rules/AGENTS.md (prior errors: {len(failed)})\"\n        if task == \"review\"\n        else f\"Run verification command: {args.get('verify_cmd', 'pnpm test')}\",\n        schema=VERDICT_SCHEMA,\n        role=\"cf-reviewer\" if task == \"review\" else \"cf-tester\",\n        type_name=\"cf-reviewer\" if task == \"review\" else \"cf-tester\",\n        model=\"pro\" if task == \"review\" else \"inherit\",\n    ),\n)\nlog(f\"QA Gate complete: review={review['passed']}, checks={checks['passed']}\")"
       },
       "mermaidDiagram": "flowchart TD\n    S[\"Finished Feature Ready for Check\"] --> P1[\"Helper 1: Safety & Rule Review\"]\n    S --> P2[\"Helper 2: Live Browser (Phone, Tablet, Desktop)\"]\n    S --> P3[\"Helper 3: Automated Tests & Build\"]\n    P1 --> G{\"Did All 3 Pass?\"}\n    P2 --> G\n    P3 --> G\n    G -->|\"Yes\"| OK[\"Stamp Ready for Your Approval\"]\n    G -->|\"No\"| FIX[\"Send Exact Fix List Back to Builder\"]",
-      "repoArtifactPath": "skills/cf-implement/references/orchestration.md",
+      "repoArtifactPath": "workflows/cf-qa-gate/workflow.py",
       "promptId": "hm-prompt-run-workflow-qa"
     },
     {
@@ -278,7 +280,7 @@
         "diagramCaption": "Keeping the AI's desk tidy: short golden rules stay open, big guides sit on the shelf until needed, and each job uses the right model speed."
       },
       "keyTakeaways": [
-        "Static vs. Dynamic Split on This Repo: Always-on rules/AGENTS.md stays lean (< 10 KB of hard invariants), while 19 progressive-disclosure skills/cf-*/SKILL.md files and deep references/ manuals load strictly when triggered.",
+        "Static vs. Dynamic Split on This Repo: Always-on rules/AGENTS.md stays lean (< 10 KB of hard invariants), while 20 progressive-disclosure skills/cf-*/SKILL.md files and deep references/ manuals load strictly when triggered.",
         "Solve the Goldilocks Problem: Bloated system prompts trigger 'lost in the middle' degradation and burn tokens every turn; crisp <= 3 KB .memory/handover.md records keep sessions sharp across model switches.",
         "Tool & MCP Interoperability (Day 2): Connect typed, least-privilege Streamable HTTP MCP servers (Cloudflare, Vercel, Supabase, Google Drive) rather than pasting giant API docs into prompts.",
         "Model Routing as a Financial Lever: Route high-reasoning models (pro) to cf-architect and independent cf-reviewer audits; route fast models (flash) to bounded parallel build workers and multi-viewport browser sweeps."
@@ -291,7 +293,7 @@
       "codeSnippet": {
         "language": "markdown",
         "filename": "Project_Antigravity Context & Model Routing Budget",
-        "code": "| Layer | Mechanism | Loaded When | Budget Target on This Repo |\n| :--- | :--- | :--- | :--- |\n| Static Invariants | rules/AGENTS.md + .agents/rules/ | Every turn | <= 10 KB (hard cap 24 KB / 20k tokens) |\n| Dynamic Playbooks | 19x skills/cf-*/SKILL.md + references/ | Progressive disclosure | Name+desc only until matched |\n| Session State | .memory/handover.md + feature-map.md + tasks.md | Session start / wrap-up | handover.md <= 3 KB |\n| Model Routing | agents/cf-*.md frontmatter | Per subagent role | pro: architect/reviewer; flash: browser/workers |"
+        "code": "| Layer | Mechanism | Loaded When | Budget Target on This Repo |\n| :--- | :--- | :--- | :--- |\n| Static Invariants | rules/AGENTS.md + .agents/rules/ | Every turn | <= 10 KB (hard cap 24 KB / 20k tokens) |\n| Dynamic Playbooks | 20x skills/cf-*/SKILL.md + references/ | Progressive disclosure | Name+desc only until matched |\n| Session State | .memory/handover.md + feature-map.md + tasks.md | Session start / wrap-up | handover.md <= 3 KB |\n| Model Routing | agents/cf-*.md frontmatter | Per subagent role | pro: architect/reviewer; flash: browser/workers |"
       },
       "mermaidDiagram": "flowchart LR\n    D[\"Always on the Desk\\n(1-Page Golden Rules)\"] --> AI[\"Sharp, Focused AI\"]\n    S[\"On the Bookshelf\\n(Guides Opened Only When Needed)\"] --> AI\n    H[\"Short Handover Note\\n(What Is Done + What Is Next)\"] --> AI\n    AI --> R1[\"Deep Thinker Model\\n(Planning & Final Review)\"]\n    AI --> R2[\"Fast Helper Model\\n(Parallel Builds & Screen Checks)\"]",
       "repoArtifactPath": "rules/AGENTS.md",
@@ -473,5 +475,80 @@
       ],
       "expectedOutcome": "A concrete byte/token context budget, progressive skill extraction plan, and cost-effective pro/flash routing table."
     }
-  ]
+  ],
+  "microLab": {
+    "id": "lab-c01-hook-router",
+    "kind": "scenario-drill",
+    "title": "Micro-Lab: 5-Event Lifecycle Hook & Fail-Closed Security Router",
+    "eli5Title": "Hands-On Practice: Which Automatic Safety Guard Catches Each Mistake?",
+    "subtitle": "Route three real terminal and file-edit events through Antigravity's native v3.0.1 lifecycle hooks.",
+    "eli5Subtitle": "Test how the workshop's automatic safety doors stop risky commands, catch leaked passwords, and break infinite retry loops.",
+    "badgeLabel": "Course 01 · Hook Router Lab",
+    "estimatedMinutes": 4,
+    "scenarios": [
+      {
+        "id": "c01-q1-pretool",
+        "prompt": "An agent attempts to run `git push --force origin main` or write a server-only private API key into a public client component.",
+        "eli5Prompt": "An AI helper tries to run a risky overwrite command or accidentally paste a secret password into public browser code.",
+        "options": [
+          {
+            "id": "pretool-fail-closed",
+            "label": "PreToolUse (hitl-gate.py + secret-guard.py) blocks or forces HITL approval",
+            "isCorrect": true,
+            "feedback": "Correct! PreToolUse security hooks run before execution and fail closed to force_ask/deny so unsafe actions never slip through.",
+            "eli5Feedback": "Exactly right! The front-door security guard stops both before anything bad can run or get saved."
+          },
+          {
+            "id": "stop-hook-later",
+            "label": "Wait for the Stop hook at the end of the conversation",
+            "isCorrect": false,
+            "feedback": "Stop fires only after tool calls finish—by then a force-push or secret write would already have happened.",
+            "eli5Feedback": "Waiting until the end is too late—you want the lock on the door before the risky button gets pressed."
+          }
+        ]
+      },
+      {
+        "id": "c01-q2-overwrite",
+        "prompt": "An agent runs `git status -sb` (read-only). How does v3.0.1 hitl-gate.py keep the terminal non-interactive without slowing you down?",
+        "eli5Prompt": "Your AI runs a harmless `git status` check. How does the workshop stop the terminal from freezing on a scroll screen?",
+        "options": [
+          {
+            "id": "safe-overwrite",
+            "label": "Transparent PreToolUse overwrite injects `--no-pager` on safe read commands only",
+            "isCorrect": true,
+            "feedback": "Spot on! Safe `overwrite` adds `--no-pager` (or `--max-time 5` on curl) only on allowed commands and never touches ask/force_ask commands.",
+            "eli5Feedback": "Right! It quietly adds a no-freeze flag on safe commands while leaving approval gates strictly untouched."
+          },
+          {
+            "id": "bypass-hitl",
+            "label": "Disable hitl-gate.py completely for all git commands",
+            "isCorrect": false,
+            "feedback": "Disabling HITL for git would allow `git push --force` and `git reset --hard` unchecked.",
+            "eli5Feedback": "Removing the whole lock would let dangerous git commands slip right through."
+          }
+        ]
+      },
+      {
+        "id": "c01-q3-loop-breaker",
+        "prompt": "A build command fails with the exact same TypeScript error 5 times in a row. Which hook halts the runaway burn?",
+        "eli5Prompt": "Your AI keeps hitting the exact same error five times in a row. Which automatic guard taps the brakes?",
+        "options": [
+          {
+            "id": "two-stage-preinvocation",
+            "label": "PostToolUse records failures in $PLUGIN_DATA; PreInvocation triggers the 5-failure loop-breaker",
+            "isCorrect": true,
+            "feedback": "Exact architecture! PostToolUse updates atomic 0600 conversation state and PreInvocation emits terminationBehavior: terminate on repeat #5.",
+            "eli5Feedback": "Correct! One hook counts the repeated stumble and the next hook pauses the loop so you can step in."
+          },
+          {
+            "id": "session-start",
+            "label": "SessionStart hook cancels the command mid-turn",
+            "isCorrect": false,
+            "feedback": "SessionStart only runs once when a conversation boots to hydrate .memory/handover.md and git status.",
+            "eli5Feedback": "SessionStart only runs once at the start of the day when you open the binder."
+          }
+        ]
+      }
+    ]
+  }
 }

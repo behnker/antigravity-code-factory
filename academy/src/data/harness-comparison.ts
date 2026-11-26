@@ -55,7 +55,7 @@ const RAW_HARNESS_DIMENSIONS: HarnessDimension[] = [
     gapAnalysis:
       "Raw Antigravity lacks async/HTTP hooks, PreCompact triggers, and direct PostToolUse feedback injection—and returning {} from PreToolUse fails closed.",
     howToPlugAndExceed:
-      "Shipped in Code Factory v3.0.0 Phase 1 Core Hooks (5 events, pure Python 3 stdlib): SessionStart .memory/ hydration, fail-closed PreToolUse force_ask + transparent overwrite (--no-pager, --max-time 5) + secret-guard, Two-Stage PostToolUse→PreInvocation <2s single-file lint bridge ($PLUGIN_DATA/conversations/<cid>.json → injectSteps.systemMessage), and bounded Stop verification gate; Phase 2 adds a <10ms Unix-socket sidecar for async webhooks/OTel.",
+      "Shipped in Code Factory v3.1.0 (7 named hooks across 5 events, pure Python 3 stdlib): SessionStart .memory/ hydration, fail-closed PreToolUse force_ask + transparent overwrite (--no-pager, --max-time 5) + secret-guard + <=150ms checkpoint-hook.py, Two-Stage PostToolUse->PreInvocation <2s single-file lint bridge ($PLUGIN_DATA/conversations/<cid>.json -> injectSteps.systemMessage), bounded Stop verification gate, and <10ms fail-open 0600 Unix-socket sidecar emits.",
     winnerRaw: "claude-code",
     winnerWithCodeFactory: "tie",
   },
@@ -93,7 +93,7 @@ const RAW_HARNESS_DIMENSIONS: HarnessDimension[] = [
     gapAnalysis:
       "Cross-session debugging lessons decay unless manually persisted, and compaction can silently evict active task state without a PreCompact warning.",
     howToPlugAndExceed:
-      "Shipped in Code Factory v3.0.0: .memory/ Memory Bank (<= 3 KB handover.md, optional <= 200-line auto-memory.md, tasks.md, ADRs), automatic SessionStart hydration, and PreInvocation turn-15+/30+ compaction nudges; Phase 2 adds Git-Shadow git stash create checkpoints and sidecar auto-memory distillation.",
+      "Shipped in Code Factory v3.1.0: .memory/ Memory Bank (<= 3 KB handover.md, bounded <= 200-line / <= 3 KB auto-memory.md, tasks.md, ADRs), automatic SessionStart hydration, PreInvocation turn-15+/30+ compaction nudges, Git-Shadow git stash create checkpoints (hooks/checkpoint-hook.py + cf-rewind), and 0600 Unix-socket sidecar auto-memory distillation.",
     winnerRaw: "claude-code",
     winnerWithCodeFactory: "antigravity",
   },
@@ -186,9 +186,9 @@ const RAW_HARNESS_DIMENSIONS: HarnessDimension[] = [
     claudeCodeSummary:
       "Background shell tasks and cloud/scheduled triggers, but lacks a declarative plugin-bundled local daemon supervisor equivalent to sidecar.json.",
     gapAnalysis:
-      "Base Code Factory v2.1.0 did not yet exploit sidecar.json, leaving async telemetry and background memory distillation unbuilt.",
+      "Base Code Factory v2.1.0 did not yet exploit sidecar.json or bundled workflows/, leaving async telemetry and background memory distillation unbuilt.",
     howToPlugAndExceed:
-      "Ship a zero-dependency Python sidecar.json daemon listening on a 0600 Unix socket under $PLUGIN_DATA to handle async OTel/webhook forwarding and verified auto-memory distillation without adding loop latency.",
+      "Shipped in Code Factory v3.1.0: zero-dependency Python sidecar.json daemon (sidecars/telemetry-memory/sidecar.py) listening on a 0600 Unix socket under $PLUGIN_DATA for rotated audit logs, opt-in redacted HTTPS webhooks, and verified .memory/auto-memory.md distillation—paired with bundled workflows/cf-qa-gate and workflows/cf-implement-spec.",
     winnerRaw: "antigravity",
     winnerWithCodeFactory: "antigravity",
   },
@@ -207,7 +207,7 @@ const RAW_HARNESS_DIMENSIONS: HarnessDimension[] = [
     gapAnalysis:
       "Unattended CI runs risk runaway token spend or infinite retry loops without a hard cost/step circuit breaker, and JS/TS teams lack a first-party SDK.",
     howToPlugAndExceed:
-      "Shipped in Code Factory v3.0.0: PreInvocation runaway loop-breaker (hooks/pre-invocation.py emits terminationBehavior: terminate after 5 consecutive identical tool failures); Phase 3 wraps agy -p --output-format stream-json / Python SDK in a budget-capped CI runner emitting SARIF & JUnit reports.",
+      "Shipped in Code Factory v3.1.0: PreInvocation runaway loop-breaker (hooks/pre-invocation.py emits terminationBehavior: terminate after 5 consecutive identical tool failures); Phase 3 wraps agy -p --output-format stream-json / Python SDK in a budget-capped CI runner emitting SARIF & JUnit reports.",
     winnerRaw: "claude-code",
     winnerWithCodeFactory: "claude-code",
   },
@@ -226,7 +226,7 @@ const RAW_HARNESS_DIMENSIONS: HarnessDimension[] = [
     gapAnalysis:
       "Legacy 2024-11-05 SSE MCP endpoints require mcp-remote bridging, and raw OS env vars are ignored unless declared in plugin variables.",
     howToPlugAndExceed:
-      "Shipped in Code Factory v3.0.0 as a self-contained portable plugin (<= 10 KB global rules + 19 skills + 5 least-privilege personas + 5-event Phase 1 Core Hooks across 8 hook modules), with Phase 2/3 adding companion code-factory-lsp, sidecar.json daemons, and bundled workflows; bridge legacy SSE via pinned mcp-remote only when needed, and use AGY_ACCOUNT for clean multi-tenant cloud ops.",
+      "Shipped in Code Factory v3.1.0 as a self-contained portable plugin (<= 10 KB global rules + 20 skills including cf-rewind + 5 least-privilege personas + 7-hook, 5-event Core Hooks across 9 hook resources + 0600 Unix-socket sidecar + bundled workflows/cf-qa-gate and workflows/cf-implement-spec), with Phase 3 adding companion code-factory-lsp; bridge legacy SSE via pinned mcp-remote only when needed, and use AGY_ACCOUNT for clean multi-tenant cloud ops.",
     winnerRaw: "claude-code",
     winnerWithCodeFactory: "antigravity",
   },

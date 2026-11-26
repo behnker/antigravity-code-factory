@@ -102,7 +102,7 @@ export function FourDomainShowcase({
               aria-hidden="true"
             />
             <span>
-              {orderedCases.length} Domains · 19/19 Skills Mapped
+              {orderedCases.length} Domains · 20/20 Skills Mapped
             </span>
           </div>
         </div>

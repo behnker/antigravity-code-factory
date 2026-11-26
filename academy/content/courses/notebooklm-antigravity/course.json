@@ -30,8 +30,8 @@
   ],
   "video": {
     "title": "NotebookLM + Antigravity: Brain Meets Hands End-to-End",
-    "durationLabel": "20:15",
-    "provider": "coming_soon",
+    "durationLabel": "00:24",
+    "provider": "mp4",
     "posterLabel": "Course 05 Studio Walkthrough — Grounded Research, Studio Media Handoff & Bidirectional Docs Sync",
     "chapters": [
       {
@@ -43,29 +43,31 @@
       {
         "id": "nlm-ch-2",
         "title": "3 Integration Tiers: Drive/Docs Bridge, Enterprise API & MCP",
-        "timestampSeconds": 240,
+        "timestampSeconds": 5,
         "summary": "Comparing official Google Workspace plugins, Gemini Notebook Enterprise API, and community MCP bridges."
       },
       {
         "id": "nlm-ch-3",
         "title": "Research-to-Spec Pipeline With Inline Citations",
-        "timestampSeconds": 510,
+        "timestampSeconds": 10,
         "summary": "Turning source-grounded NotebookLM briefs into locked specs, project rules, and zero-hallucination builds."
       },
       {
         "id": "nlm-ch-4",
         "title": "Studio Media Handoff: Podcasts, Video Overviews & Slide Decks",
-        "timestampSeconds": 780,
+        "timestampSeconds": 15,
         "summary": "When to share direct links vs. export MP3, MP4, PDF, and PPTX into Google Slides and Antigravity."
       },
       {
         "id": "nlm-ch-5",
         "title": "Reverse Sync, Legacy Drift Audits & Context Hygiene",
-        "timestampSeconds": 1020,
+        "timestampSeconds": 20,
         "summary": "Pushing architecture docs back to NotebookLM for Audio Overviews and preventing context bloat."
       }
     ],
-    "transcriptSummary": "This course teaches the complete operating playbook for combining NotebookLM (Gemini Notebook) with Google Antigravity. You will learn how to divide responsibilities cleanly—keeping messy external knowledge, PDFs, transcripts, and Studio media synthesis in NotebookLM while keeping live codebases, locked specs, automated verification, and execution in Antigravity. We compare all three integration tiers (the official Google Drive/Docs/Slides bridge, the Gemini Notebook Enterprise API, and community MCP servers), walk through citation-enforced Research-to-Spec workflows, cover exact sharing vs. download workflows for Audio Overviews, Video Overviews, and Slide Decks, and show how to reverse-sync living codebase documentation back into NotebookLM."
+    "transcriptSummary": "This course teaches the complete operating playbook for combining NotebookLM (Gemini Notebook) with Google Antigravity. You will learn how to divide responsibilities cleanly—keeping messy external knowledge, PDFs, transcripts, and Studio media synthesis in NotebookLM while keeping live codebases, locked specs, automated verification, and execution in Antigravity. We compare all three integration tiers (the official Google Drive/Docs/Slides bridge, the Gemini Notebook Enterprise API, and community MCP servers), walk through citation-enforced Research-to-Spec workflows, cover exact sharing vs. download workflows for Audio Overviews, Video Overviews, and Slide Decks, and show how to reverse-sync living codebase documentation back into NotebookLM.",
+    "embedUrl": "/media/notebooklm-antigravity-explainer.mp4",
+    "posterSrc": "/media/illustrations/notebooklm-antigravity-studio.jpg"
   },
   "steps": [
     {
@@ -432,5 +434,59 @@
       ],
       "expectedOutcome": "An evidence-backed drift matrix linking NotebookLM source citations to exact file:line code locations with prioritized remediation tasks."
     }
-  ]
+  ],
+  "microLab": {
+    "id": "lab-c05-notebooklm-bridge",
+    "kind": "scenario-drill",
+    "title": "Micro-Lab: NotebookLM Brain-to-Antigravity Hands Pipeline Drill",
+    "eli5Title": "Hands-On Practice: Connect Your Research Brain to Your Building Hands",
+    "subtitle": "Route grounded NotebookLM research, Studio media, and reverse-sync drift audits cleanly without hallucination.",
+    "eli5Subtitle": "Practice passing real facts, slides, and updates back and forth between NotebookLM and Antigravity without ever losing the truth.",
+    "badgeLabel": "Course 05 · Bridge Lab",
+    "estimatedMinutes": 3,
+    "scenarios": [
+      {
+        "id": "c05-q1-division",
+        "prompt": "You have 37 architecture whitepapers and podcasts in NotebookLM and want to build a new plugin skill in Antigravity.",
+        "eli5Prompt": "You collected 37 rich guides inside NotebookLM and now want Antigravity to build real code from them.",
+        "options": [
+          {
+            "id": "grounded-brief-to-spec",
+            "label": "Synthesize a citation-backed brief in NotebookLM, then lock a Code Factory spec in Antigravity",
+            "isCorrect": true,
+            "feedback": "Exactly! NotebookLM acts as the grounded Research Brain while Antigravity acts as the Spec-Driven Execution Hands.",
+            "eli5Feedback": "Spot on! Let NotebookLM summarize the verified facts first, then hand that crisp brief to Antigravity to build."
+          },
+          {
+            "id": "paste-all-37-raw",
+            "label": "Paste all 37 raw transcripts directly into AGENTS.md",
+            "isCorrect": false,
+            "feedback": "Dumping raw transcripts blows past the 10 KB context budget and degrades reasoning quality.",
+            "eli5Feedback": "Piling 37 books onto a tiny desk buries the important rules—summarize first!"
+          }
+        ]
+      },
+      {
+        "id": "c05-q2-drift",
+        "prompt": "Your repo shipped v3.0.1 with new hook contracts, while your NotebookLM notebook still holds v2.0 architecture docs.",
+        "eli5Prompt": "Your real code just leveled up to v3.0.1, but your study notebook still describes the older v2.0 version.",
+        "options": [
+          {
+            "id": "reverse-sync",
+            "label": "Export fresh repo snapshot / .memory/ docs back to Drive and run a NotebookLM drift audit",
+            "isCorrect": true,
+            "feedback": "Correct! Reverse-syncing keeps NotebookLM grounded in live repo truth so future podcasts and briefs stay accurate.",
+            "eli5Feedback": "Yes! Refreshing the notebook with the newest files keeps your research brain and real app in perfect sync."
+          },
+          {
+            "id": "leave-stale",
+            "label": "Keep generating new feature specs from the outdated v2.0 notebook",
+            "isCorrect": false,
+            "feedback": "Stale sources cause silent architectural drift and broken API contracts.",
+            "eli5Feedback": "Building from an old map leads to wrong turns—always refresh the notebook after major releases."
+          }
+        ]
+      }
+    ]
+  }
 }

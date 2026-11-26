@@ -26,6 +26,8 @@ const CATEGORY_TABS: readonly { id: CategoryTab; label: string }[] = [
   { id: "skill", label: "Skills" },
   { id: "agent", label: "Agents" },
   { id: "hook", label: "Hooks" },
+  { id: "sidecar", label: "Sidecars" },
+  { id: "workflow", label: "Workflows" },
   { id: "memory", label: "Memory" },
   { id: "plan", label: "Plans" },
   { id: "manifest", label: "Manifest" },
@@ -90,6 +92,8 @@ export function RepoResourceExplorer({
       skill: 0,
       agent: 0,
       hook: 0,
+      sidecar: 0,
+      workflow: 0,
       memory: 0,
       plan: 0,
       manifest: 0,
@@ -145,8 +149,9 @@ export function RepoResourceExplorer({
             Live Repo Resource Explorer
           </h3>
           <p className="mt-1 text-xs text-ink-secondary">
-            Browse every rule, skill, agent persona, Python HITL hook, ADR, and
-            spec file synced directly from this repository.
+            Browse every rule, skill, agent persona, Python hook, sidecar,
+            workflow pipeline, ADR, and spec file synced directly from this
+            repository.
           </p>
         </div>
         <span className="font-mono text-xs text-ink-muted">
