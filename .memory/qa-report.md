@@ -1,3 +1,41 @@
+# Stage 4 Dual-Axis Evaluation (`cf-eval`) — `code-factory` v2.5.0 Vibe Website Factory Pipeline
+
+**Date:** 2026-11-26 (00:24 UTC)  
+**Spec & ADR:** [`plans/cf-website-factory-spec.md`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/plans/cf-website-factory-spec.md) · [`0005-vibe-website-factory-pipeline.md`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/.memory/decisions/0005-vibe-website-factory-pipeline.md)  
+**Reviewer Context:** Clean decoupled `cf-reviewer` / `cf-eval` subagent context (zero production/skill files edited)  
+**Verdict:** **`SHIP`** *(Re-verified after resolving all 7 Blocking Defects B1–B7 and all 5 Non-Blocking Polish Notes N1–N5; `31/31` Node tests, `12/12` Python hook tests, `7/7` adversarial CLI exit-code probes, and `academy/` dry-runs pass with zero remaining blockers.)*
+
+---
+
+## Executive Scorecard
+
+| Axis | Dimension | Status | Verified Evidence |
+| :--- | :--- | :---: | :--- |
+| **Axis 1** | **Supply Chain, Secrets & Context Economics** | **PASS** | `0` root `package.json`/runtime npm deps; `0` outbound network calls (`fetch`/`http`/`https`); `0` `eval`/`new Function`/`exec`/`execSync`; `execFileSync` uses explicit arg arrays (`optimize-glb.mjs:215`); `hooks/secret-guard.py`: `21/21` `allow`; `rules/AGENTS.md`: `8,842` B (`<= 10,240`); `19/19` skills match `plugin.json` (`2.5.0`) & `README.md`; clean MIT/source attribution |
+| **Axis 1** | **Security & Parser Hardening (B1–B6 Closed)** | **PASS** | `generate-tokens.mjs` enforces `isPlainObject`, `FORBIDDEN_KEYS` (`__proto__`/`constructor`/`prototype`), `Object.hasOwn()`, and blocks `/*`, `*/`, `\r`, `\n`, `\0`, `vbscript:`, `url(data:/javascript:/vbscript:)`; `audit-geo-seo.mjs` rejects `null`/primitive JSON-LD (`aeo-jsonld-invalid`), unwraps top-level arrays & array `@type`, quote-matches `<meta name="description">`, validates `--min-words`; `audit-threejs.mjs` uses comment/string-aware `extractUseFrameBlocks()` + catches `import "lil-gui"` / `require("stats-gl")` + checks `webglcontextlost`; all 5 CLIs enforce `readRequiredFlagValue` + `.isFile()` + `inputBytes > 0` |
+| **Axis 1** | **Automated Test Oracles & Adversarial Probes** | **PASS** | `node --test`: **`31/31`** pass (`16` across `tokens.test.mjs` [8], `geo-seo.test.mjs` [4], `threejs.test.mjs` [4] + `15` `cf-verify-map` tests); `python3 -m unittest`: **`12/12`** pass (`0.179s`); `7/7` adversarial CLI `exit 2` probes pass; `audit-threejs.mjs --dir academy/src`: `passed: true` (`0` err, `0` warn); `validate-tokens.mjs --dir academy/src`: `30` files scanned cleanly; `audit-geo-seo.mjs --html academy/.next/server/app`: `1` `1.3 MB` HTML audited cleanly |
+| **Axis 2** | **Plugin Purity & Spec Adherence (B7 Closed)** | **PASS** | `rg -i "gt-alpaca\|gtalpaca\|herd\|ibiza\|avalon\|academy"` across all 4 new skill directories returned **`0` matches**; `@theme inline` maps `--color-*`, `--font-*`, `--spacing-*`, and `--radius-*`; progressive disclosure preserved |
+
+---
+
+## 1. Blocking Defect Closure Log (B1–B7)
+
+1. **B1 Closed (`generate-tokens.mjs:21,35-37,120-192,224-237`):** Added `isPlainObject()`, `FORBIDDEN_KEYS = Set(["__proto__", "constructor", "prototype"])` in both `getByPath()` and `flattenLayer()`, `Object.hasOwn(...)` checks throughout, and `Object.create(null)` accumulator. Verified `compileTokens([])`, `{"primitive":{"__proto__":...}}`, `{"dark":{"semantic":{"__proto__":...}}}`, and `{primitive.constructor.name}` all throw cleanly.
+2. **B2 Closed (`generate-tokens.mjs:22-23,139-148,295-309`):** Expanded `UNSAFE_CSS_VALUE_RE` and explicit control-char check (`[\r\n\0]`) to reject `/*`, `*/`, `\r`, `\n`, `\0`, `vbscript:`, and `url(data:/javascript:/vbscript:)`, plus mapped `--font-*` and `--spacing-*` into `@theme inline`.
+3. **B3 Closed (`audit-geo-seo.mjs:64-77,93-96,245-320,364-365`):** Added `null`/primitive JSON-LD handling (`aeo-jsonld-invalid`), top-level JSON-LD array unwrapping, array `@type` (`["WebPage", "FAQPage"]`) support, missing/non-string `acceptedAnswer.text` detection (`aeo-faq-empty-answer`), `<title>` and HTML comment stripping in `stripTagsToText()`, and empty `Disallow:` override support in `auditRobotsTxt()`.
+4. **B4 Closed (All 5 CLI Scripts):** Added `readRequiredFlagValue()` to `generate-tokens.mjs:39-45`, `validate-tokens.mjs:78-84`, `audit-threejs.mjs:37-43`, `optimize-glb.mjs:23-29`, and `audit-geo-seo.mjs:22-28`, non-negative integer check on `--min-words` (`audit-geo-seo.mjs:44-50`), `.isFile()` checks on `--config`, `--robots`, and `--in`, plus `inputBytes === 0` guard in `optimize-glb.mjs:182-186`. Verified `7/7` adversarial missing/invalid flag & directory probes return exit `2` (`CONFIG_ERROR`).
+5. **B5 Closed (`audit-geo-seo.mjs:79-91,150`):** Replaced attribute regex with `extractMetaDescription()` using quote-matched `content=(?:"([^"]*)"|'([^']*)')` so apostrophes inside double quotes never truncate descriptions.
+6. **B6 Closed (`audit-threejs.mjs:32,67-137,208-222,253-262`):** Replaced raw paren counting in `extractUseFrameBlocks()` with a comment- & string-aware lexer (stripping `//` and `/* */` comments from extracted code body), added `.test.mjs`/`.spec.mjs` to `SKIP_FILES`, added `webglcontextlost`/`onDeviceLost` advisory check, and caught side-effect `import "lil-gui"` / `require("stats-gl")`.
+7. **B7 Closed (`geo-seo.test.mjs`, `optimize-glb.mjs:12`, `cf-website-factory/SKILL.md:8`, `vibe-brief-template.md:21`):** Replaced all project-specific references (`gtalpaca`, `Herd of Ibiza`, `Herd & Co.`, `avalon.glb`, `Academy`) with generic fixtures/wording (`0` matches via `rg`).
+
+## 2. Non-Blocking Observations
+
+1. **String-Embedded `/*` in `validate-tokens.mjs` ([`validate-tokens.mjs:129-135`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-design-tokens/scripts/validate-tokens.mjs#L129-L135)):** A JS/TS string containing `"/*"` (e.g. a route glob) would trigger `inBlockComment = true` until a later `*/`; low likelihood in UI components.
+2. **Canonical `<link>` Attribute Order ([`audit-geo-seo.mjs:168-171`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-geo-seo/scripts/audit-geo-seo.mjs#L168-L171)):** Expects `rel="canonical"` before `href="https://..."`; matches Next.js output but misses reversed `<link href="..." rel="canonical">` tags.
+3. **Working-Tree Hygiene:** Pre-existing staged `academy/` v2.4.0 curriculum edits (`contracts.ts`, 5 `course.json` files) and unstaged `.memory/tasks.md` remain in the working tree alongside the untracked v2.5.0 files.
+
+---
+
 # Stage 4 Dual-Axis Evaluation (`cf-eval`) & 7-Point ELI5 Readability QA Report
 
 **Date:** 2026-11-25  

@@ -1,26 +1,22 @@
 # Session Handover Record
 
-**Timestamp:** 2026-11-25 23:33 UTC  
+**Timestamp:** 2026-11-26 02:45 UTC  
 **Active Model:** Gemini 4 Neon (High)  
-**Git Branch & Commit:** `main` (`ac4a1c3` pushed & deployed to Vercel; v2.4.0 Academy curriculum updates staged locally)
+**Git Branch & Commit:** `main` (`v2.5.0` release ready for commit/push on top of `a7c501c`; Academy live at `https://antigravity-academy-ten.vercel.app`)
 
 ## 1. Executive Summary
-Released and pushed **Enterprise Code Factory `v2.4.0`** (`ac4a1c3`) + **Stage B Emblems** (`6e954f5`) to `origin/main` and `https://antigravity-academy-ten.vercel.app`, and verified the staged v2.4.0 Academy curriculum updates locally. All suites pass: **`12/12`** Python hooks, **`15/15`** `cf-verify-map` `node:test`, **`61/61`** Vitest, **`depcruise`** (`44` modules / `0` violations), and **`9/9`** 3-viewport `verify:map`.
+Released **`code-factory` `v2.5.0` — Vibe Website Factory Pipeline** (`19` skills total: added zero-dependency `cf-design-tokens`, `cf-threejs-craft`, `cf-geo-seo`, and `cf-website-factory`, backed by `plans/cf-website-factory-spec.md`, ADR `0005`, and independent `cf-reviewer` `SHIP` clearance in `.memory/qa-report.md`). Next milestone locked via `cf-grill-me`: **`code-factory` `v3.0` Phase 1 Core Hooks + Academy Sync** (pure Python stdlib hooks + stateless Academy update, executed via `/teamwork`).
 
-## 2. Completed Items
-- **`code-factory` v2.4.0 (`ac4a1c3`, `cf-reviewer` `SHIP`):** Shipped zero-dep `skills/cf-verify-map/` (dual-mode Playwright runner + `browser` fallback, credential-free `.memory/feature-map.md` & TS-aware `.dependency-cruiser.cjs` templates), wired `cf-bootstrap` + `verify-stack.sh` Step 4b (`depcruise`), synced `rules/AGENTS.md` (`8,842` B), `plugin.json` (`15` skills), `README.md`, `cf-tester.md`, and dogfooded in `academy/` (`dependency-cruiser` MIT + `playwright` Apache-2.0, `0` High/Critical CVEs).
-- **Production Live (`ac4a1c3`):** `https://antigravity-academy-ten.vercel.app` (`antigravity-academy-fzng4yn22-nexite-os.vercel.app`). Rollback: `cd academy && vercel rollback https://antigravity-academy-3sof4tuhf-nexite-os.vercel.app --yes --scope nexite-os`.
-- **v2.4.0 Academy Curriculum (Staged):** Added Course 02 Step 9 + 2 Prompt Vault cards (`54` steps, `45` prompts) and synced `14 → 15` skills across Courses `00–04` & Hero Explorer (`contracts.ts`).
+## 2. Production & Verification Baseline
+- **Live Academy URL:** `https://antigravity-academy-ten.vercel.app` (`antigravity-academy-1s60sh98i-nexite-os.vercel.app`)
+- **Rollback Command:** `cd academy && vercel rollback https://antigravity-academy-fzng4yn22-nexite-os.vercel.app --yes --scope nexite-os`
+- **Automated Verification:** `31/31` Node plugin tests (`16` v2.5.0 + `15` `cf-verify-map`), `12/12` Python hooks, `61/61` Academy Vitest, `depcruise` (`0` violations across `44` modules / `113` deps), `9/9` live 3-viewport `verify:map`, `0` High/Critical CVEs, `rules/AGENTS.md` at `8,842` B (`<= 10 KB`).
 
-## 3. Failed Approaches & Dead Ends
-- **Dynamic `import(fileUrl)` on CJS Playwright:** Put `.chromium` on `.default` when run from global plugin dir; fixed via project-local `createRequire` + `.default` unwrap.
-- **`route.startsWith('/')` SSRF Check:** Permitted `//evil.com` & `/\evil.com`; replaced with `assertSameOriginPath()`.
-- **Missing `tsConfig` in `dependency-cruiser.template.cjs`:** Left `38/38` `@/` aliases unresolved; fixed via conditional `tsconfig.json` detection.
+## 3. Permanent Invariants Distilled
+- `.agents/rules/academy-invariants.md`: Never wrap multi-screen sections (`CourseCurriculumStudio`, `PromptVault`, `repo-hitl`) in `motion` `initial={{ opacity: 0 }}` + numeric `viewport={{ amount: 0.05 }}`.
+- `rules/AGENTS.md` (§6 #5): Keep `.memory/feature-map.md` updated in the same commit as route/API/selector edits and pass `cf-verify-map` + `depcruise`.
+- All plugin scripts (`hooks/`, `skills/*/scripts/`) remain zero-dependency stdlib (Python 3 / Node ESM `>= 20`), fail-closed, with no shell string concatenation.
 
-## 4. Key Modified Files
-- Staged: `academy/src/lib/contracts.ts`, `academy/content/courses/{zero-to-one-foundations,harness-mastery,code-factory-sdlc,pro-setup-playbook,lit-software-factory}/course.json`, `.memory/handover.md`, `.memory/tasks.md`
-- Committed (`ac4a1c3`): `skills/cf-verify-map/*`, `skills/cf-bootstrap/*`, `skills/cf-next-verify/*`, `rules/AGENTS.md`, `plugin.json`, `.memory/feature-map.md`, `academy/.dependency-cruiser.cjs`, `plans/cf-verify-map-spec.md`, `.memory/decisions/0004-*.md`
-
-## 5. Next Step Action Plan
-1. On user approval: commit & push staged v2.4.0 Academy curriculum updates + `.memory/` handover sync to `origin/main`.
-2. Deploy updated `academy/` to `https://antigravity-academy-ten.vercel.app` and run post-deploy smoke tests.
+## 4. Active Milestone (`code-factory` v3.0 Phase 1 + Academy Sync)
+- **Scope:** Two-stage `PostToolUse` → `PreInvocation` single-file lint feedback bridge (`<2s`), `SessionStart` `.memory/` auto-injection, `PreToolUse` `overwrite` (`--no-pager`, `--max-time 5`) + context-saturation/loop-breaker guardrails, `Stop` verification gate, and Academy `15 → 19` skills + v3.0 hooks curriculum/explorer sync.
+- **Next Step:** Commit & push `v2.5.0` → lock `plans/code-factory-v3-phase1-spec.md` + ADR `0006` via `cf-architect` → user sign-off & `/teamwork` launch.

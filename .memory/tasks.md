@@ -1,20 +1,29 @@
 # Active Milestone Tasks
 
 ## Current Milestone
-- **Goal:** Evolve the globally installed **Enterprise Code Factory (`code-factory`)** plugin (`v2.4.0` → `v3.0.0`) alongside the live **Antigravity Academy** (`academy/`) multi-course platform.
+- **Goal:** Release **`code-factory` `v2.5.0` (Vibe Website Factory Pipeline)** cleanly to `origin/main`, then execute **Track A (`code-factory` `v3.0.0` Phase 1 Core Hooks + Academy Sync)** via locked `cf-architect` Spec/ADR and `/teamwork`.
 - **Repository:** https://github.com/behnker/antigravity-code-factory
 
 ## In Progress
-- [ ] **Commit `.memory/` Handover Sync (Optional):** Only `.memory/handover.md` and `.memory/tasks.md` have uncommitted updates after `4423c54` pushed Course 05 & Course 06 to `origin/main`.
+- [ ] **`code-factory` v3.0 Phase 1 Core Hooks + Academy Sync (`cf-grill-me` locked → Stage 2 `cf-architect` Spec & ADR → `/teamwork`):**
+  - Pure Python stdlib core hooks (`<50ms` `PreToolUse`, `<2s` single-file `PostToolUse`): two-stage `PostToolUse` → `PreInvocation` single-file lint feedback bridge, `SessionStart` `.memory/` auto-injection, `PreToolUse` `overwrite` (`--no-pager`, `--max-time 5`) + context-saturation warning & runaway loop-breaker, and `Stop` verification gate.
+  - Sync `academy/` curriculum & Hero Explorer (`15 → 19` skills + v3.0 core hooks architecture/steps/prompts, keeping `localStorage` stateless).
 
 ## Up Next
-- [ ] **Next Milestone (`code-factory` v3.0 Phase 1–3 from `.memory/research.md`):**
-  - Implement two-stage `PostToolUse` → `PreInvocation` single-file lint/feedback bridge and `SessionStart` `.memory/` auto-injection.
-  - Add bundled `run_workflow` Python orchestration scripts and optional `sidecar.json` / LSP MCP integration.
-- [ ] Add video recordings (`mp4` / YouTube / Loom URLs) into Courses 01–05 (`academy/content/courses/*/course.json`) following the Course 06 `/media/*.mp4` pattern.
+- [ ] **`code-factory` v3.0 Phases 2–3 (`.memory/research.md`):** Git-Shadow checkpoints (`cf-rewind`), `0600` Unix-socket async sidecar, companion `code-factory-lsp` MCP plugin, and bundled `run_workflow` scripts.
+- [ ] **Phase 3 (`gt-alpaca-website`) — HITL Dependency Approval & Toolchain Smoke Test:** Standalone repo bootstrapped via `cf-bootstrap` (`proof-pack/01-bootstrap.txt` captured); install MIT/ISC/Apache-2.0 toolchain upon approval, compress `avalon_poc.glb`, compile `tokens.json → tokens.css`, and lock `plans/gt-alpaca-website-spec.md`.
+- [ ] **Phase 4A/4B — Build `gt-alpaca-website` + Academy Course 08 (`vibe-website-factory`):** Execute Swarm build + Proof Pack capture, extend `LessonStepSchema` with allowlisted `proofGallery`, and publish Course 08 (`vibe-website-factory`) in `academy/`.
+- [ ] Add video recordings (`mp4` / audio overviews) & interactive micro-labs into Courses `00–05` & `07` (`academy/content/courses/*/course.json`) following the Course 06 `/media/*.mp4` pattern.
 - [ ] Optional: Generate a Spanish (`ES`) launch cut or voiceover version of *Herd of Ibiza — GT-Alpaca Edition* inside `/Users/ralphb/Projects_Personal/product-video-studio`.
 
 ## Completed
+- [x] **`code-factory` v2.5.0 Vibe Website Factory Pipeline (Phases 1 & 2 — `cf-reviewer` `SHIP` Verdict):**
+  - Extracted full 4-pillar methodology & tool/safety inventory from 37-source NotebookLM notebook (`Vibe Design: Building Premium Websites with Gemini 3`) and audited `herd_and_co`, `Project_herd_and_co`, `product-video-studio`, plus read-only security/code audit of `nextlevelbuilder/ui-ux-pro-max-skill` (`b73ee96`, MIT) into `.memory/research-vibe-website-factory.md`.
+  - Authored locked spec (`plans/cf-website-factory-spec.md`) & ADR (`0005-vibe-website-factory-pipeline.md`) adopting MIT W3C token format + zero-native-binary `@gltf-transform/cli` (Meshopt + `KHR_mesh_quantization` + WebP) default.
+  - Built 4 zero-dependency progressive-disclosure skills: `skills/cf-website-factory/`, `skills/cf-design-tokens/` (`generate-tokens.mjs` w/ WCAG ≥ 4.5:1 + Tailwind v4 `@theme` + `validate-tokens.mjs`), `skills/cf-threejs-craft/` (Utsubo 100 Tips + `lil-gui`/`stats-gl` + `audit-threejs.mjs` + `optimize-glb.mjs`), and `skills/cf-geo-seo/` (7 AI factors + `audit-geo-seo.mjs`); synced `plugin.json` (`2.5.0`, 19 skills) & `README.md`, keeping `rules/AGENTS.md` at `8,842 B <= 10 KB`.
+  - Independent `cf-reviewer` caught 7 real blocking bugs (`B1–B7`) on Pass 1 (`BLOCK`), all 7 + 5 polish items closed with regression tests → Pass 2 **`SHIP`** (`31/31` Node tests, `12/12` Python hooks, `21/21` `secret-guard.py` allow, `7/7` adversarial CLI exit-2 probes, clean `academy/` dry-runs).
+  - Bootstrapped standalone `/Users/ralphb/Projects_Personal/gt-alpaca-website` (`git init -b main`, `cf-bootstrap`, `.gitignore`, `proof-pack/01-bootstrap.txt`).
+- [x] **8-Course ELI5 Multimodal Academy, 4-Layer 7-Mode Explorer, Course Emblems & v2.4.0 Curriculum Live (`9f93a43`, `6e954f5`, `a7c501c` → `https://antigravity-academy-ten.vercel.app`):** Shipped Courses `00–07` (`54` ELI5 steps & plain-English Mermaid diagrams, `8` concrete cutaway illustrations, `8` custom SVG course emblems, `45` Prompt Vault cards with `Use This Prompt When:`, `/swarm`·`/boost`·`/teamwork` semantic mode color-coding, and v2.4.0 `cf-verify-map`/`depcruise` integration) to Vercel production (`antigravity-academy-1s60sh98i-nexite-os.vercel.app`; `5/5` smoke tests, `61/61` Vitest, `9/9` `verify:map`).
 - [x] **`code-factory` v2.4.0 Feature Map Verification & Architectural Boundary Gates (Scope C — `SHIP` Verdict):**
   - Authored locked spec (`plans/cf-verify-map-spec.md`) and ADR (`0004-feature-map-and-architecture-boundary-verification.md`) integrating and hardening `project-antigravity-verification-kit.zip` as a zero-dependency global plugin capability.
   - Created `skills/cf-verify-map/` (`SKILL.md`, hardened `scripts/run-verify-map.mjs` with direct Markdown contract parsing, project-local Playwright resolution, same-origin SSRF guard, multi-viewport overflow check, preserved failure screenshots, and `15/15` `node:test` unit tests; credential-free `feature-map-template.md`; TS-aware `dependency-cruiser.template.cjs`).
