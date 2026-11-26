@@ -1,3 +1,59 @@
+# Stage 4 Dual-Axis Evaluation (`cf-eval`) — `code-factory` `v3.0.1` Upstream Dogfooding Fixes (`cf-learn`)
+
+**Date:** 2026-11-26 (06:48 UTC)  
+**Spec:** [`plans/code-factory-v3-0-1-dogfood-fixes-spec.md`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/plans/code-factory-v3-0-1-dogfood-fixes-spec.md) · **Commit Reviewed:** `ce7ea0c` (+ working-tree `README.md`, spec, `.memory/{handover,tasks}.md`)  
+**Reviewer Context:** Clean decoupled `cf-reviewer` (`cf-eval`) subagent context (zero source, test, skill, template, or config files modified)  
+**Verdict:** **`SHIP`** *(Zero Blocking Defects; `3` Low Non-Blocking Observations logged below. Independently verified `38/38` Node plugin tests, `37/37` Python hook tests, `0` `ruff` issues, `6/6` `verify-stack.sh` gates incl. `82/82` Vitest & `depcruise` `0` violations, `0` High/Critical CVEs, `6/6` real symlinked CLI invocations, and live symlinked dogfood checks against `gt-alpaca-website` tokens & Next 16 `.next/server/app`.)*
+
+---
+
+## Executive Dual-Axis Scorecard (`v3.0.1`)
+
+| Axis | Dimension | Status | Verified Evidence |
+| :--- | :--- | :---: | :--- |
+| **Axis 1** | **Symlink-Safe ESM Entrypoints (`6/6` Scripts)** | **PASS** | [`generate-tokens.mjs:398-413`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-design-tokens/scripts/generate-tokens.mjs#L398-L413), [`validate-tokens.mjs:234-249`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-design-tokens/scripts/validate-tokens.mjs#L234-L249), [`audit-geo-seo.mjs:495-510`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-geo-seo/scripts/audit-geo-seo.mjs#L495-L510), [`audit-threejs.mjs:349-364`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-threejs-craft/scripts/audit-threejs.mjs#L349-L364), [`optimize-glb.mjs:245-260`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-threejs-craft/scripts/optimize-glb.mjs#L245-L260), [`run-verify-map.mjs:672-689`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-verify-map/scripts/run-verify-map.mjs#L672-L689) all export `isDirectExecution()` backed by `safeRealpath()` (`fs.realpathSync` + `path.resolve` fallback); `6/6` `--help` probes via `~/.gemini/config/plugins/code-factory/skills/...` & `6/6` `fs.symlinkSync` tests pass. |
+| **Axis 1** | **WCAG Contrast Matrix & Template Tokens** | **PASS** | [`checkSemanticContrast()`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-design-tokens/scripts/generate-tokens.mjs#L197-L238) enforces `>= 4.5:1` across `foreground`, `muted-foreground`, and `*-text` × `["background", "surface", "surface-elevated", "card"]` + `5` fill pairs in Light & Dark; [`tokens.template.json`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-design-tokens/resources/tokens.template.json#L68-L106) passes **`30/30`** (`5.22:1–17.28:1`); symlinked dogfood run on `gt-alpaca-website/design/tokens.json` passes **`40/40`**. |
+| **Axis 1** | **Next.js 16 GEO/SEO Auditor Hardening** | **PASS** | [`collectHtmlFiles()`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-geo-seo/scripts/audit-geo-seo.mjs#L399-L417) excludes `_not-found.html`, `_global-error.html`, `_error.html`, `404.html`, and `500.html` during directory walks while keeping single-file audits intact; [`hasCanonicalLink()`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-geo-seo/scripts/audit-geo-seo.mjs#L93-L104) supports any `<link>` attribute order; symlinked run against `gt-alpaca-website/.next/server/app` audits `5` pages (`0` errors, `0` warnings). |
+| **Axis 1** | **Security, Deps, Purity & Full-Stack Gates** | **PASS** | `0` external deps across all `6` `.mjs` scripts (`node:*` stdlib only); `0` shell string concatenation ([`optimize-glb.mjs:215`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-threejs-craft/scripts/optimize-glb.mjs#L215) uses `execFileSync` arg array); `0` `gt-alpaca`/`herd`/`ibiza` leakage across `skills/`; `0` new Academy deps (`package.json` & `pnpm-lock.yaml` unchanged); `0` High/Critical CVEs; [`rules/AGENTS.md`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/rules/AGENTS.md) = **`9,147` B** (`<= 10,240` B); [`generated-repo-manifest.json`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/data/generated-repo-manifest.json#L2-L13) reports `pluginVersion: "3.0.1"`. |
+| **Axis 2** | **Trajectory, Spec Adherence & Oracle Honesty** | **PASS** | Bounded strictly to `plans/code-factory-v3-0-1-dogfood-fixes-spec.md`; `0` `@ts-ignore`/`eslint-disable`/`.skip`/`as any`; regression tests added across all `4` Node suites (`31 → 38`). Minor non-blocking spec deviations (`N1–N3`) logged transparently below. |
+
+---
+
+## 1. Automated Verification Oracles (Independently Executed)
+
+| Check | Command | Result | Exact Observed Output |
+| :--- | :--- | :---: | :--- |
+| **Node Plugin Tests** | `node --test skills/cf-verify-map/scripts/test_run_verify_map.mjs skills/cf-design-tokens/scripts/tokens.test.mjs skills/cf-threejs-craft/scripts/threejs.test.mjs skills/cf-geo-seo/scripts/geo-seo.test.mjs` | **PASS** | **`38/38` passed** (`4` suites, `0` failed, `0` skipped — `256.61 ms`) |
+| **Python Hooks & Lint** | `python3 -m unittest discover -s hooks -p "test_*.py" -v && ruff check hooks/` | **PASS** | **`37/37` passed** in `4.076 s`; `ruff check`: **`All checks passed!`** |
+| **Symlinked CLI & Dogfood** | Symlinked `~/.gemini/config/plugins/code-factory/skills/...` invocations (`6/6` `--help`, `tokens.template.json`, `gt-alpaca-website/design/tokens.json`, `gt-alpaca-website/.next/server/app`) | **PASS** | `6/6` `--help` exit `0`; `tokens.template.json`: `PASS` (`33/18/5/12`, `30` WCAG pairs); `gt-alpaca`: `PASS` (`40/24/6/19`, `40` WCAG pairs); `gt-alpaca` `.next/server/app`: `PASS: Audited 5 HTML document(s) — 0 error(s), 0 warning(s).` |
+| **Full-Stack Academy Gate** | `bash skills/cf-next-verify/scripts/verify-stack.sh academy --coverage` | **PASS** | **`6 passed, 0 failed, 0 skipped`**: `tsc --noEmit` (`0`), `next lint` (`0`), `vitest run --coverage` (**`4/4` files, `82/82` passed**), Static Scan (`0` leaks), `depcruise` (`0` violations across `47` modules / `125` deps), `pnpm run build` (`sync:resources`: `60` resources, `9` courses; `next build`: `7/7` routes) |
+| **CVEs & Budget Checks** | `cd academy && pnpm audit --audit-level=high`; `wc -c rules/AGENTS.md`; `git diff f100de2..HEAD -- academy/package.json academy/pnpm-lock.yaml` | **PASS** | Exit `0` — **`0` High/Critical CVEs** (`1` low, `5` moderate); `rules/AGENTS.md` = **`9147` B**; `0` dependency diffs |
+
+---
+
+## 2. Findings Table (`v3.0.1`)
+
+### Blocking Defects
+*None (`0` Critical, `0` High, `0` Medium blocking defects).*
+
+### Non-Blocking Observations
+
+| ID | Severity | Location | Finding & Rationale |
+| :---: | :---: | :--- | :--- |
+| **N1** | **Low** | [`academy/tests/api-routes.test.ts:253,264`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/tests/api-routes.test.ts#L253-L264) | **Broadened version regex vs. Spec §2.4:** Spec §2.4 specified updating the assertion to `"3.0.1"`, whereas `ce7ea0c` used `.toMatch(/^3\.0\.\d+$/)` and kept `"v3.0.0"` in the test title (`:253`). While [`plugin.json:4`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/plugin.json#L4) and [`generated-repo-manifest.json:3`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/data/generated-repo-manifest.json#L3) both genuinely carry `"3.0.1"`, asserting `.toBe("3.0.1")` (or reading `plugin.json`) prevents a stale `"3.0.0"` manifest from passing. |
+| **N2** | **Low** | [`skills/cf-design-tokens/scripts/generate-tokens.mjs:203-208`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-design-tokens/scripts/generate-tokens.mjs#L203-L208) | **Un-sorted `textKeys` & `--color--text` check vs. Spec §2.2:** `checkSemanticContrast()` iterates `Object.keys(semanticMap)` insertion order without `.sort()` or explicit filtering of literal `"--color--text"`. No correctness or security impact (`SAFE_KEY_RE` requires valid key segments and contrast pass/fail is order-invariant). |
+| **N3** | **Low** | [`.memory/tasks.md:20`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/.memory/tasks.md#L20), [`README.md:3,7`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/README.md#L3-L7), [`plans/code-factory-v3-0-1-dogfood-fixes-spec.md`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/plans/code-factory-v3-0-1-dogfood-fixes-spec.md) | **Working-tree commit hygiene & manifest resource count:** `README.md`, `plans/code-factory-v3-0-1-dogfood-fixes-spec.md`, and `.memory/{handover,tasks}.md` remain uncommitted after `ce7ea0c`. Also, `.memory/tasks.md:20` cites `61 resources` recorded prior to deleting `.memory/next-start-prompt.md`; current `sync:resources` outputs **`60 resources, 9 courses`** (`memory: 16`, `plans: 7`). |
+
+---
+
+## 3. Outer-Loop Answerability Statement (`v3.0.1`)
+
+1. **What Changed:** Shipped `code-factory` `v3.0.1` ([`plugin.json`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/plugin.json), [`README.md`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/README.md)) closing three `gt-alpaca-website` dogfood findings: `fs.realpathSync`-backed `isDirectExecution()` across all `6` skill `.mjs` CLIs, Next.js 16 `_global-error.html` / `_error.html` directory exclusion plus attribute-order-agnostic `hasCanonicalLink()` in [`audit-geo-seo.mjs`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-geo-seo/scripts/audit-geo-seo.mjs), and Light + Dark `*-text` × `["background", "surface", "surface-elevated", "card"]` WCAG contrast verification in [`generate-tokens.mjs`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-design-tokens/scripts/generate-tokens.mjs) + [`tokens.template.json`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/skills/cf-design-tokens/resources/tokens.template.json), synced to `academy/` (`pluginVersion: "3.0.1"`).
+2. **Why It Is Safe:** Zero external npm or Python dependencies were added (`0` High/Critical CVEs), zero shell concatenation or project-specific leakage exists in the skill scripts, `rules/AGENTS.md` remains `9,147 B <= 10,240 B`, and all `38/38` Node plugin tests (incl. real `fs.symlinkSync` subprocess probes), `37/37` Python hook tests, `6/6` `verify-stack.sh` gates (`82/82` Vitest, `0` `depcruise` violations), and live symlinked `gt-alpaca-website` checks pass independently.
+3. **How to Roll Back:** Revert `ce7ea0c` cleanly with `git revert ce7ea0c` (and discard or adjust the uncommitted working-tree docs/memory files) to restore `v3.0.0` (`f100de2`), then run `cd academy && pnpm run sync:resources`.
+
+---
+
 # Stage 4 Dual-Axis Evaluation (`cf-eval`) — Pass 2: Antigravity Academy Course 08 (`vibe-website-factory`), Complete Proof Pack `01–09`, `19/19` Skill Traceability & 4-Domain Showcase
 
 **Date:** 2026-11-26 (06:03 UTC)  

@@ -14,10 +14,10 @@
 
 ## Completed
 - [x] **`code-factory` `v3.0.1` (`cf-learn` Upstream Dogfood Fixes from `gt-alpaca-website`):**
-  - Hardened ESM entrypoint checks with `fs.realpathSync` across all 6 CLI scripts (`generate-tokens.mjs`, `validate-tokens.mjs`, `audit-geo-seo.mjs`, `audit-threejs.mjs`, `optimize-glb.mjs`, `run-verify-map.mjs`) so symlinked plugin invocations execute `main()` reliably.
-  - Updated `skills/cf-geo-seo/scripts/audit-geo-seo.mjs` (`collectHtmlFiles`) to exclude Next.js 16 `_global-error.html` and `_error.html`.
-  - Extended `skills/cf-design-tokens/scripts/generate-tokens.mjs` (`checkSemanticContrast`) to enforce `>= 4.5:1` WCAG contrast across all `*-text`, `foreground`, and `muted-foreground` tokens against `background`, `surface`, `surface-elevated`, and `card` in both light and dark modes.
-  - Added regression tests (`34/34` `node:test`, `37/37` Python hooks, `82/82` Academy Vitest = `153/153` passing) and bumped `plugin.json` to `3.0.1`.
+  - Locked `plans/code-factory-v3-0-1-dogfood-fixes-spec.md` and hardened ESM entrypoint checks (`isDirectExecution` via `fs.realpathSync`) across all 6 CLI scripts (`generate-tokens.mjs`, `validate-tokens.mjs`, `audit-geo-seo.mjs`, `audit-threejs.mjs`, `optimize-glb.mjs`, `run-verify-map.mjs`) with real symlink subprocess regression tests.
+  - Updated `skills/cf-geo-seo/scripts/audit-geo-seo.mjs` (`collectHtmlFiles` excludes Next.js 16 `_global-error.html` & `_error.html`; `hasCanonicalLink` supports any attribute order on `<link rel="canonical">`).
+  - Extended `skills/cf-design-tokens/scripts/generate-tokens.mjs` (`checkSemanticContrast`) to enforce `>= 4.5:1` WCAG contrast across all `*-text`, `foreground`, and `muted-foreground` tokens against `background`, `surface`, `surface-elevated`, and `card` in both light and dark modes, and updated `skills/cf-design-tokens/resources/tokens.template.json` with Light + Dark `primary-text` and `accent-text` tokens.
+  - Added regression tests (`38/38` `node:test`, `37/37` Python hooks, `82/82` Academy Vitest = `157/157` passing), bumped `plugin.json` & `README.md` to `3.0.1`, synced `academy/` manifest (`60` resources, `9` courses), and cleared independent `cf-reviewer` Dual-Axis Eval (`SHIP` in `.memory/qa-report.md`).
 - [x] **Steps 4 & 5 — Academy Course 08 (`vibe-website-factory`), Live GT-Alpaca Proof Pack `01–09`, `19/19` Skill Traceability & 4-Domain Showcase (`cf-reviewer` Pass 2 `SHIP`):**
   - Locked `plans/academy-course-08-and-gap-closure-spec.md` & ADR-0007 (`0007-academy-proof-gallery-and-four-domain-method.md`).
   - Added allowlisted `ProofGallerySchema` (`isAllowedProofImageUrl`, `isAllowedLiveUrl` w/ strict hostname validation), `DomainCaseStudySchema`, `ProofGalleryPanel.tsx` (`100%` line cov), `FourDomainShowcase.tsx` (`#four-domains`), Course `08` Amber/Emerald emblem in `CourseEmblem.tsx`, and controlled `CourseCurriculumStudio` routing.

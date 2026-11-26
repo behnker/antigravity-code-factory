@@ -1,10 +1,10 @@
 # Antigravity Enterprise Code Factory Plugin
 
-Global Antigravity plugin implementing the **Enterprise Code Factory Blueprint (v3.0.0)** — Spec-Driven Development (SDD), invariant quality gates (Security, Scalability, UI/UX, Testing, Edge/Serverless runtimes, and Lit Software Factory / Loop Engineering), persistent `.memory/` handovers & living Feature Maps, 5 least-privilege subagent personas, a **5-event Phase 1 Core Hooks** engine (pure Python 3 stdlib, zero external dependencies), and a **19-skill** SDLC, Website Factory (Token-First Design, Three.js Craft, SEO/AEO/GEO), Feature Map Verification, Architectural Boundary, and Dual-Axis Eval pipeline across all projects.
+Global Antigravity plugin implementing the **Enterprise Code Factory Blueprint (v3.0.1)** — Spec-Driven Development (SDD), invariant quality gates (Security, Scalability, UI/UX, Testing, Edge/Serverless runtimes, and Lit Software Factory / Loop Engineering), persistent `.memory/` handovers & living Feature Maps, 5 least-privilege subagent personas, a **5-event Phase 1 Core Hooks** engine (pure Python 3 stdlib, zero external dependencies), and a **19-skill** SDLC, Website Factory (Token-First Design, Three.js Craft, SEO/AEO/GEO), Feature Map Verification, Architectural Boundary, and Dual-Axis Eval pipeline across all projects.
 
 ## Structure
 
-- `plugin.json` — Plugin manifest and metadata (`v3.0.0`)
+- `plugin.json` — Plugin manifest and metadata (`v3.0.1`)
 - `assets/logo.svg` — Plugin icon
 - `rules/AGENTS.md` — Always-on global invariants (`<= 10 KB` budget covering Security, Scalability, UI/UX, Testing, Cloudflare/Vercel/Supabase edge & serverless guardrails, and Lit Software Factory governance) and `.memory/` session protocol
 - `agents/` — 5 least-privilege subagent personas with explicit `tools:` frontmatter (`cf-architect`, `cf-backend`, `cf-frontend`, `cf-reviewer`, `cf-tester`; Stage 4 visual QA uses Antigravity's built-in `browser` subagent)
