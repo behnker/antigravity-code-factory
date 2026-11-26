@@ -26,15 +26,15 @@
   3. Assert zero horizontal overflow at `375px`, `768px`, and `1440px`
 
 ### 2. Multi-Course Curriculum Studio (`course-curriculum`)
-- **Directory:** `academy/src/components/CourseCurriculumStudio.tsx`, `CourseEmblem.tsx`, `Eli5MicrolearningCard.tsx`, `MermaidDiagram.tsx`
+- **Directory:** `academy/src/components/CourseCurriculumStudio.tsx`, `CourseEmblem.tsx`, `Eli5MicrolearningCard.tsx`, `MermaidDiagram.tsx`, `ProofGalleryPanel.tsx`
 - **Routes:** `/#courses`
 - **API Endpoints:**
-  - `GET /api/courses?limit=20&offset=0` -> `200 { items[8], total: 8, limit, offset }`
+  - `GET /api/courses?limit=20&offset=0` -> `200 { items[9], total: 9, limit, offset }`
 - **Key DOM Selectors:**
   - Courses section: `#courses`, `#courses-heading`
 - **Golden Happy Path:**
   1. Scroll to `#courses`
-  2. Switch between Courses `00–07` and verify active banner, ELI5 cards, and Mermaid SVGs render without `parsererror` or console errors
+  2. Switch between Courses `00–08` (including Course `08` `vibe-website-factory` with `ProofGalleryPanel`) and verify active banner, ELI5 cards, proof cards, and Mermaid SVGs render without `parsererror` or console errors
 
 ### 3. Parameterized Prompt Vault (`prompt-vault`)
 - **Directory:** `academy/src/components/PromptVault.tsx`
@@ -61,6 +61,15 @@
 - **Golden Happy Path:**
   1. Fill `#hitl-cmd` with `git push origin main` and submit
   2. Assert `force_ask` decision badge renders and `POST /api/hitl/simulate` returns `200`
+
+### 5. Four-Domain Proven Method Showcase (`four-domains`)
+- **Directory:** `academy/src/components/FourDomainShowcase.tsx`, `academy/src/data/four-domain-cases.ts`
+- **Routes:** `/#four-domains`
+- **Key DOM Selectors:**
+  - Showcase section: `#four-domains`, `#four-domains-heading`
+- **Golden Happy Path:**
+  1. Scroll to `#four-domains` directly below `#sdlc-loop` and above `#courses`
+  2. Assert all 4 shipped/verified domain case study cards (Website, Mobile/Web 3D Game, Video Generation, App & Harness Engineering) render with ELI5/Pro copy and clicking `Open Course 08 →` selects Course `08` (`vibe-website-factory`) in `#courses`
 
 ---
 
@@ -89,6 +98,8 @@
         "#main-content",
         "#hero-lab",
         "#hero-heading",
+        "#four-domains",
+        "#four-domains-heading",
         "#courses",
         "#courses-heading",
         "#prompt-vault",

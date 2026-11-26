@@ -1,15 +1,26 @@
+import fs from "node:fs";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
+import { z } from "zod";
 import {
   CourseIllustrationSchema,
   CourseSchema,
+  DomainCaseStudySchema,
   Eli5ConceptBlockSchema,
   HarnessDimensionSchema,
   LearnerProgressSchema,
   PromptCardSchema,
+  ProofArtifactSchema,
+  ProofGallerySchema,
   VideoConfigSchema,
   isAllowedAudioUrl,
   isAllowedImageUrl,
+  isAllowedLiveUrl,
+  isAllowedProofImageUrl,
   isAllowedVideoUrl,
+  type Course,
+  type LessonStep,
+  type PromptCard,
 } from "@/lib/schemas";
 import {
   LEARNER_PROGRESS_STORAGE_KEY,
@@ -21,6 +32,7 @@ import {
   saveLearnerProgress,
 } from "@/lib/prompt-engine";
 import { HARNESS_DIMENSIONS } from "@/data/harness-comparison";
+import { FOUR_DOMAIN_CASES } from "@/data/four-domain-cases";
 
 describe("Video URL allowlist & schemas", () => {
   it("allows vetted video providers and local media paths", () => {
@@ -597,5 +609,350 @@ describe("Pilot v2 optional ELI5 readability & discovery schema fields", () => {
     expect(
       CourseSchema.safeParse({ ...validBaseCourse, eli5Title: "z".repeat(140) }).success,
     ).toBe(true);
+  });
+});
+
+describe("Course 08 Proof Gallery & 4-Domain Case Study URL allowlists & schemas", () => {
+  it("isAllowedProofImageUrl allows /media/proof-pack/<slug>/<file>.(png|webp|jpg|jpeg|svg) and blocks traversal, remote, javascript:, wrong dirs, and invalid extensions", () => {
+    expect(isAllowedProofImageUrl("/media/proof-pack/gt-alpaca/hero-1440px.png")).toBe(true);
+    expect(isAllowedProofImageUrl("/media/proof-pack/gt-alpaca/tokens_wcag.webp")).toBe(true);
+    expect(isAllowedProofImageUrl("/media/proof-pack/site-01/frame.jpg")).toBe(true);
+    expect(isAllowedProofImageUrl("/media/proof-pack/site-01/frame.jpeg")).toBe(true);
+    expect(isAllowedProofImageUrl("/media/proof-pack/site-01/diagram.svg")).toBe(true);
+
+    // Reject traversal, remote hosts, script/data URIs, wrong directories, bad extensions, empty
+    expect(isAllowedProofImageUrl("/media/proof-pack/gt-alpaca/../secret.png")).toBe(false);
+    expect(isAllowedProofImageUrl("/media/proof-pack/../gt-alpaca/hero.png")).toBe(false);
+    expect(isAllowedProofImageUrl("https://cdn.example.com/media/proof-pack/gt-alpaca/hero.png")).toBe(false);
+    expect(isAllowedProofImageUrl("http://localhost:3000/media/proof-pack/gt-alpaca/hero.png")).toBe(false);
+    expect(isAllowedProofImageUrl("javascript:alert(1)")).toBe(false);
+    expect(isAllowedProofImageUrl("data:image/png;base64,AAAA")).toBe(false);
+    expect(isAllowedProofImageUrl("/media/illustrations/hero-1440px.png")).toBe(false);
+    expect(isAllowedProofImageUrl("/media/proof-pack/hero-1440px.png")).toBe(false);
+    expect(isAllowedProofImageUrl("/media/proof-pack/gt-alpaca/nested/hero.png")).toBe(false);
+    expect(isAllowedProofImageUrl("/media/proof-pack/GT-Alpaca/hero.png")).toBe(false);
+    expect(isAllowedProofImageUrl("/media/proof-pack/gt-alpaca/hero.gif")).toBe(false);
+    expect(isAllowedProofImageUrl("/media/proof-pack/gt-alpaca/hero.html")).toBe(false);
+    expect(isAllowedProofImageUrl("")).toBe(false);
+  });
+
+  it("isAllowedLiveUrl accepts strictly https:// origins and rejects http://, javascript:, whitespace, and embedded credentials", () => {
+    expect(isAllowedLiveUrl("https://www.alpacas-ibiza.app")).toBe(true);
+    expect(isAllowedLiveUrl("https://antigravity-academy-ten.vercel.app")).toBe(true);
+    expect(isAllowedLiveUrl("https://www.alpacas-ibiza.app/game?mode=preview")).toBe(true);
+
+    expect(isAllowedLiveUrl("http://www.alpacas-ibiza.app")).toBe(false);
+    expect(isAllowedLiveUrl("javascript:alert(1)")).toBe(false);
+    expect(isAllowedLiveUrl("https://www.alpacas-ibiza.app/my page")).toBe(false);
+    expect(isAllowedLiveUrl(" https://www.alpacas-ibiza.app")).toBe(false);
+    expect(isAllowedLiveUrl("https://user:pass@www.alpacas-ibiza.app")).toBe(false);
+    expect(isAllowedLiveUrl("https://token@www.alpacas-ibiza.app")).toBe(false);
+    expect(isAllowedLiveUrl("")).toBe(false);
+    expect(isAllowedLiveUrl("not-a-url")).toBe(false);
+    expect(isAllowedLiveUrl(`https://example.com/${"a".repeat(490)}`)).toBe(false);
+  });
+
+  it("validates ProofGallerySchema and requires accessible alt text whenever imageSrc is provided", () => {
+    const validGallery = {
+      title: "GT-Alpaca Proof #03 — Tokens & GLB",
+      summary: "Verified real compilation and GLB reduction metrics.",
+      pipelinePhase: "Stage 2 · Verified",
+      skillsUsed: ["cf-design-tokens", "cf-threejs-craft"],
+      promptsVerified: ["vwf-prompt-design-tokens"],
+      metrics: [
+        {
+          label: "GLB Size",
+          before: "4.52 MB",
+          after: "852 KB (-81.57%)",
+          status: "pass" as const,
+        },
+        {
+          label: "Visual Capture",
+          after: "Pending Step 4B",
+          status: "info" as const,
+        },
+      ],
+      artifacts: [
+        {
+          id: "gt-alpaca-hero-1440",
+          label: "Desktop 1440px Hero",
+          imageSrc: "/media/proof-pack/gt-alpaca/hero-1440px.png",
+          alt: "Desktop hero showing Avalon 3D alpaca model and sunlit Ibiza palette",
+          caption: "Verified 1440px desktop screenshot with 0px overflow.",
+          command: "pnpm run verify:map",
+        },
+        {
+          id: "gt-alpaca-cli-slot",
+          label: "CLI Log Proof",
+          caption: "Pending visual capture with CLI excerpt attached.",
+          cliExcerpt: "6 passed, 0 failed",
+        },
+      ],
+      liveUrl: "https://www.alpacas-ibiza.app",
+    };
+
+    const parsed = ProofGallerySchema.safeParse(validGallery);
+    expect(parsed.success).toBe(true);
+
+    // Missing alt when imageSrc is provided must fail with alt path
+    const missingAlt = ProofArtifactSchema.safeParse({
+      id: "missing-alt-artifact",
+      label: "Missing Alt",
+      imageSrc: "/media/proof-pack/gt-alpaca/hero-1440px.png",
+      caption: "Should fail because alt is omitted.",
+    });
+    expect(missingAlt.success).toBe(false);
+    if (!missingAlt.success) {
+      expect(missingAlt.error.issues.some((issue) => issue.path.includes("alt"))).toBe(true);
+    }
+
+    // Disallowed imageSrc & liveUrl & empty artifacts fail cleanly
+    expect(
+      ProofGallerySchema.safeParse({
+        ...validGallery,
+        liveUrl: "http://www.alpacas-ibiza.app",
+      }).success,
+    ).toBe(false);
+    expect(
+      ProofGallerySchema.safeParse({
+        ...validGallery,
+        liveUrl: "https://..",
+      }).success,
+    ).toBe(false);
+    expect(
+      ProofGallerySchema.safeParse({
+        ...validGallery,
+        artifacts: [
+          {
+            id: "bad-img",
+            label: "Bad Img",
+            imageSrc: "https://evil.example.com/shot.png",
+            alt: "Blocked",
+            caption: "Should fail",
+          },
+        ],
+      }).success,
+    ).toBe(false);
+    expect(
+      ProofGallerySchema.safeParse({
+        ...validGallery,
+        artifacts: [],
+      }).success,
+    ).toBe(false);
+  });
+
+  it("validates DomainCaseStudySchema happy path and rejects invalid domain ids, order bounds, and unsafe liveUrl", () => {
+    const validDomain = {
+      id: "website" as const,
+      order: 1,
+      domainLabel: "Website",
+      title: "The Herd of Ibiza: GT-Alpaca",
+      eli5Title: "Interactive 3D Game Showcase Website",
+      repoName: "gt-alpaca-website",
+      status: "shipped" as const,
+      accentTone: "amber" as const,
+      summary: "Next.js App Router flagship site built with cf-website-factory.",
+      eli5Summary: "A fast, sunlit 3D website that loads smoothly on phones.",
+      stack: ["Next.js App Router", "Tailwind CSS v4"],
+      skillsApplied: ["cf-website-factory", "cf-design-tokens"],
+      verifiedMetrics: [
+        { label: "GLB Compression", value: "81.57%" },
+        { label: "WCAG AA Tokens", value: "12/12 >= 4.5:1" },
+      ],
+      proofArtifactPath: "gt-alpaca-website/proof-pack/03-tokens-and-glb.json",
+      liveUrl: "https://www.alpacas-ibiza.app",
+      linkedCourseSlug: "vibe-website-factory",
+      linkedCourseNumber: 8,
+    };
+
+    expect(DomainCaseStudySchema.safeParse(validDomain).success).toBe(true);
+    expect(
+      DomainCaseStudySchema.safeParse({ ...validDomain, liveUrl: undefined, status: "in-progress" })
+        .success,
+    ).toBe(true);
+
+    expect(DomainCaseStudySchema.safeParse({ ...validDomain, id: "mobile" }).success).toBe(false);
+    expect(DomainCaseStudySchema.safeParse({ ...validDomain, order: 0 }).success).toBe(false);
+    expect(DomainCaseStudySchema.safeParse({ ...validDomain, order: 5 }).success).toBe(false);
+    expect(
+      DomainCaseStudySchema.safeParse({ ...validDomain, liveUrl: "http://insecure.example.com" })
+        .success,
+    ).toBe(false);
+    expect(
+      DomainCaseStudySchema.safeParse({ ...validDomain, linkedCourseSlug: "INVALID SLUG" }).success,
+    ).toBe(false);
+    expect(DomainCaseStudySchema.safeParse({ ...validDomain, stack: ["OnlyOne"] }).success).toBe(
+      false,
+    );
+    expect(
+      DomainCaseStudySchema.safeParse({
+        ...validDomain,
+        verifiedMetrics: [{ label: "OnlyOne", value: "1" }],
+      }).success,
+    ).toBe(false);
+  });
+});
+
+describe("Filesystem-Backed 19/19 Skill Traceability & 4-Domain Regression Gate (Spec §5.3)", () => {
+  const REPO_SKILLS_DIR = path.resolve(__dirname, "../../skills");
+  const COURSES_DIR = path.resolve(__dirname, "../content/courses");
+
+  function loadAllCoursesFromDisk(): Course[] {
+    const entries = fs.readdirSync(COURSES_DIR, { withFileTypes: true });
+    const parsedCourses: Course[] = [];
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue;
+      const courseFile = path.join(COURSES_DIR, entry.name, "course.json");
+      if (!fs.existsSync(courseFile)) continue;
+      const rawJson = JSON.parse(fs.readFileSync(courseFile, "utf8")) as unknown;
+      parsedCourses.push(CourseSchema.parse(rawJson));
+    }
+    return parsedCourses.sort((a, b) => a.number - b.number);
+  }
+
+  function stepReferencesSkill(
+    step: LessonStep,
+    skillSlug: string,
+    promptById: ReadonlyMap<string, PromptCard>,
+  ): boolean {
+    if (step.repoArtifactPath?.includes(skillSlug)) return true;
+
+    const linkedPrompt = step.promptId ? promptById.get(step.promptId) : undefined;
+    if (linkedPrompt?.skillRef) {
+      const tokens = linkedPrompt.skillRef
+        .split("+")
+        .map((part) => part.trim())
+        .filter(Boolean);
+      if (linkedPrompt.skillRef === skillSlug || tokens.includes(skillSlug)) {
+        return true;
+      }
+    }
+
+    if (step.proofGallery) {
+      if (step.proofGallery.skillsUsed.includes(skillSlug)) return true;
+      if (step.proofGallery.title.includes(skillSlug)) return true;
+      if (step.proofGallery.summary.includes(skillSlug)) return true;
+    }
+
+    const textFields: Array<string | undefined> = [
+      step.title,
+      step.summary,
+      ...step.keyTakeaways,
+      ...step.actionChecklist,
+      step.codeSnippet?.filename,
+      step.codeSnippet?.code,
+      ...(step.additionalCodeSnippets?.flatMap((s) => [s.filename, s.code]) ?? []),
+      step.eli5?.plainTitle,
+      step.eli5?.oneLineHook,
+      step.eli5?.simpleExplanation,
+      step.eli5?.whyItMatters,
+      step.eli5?.roleInProtocol,
+      step.eli5?.howToUseGoingForward,
+      step.eli5?.whenToUse,
+      step.eli5?.realWorldExample,
+    ];
+
+    return textFields.some((field) => typeof field === "string" && field.includes(skillSlug));
+  }
+
+  it("enforces 100% (19/19) standalone Prompt Vault + Curriculum step traceability and valid step.promptId resolution across all 9 courses", () => {
+    const discoveredSkills = fs
+      .readdirSync(REPO_SKILLS_DIR, { withFileTypes: true })
+      .filter(
+        (entry) =>
+          entry.isDirectory() &&
+          entry.name.startsWith("cf-") &&
+          fs.existsSync(path.join(REPO_SKILLS_DIR, entry.name, "SKILL.md")),
+      )
+      .map((entry) => entry.name)
+      .sort();
+
+    expect(discoveredSkills.length).toBeGreaterThanOrEqual(19);
+    expect(discoveredSkills).toHaveLength(19);
+
+    const courses = loadAllCoursesFromDisk();
+    expect(courses.length).toBeGreaterThanOrEqual(9);
+    expect(courses.map((c) => c.number)).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+
+    const allPrompts = courses.flatMap((course) => course.prompts);
+    const promptById = new Map<string, PromptCard>();
+    for (const prompt of allPrompts) {
+      expect(
+        promptById.has(prompt.id),
+        `Duplicate prompt.id detected across courses: ${prompt.id}`,
+      ).toBe(false);
+      promptById.set(prompt.id, prompt);
+    }
+
+    const allSteps = courses.flatMap((course) =>
+      course.steps.map((step) => ({ courseSlug: course.slug, step })),
+    );
+
+    // 3. Every defined step.promptId across all 9 courses must resolve to a real PromptCard.id
+    for (const { courseSlug, step } of allSteps) {
+      if (step.promptId) {
+        expect(
+          promptById.has(step.promptId),
+          `Broken step.promptId "${step.promptId}" on ${courseSlug}/${step.id}`,
+        ).toBe(true);
+      }
+    }
+
+    // 1 & 2. Every discovered skill has a standalone PromptCard (skillRef === skillSlug) and >= 1 LessonStep
+    for (const skillSlug of discoveredSkills) {
+      const standalonePrompts = allPrompts.filter((prompt) => prompt.skillRef === skillSlug);
+      expect(
+        standalonePrompts.length,
+        `Skill "${skillSlug}" is missing a standalone PromptCard (exact skillRef === "${skillSlug}")`,
+      ).toBeGreaterThanOrEqual(1);
+
+      const tokenizedPrompts = allPrompts.filter((prompt) =>
+        (prompt.skillRef ?? "")
+          .split("+")
+          .map((token) => token.trim())
+          .includes(skillSlug),
+      );
+      expect(
+        tokenizedPrompts.length,
+        `Skill "${skillSlug}" missing from tokenized skillRef membership`,
+      ).toBeGreaterThanOrEqual(1);
+
+      const referencingSteps = allSteps.filter(({ step }) =>
+        stepReferencesSkill(step, skillSlug, promptById),
+      );
+      expect(
+        referencingSteps.length,
+        `Skill "${skillSlug}" is not explicitly referenced by any LessonStep across all 9 courses`,
+      ).toBeGreaterThanOrEqual(1);
+    }
+  });
+
+  it("validates FOUR_DOMAIN_CASES against DomainCaseStudySchema[4], canonical IDs/order, https:// liveUrls, and real linkedCourseSlugs", () => {
+    const parsedCases = z.array(DomainCaseStudySchema).length(4).parse(FOUR_DOMAIN_CASES);
+    expect(parsedCases.map((c) => c.id)).toEqual(["website", "game", "video", "harness"]);
+    expect(parsedCases.map((c) => c.order)).toEqual([1, 2, 3, 4]);
+
+    const courses = loadAllCoursesFromDisk();
+    const courseBySlug = new Map(courses.map((course) => [course.slug, course]));
+
+    for (const domain of parsedCases) {
+      if (domain.liveUrl !== undefined) {
+        expect(
+          isAllowedLiveUrl(domain.liveUrl),
+          `Domain "${domain.id}" has invalid liveUrl: ${domain.liveUrl}`,
+        ).toBe(true);
+      }
+
+      if (domain.linkedCourseSlug !== undefined) {
+        const matchedCourse = courseBySlug.get(domain.linkedCourseSlug);
+        expect(
+          matchedCourse,
+          `Domain "${domain.id}" references unknown linkedCourseSlug "${domain.linkedCourseSlug}"`,
+        ).toBeDefined();
+        if (domain.linkedCourseNumber !== undefined && matchedCourse) {
+          expect(domain.linkedCourseNumber).toBe(matchedCourse.number);
+        }
+      }
+    }
   });
 });

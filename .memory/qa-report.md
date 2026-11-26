@@ -1,3 +1,79 @@
+# Stage 4 Dual-Axis Evaluation (`cf-eval`) — Pass 2: Antigravity Academy Course 08 (`vibe-website-factory`), Complete Proof Pack `01–09`, `19/19` Skill Traceability & 4-Domain Showcase
+
+**Date:** 2026-11-26 (06:03 UTC)  
+**Spec & ADR:** [`plans/academy-course-08-and-gap-closure-spec.md`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/plans/academy-course-08-and-gap-closure-spec.md) · [`0007-academy-proof-gallery-and-four-domain-method.md`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/.memory/decisions/0007-academy-proof-gallery-and-four-domain-method.md)  
+**Project Invariants:** [`.agents/rules/academy-invariants.md`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/.agents/rules/academy-invariants.md)  
+**Reviewer Context:** Clean decoupled `cf-reviewer` (`cf-eval`) subagent context (zero source, test, course, config, or asset files modified)  
+**Verdict:** **`SHIP`** *(All Pass 1 blocking defects [`B1–B3`], `N1`, and final Step 4B Proof `#09` ingestion verified **CLOSED** in independent re-checks: `6/6` `verify-stack.sh` incl. `82/82` Vitest & `depcruise` `0` violations, `0` High/Critical CVEs, `9/9` live 3-viewport `verify:map` against freshly built production output, `19/19` Skill Traceability, `0` forbidden patterns, and 1:1 Proof Pack `01–09` metric/artifact parity.)*
+
+---
+
+## Executive Dual-Axis Scorecard (Pass 2)
+
+| Axis | Dimension | Status | Verified Evidence |
+| :--- | :--- | :---: | :--- |
+| **Axis 1** | **Security Boundaries & Allowlists (`schemas.ts`, UI)** | **PASS (`N1` Closed)** | [`isAllowedProofImageUrl`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/lib/schemas.ts#L52-L55) & hardened [`isAllowedLiveUrl`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/lib/schemas.ts#L61-L79) reject `..`, leading/trailing dots, dotless hosts (`https://..`), `http://`, `javascript:`, `data:`, whitespace, and embedded credentials (verified by [`schemas-and-prompts.test.ts:716-721`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/tests/schemas-and-prompts.test.ts#L716-L721)); [`ProofGalleryPanel.tsx`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/components/ProofGalleryPanel.tsx#L54-L84,L199-L219) & [`FourDomainShowcase.tsx`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/components/FourDomainShowcase.tsx#L278-L307) fail closed to `role="alert"` and use `rel="noopener noreferrer"`. |
+| **Axis 1** | **Design Tokens, `CLS = 0`, WCAG & Boundaries** | **PASS** | `0` hardcoded `#hex`, `0` `opacity-55`, and `0` arbitrary `text-[*]`/`p-[*]` brackets across all 13 new/modified `academy/src` & `academy/tests` files; [`ProofGalleryPanel.tsx`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/components/ProofGalleryPanel.tsx#L59-L133) reserves `aspect-video` across all states (`CLS = 0`); [`AcademyShell.tsx`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/components/AcademyShell.tsx#L255-L295) mounts `#four-domains`, `#courses`, and `#prompt-vault` without fractional `whileInView`; `depcruise`: `0` violations (`47` modules / `125` deps). |
+| **Axis 1** | **Full-Stack Build, `19/19` Traceability & Live `verify:map`** | **PASS** | `verify-stack.sh`: **`6 passed, 0 failed, 0 skipped`** (`tsc` `0`, `next lint` `0`, **`82/82` Vitest** across `4` suites incl. filesystem-backed `19/19` Skill Traceability & `4/4` Domain checks, Static Scan `0`, `depcruise` `0`, `sync:resources` `60` resources / `9` courses + `next build` `7/7` pages); `pnpm audit --audit-level=high`: **`0` High/Critical CVEs**; `run-verify-map.mjs --all-viewports`: **`9/9` PASS** (`375/768/1440px`, `0px` overflow, `0` console/page/network errors). |
+| **Axis 1** | **Course 08 ELI5 Rubric, PNG Parity & Proofs `01–09`** | **PASS (`B1–B3` Closed)** | `7/7` steps pass the 7-point ELI5 rubric (`audioScript` `115–129` words, `0` `**`/backticks/`#`/URLs; `everydayAnalogy` `120–155` chars; `0` HTML tags in Mermaid; `7/7` distinct 4-part cards); `9/9` PNGs match `gt-alpaca-website/proof-pack/` SHA-256 1:1; Step 2 matches Pass 2 `40/24/6/19` & `30/30` WCAG after Pass 1 `BLOCK` (`B1`); Step 1 `cliExcerpt` cites `@vitejs/plugin-react@5.2.0` (`B2`); Steps 5–7 & Domain 1 cleanly document completed Proofs `01–09` and `https://gt-alpaca-website.vercel.app` (`B3` + `N3`). |
+| **Axis 2** | **Trajectory, Spec Adherence, Root Purity & Anti-Gaming** | **PASS** | `0` new dependencies (`academy/package.json` & lockfile untouched), `0` root plugin edits (`plugin.json`, `hooks.json`, `rules/AGENTS.md` [`9,147 B`], `hooks/`, `skills/`, `agents/` untouched), `0` `@ts-ignore`/`eslint-disable`/`it.skip`/`as any`, `.memory/feature-map.md` updated cleanly; Pass 1 `BLOCK` remediated transparently without weakening tests. |
+
+---
+
+## 1. Pass 1 Defect Closure Verification (`B1–B3`, `N1`, `N3`)
+
+1. **[B1 — CLOSED]** [`academy/content/courses/vibe-website-factory/course.json:47,185-186,193,206`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/content/courses/vibe-website-factory/course.json#L47): Chapter 2 summary (`:47`), `eli5.realWorldExample` (`:185`), `eli5.audioScript` (`:186`, `125` words, `0` markdown/backticks/URLs), `keyTakeaways[2]` (`:193`), and `mermaidDiagram` (`:206`, `0` HTML tags) now accurately state **`40` primitive, `24` semantic, `6` component, and `19` dark overrides**, document Pass 1's dark-ink `BLOCK` (`1.52:1–3.65:1`), and report **30/30 Light+Dark WCAG pairs (`5.75:1–17.28:1` Light; `7.62:1–17.13:1` Dark)** with `0` literal violations across `27` files, matching [`03-tokens-and-glb.json`](file:///Users/ralphb/Projects_Personal/gt-alpaca-website/proof-pack/03-tokens-and-glb.json#L9-L16) and [`08-cf-eval-verdict.md:27`](file:///Users/ralphb/Projects_Personal/gt-alpaca-website/proof-pack/08-cf-eval-verdict.md#L27).
+2. **[B2 — CLOSED]** [`academy/content/courses/vibe-website-factory/course.json:165`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/content/courses/vibe-website-factory/course.json#L165): Step 1 `cliExcerpt` now states `@vitejs/plugin-react@5.2.0` verbatim matching [`02-research-and-audit.txt:17`](file:///Users/ralphb/Projects_Personal/gt-alpaca-website/proof-pack/02-research-and-audit.txt#L17) and [`07-gates-summary.txt:7`](file:///Users/ralphb/Projects_Personal/gt-alpaca-website/proof-pack/07-gates-summary.txt#L7).
+3. **[B3 + N3 — CLOSED]** [`academy/content/courses/vibe-website-factory/course.json:477,486,565,644-708`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/content/courses/vibe-website-factory/course.json#L644-L708) & [`academy/src/data/four-domain-cases.ts:12-60`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/data/four-domain-cases.ts#L12-L60): Removed all stale Step 4A future-tense phrasing (`0` residual matches via `rg`), populated Proof `#09` with exact live production metrics from [`live-smoke-tests.txt`](file:///Users/ralphb/Projects_Personal/gt-alpaca-website/proof-pack/09-launch-and-walkthrough/live-smoke-tests.txt) and [`phase-completion-matrix.md`](file:///Users/ralphb/Projects_Personal/gt-alpaca-website/proof-pack/09-launch-and-walkthrough/phase-completion-matrix.md) (`https://gt-alpaca-website.vercel.app`, commit `3b78ba7`, `12/12` live smoke checks, `872,868 B` immutable GLB cache, `GTA-20261126-4U00`), and set Domain 1 to `status: "shipped"` with `liveUrl: "https://gt-alpaca-website.vercel.app"`.
+4. **[N1 — CLOSED]** [`academy/src/lib/schemas.ts:69-72`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/lib/schemas.ts#L69-L72) & [`academy/tests/schemas-and-prompts.test.ts:716-721`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/tests/schemas-and-prompts.test.ts#L716-L721): `isAllowedLiveUrl` now enforces `parsed.hostname.includes(".")`, `!startsWith(".")`, `!endsWith(".")`, and `!includes("..")`, backed by an explicit `"https://.."` rejection assertion in `ProofGallerySchema` tests.
+
+---
+
+## 2. Automated Verification Oracles (Pass 2 Independently Re-Executed)
+
+| Check | Command | Result | Exact Observed Output |
+| :--- | :--- | :---: | :--- |
+| **Full-Stack Academy Gate** | `bash skills/cf-next-verify/scripts/verify-stack.sh academy --coverage` | **PASS** | **`6 passed, 0 failed, 0 skipped`**: `tsc --noEmit` (`0` errors); `next lint` (`✔ No ESLint warnings or errors`); `vitest run --coverage` (**`4/4` files, `82/82` tests passed** — `schemas.ts` `99.41%` stmts / `97.14%` branches, `contracts.ts` `100%`, `ProofGalleryPanel.tsx` `100%`, `FourDomainShowcase.tsx` `97.2%`, `CourseEmblem.tsx` `100%`); Static Boundary Scan (`0` leaks); `depcruise` (`0` violations across `47` modules, `125` deps); `pnpm run build` (`sync:resources`: `60` resources, `9` courses; `next build`: `7/7` pages) |
+| **Dependency CVE Audit** | `cd academy && pnpm audit --audit-level=high` | **PASS** | Exit `0` — **`0` High/Critical CVEs** (`6 vulnerabilities found: 1 low \| 5 moderate`) |
+| **Live 3-Viewport Map Gate** | `next start -p 3105` + `node ../skills/cf-verify-map/scripts/run-verify-map.mjs --map ../.memory/feature-map.md --all-viewports --base-url http://localhost:3105` | **PASS** | **`9/9` PASS** across `mobile (375x812)`, `tablet (768x1024)`, `desktop (1440x900)` on `/`, `/api/courses?limit=10&offset=0`, `/api/resources?limit=10&offset=0` (`0` consoleErrors, `0` pageErrors, `0` networkErrors, `0` missingSelectors incl. `#four-domains` & `#four-domains-heading`, `0px` horizontalOverflowPx) |
+| **Forbidden Pattern Scan** | `rg -n "(#[0-9a-fA-F]{3,8}\b\|opacity-55\|text-\[\|p-\[\|m-\[\|@ts-ignore\|@ts-expect-error\|eslint-disable\|it\.skip\|describe\.skip\|test\.skip\|\bas any\b)" <13 modified/new TS/TSX files>` | **PASS** | **`CLEAN_ZERO_MATCHES`** (`0` violations in all modified/new source & test files) |
+| **Course 08 Pass 2 Rubric & Stale Scan** | Python ELI5 check + `rg` stale-string scan over `vibe-website-factory/course.json` & `four-domain-cases.ts` | **PASS** | `7/7` steps valid (`audioScript` `115–129` words, `0` `**`/backticks/`#`/URLs; `everydayAnalogy` `120–155` chars; `0` HTML tags in Mermaid; `7/7` distinct 4-part cards; all `imageSrc` PNGs on disk); `0` stale Pass 1 / Step 4A text matches |
+
+---
+
+## 3. Findings Table (Pass 2)
+
+### Blocking Defects
+*None (`0` Critical, `0` High, `0` Medium blocking defects).*
+
+### Remaining Non-Blocking Observations
+
+| ID | Severity | Location | Finding & Rationale |
+| :---: | :---: | :--- | :--- |
+| **N2** | **Low** | [`HarnessConstellationScene.tsx:1234`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/components/three/HarnessConstellationScene.tsx#L1234), [`SdlcOrbitalScene.tsx:1046`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/components/three/SdlcOrbitalScene.tsx#L1046), [`WebGLFallbackCard.tsx:135`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/components/three/WebGLFallbackCard.tsx#L135) | **Pre-existing `validate-tokens.mjs` literals outside milestone diff:** Untouched `src/components/three/*` contains `7` pre-existing `text-[11px]`/`text-[10px]` literals (`0` in all new/modified files). |
+| **N4** | **Low** | [`academy/src/data/four-domain-cases.ts:100-108`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/data/four-domain-cases.ts#L100-L108) | **Domain 2 branch reference clarity:** `build:poki`, `build:crazygames`, and `verify:sponsors` live on `herd_and_co` branch `feat/monetisation-sponsor-platform:package.json` (and `plans/monetisation-sponsor-platform-spec.md`) rather than the workspace's `feat/vinyl-clay-scene-poc` checkout. |
+| **N5** | **Low** | [`CourseCurriculumStudio.tsx:1033-1038`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/components/CourseCurriculumStudio.tsx#L1033-L1038) | **Integration coverage note:** `ProofGalleryPanel` achieves `100%` line coverage standalone, while lines `1034–1037` inside `CourseCurriculumStudio.tsx` were exercised in live `verify:map` rather than an integration unit test. |
+
+---
+
+## 4. Outer-Loop Answerability Statement
+
+1. **What Changed:** Shipped allowlisted [`ProofGallerySchema`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/lib/schemas.ts#L111-L125) and [`DomainCaseStudySchema`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/lib/schemas.ts#L129-L160) (`isAllowedProofImageUrl`, hardened `isAllowedLiveUrl`), [`ProofGalleryPanel.tsx`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/components/ProofGalleryPanel.tsx), [`FourDomainShowcase.tsx`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/components/FourDomainShowcase.tsx) (`#four-domains` wired via [`page.tsx`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/app/page.tsx) → [`AcademyShell.tsx`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/components/AcademyShell.tsx) → controlled [`CourseCurriculumStudio.tsx`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/components/CourseCurriculumStudio.tsx)), **Course 08 (`vibe-website-factory`)** with custom [`CourseEmblem.tsx`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/src/components/CourseEmblem.tsx#L121-L130,L590-L642), studio illustration, and complete verified GT-Alpaca **Proof Pack `01–09`** (`9` PNGs + live `https://gt-alpaca-website.vercel.app` smoke logs), Course 02 standalone `cf-learn` prompt (`cf-prompt-learn-distill`), [`.memory/feature-map.md`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/.memory/feature-map.md), and the filesystem-backed `19/19` Skill Traceability + `4`-Domain regression suite in [`schemas-and-prompts.test.ts:790-958`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/academy/tests/schemas-and-prompts.test.ts#L790-L958).
+2. **Why It Is Safe:** Zero new npm dependencies, zero High/Critical CVEs, zero root plugin changes, strict allowlisted local proof-pack/HTTPS URLs (`role="alert"` fail-closed UI), `0` `depcruise` boundary violations (`47` modules), `82/82` Vitest, `9/9` live 3-viewport `verify:map`, and Pass 2 closure of `B1–B3` + `N1` ensuring 100% factual alignment with `gt-alpaca-website` Proof Pack `01–09`.
+3. **How to Roll Back:** Revert tracked edits via `git checkout -- academy/ .memory/feature-map.md` and remove untracked `academy/content/courses/vibe-website-factory/`, `academy/public/media/{illustrations/vibe-website-factory-studio.jpg,proof-pack/gt-alpaca/}`, `academy/src/components/{ProofGalleryPanel,FourDomainShowcase}.tsx`, `academy/src/data/four-domain-cases.ts` (or post-deploy via `cd academy && vercel rollback https://antigravity-academy-ten.vercel.app --yes --scope nexite-os`).
+
+---
+
+# Stage 4 Dual-Axis Evaluation (`cf-eval`) — Pass 1: Antigravity Academy Course 08 (`vibe-website-factory`), Proof Pack `01–08`, `19/19` Skill Traceability & 4-Domain Showcase
+
+**Date:** 2026-11-26 (05:56 UTC)  
+**Spec & ADR:** [`plans/academy-course-08-and-gap-closure-spec.md`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/plans/academy-course-08-and-gap-closure-spec.md) · [`0007-academy-proof-gallery-and-four-domain-method.md`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/.memory/decisions/0007-academy-proof-gallery-and-four-domain-method.md)  
+**Project Invariants:** [`.agents/rules/academy-invariants.md`](file:///Users/ralphb/Projects_Personal/Project_Antigravity/.agents/rules/academy-invariants.md)  
+**Reviewer Context:** Clean decoupled `cf-reviewer` (`cf-eval`) subagent context (zero source, test, course, config, or asset files modified)  
+**Verdict:** **`BLOCK`** *(Remediated and closed in Pass 2 above.)*
+
+---
+
 # Stage 4 Dual-Axis Evaluation (`cf-eval`) — `code-factory` `v3.0.0` Phase 1 Core Hooks & Academy Sync
 
 **Date:** 2026-11-26 (04:55 UTC)  

@@ -1,0 +1,904 @@
+{
+  "id": "vibe-website-factory",
+  "slug": "vibe-website-factory",
+  "number": 8,
+  "title": "Vibe Website Factory: Token-First 3D & AI-Citable Sites (GT-Alpaca Case Study)",
+  "eli5Title": "How to Build a Fast, Accessible 3D Website AI Search Loves",
+  "subtitle": "Master the 6-stage cf-website-factory pipeline end to end—combining 3-layer W3C design tokens, zero-native-binary GLB compression, SSR-first GEO/AEO/SEO, deterministic quality gates, and verifiable Proof Pack 01–09 evidence from The Herd of Ibiza: GT-Alpaca.",
+  "eli5Tagline": "Walk step by step through a real 3D website build! Learn how color swatches check readability automatically, how giant 3D sculptures shrink by 81% for phones, how Google and AI assistants read your pages, and how every claim ships with honest proof.",
+  "illustration": {
+    "src": "/media/illustrations/vibe-website-factory-studio.jpg",
+    "alt": "Editorial cutaway of a sunlit modern website craft studio showing a 3-layer color swatch wall with contrast gauges, a 3D alpaca sculpture compression bench, an AI search lighthouse beaming clean cards, and a glass Proof Pack shelf numbered 01 through 09.",
+    "caption": "Inside the Vibe Website Factory: color tokens enforce readability, 3D sculptures shrink for mobile phones, server-rendered pages speak cleanly to AI search, and Proof Pack shelves verify every stage.",
+    "visualAnalogy": "A Sunlit Boutique Web Craft Studio (Color Swatch Wall, 3D Workshop & Proof Shelf)"
+  },
+  "level": "all-levels",
+  "estimatedMinutes": 60,
+  "threeScenePreset": "sdlc-orbital",
+  "accentTone": "emerald",
+  "tags": [
+    "website-factory",
+    "cf-website-factory",
+    "design-tokens",
+    "threejs",
+    "geo-aeo-seo",
+    "wcag",
+    "glb-compression",
+    "proof-pack",
+    "gt-alpaca",
+    "nextjs"
+  ],
+  "video": {
+    "title": "Inside the Vibe Website Factory: Building GT-Alpaca From Brief to Proof Pack 09",
+    "durationLabel": "24:00",
+    "provider": "coming_soon",
+    "posterLabel": "Course 08 Live Case Study — 6-Stage Website Factory & Proof Pack 01–09",
+    "chapters": [
+      {
+        "id": "ch1-bootstrap-research-brief",
+        "title": "Stages 0–1: Workspace Bootstrap, Grounded Facts & Security Audit (Proofs 01–02)",
+        "timestampSeconds": 0,
+        "summary": "Initializing .memory/, grounding 22 alpacas, 7 routes, and 23 tracks from real source repos, and catching 3 Critical CVEs before writing UI code."
+      },
+      {
+        "id": "ch2-design-tokens-wcag",
+        "title": "Stage 2A: 3-Layer W3C Design Tokens & Build-Time WCAG >= 4.5:1 (Proof 03)",
+        "timestampSeconds": 240,
+        "summary": "Compiling 40 primitive, 24 semantic, 6 component, and 19 dark override tokens into Tailwind v4 and verifying 30/30 Light+Dark WCAG contrast pairs after Pass 1 caught dark ink gaps."
+      },
+      {
+        "id": "ch3-threejs-glb-craft",
+        "title": "Stage 2B: Shrinking a 4.52 MB 3D Alpaca by 81.57% Without Native Binaries",
+        "timestampSeconds": 510,
+        "summary": "Using Meshopt, KHR_mesh_quantization, and 1024px WebP to drop avalon_poc.glb to 852 KB plus R3F PerformanceMonitor mobile guardrails."
+      },
+      {
+        "id": "ch4-swarm-geo-seo",
+        "title": "Stage 3: Partitioned Swarm Build & Tri-Layer GEO / AEO / SEO (Proofs 04–05)",
+        "timestampSeconds": 780,
+        "summary": "Shipping 5 crawlable SSR hub-and-spoke routes with AI-permissive robots.txt, connected JSON-LD @graph schemas, and 40–60 word AEO answers."
+      },
+      {
+        "id": "ch5-verify-stack-and-eval",
+        "title": "Stage 4: Full-Stack Gates, 3-Viewport Checks & Decoupled cf-eval (Proofs 06–08)",
+        "timestampSeconds": 1050,
+        "summary": "Running verify-stack, 375px/768px/1440px Feature Map checks, and a clean-context cf-reviewer dual-axis audit."
+      },
+      {
+        "id": "ch6-hitl-launch-proof-pack",
+        "title": "Stage 5: Human-Approved Launch, Live Smoke Tests & Proof Pack 09",
+        "timestampSeconds": 1260,
+        "summary": "Completing HITL staging deployment, verifying live endpoints with bounded curl checks, and packaging reusable Proof Pack evidence."
+      }
+    ],
+    "transcriptSummary": "This walkthrough follows the real six-stage Vibe Website Factory build for The Herd of Ibiza: GT-Alpaca. You will see how workspace bootstrap and grounded source research prevent made-up claims and catch critical dependency vulnerabilities early, how three-layer W3C design tokens enforce WCAG 2.1 AA contrast at compile time, how zero-native-binary GLB compression cuts a 4.52 megabyte 3D alpaca model down to 852 kilobytes, how five server-rendered routes stay readable to Google, Gemini, ChatGPT, Perplexity, and Claude, and how decoupled verification plus human-approved launch produce an honest numbered Proof Pack from 01 through 09."
+  },
+  "steps": [
+    {
+      "id": "vwf-step-1-bootstrap-research-brief",
+      "order": 1,
+      "title": "Bootstrap, Grounded Research & Creative Brief (Stages 0–1)",
+      "stageTag": "Stages 0–1 · Brief",
+      "summary": "Every Vibe Website Factory build starts with zero guesswork: `cf-bootstrap` initializes `.memory/` and `plans/`, `cf-research` grounds every product number directly from primary repos (zero fabricated claims), `cf-grill-me` resolves creative trade-offs upfront, and `pnpm audit --audit-level=high` blocks vulnerable dependencies before a single page renders.",
+      "eli5": {
+        "plainTitle": "Set Up Your Workshop & Gather Real Facts First",
+        "oneLineHook": "Never invent fake numbers or jump straight into layout—set up clean folders, verify real facts, and screen tools for safety first.",
+        "everydayAnalogy": "A chef wiping down the counter, checking every ingredient label for freshness, and reading the recipe before turning on the stove.",
+        "simpleExplanation": "Before designing a single button on a website, the Website Factory sets up a tidy project binder and collects only real, verified facts from your actual product files. For the GT-Alpaca website, we confirmed exact counts—twenty-two alpacas, seven Ibiza routes, twenty-three songs, and one heavy 3D sculpture—instead of guessing. We also scanned every software tool for license safety and security holes, catching three serious warnings right away and fixing them before coding.",
+        "whyItMatters": "Websites built from vague prompts quickly fill up with made-up testimonials, mismatched stats, and unsafe third-party packages. Catching bad dependencies and fuzzy requirements on day one saves days of painful rework later.",
+        "roleInProtocol": "This pairs Stages 0 and 1 of `cf-website-factory` (`cf-bootstrap`, `cf-research`, and `cf-grill-me`), creating Proof #01 (clean workspace tree) and Proof #02 (grounded facts, license compliance, and zero High/Critical CVEs).",
+        "howToUseGoingForward": "Start every new website project by bootstrapping `.memory/`, listing your verified product facts in one research sheet, answering 5 Creative Brief questions, and confirming `pnpm audit --audit-level=high` exits cleanly with zero High or Critical issues.",
+        "whenToUse": "Run Stages 0 and 1 at the very beginning of every website build—before picking colors, generating components, or installing UI libraries.",
+        "realWorldExample": "On `gt-alpaca-website`, Proof #02 grounded 22 alpacas, 7 Ibiza routes, 23 audio tracks, and the raw 4.52 MB `avalon_poc.glb` directly from `herd_and_co`, excluded an MPL-2.0 library, and upgraded `vitest` from 3.2.4 to 5.1.2 to clear 3 Critical CVEs.",
+        "audioScript": "Think of building a great website like cooking a big celebratory dinner. You would never toss mystery jars into a hot pan without checking expiration dates first. Stages zero and one of the Vibe Website Factory prepare your clean workshop before a single line of page code exists. First, bootstrap creates your project memory binder and proof folder. Next, grounded research pulls only real numbers straight from your product files, with zero made-up quotes or fake statistics. For the GT-Alpaca site, we verified twenty-two real alpacas, seven Ibiza routes, twenty-three original audio tracks, and a four-point-five-two megabyte three-D model. Best of all, our upfront security audit caught three critical package vulnerabilities in an older test runner and upgraded it immediately so the build began completely clean.",
+        "estimatedMinutes": 8,
+        "diagramCaption": "How Stages 0–1 turn raw product repos into a clean workspace, verified fact sheet, license check, and zero-CVE foundation."
+      },
+      "keyTakeaways": [
+        "Proof #01 (`cf-bootstrap`): Creates `.memory/`, `plans/`, `.memory/feature-map.md`, `.agents/rules/`, and `proof-pack/` before any framework files are written.",
+        "Zero Fabricated Claims (`cf-research`): Every stat on `gt-alpaca-website` (`22` alpacas, `7` Ibiza routes, `23` tracks, `45s` `60fps` trailer, `4.52 MB` raw `avalon_poc.glb`) traces directly to `herd_and_co`, `product-video-studio`, and `Project_herd_and_co`.",
+        "License & CVE Hygiene: Verified 100% MIT / ISC / Apache-2.0 runtime and dev packages (excluding MPL-2.0 `@axe-core/playwright`) and upgraded `vitest@3.2.4` -> `5.1.2` after `pnpm audit --audit-level=high` caught `3` Critical CVEs.",
+        "Creative Brief Lock (`cf-grill-me`): Resolves palette polarity, 50% Hero anchor, target audiences, and commercial goals before touching design tokens or components."
+      ],
+      "actionChecklist": [
+        "Run `cf-bootstrap` on a new website repo and add `.tmp/` to `.gitignore` so temporary screenshots stay untracked.",
+        "Record only verified source facts in `.memory/research.md` and save the bootstrap tree to `proof-pack/01-bootstrap.txt`.",
+        "Run `pnpm audit --audit-level=high` right after dependency selection and resolve every High/Critical CVE before Stage 2."
+      ],
+      "codeSnippet": {
+        "language": "bash",
+        "filename": "Stages 0–1 Bootstrap & CVE Verification Commands",
+        "code": "# 1. Bootstrap Antigravity Code Factory workspace & capture Proof #01\nnode skills/cf-bootstrap/scripts/init-workspace.mjs /path/to/my-site | tee proof-pack/01-bootstrap.txt\n\n# 2. Verify zero High/Critical CVEs after locking MIT/ISC/Apache-2.0 stack\npnpm audit --audit-level=high"
+      },
+      "mermaidDiagram": "flowchart LR\n    R[\"Real Product Repos\"] --> B[\"Stage 0: Workspace Bootstrap\"]\n    B --> G[\"Stage 1: Grounded Fact Check\"]\n    G --> Q[\"Creative Brief Questions\"]\n    Q --> A[\"License & Security Audit\"]\n    A --> P[\"Proofs 01 & 02 Saved\"]",
+      "repoArtifactPath": "skills/cf-website-factory/SKILL.md",
+      "promptId": "vwf-prompt-website-factory",
+      "proofGallery": {
+        "title": "GT-Alpaca Proofs #01 & #02 — Real Bootstrap Tree, Grounded Counts & CVE Catch",
+        "summary": "Verified Stage 0–1 evidence captured directly from gt-alpaca-website: clean workspace initialization, primary-repo product counts with zero fabricated claims, 100% permissive licenses, and a real 3-Critical-CVE catch resolved before coding.",
+        "pipelinePhase": "Stages 0–1 · Verified Real Data",
+        "skillsUsed": [
+          "cf-website-factory",
+          "cf-bootstrap",
+          "cf-research",
+          "cf-grill-me"
+        ],
+        "promptsVerified": [
+          "vwf-prompt-website-factory"
+        ],
+        "metrics": [
+          {
+            "label": "Verified Herd & Route Facts",
+            "after": "22 alpacas · 7 Ibiza routes · 23 tracks (0 fabricated)",
+            "status": "pass"
+          },
+          {
+            "label": "Raw Hero 3D Model Baseline",
+            "after": "4.52 MB (avalon_poc.glb verified from herd_and_co)",
+            "status": "pass"
+          },
+          {
+            "label": "High / Critical CVEs",
+            "before": "3 Critical (vitest 3.2.4)",
+            "after": "0 High / 0 Critical (vitest 5.1.2)",
+            "status": "pass"
+          },
+          {
+            "label": "Dependency License Audit",
+            "after": "100% MIT / ISC / Apache-2.0 (MPL-2.0 excluded)",
+            "status": "pass"
+          }
+        ],
+        "artifacts": [
+          {
+            "id": "gt-alpaca-01-bootstrap",
+            "label": "Proof #01 — Bootstrapped Workspace Tree (01-bootstrap.txt)",
+            "caption": "Verified Code Factory workspace scaffold in gt-alpaca-website including .memory/, plans/, feature-map.md, .agents/rules/, and proof-pack/.",
+            "command": "node skills/cf-bootstrap/scripts/init-workspace.mjs /Users/ralphb/Projects_Personal/gt-alpaca-website",
+            "cliExcerpt": "Bootstrapping Antigravity Code Factory workspace in: /Users/ralphb/Projects_Personal/gt-alpaca-website\n  [create] .memory/handover.md\n  [create] .memory/tasks.md\n  [create] .memory/architecture.md\n  [create] .memory/decisions/0001-record-template.md\n  [create] plans/templates/feature-spec-template.md\n  [create] .memory/feature-map.md\n  [tip]    Add '.tmp/' to .gitignore so verification screenshots stay untracked.\nAntigravity Code Factory workspace initialized."
+          },
+          {
+            "id": "gt-alpaca-02-research-audit",
+            "label": "Proof #02 — Grounded Research, Licenses & CVE Fix (02-research-and-audit.txt)",
+            "caption": "Verified product counts from 3 primary repos plus real-world pnpm audit catch upgrading vitest 3.2.4 to 5.1.2 for EXIT 0.",
+            "command": "pnpm audit --audit-level=high",
+            "cliExcerpt": "=== Proof #02: Stage 1 Research, License Compliance & CVE Audit ===\n1. Verified Source Repos Grounded:\n   - herd_and_co (22 alpacas, 7 routes, 23 audio tracks, 22 vinyl-clay renders, 9 posters, avalon_poc.glb 4.52 MiB)\n   - product-video-studio (45s 60fps mastered 16:9 trailer + QA poster frames)\n   - Project_herd_and_co (Herd & Co. regional white-label farm platform)\n2. License Audit (100% MIT / ISC / Apache-2.0) — Excluded: @axe-core/playwright (MPL-2.0)\n3. Real-World Security Gate Catch & Resolution:\n   - Initial install with vitest@3.2.4 flagged 3 Critical CVEs (vitest <3.2.6, tinypool <2.1.2).\n   - Upgraded vitest + @vitest/coverage-v8 -> 5.1.2 and @vitejs/plugin-react@5.2.0.\n   - Re-ran pnpm audit --audit-level=high: EXIT 0 (0 High, 0 Critical CVEs)."
+          }
+        ]
+      }
+    },
+    {
+      "id": "vwf-step-2-design-tokens-wcag",
+      "order": 2,
+      "title": "3-Layer W3C Design Tokens & Build-Time WCAG >= 4.5:1 (Stage 2A)",
+      "stageTag": "Stage 2A · Tokens",
+      "summary": "Eliminate generic AI-slop styling and contrast failures by authoring a single 3-layer W3C `design/tokens.json` (`primitive` -> `semantic` -> `component` + `dark.semantic`), compiling it into Tailwind CSS v4 `@theme inline` via `generate-tokens.mjs` with build-time WCAG 2.1 AA (`>= 4.5:1`) enforcement, and blocking raw `#hex` or arbitrary spacing literals with `validate-tokens.mjs`.",
+      "eli5": {
+        "plainTitle": "Build a Smart Color & Spacing Book That Checks Readability Automatically",
+        "oneLineHook": "Define every brand color and spacing rule once in a master swatch book that refuses to build if text is too faint to read.",
+        "everydayAnalogy": "An architect's paint-and-fabric sample binder with a built-in light meter that buzzes if wall lettering is too hard to see.",
+        "simpleExplanation": "Instead of sprinkling random color codes across dozens of webpage files, we put every color, font, and spacing value into one neat three-layer swatch file. Layer one lists raw shades, layer two gives each shade a clear job like page background or button text, and layer three sets rules for cards and buttons plus dark mode. When we compile that file, a built-in readability check verifies every text-and-background pair passes eye-strain standards automatically.",
+        "whyItMatters": "Hardcoded colors drift across pages, break dark mode, and leave low-contrast gray text that people on bright phone screens cannot read. Compiling tokens with automatic contrast checks stops visual mess and accessibility bugs at the factory door.",
+        "roleInProtocol": "This is Stage 2A (`cf-design-tokens`): `generate-tokens.mjs` compiles `design/tokens.json` into `src/styles/tokens.css` (enforcing `>= 4.5:1` contrast and safe CSS values), while `validate-tokens.mjs` scans `src/` to reject raw `#hex` or `p-[19px]` hacks.",
+        "howToUseGoingForward": "Create `design/tokens.json` before writing UI components, compile it into Tailwind CSS v4 `@theme inline`, name semantic tokens by purpose (`surface`, `foreground`, `primary`) rather than hue, and run `validate-tokens.mjs` in CI.",
+        "whenToUse": "Use `cf-design-tokens` on every new website or design-system refresh right after locking your Creative Brief—and re-run `validate-tokens.mjs` after every UI edit.",
+        "realWorldExample": "On `gt-alpaca-website`, Pass 1 `cf-reviewer` caught dark Espresso fill tokens used as text ink (`1.52:1–3.65:1`); adding dedicated `primary-text`/`accent-text`/`secondary-text` aliases expanded `design/tokens.json` to `40` primitive, `24` semantic, `6` component, and `19` dark overrides—passing `30/30` Light+Dark pairs (`>= 5.75:1` Light, `>= 7.62:1` Dark) with `0` literal violations.",
+        "audioScript": "Imagine painting a whole house by mixing a slightly different shade of cream in every single room. By the time you reach the hallway, nothing matches. Design tokens fix that forever. In Stage two A, we organize every brand color, font size, and spacing step into one three-layer swatch file. The first layer holds raw palette colors, the second layer names them by job like background or readable text ink, and the third layer wires buttons, cards, and dark mode overrides. When our compiler builds Tailwind CSS variables, it checks text contrast automatically. On the GT-Alpaca site, our independent reviewer even caught dark mode text contrast gaps on pass one—so we added dedicated high-contrast text tokens and passed all thirty light and dark pairs cleanly.",
+        "estimatedMinutes": 8,
+        "diagramCaption": "How 3-layer W3C tokens flow from primitive shades to semantic intent, dark overrides, 30-pair Light+Dark WCAG contrast math, and Tailwind v4 CSS."
+      },
+      "keyTakeaways": [
+        "3-Layer W3C Hierarchy: Separate `primitive` (raw values), `semantic` (intent-named aliases like `primary-text` and `foreground`, never `blue-500`), `component` (`button.*`, `card.*`), and `dark.semantic` overrides.",
+        "Build-Time Accessibility & Safety: `generate-tokens.mjs` fails with exit `1` on cyclic `{ref}` chains, unsafe CSS injection strings (`</style`, `javascript:`), or any paired foreground/background ratio below `4.5:1`.",
+        "GT-Alpaca Verified Pass 2 Compilation: `40` primitive, `24` semantic, `6` component, and `19` dark overrides compiled to `src/styles/tokens.css` (`tailwind-v4`), closing Pass 1's dark-ink blocker to pass `30/30` Light+Dark WCAG pairs (`5.75:1–17.28:1` Light; `7.62:1–17.13:1` Dark) with `0` literal violations across `27` files.",
+        "Zero-Drift Source Guard: `validate-tokens.mjs --dir src/` blocks raw `#hex`, `rgb()`, `rgba()`, `hsl()`, and arbitrary Tailwind brackets (`bg-[#...]`, `p-[19px]`), permitting `// @tokens-ignore-file` only for pure 3D material registries."
+      ],
+      "actionChecklist": [
+        "Author `design/tokens.json` using `skills/cf-design-tokens/resources/tokens.template.json` as your starter structure.",
+        "Compile tokens with `generate-tokens.mjs --format tailwind-v4` and confirm every semantic foreground/background pair passes `>= 4.5:1`.",
+        "Run `validate-tokens.mjs --dir src/` before every commit to prove zero hardcoded color or pixel hacks crept into components."
+      ],
+      "codeSnippet": {
+        "language": "bash",
+        "filename": "Stage 2A Token Compile & Literal Scan Commands",
+        "code": "# 1. Compile 3-layer W3C tokens -> Tailwind v4 @theme inline + WCAG >= 4.5:1 gate\nnode skills/cf-design-tokens/scripts/generate-tokens.mjs \\\n  --config design/tokens.json \\\n  --out src/styles/tokens.css \\\n  --format tailwind-v4\n\n# 2. Enforce zero raw #hex / rgb() / arbitrary Tailwind brackets in src/\nnode skills/cf-design-tokens/scripts/validate-tokens.mjs --dir src/"
+      },
+      "mermaidDiagram": "flowchart LR\n    P[\"Primitive Layer (40 Raw Values)\"] --> S[\"Semantic Layer (24 Intent Aliases)\"]\n    S --> C[\"Component & 19 Dark Overrides\"]\n    C --> W{\"Light + Dark WCAG Check (30/30 Pairs)\"}\n    W -->|\"Pass\"| T[\"Tailwind v4 tokens.css\"]\n    T --> V[\"Source Scan Blocks Raw Hex Codes (0/27)\"]",
+      "repoArtifactPath": "skills/cf-design-tokens/SKILL.md",
+      "promptId": "vwf-prompt-design-tokens",
+      "proofGallery": {
+        "title": "GT-Alpaca Proof #03 (Part A) — Compiled W3C Design Tokens, 30/30 WCAG Pairs & Zero Literal Scan",
+        "summary": "Verified Pass 2 metrics from gt-alpaca-website proving 3-layer W3C token compilation (40 primitive, 24 semantic, 6 component, 19 dark), 30/30 Light+Dark WCAG contrast pairs (>= 5.75:1 Light, >= 7.62:1 Dark), and 0 token violations across 27 source files.",
+        "pipelinePhase": "Stage 2A · Verified Pass 2 Real Proof",
+        "skillsUsed": [
+          "cf-design-tokens"
+        ],
+        "promptsVerified": [
+          "vwf-prompt-design-tokens"
+        ],
+        "metrics": [
+          {
+            "label": "3-Layer Token Counts (Pass 2)",
+            "after": "40 primitive · 24 semantic · 6 component · 19 dark",
+            "status": "pass"
+          },
+          {
+            "label": "Light + Dark WCAG Contrast Matrix",
+            "before": "Pass 1 caught 1.52:1–3.65:1 dark ink",
+            "after": "30/30 pairs PASS (5.75:1–17.28:1 Light; 7.62:1–17.13:1 Dark)",
+            "status": "pass"
+          },
+          {
+            "label": "Compiled Output Format",
+            "after": "src/styles/tokens.css (tailwind-v4 @theme inline)",
+            "status": "pass"
+          },
+          {
+            "label": "Source Literal Scan (validate-tokens)",
+            "after": "PASS — 27 files scanned, 0 token violations",
+            "status": "pass"
+          }
+        ],
+        "artifacts": [
+          {
+            "id": "gt-alpaca-03-tokens-compile",
+            "label": "Proof #03A — Dark Espresso Polarity Hero (hero-dark-polarity.png)",
+            "imageSrc": "/media/proof-pack/gt-alpaca/hero-dark-polarity.png",
+            "alt": "GT-Alpaca homepage rendered in Dark Espresso polarity showing WCAG AAA contrast semantic text tokens paired with the sunlit Mediterranean 3D alpaca hero.",
+            "caption": "Verified Pass 2 Dark Espresso polarity hero confirming dedicated primary-text, accent-text, and secondary-text tokens achieve >= 7.62:1 contrast across dark surfaces.",
+            "command": "node skills/cf-design-tokens/scripts/generate-tokens.mjs --config design/tokens.json --out src/styles/tokens.css --format tailwind-v4",
+            "cliExcerpt": "generate-tokens.mjs: PASS (40 primitive, 24 semantic, 6 component, 19 dark)\nLight + Dark WCAG Matrix: 30/30 pairs PASS (5.75:1–17.28:1 Light; 7.62:1–17.13:1 Dark)\nvalidate-tokens.mjs --dir src: PASS — Scanned 27 files, 0 token violations"
+          },
+          {
+            "id": "gt-alpaca-03-tokens-source-scan",
+            "label": "Proof #03B — Scrolled Dark Polarity Contrast Verification (hero-dark-scrolled.png)",
+            "imageSrc": "/media/proof-pack/gt-alpaca/hero-dark-scrolled.png",
+            "alt": "Lower sections of the GT-Alpaca website in Dark Espresso mode demonstrating crisp >= 7.62:1 WCAG contrast on all cards, headings, and interactive buttons.",
+            "caption": "Scrolled dark-mode verification captured after Pass 1 cf-reviewer caught low-contrast fill tokens used as text ink—now passing all 30 Light+Dark WCAG contrast pairs.",
+            "command": "node skills/cf-design-tokens/scripts/validate-tokens.mjs --dir src/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vwf-step-3-threejs-glb-craft",
+      "order": 3,
+      "title": "Zero-Native-Binary GLB Compression & Mobile 3D Craft (Stage 2B)",
+      "stageTag": "Stage 2B · 3D Craft",
+      "summary": "Ship 60 FPS interactive Three.js / React Three Fiber scenes without punishing mobile users: compress raw `.glb` models with `optimize-glb.mjs` (Meshopt + `KHR_mesh_quantization` + 1024px WebP via pure-JS `@gltf-transform/cli`), enforce `Timer`, `<PerformanceMonitor>`, capped DPR, and static fallbacks, and verify zero 3D anti-patterns with `audit-threejs.mjs`.",
+      "eli5": {
+        "plainTitle": "Shrink Giant 3D Models by 81% So Phones Stay Smooth and Cool",
+        "oneLineHook": "Pack heavy 3D studio sculptures into featherweight web files and add smart safety guards so older phones never stutter or overheat.",
+        "everydayAnalogy": "Vacuum-sealing a giant winter coat into a tiny carry-on pouch while keeping it fluffy and warm the moment you unpack it.",
+        "simpleExplanation": "Raw 3D art straight from a studio is huge—on GT-Alpaca, our hero alpaca model started at over four and a half megabytes, which crawls on phones. Our zero-setup optimizer trims hidden parts, packs geometry tightly, and converts textures to WebP, shrinking it by over eighty-one percent to under one megabyte! Then our 3D rules keep frames smooth, cap screen workload, and swap in a crisp still picture if someone prefers reduced motion.",
+        "whyItMatters": "Uncompressed 3D scenes freeze mobile browsers, drain batteries, and hurt search rankings. Shrinking models upfront and blocking slow per-frame mistakes gives every visitor an unforgettable hero without sacrificing speed.",
+        "roleInProtocol": "This is Stage 2B (`cf-threejs-craft`), grounding Utsubo's 100 Three.js Performance Tips into two deterministic scripts: `optimize-glb.mjs` (zero native C++ tools required) and `audit-threejs.mjs` (blocking `setState` or `new THREE.*` inside `useFrame`, deprecated `THREE.Clock`, uncapped DPR, and unguarded `lil-gui`).",
+        "howToUseGoingForward": "Run `optimize-glb.mjs` on every `.glb` before placing it in `public/models/`, wrap R3F scenes in `<PerformanceMonitor>` with DPR clamped to `2`, keep `lil-gui`/`stats-gl` dev-only, always supply a static WebP fallback, and pass `audit-threejs.mjs`.",
+        "whenToUse": "Apply `cf-threejs-craft` anytime a site features an interactive 3D hero, product viewer, or WebGL canvas—especially when mobile visitors and Core Web Vitals matter.",
+        "realWorldExample": "On `gt-alpaca-website`, `optimize-glb.mjs` shrank `avalon_poc.glb` from `4,736,680 B` (`4.52 MB`) down to `872,868 B` (`852 KB`)—an exact `81.57%` reduction (`3.86 MB` saved)—while static media optimization turned a `1.5 MB` diorama PNG into a `~28 KB` WebP fallback.",
+        "audioScript": "Have you ever opened a fancy three-D website on your phone and felt the battery get warm while the screen froze? Almost every time, the culprit is an uncompressed three-D model paired with sloppy animation loops. Stage two B fixes both problems cleanly. First, our optimizer runs pure JavaScript compression using Meshopt, quantization, and crisp WebP textures—no finicky native binaries to install. On the GT-Alpaca website, that pipeline shrank the raw Avalon alpaca model from four point five two megabytes all the way down to eight hundred fifty-two kilobytes, saving eighty-one point five seven percent of the file size! Even the fallback diorama picture shrank from one point five megabytes to twenty-eight kilobytes. Finally, our static audit checks every frame loop so older devices stay cool, smooth, and fast.",
+        "estimatedMinutes": 9,
+        "diagramCaption": "How raw 3D models shrink through Meshopt + WebP compression and pass mobile 60 FPS safety rules before reaching visitors."
+      },
+      "keyTakeaways": [
+        "Verified GT-Alpaca GLB Compression (`03-tokens-and-glb.json`): `4,736,680 B` (`4.52 MB`) -> `872,868 B` (`852 KB`) = **`81.57%` reduction (`3.86 MB` saved)** via `prune -> weld -> KHR_mesh_quantization -> meshopt -> webp 1024px`.",
+        "Static Media Budget Verified: Generated `28` WebP assets (`22` herd sculpt renders + `5` studio posters + hero diorama fallback dropping from `1.5 MB` PNG to `~28 KB` WebP), plus `12 MB` `45s` `60fps` trailer and off-by-default `preload=none` ambient audio.",
+        "Non-Negotiable R3F / Three.js Invariants: Zero `setState` or `new THREE.*` allocations inside `useFrame`, use `Timer` (never deprecated `THREE.Clock`), clamp DPR `<= 2` with `<PerformanceMonitor>`, cap dynamic lights `<= 3`, and gate `lil-gui`/`stats-gl` to dev only.",
+        "Graceful Fallback Guarantee: Always pair `<Canvas>` with a static WebP fallback for `prefers-reduced-motion` and `webglcontextlost`, keeping primary headings and copy in crawlable SSR HTML outside `<canvas>`."
+      ],
+      "actionChecklist": [
+        "Compress every raw `.glb` with `optimize-glb.mjs --texture-format webp --max-texture-size 1024` and log the before/after byte JSON.",
+        "Configure R3F `<Canvas dpr={[1, 2]}>`, Drei `<PerformanceMonitor>`, `three` `Timer`, and a `prefers-reduced-motion` + `webglcontextlost` static WebP fallback.",
+        "Run `audit-threejs.mjs --dir src/` after building 3D components and verify exit code `0`."
+      ],
+      "codeSnippet": {
+        "language": "bash",
+        "filename": "Stage 2B Zero-Native-Binary GLB Compression & Static Audit",
+        "code": "# 1. Compress raw .glb -> Meshopt + KHR_mesh_quantization + WebP 1024px\nnode skills/cf-threejs-craft/scripts/optimize-glb.mjs \\\n  --in ../herd_and_co/creative/poc/avalon_poc.glb \\\n  --out public/models/avalon.glb \\\n  --texture-format webp \\\n  --max-texture-size 1024\n\n# 2. Audit R3F/Three.js source for useFrame leaks, Clock, DPR & unguarded lil-gui\nnode skills/cf-threejs-craft/scripts/audit-threejs.mjs --dir src/"
+      },
+      "mermaidDiagram": "flowchart LR\n    Raw[\"Raw avalon_poc.glb (4.52 MB)\"] --> Pipe[\"Prune, Weld, Quantize, Meshopt, WebP\"]\n    Pipe --> Slim[\"Optimized avalon.glb (852 KB · 81.57% Saved)\"]\n    Slim --> Scene[\"R3F Canvas + PerformanceMonitor + Timer\"]\n    Scene --> Fall[\"Static 28 KB WebP Fallback (Reduced Motion)\"]\n    Scene --> Audit[\"audit-threejs.mjs Gate\"]",
+      "repoArtifactPath": "skills/cf-threejs-craft/SKILL.md",
+      "promptId": "vwf-prompt-threejs-craft",
+      "proofGallery": {
+        "title": "GT-Alpaca Proof #03 (Part B) & Proof #04 — 81.57% GLB Reduction & 0-Warning 3D Audit",
+        "summary": "Verified real GLB compression metrics (4.52 MB -> 852 KB), live 1440px R3F 3D Avalon hero render, and exit-0 audit-threejs.mjs static verification across 2 Three.js/R3F source files.",
+        "pipelinePhase": "Stage 2B · Verified Pass 2 Real Proof",
+        "skillsUsed": [
+          "cf-threejs-craft"
+        ],
+        "promptsVerified": [
+          "vwf-prompt-threejs-craft"
+        ],
+        "metrics": [
+          {
+            "label": "Hero 3D Model (avalon.glb)",
+            "before": "4,736,680 B (4.52 MB)",
+            "after": "872,868 B (852 KB) · 81.57% reduction (3.86 MB saved)",
+            "status": "pass"
+          },
+          {
+            "label": "Hero Diorama Fallback Image",
+            "before": "1.5 MB PNG",
+            "after": "~28 KB WebP (28 WebP assets total)",
+            "status": "pass"
+          },
+          {
+            "label": "Compression Pipeline",
+            "after": "Meshopt + KHR_mesh_quantization + WebP 1024px (zero native binaries)",
+            "status": "pass"
+          },
+          {
+            "label": "Three.js Static Audit (04-threejs-audit)",
+            "after": "PASS — 2 Three.js/R3F files audited, 0 errors, 0 warnings",
+            "status": "pass"
+          }
+        ],
+        "artifacts": [
+          {
+            "id": "gt-alpaca-02-glb-compression",
+            "label": "Proof #02 / #03B — Real GLB & Static Media Compression (03-tokens-and-glb.json)",
+            "caption": "Verified @gltf-transform/cli pipeline reducing avalon_poc.glb from 4.52 MB to 852 KB (81.57% smaller) plus 28 WebP media assets.",
+            "command": "node skills/cf-threejs-craft/scripts/optimize-glb.mjs --in avalon_poc.glb --out public/models/avalon.glb --texture-format webp --max-texture-size 1024",
+            "cliExcerpt": "{\n  \"glbOptimization\": {\n    \"status\": \"PASS\",\n    \"pipeline\": \"zero-native-binary @gltf-transform/cli (prune -> weld -> KHR_mesh_quantization -> meshopt -> webp 1024px)\",\n    \"output\": \"public/models/avalon.glb\",\n    \"inputBytes\": 4736680,\n    \"outputBytes\": 872868,\n    \"savedBytes\": 3863812,\n    \"reductionPercent\": 81.57,\n    \"textureFormat\": \"webp\"\n  },\n  \"staticMediaOptimization\": {\n    \"webpAssetsGenerated\": 28,\n    \"heroDioramaFallbackBytes\": \"~28 KB (from 1.5 MB PNG)\",\n    \"herdSculptRenders\": 22,\n    \"studioPosters\": 5\n  }\n}"
+          },
+          {
+            "id": "gt-alpaca-04-threejs-audit",
+            "label": "Proof #04 — Live 1440px 3D Avalon Hero & 0-Warning audit-threejs.mjs Gate (hero-1440px.png)",
+            "imageSrc": "/media/proof-pack/gt-alpaca/hero-1440px.png",
+            "alt": "Desktop 1440px render of the GT-Alpaca flagship website showing the compressed 852 KB 3D Avalon alpaca turntable alongside sunlit SSR headlines and calls to action.",
+            "caption": "Live desktop 1440px capture of the R3F/Three.js r187 Avalon hero stage paired with zero-warning audit-threejs.mjs static inspection and polarity-synced lighting.",
+            "command": "node skills/cf-threejs-craft/scripts/audit-threejs.mjs --dir src/",
+            "cliExcerpt": "audit-threejs.mjs --dir src: PASS — Audited 2 Three.js/R3F files, 0 errors, 0 warnings\nVerified: Timer (no THREE.Clock), clamped DPR <= 2, <PerformanceMonitor>, dev-only lil-gui/stats-gl, shared useGLTF cache preserved across 3D/Static toggles."
+          }
+        ]
+      }
+    },
+    {
+      "id": "vwf-step-4-swarm-and-geo-seo",
+      "order": 4,
+      "title": "Partitioned Swarm Build & Tri-Layer GEO / AEO / SEO (Stage 3)",
+      "stageTag": "Stage 3 · Build & GEO",
+      "summary": "Build fast without file collisions by partitioning Stage 3 across disjoint Swarm workers (3D & Media, Token UI, and SSR Routes/APIs) while enforcing `cf-geo-seo` invariants: real SSR HTML outside WebGL canvases, AI-permissive `robots.txt` (`GPTBot`, `ClaudeBot`, `PerplexityBot`, `Google-Extended`), connected JSON-LD `@graph`, and 40–60 word AEO answers.",
+      "eli5": {
+        "plainTitle": "Build All Five Pages in Parallel So Humans and AI Search Can Read Everything",
+        "oneLineHook": "Let three focused builders work side by side while making sure Google, Gemini, ChatGPT, and Claude can read every word without guessing.",
+        "everydayAnalogy": "A museum where the 3D sculpture stands in the center while clear, well-lit plaques on the wall let every visitor and tour guide quote the exact facts.",
+        "simpleExplanation": "Many flashy 3D websites trap all their words inside JavaScript code, which means AI search assistants arrive and see an empty blank box! In Stage three, we split our build into three separate lanes—one for the 3D studio, one for clean buttons and sections, and one for five server-rendered pages. Every headline, stat, and answer lives in plain server HTML, linked together with structured data cards and an open welcome mat for AI crawlers.",
+        "whyItMatters": "AI crawlers execute zero JavaScript. If your copy only appears after scripts run, or if your robots file accidentally blocks Google-Extended or GPTBot, your brand becomes invisible in generative search answers.",
+        "roleInProtocol": "This combines Stage 3 partitioned Swarm building (`cf-implement`) with Tri-Layer Discovery (`cf-geo-seo` covering traditional SEO, Answer Engine Optimization, and Generative Engine Optimization), verified by `audit-geo-seo.mjs`.",
+        "howToUseGoingForward": "Keep all H1s, opening summaries, tables, and 40–60 word FAQ answers in Next.js Server Components, connect entities via one JSON-LD `@graph`, allow `GPTBot`, `ClaudeBot`, `PerplexityBot`, and `Google-Extended` in `robots.ts`, and audit rendered HTML with `audit-geo-seo.mjs`.",
+        "whenToUse": "Apply this pattern whenever building marketing hubs, product microsites, or documentation portals that combine rich client interactivity with organic SEO and AI answer-engine discovery.",
+        "realWorldExample": "Proof #04 on `gt-alpaca-website` locked 5 SSR hub-and-spoke routes (`/`, `/game`, `/sponsors`, `/farms`, `/faq`), 23 `data-testid` contracts, 8 AEO FAQs (`40–60` words each), connected `FAQPage` + `HowTo` JSON-LD `@graph`, and 2 Zod-validated API routes.",
+        "audioScript": "Here is a secret that trips up thousands of modern websites: AI search assistants like ChatGPT, Claude, Perplexity, and Gemini do not run heavy browser scripts when they scan a page. If all your text lives inside a three-D canvas or slow client code, search bots see a blank screen. Stage three solves both speed and discovery at once. First, we split coding across three non-overlapping workers—one for three-D scenes, one for token-styled sections, and one for server-rendered pages and safe APIs. Second, we render every headline, stat, and forty-to-sixty-word FAQ answer straight from the server in clean HTML, connect every entity with a structured JSON-LD graph, and invite AI crawlers explicitly in robots dot text. On GT-Alpaca, all five hub-and-spoke routes follow this exact contract.",
+        "estimatedMinutes": 10,
+        "diagramCaption": "How 3 disjoint Swarm workers ship 5 SSR routes with crawlable HTML, connected JSON-LD @graph, and AI-permissive robots.txt."
+      },
+      "keyTakeaways": [
+        "Zero-Collision 3-Worker Stage 3 Partition (`cf-implement`): Worker A owns `src/components/three/*` & audio; Worker B owns `src/components/ui/*` & sections; Worker C owns SSR `src/app/**/page.tsx`, `robots.ts`, `sitemap.ts`, `schema-graph.ts`, and Zod API routes.",
+        "Verified GT-Alpaca 5-Route Contract (`04-spec-and-feature-map.txt`): `/` (Flagship 3D Hub), `/game` (22 Alpacas, 7 Routes, 22 Songs), `/sponsors` (4 Child-Safe Pillars), `/farms` (White-Label Platform), and `/faq` (8 AEO FAQs + connected JSON-LD `@graph`).",
+        "Stateless Zod API Boundary: Locked `GET /api/health` (`200 { status: \"ok\" }`) and `POST /api/inquiries` (Zod validation, `<= 8 KB` body cap, `202` honeypot, `429` sliding-window rate limit, `maxDuration = 10`).",
+        "Tri-Layer Discovery (`cf-geo-seo`): Raw SSR HTML outside `<canvas>`, explicit `robots.txt` allows for `GPTBot`, `ClaudeBot`, `PerplexityBot`, and `Google-Extended`, `<title> <= 60` chars, meta description `140–155` chars, and automated `audit-geo-seo.mjs` verification."
+      ],
+      "actionChecklist": [
+        "Lock your route table, `data-testid` contracts, and API schemas in `.memory/feature-map.md` before launching parallel Stage 3 workers.",
+        "Render all primary headings, 50–150 word opening summaries, 40–60 word FAQ answers, and JSON-LD `@graph` in Server Components.",
+        "Run `audit-geo-seo.mjs --html .next/server/app --robots public/robots.txt` after production build to verify zero discovery blockers."
+      ],
+      "codeSnippet": {
+        "language": "bash",
+        "filename": "Stage 3 Tri-Layer GEO / AEO / SEO Verification Gate",
+        "code": "# Run automated SSR HTML, JSON-LD @graph, metadata & AI robots.txt audit\nnode skills/cf-geo-seo/scripts/audit-geo-seo.mjs \\\n  --html .next/server/app \\\n  --robots public/robots.txt"
+      },
+      "mermaidDiagram": "flowchart TD\n    Spec[\"Locked 5-Route Spec & Feature Map\"] --> WA[\"Worker A: 3D Hero & Audio\"]\n    Spec --> WB[\"Worker B: Token UI & Interactive Flows\"]\n    Spec --> WC[\"Worker C: 5 SSR Routes, JSON-LD & APIs\"]\n    WA --> Out[\"SSR HTML + AI robots.txt + Connected Graph\"]\n    WB --> Out\n    WC --> Out\n    Out --> Gate[\"audit-geo-seo.mjs Discovery Gate\"]",
+      "repoArtifactPath": "skills/cf-geo-seo/SKILL.md",
+      "promptId": "vwf-prompt-geo-seo",
+      "proofGallery": {
+        "title": "GT-Alpaca Proofs #04 & #05 — 5 Verified SSR Hub-and-Spoke Routes & 0-Error GEO/AEO/SEO Audit",
+        "summary": "Verified Pass 2 screenshots of all 4 spoke routes (/game, /sponsors, /farms, /faq) plus exit-0 pnpm run geo:audit confirming 5 SSR HTML documents, connected JSON-LD @graph, and permissive AI robots.txt.",
+        "pipelinePhase": "Stage 3 · Verified Pass 2 Real Proof",
+        "skillsUsed": [
+          "cf-geo-seo",
+          "cf-implement"
+        ],
+        "promptsVerified": [
+          "vwf-prompt-geo-seo"
+        ],
+        "metrics": [
+          {
+            "label": "Verified SSR Hub-and-Spoke Routes",
+            "after": "5 routes (/, /game, /sponsors, /farms, /faq) · 11/11 Next.js routes",
+            "status": "pass"
+          },
+          {
+            "label": "Rendered HTML & JSON-LD Audit",
+            "after": "PASS — 5 HTML docs + robots.txt, 0 errors, 0 warnings",
+            "status": "pass"
+          },
+          {
+            "label": "AI Crawlers Explicitly Allowed",
+            "after": "GPTBot · OAI-SearchBot · ChatGPT-User · ClaudeBot · PerplexityBot · Google-Extended",
+            "status": "pass"
+          },
+          {
+            "label": "Hardened Stateless APIs",
+            "after": "GET /api/health + POST /api/inquiries (Zod, 415, 413, 202, 429)",
+            "status": "pass"
+          }
+        ],
+        "artifacts": [
+          {
+            "id": "gt-alpaca-05-game-route",
+            "label": "Proof #05A — /game Spoke Route: 22 Alpacas & 7 Ibiza Routes (game-1440px.png)",
+            "imageSrc": "/media/proof-pack/gt-alpaca/game-1440px.png",
+            "alt": "GT-Alpaca /game route at 1440px showcasing the 22-alpaca Herd Explorer, 7 Ibiza routes, and 22 original character songs in crawlable SSR HTML.",
+            "caption": "Server-rendered /game spoke showcasing all 22 verified Ibiza alpacas, 7 island routes, and 22 character tracks with zero WebGL text traps.",
+            "command": "pnpm run geo:audit",
+            "cliExcerpt": "pnpm run geo:audit (scripts/run-geo-audit.mjs): PASS\nAudited 5 HTML documents (/, /game, /sponsors, /farms, /faq) + .next/server/app/robots.txt.body\nErrors: 0 | Warnings: 0 | AI Crawlers Allowed: GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, PerplexityBot, Google-Extended"
+          },
+          {
+            "id": "gt-alpaca-05-sponsors-route",
+            "label": "Proof #05B — /sponsors Spoke Route: Child-Safe First-Party Pillars (sponsors-1440px.png)",
+            "imageSrc": "/media/proof-pack/gt-alpaca/sponsors-1440px.png",
+            "alt": "GT-Alpaca /sponsors route at 1440px displaying child-safe, cookie-free first-party sponsorship pillars and zero-PII Media Kit preview.",
+            "caption": "Server-rendered /sponsors route presenting the 4 child-safe, cookie-free first-party sponsorship pillars and Zod-validated inquiry flow."
+          },
+          {
+            "id": "gt-alpaca-05-farms-configurator",
+            "label": "Proof #05C — /farms Interactive White-Label Configurator (farms-configurator-1440px.png)",
+            "imageSrc": "/media/proof-pack/gt-alpaca/farms-configurator-1440px.png",
+            "alt": "GT-Alpaca /farms route at 1440px displaying the 7-species regional farm white-label edition configurator and verified inquiry form.",
+            "caption": "Verified /farms white-label configurator passing the live Chromium golden happy path (POST /api/inquiries -> 201 receipt GTA-...)."
+          },
+          {
+            "id": "gt-alpaca-05-faq-aeo",
+            "label": "Proof #05D — /faq AEO Hub & Connected JSON-LD @graph (faq-1440px.png)",
+            "imageSrc": "/media/proof-pack/gt-alpaca/faq-1440px.png",
+            "alt": "GT-Alpaca /faq route at 1440px displaying conclusion-first 40 to 60 word AEO answers backed by connected FAQPage and HowTo JSON-LD @graph.",
+            "caption": "Server-rendered /faq spoke with 8 conclusion-first 40–60 word AEO answers and HTML-escaped JSON-LD @graph (FAQPage + HowTo)."
+          }
+        ]
+      }
+    },
+    {
+      "id": "vwf-step-5-verify-stack-and-map",
+      "order": 5,
+      "title": "Full-Stack Gates & 3-Viewport Feature Map Check (Stage 4A)",
+      "stageTag": "Stage 4A · Gates",
+      "summary": "Never trust 'it compiled on my machine.' Stage 4A executes deterministic full-stack verification (`cf-next-verify`: TypeScript, ESLint, Vitest coverage, secret/boundary scan, `dependency-cruiser`, and production `next build`) followed by headless 3-viewport `cf-verify-map` sweeps (`375px`, `768px`, `1440px`) checking every route, `data-testid`, HTTP status, console error, and `0px` horizontal overflow.",
+      "eli5": {
+        "plainTitle": "Run Every Automated Safety Check Across Phone, Tablet, and Laptop Screens",
+        "oneLineHook": "Before asking a human to review your site, let six strict robot inspectors test the code and open every page at three real screen sizes.",
+        "everydayAnalogy": "A new car rolling through automated brake, headlight, airbag, and rain-tunnel tests before a human test driver ever grabs the keys.",
+        "simpleExplanation": "A website can look fine on a wide desktop monitor while hiding broken buttons, secret leaks, or sideways scrolling on a narrow phone. Stage four A runs two rock-solid automated sweeps. First, our six-part code harness checks types, style rules, unit tests, accidental secrets, clean folder boundaries, and a full production build. Second, our Feature Map robot opens every single route at phone, tablet, and desktop widths to prove zero console errors and zero sideways screen overflow.",
+        "whyItMatters": "Automated multi-viewport gates catch real production breaks—like a missing button selector, a broken API route, or a wide table blowing out mobile layouts—in seconds, with repeatable proof every time.",
+        "roleInProtocol": "This is Stage 4A (`cf-next-verify` + `cf-verify-map`), generating Proof #06 (`verify-stack.sh` 6/6 output) and Proof #07 (`run-verify-map.mjs --all-viewports` 375px / 768px / 1440px verification matrix).",
+        "howToUseGoingForward": "Run `verify-stack.sh` and `run-verify-map.mjs --all-viewports` against a real `next start` production server before every PR or deploy—and update `.memory/feature-map.md` in the same commit whenever routes or `data-testid` selectors change.",
+        "whenToUse": "Run Stage 4A right after Stage 3 workers finish synthesizing a milestone, and re-run it after every bug fix before calling the independent reviewer.",
+        "realWorldExample": "On `gt-alpaca-website`, Proofs `#06` and `#07` passed `6/6` `verify-stack.sh` gates (`29/29` Vitest `85.64%` lines, `44` `depcruise` modules `0` violations, `11/11` routes) and `15/15` `cf-verify-map` checks across `375px`, `768px`, and `1440px` (`0` errors, `0px` overflow).",
+        "audioScript": "Imagine finishing a shiny new car and shipping it straight to buyers without checking the brakes or turning on the headlights in the dark. Stage four A prevents that with two unskippable robot checks. First, our full-stack verification script runs six automated gates in sequence: TypeScript types, ESLint style rules, unit tests, a secret leak scanner, architecture boundary checks, and a real production build. Second, our Feature Map checker boots the production server and opens every single route across three screen widths: a narrow phone at three hundred seventy-five pixels, a tablet at seven hundred sixty-eight pixels, and a desktop at fourteen hundred forty pixels. It checks every button selector, verifies zero browser errors, and confirms zero sideways scrolling before any human reviewer looks at the work.",
+        "estimatedMinutes": 8,
+        "diagramCaption": "How Stage 4A chains 6 deterministic code checks with 3-viewport automated browser verification across every route."
+      },
+      "keyTakeaways": [
+        "6-Gate `cf-next-verify` Pipeline (`Proof #06`): Sequentially runs `tsc --noEmit`, `eslint`, `vitest --coverage`, static secret/boundary scan, `dependency-cruiser` (`0` boundary violations), and production `next build`.",
+        "3-Viewport `cf-verify-map` Contract (`Proof #07`): Audits every route in `.memory/feature-map.md` at `375px` (mobile), `768px` (tablet), and `1440px` (desktop) for HTTP `200`, required `data-testid` selectors, `0` console/page/network errors, and `0px` horizontal overflow.",
+        "Production Server Fidelity: Always run `cf-verify-map` against `next build && next start`—never rely solely on `next dev`—so production SSR HTML, headers, and image caching behave identically to live hosting.",
+        "Verified GT-Alpaca Pass 2 Results: `verify-stack.sh` passed `6/6` (`29/29` Vitest `85.64%` lines, `44` `depcruise` modules `0` violations) and `cf-verify-map` passed `15/15` checks (`375px`/`768px`/`1440px`, `0px` overflow) plus the live Chromium `/farms` -> `POST /api/inquiries` `201` happy path."
+      ],
+      "actionChecklist": [
+        "Run `bash skills/cf-next-verify/scripts/verify-stack.sh <app-dir> --coverage` and confirm `6 passed, 0 failed`.",
+        "Boot the production server (`pnpm start`) and run `run-verify-map.mjs --map .memory/feature-map.md --all-viewports`.",
+        "Archive both command outputs and 3-viewport screenshots into `proof-pack/06-*` and `proof-pack/07-*`."
+      ],
+      "codeSnippet": {
+        "language": "bash",
+        "filename": "Stage 4A Full-Stack & 3-Viewport Feature Map Commands",
+        "code": "# 1. Run all 6 deterministic code, test, boundary & build gates (Proof #06)\nbash skills/cf-next-verify/scripts/verify-stack.sh . --coverage\n\n# 2. Run 3-viewport Feature Map verification against production server (Proof #07)\nnode skills/cf-verify-map/scripts/run-verify-map.mjs \\\n  --map .memory/feature-map.md \\\n  --all-viewports"
+      },
+      "mermaidDiagram": "flowchart LR\n    Build[\"Stage 3 Complete\"] --> Stack[\"6-Gate verify-stack.sh (Types, Lint, Tests, Secrets, Bounds, Build)\"]\n    Stack --> Start[\"Boot Production next start\"]\n    Start --> Map[\"cf-verify-map Across 375px, 768px & 1440px\"]\n    Map --> Check{\"Zero Errors & Zero Overflow?\"}\n    Check -->|\"Yes\"| Proof[\"Proofs 06 & 07 Ready for Review\"]\n    Check -->|\"No\"| Fix[\"Fix Defect & Re-Run\"]",
+      "repoArtifactPath": "skills/cf-verify-map/SKILL.md",
+      "promptId": "vwf-prompt-proof-pack-audit",
+      "proofGallery": {
+        "title": "GT-Alpaca Proofs #06 & #07 — 6/6 verify-stack.sh & 15/15 3-Viewport Feature Map Pass",
+        "summary": "Verified Pass 2 full-stack gate output (29/29 Vitest 85.64% lines, 44 depcruise modules 0 violations, 11/11 Next.js routes) and 15/15 Playwright verify:map results across 375px mobile, 768px tablet, and 1440px desktop with 0px horizontal overflow.",
+        "pipelinePhase": "Stage 4A · Verified Pass 2 Real Proof",
+        "skillsUsed": [
+          "cf-next-verify",
+          "cf-verify-map"
+        ],
+        "promptsVerified": [
+          "vwf-prompt-proof-pack-audit"
+        ],
+        "metrics": [
+          {
+            "label": "Full-Stack Verify Gate (06-verify-stack)",
+            "after": "6/6 PASS (tsc 0 · eslint 0 · 29/29 Vitest 85.64% · 0 depcruise · 11/11 routes)",
+            "status": "pass"
+          },
+          {
+            "label": "3-Viewport Feature Map (07-verify-map)",
+            "after": "15/15 PASS (375px · 768px · 1440px · 0 errors · 0px overflow)",
+            "status": "pass"
+          },
+          {
+            "label": "Chromium Golden Happy Path",
+            "after": "/farms configurator -> POST /api/inquiries -> 201 receipt (GTA-...)",
+            "status": "pass"
+          }
+        ],
+        "artifacts": [
+          {
+            "id": "gt-alpaca-06-verify-stack",
+            "label": "Proof #06 — Tablet 768px Layout & 6/6 verify-stack.sh Summary (hero-768px.png)",
+            "imageSrc": "/media/proof-pack/gt-alpaca/hero-768px.png",
+            "alt": "GT-Alpaca website rendered at 768px tablet width with crisp single-line navigation, responsive hero stage, and zero horizontal overflow.",
+            "caption": "Pass 2 tablet 768px verification confirming single-line header navigation (fixed after Pass 1 QA) alongside 6/6 green verify-stack.sh gates.",
+            "command": "bash skills/cf-next-verify/scripts/verify-stack.sh . --coverage",
+            "cliExcerpt": "=== Proof #07: Deterministic Verification Gates Summary (Pass 2) ===\n[PASS] TypeScript (tsc --noEmit) — 0 errors\n[PASS] Lint (eslint .) — 0 errors, 0 warnings\n[PASS] Vitest — 3 files, 29/29 passed (85.64% lines; 100% src/lib/*; 93.22% api/inquiries)\n[PASS] Static Boundary Scan — 0 NEXT_PUBLIC_* secret or client service_role leaks\n[PASS] Architecture Boundaries (depcruise) — 44 modules, 107 deps, 0 violations\n[PASS] Production Build (next build, Turbopack) — 11/11 routes in 376ms\n[PASS] cf-verify-map — 15/15 across 375x812, 768x1024, 1440x900 (0 errors, 0px overflow)"
+          },
+          {
+            "id": "gt-alpaca-07-verify-map-3viewports",
+            "label": "Proof #07 — Mobile 375px Layout Verification (hero-375px.png)",
+            "imageSrc": "/media/proof-pack/gt-alpaca/hero-375px.png",
+            "alt": "GT-Alpaca website rendered at 375px mobile phone width showing stacked hero controls, readable typography, and zero horizontal overflow.",
+            "caption": "Verified mobile 375x812 layout proving 0px horizontal overflow, 44px touch targets, and clean SSR hero framing on small screens.",
+            "command": "node skills/cf-verify-map/scripts/run-verify-map.mjs --map .memory/feature-map.md --all-viewports"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vwf-step-6-decoupled-eval-qa",
+      "order": 6,
+      "title": "Decoupled Dual-Axis Evaluation & Answerability (Stage 4B)",
+      "stageTag": "Stage 4B · cf-eval",
+      "summary": "Never let the generator grade its own homework. Stage 4B delegates an independent `cf-reviewer` in a clean read-only context to run `cf-eval` and `cf-qa-review` across two axes—Output Quality (security, tokens, 3D, GEO, visual QA) and Execution Trajectory (spec fidelity, zero weakened tests, honest metrics)—producing an Answerability Statement and an explicit `SHIP`, `REVISE`, or `BLOCK` verdict.",
+      "eli5": {
+        "plainTitle": "Bring In a Fresh Independent Inspector to Grade Both Result and Honesty",
+        "oneLineHook": "Never let the same AI helper that wrote your website also grade its own final exam—hire a fresh inspector who checks both quality and honesty.",
+        "everydayAnalogy": "A city building inspector from outside the construction company checking both the finished wiring and the permit logbook before signing off.",
+        "simpleExplanation": "Even smart AI builders can develop blind spots—or accidentally take a shortcut like muting a warning just to make a test turn green. That is why Stage four B brings in a brand-new, read-only reviewer who had nothing to do with building the site. The inspector grades two things separately: first, does the finished website actually work, stay safe, and look crisp on every screen? Second, did the builders follow the spec honestly without cheating any checks?",
+        "whyItMatters": "Independent dual-axis grading catches subtle security leaks, skipped accessibility checks, and silent test-weakening before real visitors or customers ever encounter them—giving you full confidence to explain why the launch is safe.",
+        "roleInProtocol": "This is Stage 4B (`cf-eval` + `cf-qa-review` executed by `cf-reviewer` with read-only tools), writing `.memory/qa-report.md` and Proof #08 (`SHIP` / `REVISE` / `BLOCK` scorecard + Outer-Loop Answerability Statement).",
+        "howToUseGoingForward": "Before any staging or production launch, invoke `cf-reviewer` in a clean subagent context against your locked spec and `git diff`, demand both Output Quality and Trajectory scores, and fix every blocking item until it issues an explicit `SHIP`.",
+        "whenToUse": "Run decoupled `cf-eval` at the end of every major website milestone, security change, or release candidate—never skip it when deadlines feel tight.",
+        "realWorldExample": "On `gt-alpaca-website`, Proof `#08` proved decoupled review works: Pass 1 `cf-reviewer` issued `BLOCK` over dark Espresso text contrast and a Next.js 16 `_global-error.html` edge case, then certified Pass 2 `SHIP` (`0` P0, `0` P1) once both blockers and 4 polish items were closed with regression tests.",
+        "audioScript": "Imagine a student writing an exam, grading their own paper, and giving themselves an A plus. Nobody would trust that diploma! Stage four B enforces our favorite engineering rule: never let the builder grade its own homework. Once all automated tests turn green, we spin up a completely fresh, read-only reviewer subagent that never touched the code. That independent inspector grades two distinct axes. Axis one checks Output Quality: security, accessibility contrast, three-D smoothness, search crawlability, and live phone-to-desktop screenshots. Axis two checks Execution Trajectory: did the builders follow the locked spec, stay inside their file partitions, and keep every test honest without sneaking in bypasses? Only an explicit SHIP verdict unlocks human launch approval.",
+        "estimatedMinutes": 9,
+        "diagramCaption": "How a clean-context cf-reviewer grades Output Quality and Execution Trajectory separately before issuing SHIP, REVISE, or BLOCK."
+      },
+      "keyTakeaways": [
+        "Axis 1 — Output Quality (`cf-qa-review`): Audits all 5 Website Factory gates (`verify-stack`, `validate-tokens`, `audit-threejs`, `audit-geo-seo`, `verify-map`), Zod API boundaries, secret hygiene, and live 3-viewport browser visuals.",
+        "Axis 2 — Execution Trajectory (`cf-eval`): Audits spec compliance, disjoint Swarm partition discipline, and anti-gaming oracle honesty (zero weakened assertions, `@ts-ignore`, disabled ESLint rules, or fabricated proof metrics).",
+        "Outer-Loop Answerability Statement: Every `SHIP` report documents in plain language what changed, why it is safe, what risks remain, and the exact rollback command.",
+        "Clean-Context Separation: `cf-reviewer` operates read-only (`subagent: true`, `mainAgent: false`) so it can never silently patch code to rubber-stamp its own verdict."
+      ],
+      "actionChecklist": [
+        "Run all 5 Website Factory automated gates first so `cf-reviewer` inspects verifiable command outputs.",
+        "Spawn a fresh `cf-reviewer` subagent (`cf-eval`) with the locked spec path and `git diff` scope.",
+        "Archive the `SHIP` scorecard and Answerability Statement to `.memory/qa-report.md` and `proof-pack/08-cf-eval-ship.*`."
+      ],
+      "codeSnippet": {
+        "language": "markdown",
+        "filename": "Stage 4B Dual-Axis cf-eval Scorecard Structure (Proof #08)",
+        "code": "## Independent cf-reviewer Dual-Axis Audit (cf-eval)\n- Axis 1 (Output Quality): verify-stack (6/6), validate-tokens (0 literals), audit-threejs (0 blockers), audit-geo-seo (PASS), verify-map (375/768/1440px)\n- Axis 2 (Execution Trajectory): Locked spec adherence, zero weakened tests, zero @ts-ignore, zero fabricated numbers\n- Outer-Loop Answerability: What changed, why it is safe, exact rollback command\n- Final Verdict: SHIP | REVISE | BLOCK"
+      },
+      "mermaidDiagram": "flowchart TD\n    G[\"All 5 Automated Gates Green\"] --> Rev[\"Fresh Read-Only cf-reviewer Subagent\"]\n    Rev --> A1[\"Axis 1: Output Quality (Security, 3D, GEO, Visuals)\"]\n    Rev --> A2[\"Axis 2: Execution Trajectory (Spec & Anti-Gaming Honesty)\"]\n    A1 --> V{\"Verdict\"}\n    A2 --> V\n    V -->|\"SHIP\"| Launch[\"Unlock Stage 5 Human Launch Gate\"]\n    V -->|\"REVISE or BLOCK\"| Fix[\"Return Cited File & Line Fixes\"]",
+      "repoArtifactPath": "skills/cf-eval/SKILL.md",
+      "promptId": "vwf-prompt-proof-pack-audit",
+      "proofGallery": {
+        "title": "GT-Alpaca Proof #08 — Decoupled cf-eval: Pass 1 BLOCK -> Pass 2 SHIP",
+        "summary": "Real proof of Lit Software Factory governance in action: independent cf-reviewer blocked Pass 1 over two genuine P1 defects (dark Espresso text contrast and Next.js 16 _global-error.html in geo:audit), then certified Pass 2 SHIP (0 P0, 0 P1) after remediation and regression tests.",
+        "pipelinePhase": "Stage 4B · Verified Pass 2 SHIP Verdict",
+        "skillsUsed": [
+          "cf-eval",
+          "cf-qa-review"
+        ],
+        "promptsVerified": [
+          "vwf-prompt-proof-pack-audit"
+        ],
+        "metrics": [
+          {
+            "label": "Dual-Axis cf-eval Verdict",
+            "before": "Pass 1: BLOCK (2 P1 blockers caught)",
+            "after": "Pass 2: SHIP (0 P0 · 0 P1 · Axis 1 PASS · Axis 2 PASS)",
+            "status": "pass"
+          },
+          {
+            "label": "Oracle Honesty & Anti-Gaming",
+            "after": "0 @ts-ignore · 0 eslint-disable · 0 as any · 0 it.skip",
+            "status": "pass"
+          },
+          {
+            "label": "Real Method Improvement Caught",
+            "after": "Surfaced Next.js 16 _global-error.html edge case for upstream cf-geo-seo",
+            "status": "pass"
+          }
+        ],
+        "artifacts": [
+          {
+            "id": "gt-alpaca-08-cf-eval-ship",
+            "label": "Proof #08 — Clean-Context cf-reviewer Dual-Axis Pass 2 SHIP Scorecard (08-cf-eval-verdict.md)",
+            "caption": "Verified Pass 2 cf-eval verdict certifying both Output Quality and Execution Trajectory PASS with full Outer-Loop Answerability Statement.",
+            "command": "cat proof-pack/08-cf-eval-verdict.md",
+            "cliExcerpt": "# Proof #08: Independent Dual-Axis Evaluation Verdict (cf-eval) — Pass 2\nVerdict: SHIP (0 P0 Defects, 0 P1 Blocking Defects, 3 Informational Notes)\nAxis 1 (Output Quality): PASS — 0 High/Critical CVEs, tsc 0, eslint 0, 29/29 Vitest (85.64% lines), depcruise 44 modules 0 violations, next build 11/11, tokens:check 0, threejs:audit 0, geo:audit 0, cf-verify-map 15/15, 30/30 WCAG pairs (5.75:1–17.28:1 Light; 7.62:1–17.13:1 Dark).\nAxis 2 (Execution Trajectory): PASS — 0 @ts-ignore / eslint-disable / as any / it.skip; both Pass 1 P1 blockers & 4 polish items closed with real behavioral regression tests."
+          }
+        ]
+      }
+    },
+    {
+      "id": "vwf-step-7-hitl-launch-proof-pack",
+      "order": 7,
+      "title": "HITL Live Launch, Smoke Tests & Proof Pack Assembly (Stage 5)",
+      "stageTag": "Stage 5 · Launch",
+      "summary": "Graduate from verified local build to live production with zero surprises: pause at the Human-in-the-Loop deployment gate (`cf-deploy-staging`) with a documented rollback command, verify live SSR HTML, `robots.txt`, JSON-LD, and API routes using bounded `curl --max-time 5` smoke tests, assemble numbered Proof Pack `01–09`, and write a concise `<= 3 KB` `.memory/handover.md` (`cf-handover`).",
+      "eli5": {
+        "plainTitle": "Approve the Live Launch, Test the Real URL & Lock Your Proof Binder",
+        "oneLineHook": "Keep a human hand on the launch button, test the live website with quick safety probes, and file a complete Proof Pack 01–09.",
+        "everydayAnalogy": "A mission flight director checking every green console light, confirming the abort switch works, giving the final go-ahead, and filing the flight recorder.",
+        "simpleExplanation": "Even when every robot check and independent review says SHIP, the Code Factory never silently pushes a site to live customers behind your back. Stage five shows you the release summary and exact undo command, waits for your explicit thumbs-up, deploys the site, and immediately runs fast five-second checks against the live web address—confirming pages, search files, and forms answer cleanly. Finally, it packs all nine proofs and a short handover note so anyone can pick up the project tomorrow.",
+        "whyItMatters": "A documented rollback plan, live post-deploy smoke tests, and a clean numbered Proof Pack turn a scary launch day into a calm, repeatable ritual—and give clients or teams transparent evidence of every engineering standard met.",
+        "roleInProtocol": "This closes Stage 5 (`cf-deploy-staging` + `cf-handover` + `cf-website-factory`), producing Proof #09 (live URL, bounded `curl --max-time 5` smoke-test matrix, and complete phase/prompt checklist) while keeping `.memory/handover.md` at `<= 3 KB`.",
+        "howToUseGoingForward": "Never deploy without a `SHIP` `.memory/qa-report.md` and a written rollback command. After deploy, run bounded `curl --max-time 5` checks on every route, `robots.txt`, and API health endpoint, then run `cf-handover` to freeze session memory cleanly.",
+        "whenToUse": "Use Stage 5 at the end of every staging or production release—and reuse the numbered Proof Pack `01–09` pattern whenever shipping client sites, agency case studies, or internal web launches.",
+        "realWorldExample": "On `gt-alpaca-website`, Proof `#09` completed the full 6-stage loop: after HITL approval, commit `3b78ba7` deployed live to `https://gt-alpaca-website.vercel.app`, passing all `12/12` live production smoke tests (5 SSR routes, AI `robots.txt`, `sitemap.xml`, immutable `872,868 B` GLB cache, and `201`/`400`/`415` API probes).",
+        "audioScript": "We have reached launch day, and notice how calm it feels. In Stage five, nothing pushes silently to the internet behind your back. First, our staging deploy skill confirms your independent review earned a SHIP verdict and prints the exact one-line rollback command so you always have a safe undo button. Only after your explicit human approval does the site go live. Immediately afterward, quick five-second smoke tests ping the real deployed web address to verify server HTML, AI crawler rules, structured data, and API health endpoints. On the GT-Alpaca build, all twelve live production smoke tests passed immediately, confirming every single stage from workspace bootstrap through live launch with verifiable Proof Pack zero-one through zero-nine evidence.",
+        "estimatedMinutes": 8,
+        "diagramCaption": "How Stage 5 pairs Human-in-the-Loop deploy approval with bounded live smoke tests, rollback readiness, and Proof Pack 09."
+      },
+      "keyTakeaways": [
+        "Human-Lit Release Gate (`cf-deploy-staging`): Requires Stage 4 `.memory/qa-report.md` `SHIP` clearance, explicit human approval, and a tested rollback command (`vercel rollback <url>`) before production promotion.",
+        "Bounded Live Smoke Tests (`curl --max-time 5`): Immediately probe live SSR HTML routes (`/`, `/game`, `/sponsors`, `/farms`, `/faq`), `/robots.txt`, `/sitemap.xml`, `GET /api/health`, immutable `/models/avalon.glb` cache headers, and `201`/`400`/`415` checks on `POST /api/inquiries`.",
+        "Complete Proven Proof Pack `01–09`: Every stage from bootstrap (`01-bootstrap.txt`) through Pass 2 `cf-eval` `SHIP` (`08-cf-eval-verdict.md`) and live production smoke tests (`09-launch-and-walkthrough/live-smoke-tests.txt` at `https://gt-alpaca-website.vercel.app`) is backed by real artifacts—zero fabricated claims.",
+        "Compact Memory Handover (`cf-handover`): Updates `.memory/tasks.md` and overwrites `.memory/handover.md` (`<= 3 KB`) so any future model or engineer can resume cleanly."
+      ],
+      "actionChecklist": [
+        "Confirm `.memory/qa-report.md` holds a `SHIP` verdict and write down the exact `vercel rollback` command before approving deploy.",
+        "Run bounded `curl --max-time 5` smoke tests against the live URL covering SSR routes, `robots.txt`, JSON-LD, and API endpoints.",
+        "Complete Proof Pack `09-live-launch-matrix` and run `cf-handover` (`<= 3 KB`) to wrap up the release."
+      ],
+      "codeSnippet": {
+        "language": "bash",
+        "filename": "Stage 5 Bounded Post-Deploy Live Smoke Tests (Proof #09)",
+        "code": "# Bounded 5-second live verification after HITL-approved Vercel deploy\nLIVE_URL=\"https://gt-alpaca-website.vercel.app\"\ncurl -sS --max-time 5 -o /dev/null -w \"/ -> %{http_code}\\n\" \"$LIVE_URL/\"\ncurl -sS --max-time 5 -o /dev/null -w \"/robots.txt -> %{http_code}\\n\" \"$LIVE_URL/robots.txt\"\ncurl -sS --max-time 5 \"$LIVE_URL/api/health\""
+      },
+      "mermaidDiagram": "flowchart LR\n    Ship[\"Stage 4 SHIP Verdict + Rollback Plan\"] --> HITL{\"Explicit Human Launch Approval\"}\n    HITL -->|\"Approved\"| Dep[\"Deploy Live to Vercel\"]\n    Dep --> Smoke[\"12/12 Live Production Smoke Tests\"]\n    Smoke --> Pack[\"Complete Proof Pack 01–09 Archived\"]\n    Pack --> Hand[\"Compact Handover Note (cf-handover)\"]",
+      "repoArtifactPath": "skills/cf-website-factory/references/vibe-brief-template.md",
+      "promptId": "vwf-prompt-website-factory",
+      "proofGallery": {
+        "title": "GT-Alpaca Proof #09 — Live Production Launch & 12/12 Smoke Tests Verified",
+        "summary": "Verified Stage 5 production deployment of gt-alpaca-website (commit 3b78ba7) to https://gt-alpaca-website.vercel.app with 12/12 live smoke tests passing (5 SSR routes, AI robots.txt, sitemap.xml, immutable 872,868 B GLB cache, and 201/400/415 API checks).",
+        "pipelinePhase": "Stage 5 · Live Production Verified",
+        "skillsUsed": [
+          "cf-deploy-staging",
+          "cf-handover",
+          "cf-website-factory"
+        ],
+        "promptsVerified": [
+          "vwf-prompt-website-factory"
+        ],
+        "metrics": [
+          {
+            "label": "Live Production Deployment",
+            "after": "gt-alpaca-website.vercel.app (commit 3b78ba7 · HTTP/2 200)",
+            "status": "pass"
+          },
+          {
+            "label": "Post-Deploy Smoke Test Matrix",
+            "after": "12/12 PASS (5 SSR routes, robots.txt, sitemap, GLB cache, 201/400/415 API)",
+            "status": "pass"
+          },
+          {
+            "label": "CDN 3D Asset Caching",
+            "after": "HEAD /models/avalon.glb -> 872,868 B (max-age=31536000, immutable)",
+            "status": "pass"
+          }
+        ],
+        "artifacts": [
+          {
+            "id": "gt-alpaca-09-live-launch-matrix",
+            "label": "Proof #09 — Live Production Smoke Tests & Phase Completion Matrix (live-smoke-tests.txt)",
+            "imageSrc": "/media/proof-pack/gt-alpaca/hero-1440px.png",
+            "alt": "Live production flagship hero of The Herd of Ibiza: GT-Alpaca website deployed at gt-alpaca-website.vercel.app after passing all 12 post-deploy smoke tests.",
+            "caption": "Verified live production deployment at https://gt-alpaca-website.vercel.app passing all 12/12 bounded smoke tests plus complete 6-stage phase-completion matrix.",
+            "command": "cat proof-pack/09-launch-and-walkthrough/live-smoke-tests.txt",
+            "cliExcerpt": "=== Proof #09: Live Production Smoke Tests ===\nProduction Alias: https://gt-alpaca-website.vercel.app\nDeployment URL:   https://gt-alpaca-website-j9h0m9bf0-nexite-os.vercel.app\nGit Commit:       3b78ba7 (main)\n[GET /] [GET /game] [GET /sponsors] [GET /farms] [GET /faq] -> HTTP 200 (h1=1, json-ld=1)\n[GET /robots.txt] -> HTTP 200 (GPTBot, ClaudeBot, PerplexityBot, Google-Extended)\n[GET /sitemap.xml] -> HTTP 200 (routes=5)\n[GET /api/health] -> HTTP 200 { status: \"ok\" }\n[HEAD /models/avalon.glb] -> HTTP/2 200 (872868 B, immutable)\n[POST /api/inquiries] -> valid 201 (GTA-20261126-4U00) | invalid 400 | non-json 415\nALL LIVE PRODUCTION SMOKE TESTS PASSED."
+          }
+        ],
+        "liveUrl": "https://gt-alpaca-website.vercel.app"
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "id": "vwf-prompt-website-factory",
+      "title": "Orchestrate the Full 6-Stage Vibe Website Factory Pipeline (cf-website-factory)",
+      "eli5Title": "Build a Complete 3D & AI-Friendly Website From Brief to Proof Pack 09",
+      "stage": "spec",
+      "difficulty": "intermediate",
+      "skillRef": "cf-website-factory",
+      "description": "Runs the end-to-end 6-stage cf-website-factory workflow from workspace bootstrap, grounded research, and Creative Brief through W3C tokens, GLB compression, Swarm build, 5 automated gates, and Proof Pack 01–09.",
+      "whenToUse": "Copy this at the start of any new website or product microsite build to run the entire grounded, accessible, 3D-capable, AI-citable pipeline under Code Factory governance.",
+      "template": "Orchestrate the full 6-stage `cf-website-factory` pipeline for `{{site_name}}` inside `{{workspace_dir}}`:\n\n1. **Stages 0–1 (Bootstrap, Grounded Research & Brief):** Run `cf-bootstrap`, ground all product stats strictly from `{{source_repos}}` (zero fabricated claims), ask me 5 `cf-grill-me` Creative Brief questions, verify 100% MIT/ISC/Apache-2.0 licenses, and pass `pnpm audit --audit-level=high` (`0` High/Critical CVEs). Save Proofs `01` & `02`.\n2. **Stage 2 (Spec, Tokens & 3D Prep):** Lock `plans/{{site_slug}}-spec.md` and `.memory/feature-map.md`, compile 3-layer W3C `design/tokens.json` (`>= 4.5:1` WCAG AA), and compress raw `.glb` assets with `optimize-glb.mjs` (Meshopt + WebP 1024px). Save Proofs `03` & `04`.\n3. **Stage 3 (Partitioned Swarm):** Execute disjoint workers for 3D/Media, Token UI, and SSR Routes (`{{target_routes}}`) + connected JSON-LD `@graph` + AI-permissive `robots.txt`.\n4. **Stages 4–5 (Gates, Eval & HITL Launch):** Pass all 5 Website Factory gates, invoke clean-context `cf-reviewer` (`cf-eval`) for a `SHIP` verdict, assemble numbered Proof Pack `01–09`, and pause at the HITL launch gate with an explicit rollback command.",
+      "variables": [
+        {
+          "key": "site_name",
+          "label": "Website / Brand Name",
+          "placeholder": "e.g., The Herd of Ibiza: GT-Alpaca",
+          "defaultValue": "The Herd of Ibiza: GT-Alpaca"
+        },
+        {
+          "key": "site_slug",
+          "label": "Spec Filename Slug",
+          "placeholder": "e.g., gt-alpaca-website",
+          "defaultValue": "gt-alpaca-website"
+        },
+        {
+          "key": "workspace_dir",
+          "label": "Website Workspace Path",
+          "placeholder": "./my-website",
+          "defaultValue": "."
+        },
+        {
+          "key": "source_repos",
+          "label": "Primary Source Repos for Grounded Facts",
+          "placeholder": "../product-repo, ../video-studio",
+          "defaultValue": "primary product repository (zero fabricated claims)"
+        },
+        {
+          "key": "target_routes",
+          "label": "SSR Hub-and-Spoke Routes",
+          "placeholder": "/, /game, /sponsors, /farms, /faq",
+          "defaultValue": "/, /features, /pricing, /faq"
+        }
+      ],
+      "expectedOutcome": "A spec-locked, token-verified, 3D-optimized, AI-citable website backed by numbered Proof Pack 01–09 and an independent cf-reviewer SHIP verdict ready for HITL launch."
+    },
+    {
+      "id": "vwf-prompt-design-tokens",
+      "title": "Author 3-Layer W3C Design Tokens & Enforce WCAG >= 4.5:1 (cf-design-tokens)",
+      "eli5Title": "Create a Smart Color & Spacing System That Auto-Checks Readability",
+      "stage": "architecture",
+      "difficulty": "beginner",
+      "skillRef": "cf-design-tokens",
+      "description": "Creates a 3-layer W3C design/tokens.json (primitive, semantic, component + dark overrides), compiles it to Tailwind CSS v4 @theme inline with >= 4.5:1 WCAG AA contrast enforcement, and validates source files against hardcoded literals.",
+      "whenToUse": "Copy this before writing any UI styles or components so your entire site shares one accessible, dark-mode-ready token system with zero hardcoded hex hacks.",
+      "template": "Build a token-first design system for `{{brand_aesthetic}}` using `skills/cf-design-tokens/SKILL.md`:\n\n1. Author `{{tokens_path}}` using the strict 3-layer W3C hierarchy: `primitive` (raw palette, typography, spacing, radii), `semantic` (intent-named aliases like `background`, `foreground`, `primary`, `border`, `ring`—never appearance names like `blue-500`), `component` (`button.*`, `card.*`, `badge.*`), and `dark.semantic` overrides.\n2. Compile via `node skills/cf-design-tokens/scripts/generate-tokens.mjs --config {{tokens_path}} --out {{css_out_path}} --format tailwind-v4` and fix any contrast pair below `4.5:1` until exit `0`.\n3. Scan `{{source_dir}}` via `node skills/cf-design-tokens/scripts/validate-tokens.mjs --dir {{source_dir}}` to confirm zero raw `#hex`, `rgb()`, `hsl()`, or arbitrary Tailwind brackets (`bg-[#...]`, `p-[19px]`).\n4. Record exact token layer counts and verified WCAG pair totals for the Proof Pack.",
+      "variables": [
+        {
+          "key": "brand_aesthetic",
+          "label": "Brand Palette Polarity & Aesthetic",
+          "placeholder": "e.g., Sunlit Ibiza Warm Sand light-first with deep olive ink + dark mode",
+          "defaultValue": "High-craft editorial light-first palette with accessible dark overrides"
+        },
+        {
+          "key": "tokens_path",
+          "label": "W3C Tokens JSON Path",
+          "placeholder": "design/tokens.json",
+          "defaultValue": "design/tokens.json"
+        },
+        {
+          "key": "css_out_path",
+          "label": "Compiled Tailwind v4 CSS Path",
+          "placeholder": "src/styles/tokens.css",
+          "defaultValue": "src/styles/tokens.css"
+        },
+        {
+          "key": "source_dir",
+          "label": "Source Directory to Audit",
+          "placeholder": "src/",
+          "defaultValue": "src/"
+        }
+      ],
+      "expectedOutcome": "A compiled Tailwind CSS v4 tokens.css file with 100% WCAG 2.1 AA >= 4.5:1 verified pairs and a clean validate-tokens.mjs scan showing zero hardcoded literals."
+    },
+    {
+      "id": "vwf-prompt-threejs-craft",
+      "title": "Compress .glb Assets & Build Mobile-Safe R3F 3D Scenes (cf-threejs-craft)",
+      "eli5Title": "Shrink Heavy 3D Models & Build a Smooth 60 FPS Mobile-Safe Hero",
+      "stage": "build",
+      "difficulty": "senior",
+      "skillRef": "cf-threejs-craft",
+      "description": "Compresses raw .glb models via zero-native-binary Meshopt + KHR_mesh_quantization + WebP, implements R3F v9 scenes with PerformanceMonitor, Timer, dev-only lil-gui, and static fallbacks, and passes audit-threejs.mjs.",
+      "whenToUse": "Copy this whenever adding an interactive 3D hero or Three.js/R3F canvas so models download fast on mobile, frames stay smooth, and debug panels never leak into production.",
+      "template": "Implement a production 60 FPS 3D web experience for `{{scene_goal}}` following `skills/cf-threejs-craft/SKILL.md`:\n\n1. **Zero-Native-Binary GLB Compression:** Run `node skills/cf-threejs-craft/scripts/optimize-glb.mjs --in {{raw_glb_path}} --out {{out_glb_path}} --texture-format webp --max-texture-size 1024` and log exact before/after bytes and reduction percentage.\n2. **Hybrid SSR + Mobile-Safe R3F Scene:** Keep all H1s, copy, and CTAs in crawlable SSR HTML outside `<Canvas>` (`pointer-events: none` on passive overlays). Clamp DPR (`<= 2`), wrap in Drei `<PerformanceMonitor flipflops={3} onFallback={() => setDpr(1)} />`, use `Timer` from `three` (never deprecated `THREE.Clock`), keep dynamic lights `<= 3`, and never call `setState` or allocate `new THREE.*` inside `useFrame`.\n3. **Fallbacks & Dev Isolation:** Render a lightweight static WebP fallback (`{{fallback_webp}}`) for `prefers-reduced-motion` and `webglcontextlost`, and gate `lil-gui`/`stats-gl` strictly behind `process.env.NODE_ENV === \"development\"`.\n4. **Static Audit Gate:** Pass `node skills/cf-threejs-craft/scripts/audit-threejs.mjs --dir src/` with exit `0`.",
+      "variables": [
+        {
+          "key": "scene_goal",
+          "label": "3D Hero or Interactive Scene Description",
+          "placeholder": "e.g., Interactive Avalon alpaca turntable with soft Mediterranean daylight",
+          "defaultValue": "Interactive 3D hero turntable with smooth orbit damping and WebP fallback"
+        },
+        {
+          "key": "raw_glb_path",
+          "label": "Input Raw .glb Path",
+          "placeholder": "assets/raw/avalon_poc.glb",
+          "defaultValue": "assets/raw/hero.glb"
+        },
+        {
+          "key": "out_glb_path",
+          "label": "Optimized Output .glb Path",
+          "placeholder": "public/models/avalon.glb",
+          "defaultValue": "public/models/hero.glb"
+        },
+        {
+          "key": "fallback_webp",
+          "label": "Static Fallback WebP Path",
+          "placeholder": "/media/hero-diorama-fallback.webp",
+          "defaultValue": "/media/hero-fallback.webp"
+        }
+      ],
+      "expectedOutcome": "A dramatically compressed .glb model with logged byte savings, a mobile-safe 60 FPS R3F scene with reduced-motion fallback, and a clean exit-0 audit-threejs.mjs report."
+    },
+    {
+      "id": "vwf-prompt-geo-seo",
+      "title": "Implement Tri-Layer GEO / AEO / SEO & Connected JSON-LD @graph (cf-geo-seo)",
+      "eli5Title": "Make Every Page Easy for Google, Gemini, ChatGPT & Claude to Read and Cite",
+      "stage": "build",
+      "difficulty": "intermediate",
+      "skillRef": "cf-geo-seo",
+      "description": "Builds SSR crawlable hub-and-spoke pages, AI-permissive robots.txt, connected JSON-LD @graph schemas, conclusion-first 40–60 word AEO answers, and passes audit-geo-seo.mjs.",
+      "whenToUse": "Copy this when building your website routes, metadata, FAQ pages, and robots.txt so traditional search engines and generative AI answer engines can extract and cite your verified facts.",
+      "template": "Implement Tri-Layer SEO, AEO, and GEO discovery across `{{site_routes}}` for `{{entity_name}}` using `skills/cf-geo-seo/SKILL.md`:\n\n1. **SSR HTML Imperative:** Ensure every H1, 50–150 word opening declarative summary, verified metric table, and 40–60 word FAQ answer renders in raw Server Component HTML outside WebGL canvases.\n2. **Permissive AI `robots.txt`:** Explicitly allow `GPTBot`, `ClaudeBot`, `PerplexityBot`, and `Google-Extended` in `src/app/robots.ts` and publish `src/app/sitemap.ts`.\n3. **Connected JSON-LD `@graph`:** Emit one connected `@graph` linking `Organization`, `{{primary_schema_type}}`, `WebPage`, `FAQPage`, `HowTo`, and `BreadcrumbList` via stable `@id` IRIs on `{{canonical_origin}}`.\n4. **Metadata & Automated Audit:** Enforce `<title> <= 60` chars, meta description `140–155` chars, canonical links, and `html[lang]`, then pass `node skills/cf-geo-seo/scripts/audit-geo-seo.mjs --html .next/server/app --robots public/robots.txt` with exit `0`.",
+      "variables": [
+        {
+          "key": "entity_name",
+          "label": "Brand / Product Entity Name",
+          "placeholder": "e.g., The Herd of Ibiza: GT-Alpaca",
+          "defaultValue": "The Herd of Ibiza: GT-Alpaca"
+        },
+        {
+          "key": "site_routes",
+          "label": "Target SSR Routes",
+          "placeholder": "/, /game, /sponsors, /farms, /faq",
+          "defaultValue": "/, /game, /sponsors, /farms, /faq"
+        },
+        {
+          "key": "primary_schema_type",
+          "label": "Primary Schema.org Entity Type",
+          "placeholder": "VideoGame / SoftwareApplication / Product",
+          "defaultValue": "VideoGame"
+        },
+        {
+          "key": "canonical_origin",
+          "label": "Canonical HTTPS Origin",
+          "placeholder": "https://example.com",
+          "defaultValue": "https://example.com"
+        }
+      ],
+      "expectedOutcome": "SSR-crawlable pages with connected JSON-LD @graph schemas, AI-permissive robots.txt, concise AEO answers, and an exit-0 audit-geo-seo.mjs report."
+    },
+    {
+      "id": "vwf-prompt-proof-pack-audit",
+      "title": "Run All 5 Website Factory Gates, Assemble Proof Pack 01–09 & Run cf-eval",
+      "eli5Title": "Run Every Website Quality Gate, Build Proof Pack 01–09 & Get a Fresh SHIP Grade",
+      "stage": "test",
+      "difficulty": "senior",
+      "skillRef": "cf-website-factory",
+      "description": "Executes all 5 deterministic Website Factory gates (verify-stack, validate-tokens, audit-threejs, audit-geo-seo, verify-map across 3 viewports), compiles Proof Pack 01–09 with zero fabricated numbers, and invokes clean-context cf-reviewer (cf-eval).",
+      "whenToUse": "Copy this right after building your website (or before staging/production launch) to prove every technical, visual, accessibility, 3D, and AI-discovery gate passes honestly.",
+      "template": "Execute Stage 4 full verification and Proof Pack assembly for `{{project_dir}}` against `{{spec_path}}`:\n\n1. **Run All 5 Deterministic Website Factory Gates:**\n   - `bash skills/cf-next-verify/scripts/verify-stack.sh {{project_dir}} --coverage` (`6 passed, 0 failed`)\n   - `node skills/cf-design-tokens/scripts/validate-tokens.mjs --dir {{project_dir}}/src`\n   - `node skills/cf-threejs-craft/scripts/audit-threejs.mjs --dir {{project_dir}}/src`\n   - `node skills/cf-geo-seo/scripts/audit-geo-seo.mjs --html {{project_dir}}/.next/server/app --robots {{project_dir}}/public/robots.txt`\n   - `node skills/cf-verify-map/scripts/run-verify-map.mjs --map {{project_dir}}/.memory/feature-map.md --all-viewports` (`375px`, `768px`, `1440px`)\n2. **Assemble Honest Proof Pack `01–09`:** Save real command excerpts, byte/contrast JSON, and 3-viewport screenshots under `{{proof_pack_dir}}` (never fabricate pending metrics or missing URLs).\n3. **Decoupled Dual-Axis Audit (`cf-eval`):** Invoke read-only `cf-reviewer` in a clean context to grade Output Quality + Execution Trajectory, author an Answerability Statement, write `.memory/qa-report.md`, and issue `SHIP`, `REVISE`, or `BLOCK`.",
+      "variables": [
+        {
+          "key": "project_dir",
+          "label": "Website Project Directory",
+          "placeholder": ".",
+          "defaultValue": "."
+        },
+        {
+          "key": "spec_path",
+          "label": "Locked Feature Spec Path",
+          "placeholder": "plans/gt-alpaca-website-spec.md",
+          "defaultValue": "plans/site-spec.md"
+        },
+        {
+          "key": "proof_pack_dir",
+          "label": "Proof Pack Output Folder",
+          "placeholder": "proof-pack/",
+          "defaultValue": "proof-pack/"
+        }
+      ],
+      "expectedOutcome": "Verified exit-0 logs across all 5 Website Factory gates, a complete honest Proof Pack 01–09 folder, and an independent cf-reviewer SHIP scorecard in .memory/qa-report.md."
+    }
+  ]
+}

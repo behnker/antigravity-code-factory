@@ -10,10 +10,13 @@ import {
 } from "@/components/CourseEmblem";
 import { CourseIllustrationBanner } from "@/components/CourseIllustrationBanner";
 import { Eli5MicrolearningCard } from "@/components/Eli5MicrolearningCard";
+import { FourDomainShowcase } from "@/components/FourDomainShowcase";
 import { MermaidDiagram } from "@/components/MermaidDiagram";
+import { ProofGalleryPanel } from "@/components/ProofGalleryPanel";
 import { VideoStage } from "@/components/VideoStage";
 import { PromptVault } from "@/components/PromptVault";
 import { HitlGateSimulator } from "@/components/HitlGateSimulator";
+import { FOUR_DOMAIN_CASES } from "@/data/four-domain-cases";
 import {
   ANTIGRAVITY_AGENT_MODES,
   ANTIGRAVITY_BUILDING_BLOCKS,
@@ -23,9 +26,11 @@ import { createDefaultProgress } from "@/lib/prompt-engine";
 import type {
   Course,
   CourseIllustration,
+  DomainCaseStudy,
   Eli5ConceptBlock,
   LessonStep,
   PromptCard,
+  ProofGallery,
   VideoConfig,
 } from "@/lib/schemas";
 
@@ -1997,9 +2002,10 @@ describe("CourseEmblem & Course Visual Themes (Stage B)", () => {
     { slug: "notebooklm-antigravity", courseNumber: 5, expectedColorToken: "violet" },
     { slug: "enterprise-product-video-studio", courseNumber: 6, expectedColorToken: "rose" },
     { slug: "orchestration-showcase", courseNumber: 7, expectedColorToken: "cyan" },
+    { slug: "vibe-website-factory", courseNumber: 8, expectedColorToken: "amber" },
   ] as const;
 
-  it("renders clean decorative SVGs (aria-hidden='true') with distinct themes across all 8 canonical courses (00-07) and future Course 08 fallback", () => {
+  it("renders clean decorative SVGs (aria-hidden='true') with distinct themes across all 9 canonical courses (00-08) and future Course 09 fallback", () => {
     const renderedSvgMarkup = new Set<string>();
     const observedColorFamilies = new Set<string>();
 
@@ -2032,19 +2038,25 @@ describe("CourseEmblem & Course Visual Themes (Stage B)", () => {
       unmount();
     }
 
-    // All 5 semantic theme families (emerald, cyan, violet, amber, rose) and 8 distinct artworks are present
+    // Course 08 (vibe-website-factory) uses the Amber & Emerald theme
+    const course08Theme = getCourseVisualTheme("vibe-website-factory", 8);
+    expect(course08Theme.themeLabel).toContain("Amber & Emerald");
+    expect(course08Theme.topBarClass).toContain("amber-glow");
+    expect(course08Theme.topBarClass).toContain("emerald-glow");
+
+    // All 5 semantic theme families (emerald, cyan, violet, amber, rose) and 9 distinct artworks are present
     expect(observedColorFamilies).toEqual(
       new Set(["emerald", "cyan", "violet", "amber", "rose"]),
     );
-    expect(renderedSvgMarkup.size).toBe(8);
+    expect(renderedSvgMarkup.size).toBe(9);
 
-    // Future Course 08 fallback (unknown slug) wraps deterministically via modulo to Course 00 (emerald)
+    // Future Course 09 fallback (unknown slug) wraps deterministically via modulo to Course 00 (emerald)
     const course00Theme = getCourseVisualTheme("zero-to-one-foundations", 0);
-    const course08FallbackTheme = getCourseVisualTheme("future-course-08", 8);
-    expect(course08FallbackTheme).toEqual(course00Theme);
+    const course09FallbackTheme = getCourseVisualTheme("future-course-09", 9);
+    expect(course09FallbackTheme).toEqual(course00Theme);
 
     const { container: fallbackContainer, unmount: unmountFallback } = render(
-      <CourseEmblem slug="future-course-08" courseNumber={8} />,
+      <CourseEmblem slug="future-course-09" courseNumber={9} />,
     );
     const fallbackWrapper = fallbackContainer.firstElementChild as HTMLElement | null;
     expect(fallbackWrapper).toHaveAttribute("aria-hidden", "true");
@@ -2058,7 +2070,7 @@ describe("CourseEmblem & Course Visual Themes (Stage B)", () => {
     // Negative boundary courseNumber with unknown slug also resolves safely without throwing
     const negativeFallbackTheme = getCourseVisualTheme("future-course-negative", -1);
     expect(negativeFallbackTheme).toEqual(
-      getCourseVisualTheme("orchestration-showcase", 7),
+      getCourseVisualTheme("vibe-website-factory", 8),
     );
   });
 
@@ -2099,5 +2111,230 @@ describe("CourseEmblem & Course Visual Themes (Stage B)", () => {
       expect(svg).toHaveClass(...spec.svgClasses);
       unmount();
     }
+  });
+});
+
+describe("ProofGalleryPanel (Course 08 Proof Pack Evidence)", () => {
+  const BASE_GALLERY: ProofGallery = {
+    title: "GT-Alpaca Proof #03 — Tokens, GLB & Live Launch",
+    summary: "Verified stage metrics and visual/CLI artifacts from gt-alpaca-website.",
+    pipelinePhase: "Stage 2 · Verified",
+    skillsUsed: ["cf-design-tokens", "cf-threejs-craft"],
+    promptsVerified: ["vwf-prompt-design-tokens", "vwf-prompt-threejs-craft"],
+    metrics: [
+      {
+        label: "GLB Size",
+        before: "4.52 MB",
+        after: "852 KB (-81.57%)",
+        status: "pass",
+      },
+      {
+        label: "Live Screenshot Capture",
+        after: "Pending Step 4B",
+        status: "info",
+      },
+    ],
+    artifacts: [
+      {
+        id: "hero-shot",
+        label: "1440px Desktop Hero",
+        imageSrc: "/media/proof-pack/gt-alpaca/hero-1440px.png",
+        alt: "Sunlit GT-Alpaca 3D hero at 1440px",
+        caption: "Verified desktop hero screenshot.",
+        command: "pnpm run verify:map",
+        cliExcerpt: "9/9 targets passed across 375px, 768px, 1440px",
+      },
+      {
+        id: "cli-proof-slot",
+        label: "Bootstrap CLI Proof",
+        caption: "Verified workspace bootstrap output.",
+        command: "node skills/cf-bootstrap/scripts/init-workspace.mjs",
+        cliExcerpt: "Antigravity Code Factory workspace initialized.",
+      },
+      {
+        id: "pending-capture-slot",
+        label: "Step 4B Pending Frame",
+        caption: "Awaiting final live capture in Step 4B.",
+      },
+    ],
+    liveUrl: "https://www.alpacas-ibiza.app",
+  };
+
+  it("renders pass & info metrics strip, allowlisted image with onError fallback, CLI/pending terminal slates, expandable CLI drawer, and allowlisted https:// liveUrl", () => {
+    render(<ProofGalleryPanel gallery={BASE_GALLERY} stepId="vwf-step-3" />);
+
+    // Metrics strip (pass & info)
+    const metricsRegion = screen.getByLabelText("Proof metrics");
+    expect(within(metricsRegion).getByText("GLB Size")).toBeInTheDocument();
+    expect(within(metricsRegion).getByText("4.52 MB")).toBeInTheDocument();
+    expect(within(metricsRegion).getByText("852 KB (-81.57%)")).toBeInTheDocument();
+    expect(within(metricsRegion).getByText("Verified")).toBeInTheDocument();
+    expect(within(metricsRegion).getByText("Live Screenshot Capture")).toBeInTheDocument();
+    expect(within(metricsRegion).getByText("Pending Step 4B")).toBeInTheDocument();
+    expect(within(metricsRegion).getByText("Pending")).toBeInTheDocument();
+
+    // Allowlisted https:// liveUrl anchor with safe target/rel attributes
+    const liveLink = screen.getByRole("link", { name: /Open Live Deployment/i });
+    expect(liveLink).toHaveAttribute("href", "https://www.alpacas-ibiza.app");
+    expect(liveLink).toHaveAttribute("target", "_blank");
+    expect(liveLink).toHaveAttribute("rel", "noopener noreferrer");
+
+    // CLI terminal slate & Pending Step 4B Capture slate (!imageSrc)
+    expect(screen.getByText("CLI Proof")).toBeInTheDocument();
+    expect(screen.getByText("Pending Step 4B Capture")).toBeInTheDocument();
+
+    // Expandable CLI excerpt drawer (aria-expanded toggle)
+    const cliToggleButtons = screen.getAllByRole("button", { name: /Inspect CLI Excerpt/i });
+    expect(cliToggleButtons).toHaveLength(2);
+    const firstCliBtn = cliToggleButtons[0];
+    expect(firstCliBtn).toHaveAttribute("aria-expanded", "false");
+    expect(firstCliBtn).toHaveAttribute("aria-controls", "proof-cli-vwf-step-3-hero-shot");
+    expect(
+      screen.queryByText("9/9 targets passed across 375px, 768px, 1440px"),
+    ).not.toBeInTheDocument();
+
+    fireEvent.click(firstCliBtn);
+    expect(firstCliBtn).toHaveAttribute("aria-expanded", "true");
+    expect(
+      screen.getByText("9/9 targets passed across 375px, 768px, 1440px"),
+    ).toBeInTheDocument();
+
+    fireEvent.click(firstCliBtn);
+    expect(firstCliBtn).toHaveAttribute("aria-expanded", "false");
+    expect(
+      screen.queryByText("9/9 targets passed across 375px, 768px, 1440px"),
+    ).not.toBeInTheDocument();
+
+    // Allowlisted image renders and handles onError -> role="status" "Proof Preview Unavailable"
+    const proofImg = screen.getByRole("img", {
+      name: "Sunlit GT-Alpaca 3D hero at 1440px",
+    });
+    expect(proofImg).toBeInTheDocument();
+
+    fireEvent.error(proofImg);
+    expect(screen.queryByRole("img")).not.toBeInTheDocument();
+    expect(screen.getByText("Proof Preview Unavailable")).toBeInTheDocument();
+    const statusBlocks = screen.getAllByRole("status");
+    expect(
+      statusBlocks.some((el) => el.textContent?.includes("Proof Preview Unavailable")),
+    ).toBe(true);
+  });
+
+  it("blocks disallowed imageSrc and liveUrl with role='alert' and renders zero <img> or outbound anchor tags", () => {
+    const blockedGallery: ProofGallery = {
+      ...BASE_GALLERY,
+      liveUrl: "javascript:alert(1)",
+      artifacts: [
+        {
+          id: "blocked-remote-img",
+          label: "Untrusted Remote Screenshot",
+          imageSrc: "https://evil.example.com/steal.png",
+          alt: "Untrusted image",
+          caption: "Must be blocked by allowlist.",
+        },
+        {
+          id: "blocked-traversal-img",
+          label: "Traversal Screenshot",
+          imageSrc: "/media/proof-pack/gt-alpaca/../secret.png",
+          alt: "Traversal image",
+          caption: "Must be blocked by traversal check.",
+        },
+      ],
+    };
+
+    render(<ProofGalleryPanel gallery={blockedGallery} stepId="vwf-blocked" />);
+
+    expect(screen.queryByRole("img")).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /Open Live Deployment/i })).not.toBeInTheDocument();
+
+    const alerts = screen.getAllByRole("alert");
+    // 1 alert for blocked liveUrl + 2 alerts for blocked imageSrc artifacts
+    expect(alerts).toHaveLength(3);
+    expect(screen.getByText("Blocked Live URL")).toBeInTheDocument();
+    expect(screen.getAllByText("Blocked Proof Image URL")).toHaveLength(2);
+  });
+});
+
+describe("FourDomainShowcase (Step 5 Proven 4-Domain Method)", () => {
+  it("renders #four-domains, #four-domains-heading, all 4 domain cards, switches ELI5 vs Pro copy, and invokes onOpenCourse('vibe-website-factory')", () => {
+    const onOpenCourse = vi.fn();
+
+    const { container, rerender } = render(
+      <FourDomainShowcase
+        domainCases={[...FOUR_DOMAIN_CASES]}
+        learningDepthMode="eli5"
+        onOpenCourse={onOpenCourse}
+      />,
+    );
+
+    const section = container.querySelector("#four-domains");
+    expect(section).not.toBeNull();
+    const heading = container.querySelector("#four-domains-heading");
+    expect(heading).not.toBeNull();
+    expect(heading).toHaveTextContent(/One Code Factory Method · 4 Real Shipped Domains/i);
+
+    const cards = container.querySelectorAll("#four-domains article");
+    expect(cards).toHaveLength(4);
+    expect(screen.getByText(/Domain 01 · Website/i)).toBeInTheDocument();
+    expect(screen.getByText(/Domain 02 · Mobile \/ Web 3D Game/i)).toBeInTheDocument();
+    expect(screen.getByText(/Domain 03 · Video Generation/i)).toBeInTheDocument();
+    expect(screen.getByText(/Domain 04 · App & Harness Engineering/i)).toBeInTheDocument();
+
+    // ELI5 mode shows eli5Title & eli5Summary
+    expect(screen.getByText(FOUR_DOMAIN_CASES[0].eli5Title)).toBeInTheDocument();
+    expect(screen.getByText(FOUR_DOMAIN_CASES[0].eli5Summary)).toBeInTheDocument();
+    expect(screen.queryByText(FOUR_DOMAIN_CASES[0].title)).not.toBeInTheDocument();
+
+    // Clicking "Open Course 08 →" invokes onOpenCourse("vibe-website-factory")
+    const openCourse08Btn = screen.getByRole("button", { name: /Open Course 08 →/i });
+    fireEvent.click(openCourse08Btn);
+    expect(onOpenCourse).toHaveBeenCalledTimes(1);
+    expect(onOpenCourse).toHaveBeenCalledWith("vibe-website-factory");
+
+    // Switching to Pro mode swaps titles and summaries cleanly
+    rerender(
+      <FourDomainShowcase
+        domainCases={[...FOUR_DOMAIN_CASES]}
+        learningDepthMode="pro"
+        onOpenCourse={onOpenCourse}
+      />,
+    );
+    expect(screen.getByText(FOUR_DOMAIN_CASES[0].title)).toBeInTheDocument();
+    expect(screen.getByText(FOUR_DOMAIN_CASES[0].summary)).toBeInTheDocument();
+    expect(screen.queryByText(FOUR_DOMAIN_CASES[0].eli5Title)).not.toBeInTheDocument();
+
+    // Allowlisted https:// live links carry safe target & rel attributes
+    const liveLinks = screen.getAllByRole("link", { name: /Live Deployment/i });
+    expect(liveLinks.length).toBeGreaterThanOrEqual(2);
+    for (const link of liveLinks) {
+      expect(link).toHaveAttribute("target", "_blank");
+      expect(link).toHaveAttribute("rel", "noopener noreferrer");
+      expect(link.getAttribute("href")).toMatch(/^https:\/\//);
+    }
+  });
+
+  it("handles empty domainCases with role='status' and blocks unsafe liveUrl with role='alert'", () => {
+    const { rerender } = render(
+      <FourDomainShowcase
+        domainCases={[]}
+        learningDepthMode="eli5"
+        onOpenCourse={vi.fn()}
+      />,
+    );
+    expect(screen.getByRole("status")).toHaveTextContent(/No domain case studies loaded/i);
+
+    const unsafeCase: DomainCaseStudy = {
+      ...FOUR_DOMAIN_CASES[1],
+      liveUrl: "http://insecure.example.com",
+    };
+    rerender(
+      <FourDomainShowcase
+        domainCases={[unsafeCase]}
+        learningDepthMode="pro"
+        onOpenCourse={vi.fn()}
+      />,
+    );
+    expect(screen.getByRole("alert")).toHaveTextContent(/Blocked Live URL/i);
+    expect(screen.queryByRole("link", { name: /Live Deployment/i })).not.toBeInTheDocument();
   });
 });

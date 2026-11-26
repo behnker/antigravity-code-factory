@@ -1,4 +1,9 @@
-import type { HarnessDimension, RepoManifest, SdlcStageKey } from "./schemas";
+import type {
+  DomainCaseStudy,
+  HarnessDimension,
+  RepoManifest,
+  SdlcStageKey,
+} from "./schemas";
 
 export type HarnessMode = "raw" | "code-factory-v3";
 
@@ -462,6 +467,7 @@ export interface SdlcOrbitalSceneProps {
 export interface AcademyShellProps {
   manifest: RepoManifest;
   harnessDimensions: HarnessDimension[];
+  domainCases?: DomainCaseStudy[];
 }
 
 export const HARNESS_NODES: readonly HarnessNodeSpec[] = [

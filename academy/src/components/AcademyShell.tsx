@@ -15,6 +15,7 @@ import type {
   SdlcStageKey,
 } from "@/lib/schemas";
 import { CourseCurriculumStudio } from "./CourseCurriculumStudio";
+import { FourDomainShowcase } from "./FourDomainShowcase";
 import { GlassNavbar } from "./GlassNavbar";
 import { HarnessComparisonLab } from "./HarnessComparisonLab";
 import { HeroShowcase } from "./HeroShowcase";
@@ -26,11 +27,15 @@ import { SdlcReferenceShowcase } from "./SdlcReferenceShowcase";
 export function AcademyShell({
   manifest,
   harnessDimensions,
+  domainCases = [],
 }: AcademyShellProps) {
   const [progress, setProgress] = useState<LearnerProgress>(() =>
     createDefaultProgress("2026-11-24T00:00:00.000Z"),
   );
   const [hydrated, setHydrated] = useState(false);
+  const [activeCourseId, setActiveCourseId] = useState<string>(
+    () => manifest.courses[0]?.id ?? "",
+  );
   const [progressModalOpen, setProgressModalOpen] = useState(false);
   const [highlightedPromptId, setHighlightedPromptId] = useState<string | null>(
     null,
@@ -185,6 +190,21 @@ export function AcademyShell({
       ?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
+  const handleOpenCourseBySlug = useCallback(
+    (courseSlug: string) => {
+      const matchedCourse = manifest.courses.find(
+        (course) => course.slug === courseSlug || course.id === courseSlug,
+      );
+      if (matchedCourse) {
+        setActiveCourseId(matchedCourse.id);
+      }
+      document
+        .getElementById("courses")
+        ?.scrollIntoView({ behavior: "smooth" });
+    },
+    [manifest.courses],
+  );
+
   return (
     <MotionConfig reducedMotion="user">
       <div className="relative min-h-screen w-full overflow-x-clip">
@@ -233,8 +253,18 @@ export function AcademyShell({
           </motion.div>
 
           <div className="border-t-2 border-glass-border-strong bg-void-900/65">
+            <FourDomainShowcase
+              domainCases={domainCases}
+              learningDepthMode={progress.learningDepthMode}
+              onOpenCourse={handleOpenCourseBySlug}
+            />
+          </div>
+
+          <div className="border-t-2 border-glass-border-strong bg-void-950">
             <CourseCurriculumStudio
               courses={manifest.courses}
+              activeCourseId={activeCourseId}
+              onSelectCourseId={setActiveCourseId}
               completedStepIds={progress.completedStepIds}
               onToggleStepComplete={handleToggleStepComplete}
               onJumpToPrompt={handleJumpToPrompt}
@@ -250,7 +280,7 @@ export function AcademyShell({
             />
           </div>
 
-          <div className="border-t-2 border-glass-border-strong bg-void-950">
+          <div className="border-t-2 border-glass-border-strong bg-void-900/65">
             <PromptVault
               courses={manifest.courses}
               bookmarkedPromptIds={progress.bookmarkedPromptIds}
@@ -267,7 +297,7 @@ export function AcademyShell({
           <section
             id="repo-hitl"
             aria-labelledby="repo-hitl-heading"
-            className="border-t-2 border-glass-border-strong bg-void-900/65 py-14 sm:py-16"
+            className="border-t-2 border-glass-border-strong bg-void-950 py-14 sm:py-16"
           >
             <div className="mx-auto max-w-7xl space-y-8 px-4 sm:px-6 lg:px-8">
               <div className="max-w-3xl space-y-2">

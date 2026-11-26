@@ -33,10 +33,13 @@ import { CourseEmblem, getCourseVisualTheme } from "./CourseEmblem";
 import { CourseIllustrationBanner } from "./CourseIllustrationBanner";
 import { Eli5MicrolearningCard } from "./Eli5MicrolearningCard";
 import { MermaidDiagram } from "./MermaidDiagram";
+import { ProofGalleryPanel } from "./ProofGalleryPanel";
 import { VideoStage } from "./VideoStage";
 
 export interface CourseCurriculumStudioProps {
   courses: Course[];
+  activeCourseId?: string;
+  onSelectCourseId?: (courseId: string) => void;
   completedStepIds: string[];
   onToggleStepComplete: (stepId: string) => void;
   onJumpToPrompt: (promptId: string) => void;
@@ -74,6 +77,8 @@ async function copyCodeSafely(text: string): Promise<boolean> {
 
 export function CourseCurriculumStudio({
   courses,
+  activeCourseId: controlledActiveCourseId,
+  onSelectCourseId,
   completedStepIds,
   onToggleStepComplete,
   onJumpToPrompt,
@@ -87,9 +92,10 @@ export function CourseCurriculumStudio({
   learningDepthMode,
   onChangeLearningDepthMode,
 }: CourseCurriculumStudioProps) {
-  const [activeCourseId, setActiveCourseId] = useState<string>(
+  const [uncontrolledCourseId, setUncontrolledCourseId] = useState<string>(
     courses[0]?.id ?? "",
   );
+  const activeCourseId = controlledActiveCourseId ?? uncontrolledCourseId;
   const [uncontrolledDepthMode, setUncontrolledDepthMode] =
     useState<LearningDepthMode>(
       learningDepthMode ?? progress.learningDepthMode ?? "eli5",
@@ -158,14 +164,15 @@ export function CourseCurriculumStudio({
   }, [activeCourse, completedStepIds]);
 
   const handleSelectCourse = (course: Course) => {
-    setActiveCourseId(course.id);
+    setUncontrolledCourseId(course.id);
+    onSelectCourseId?.(course.id);
     if (course.steps[0]) {
       setExpandedSteps((prev) => ({ ...prev, [course.steps[0].id]: true }));
     }
   };
 
-  const toggleStepAccordion = (stepId: string) => {
-    setExpandedSteps((prev) => ({ ...prev, [stepId]: !prev[stepId] }));
+  const toggleStepAccordion = (stepId: string, currentlyExpanded: boolean) => {
+    setExpandedSteps((prev) => ({ ...prev, [stepId]: !currentlyExpanded }));
   };
 
   const handleCompleteAndAdvance = (
@@ -718,7 +725,12 @@ export function CourseCurriculumStudio({
 
                 {activeCourse.steps.map((step, stepIndex) => {
                   const isCompleted = completedStepIds.includes(step.id);
-                  const isExpanded = Boolean(expandedSteps[step.id]);
+                  const hasExplicitCourseStepState = activeCourse.steps.some(
+                    (courseStep) => expandedSteps[courseStep.id] !== undefined,
+                  );
+                  const isExpanded =
+                    expandedSteps[step.id] ??
+                    (!hasExplicitCourseStepState && stepIndex === 0);
                   const checkboxId = `complete-step-${step.id}`;
                   const stepSnippets = [
                     ...(step.codeSnippet ? [step.codeSnippet] : []),
@@ -768,7 +780,7 @@ export function CourseCurriculumStudio({
 
                         <button
                           type="button"
-                          onClick={() => toggleStepAccordion(step.id)}
+                          onClick={() => toggleStepAccordion(step.id, isExpanded)}
                           aria-expanded={isExpanded}
                           aria-controls={`step-body-${step.id}`}
                           className="flex min-w-0 flex-1 cursor-pointer flex-col gap-3 text-left sm:flex-row sm:items-start sm:justify-between"
@@ -1016,6 +1028,13 @@ export function CourseCurriculumStudio({
                                   </div>
                                 )}
                               </>
+                            )}
+
+                            {step.proofGallery && (
+                              <ProofGalleryPanel
+                                gallery={step.proofGallery}
+                                stepId={step.id}
+                              />
                             )}
                           </div>
 

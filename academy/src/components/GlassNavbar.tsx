@@ -23,6 +23,7 @@ const NAV_LINKS = [
   { href: "#hero-lab", label: "3D Lab" },
   { href: "#comparison-lab", label: "Comparison" },
   { href: "#sdlc-loop", label: "SDLC Loop" },
+  { href: "#four-domains", label: "4 Domains" },
   { href: "#courses", label: "Courses" },
   { href: "#prompt-vault", label: "Prompt Vault" },
   { href: "#repo-hitl", label: "Repo & HITL" },
@@ -104,7 +105,7 @@ export function GlassNavbar({
             <a
               key={link.href}
               href={link.href}
-              className="rounded-lg px-3 py-1.5 text-sm font-medium text-ink-secondary transition-colors hover:bg-glass-elevated hover:text-ink-primary"
+              className="whitespace-nowrap rounded-lg px-2.5 py-1.5 text-sm font-medium text-ink-secondary transition-colors hover:bg-glass-elevated hover:text-ink-primary xl:px-3"
             >
               {link.label}
             </a>

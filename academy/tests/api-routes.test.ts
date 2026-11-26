@@ -5,7 +5,13 @@ import { NextRequest } from "next/server";
 import { GET as getCourses } from "@/app/api/courses/route";
 import { GET as getResources } from "@/app/api/resources/route";
 import { POST as postHitlSimulate } from "@/app/api/hitl/simulate/route";
-import { CourseSchema, isAllowedImageUrl, type Course } from "@/lib/schemas";
+import {
+  CourseSchema,
+  isAllowedImageUrl,
+  isAllowedLiveUrl,
+  isAllowedProofImageUrl,
+  type Course,
+} from "@/lib/schemas";
 
 const EXPECTED_COURSE_SLUGS = [
   "zero-to-one-foundations",
@@ -16,32 +22,33 @@ const EXPECTED_COURSE_SLUGS = [
   "notebooklm-antigravity",
   "enterprise-product-video-studio",
   "orchestration-showcase",
+  "vibe-website-factory",
 ] as const;
 
 const ACADEMY_PUBLIC_DIR = path.resolve(__dirname, "..", "public");
 
 describe("Next.js API Route Handlers", () => {
   describe("GET /api/courses", () => {
-    it("returns all 8 validated courses sorted strictly in ascending order 0..7", async () => {
+    it("returns all 9 validated courses sorted strictly in ascending order 0..8", async () => {
       const req = new NextRequest("http://localhost:3000/api/courses?limit=10&offset=0");
       const res = await getCourses(req);
       expect(res.status).toBe(200);
       const data = await res.json();
-      expect(data.items).toHaveLength(8);
-      expect(data.total).toBe(8);
-      expect(data.items.map((c: Course) => c.number)).toEqual([0, 1, 2, 3, 4, 5, 6, 7]);
+      expect(data.items).toHaveLength(9);
+      expect(data.total).toBe(9);
+      expect(data.items.map((c: Course) => c.number)).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8]);
       expect(data.items.map((c: Course) => c.slug)).toEqual([...EXPECTED_COURSE_SLUGS]);
       expect(data.limit).toBe(10);
       expect(data.offset).toBe(0);
     });
 
-    it("enforces 100% ELI5, allowlisted illustration on disk, mermaidDiagram, and prompt metadata coverage across courses 0..7", async () => {
+    it("enforces 100% ELI5, allowlisted illustration on disk, mermaidDiagram, proofGallery safety, and prompt metadata coverage across courses 0..8", async () => {
       const req = new NextRequest("http://localhost:3000/api/courses?limit=20&offset=0");
       const res = await getCourses(req);
       expect(res.status).toBe(200);
       const data: { items: Course[]; total: number } = await res.json();
-      expect(data.total).toBe(8);
-      expect(data.items).toHaveLength(8);
+      expect(data.total).toBe(9);
+      expect(data.items).toHaveLength(9);
 
       for (const course of data.items) {
         const parsed = CourseSchema.safeParse(course);
@@ -97,6 +104,33 @@ describe("Next.js API Route Handlers", () => {
           expect(eli5.roleInProtocol.trim().length, `Step ${stepCtx} missing eli5.roleInProtocol`).toBeGreaterThan(0);
           expect(eli5.howToUseGoingForward.trim().length, `Step ${stepCtx} missing eli5.howToUseGoingForward`).toBeGreaterThan(0);
           expect(eli5.realWorldExample.trim().length, `Step ${stepCtx} missing eli5.realWorldExample`).toBeGreaterThan(0);
+
+          if (step.proofGallery) {
+            if (step.proofGallery.liveUrl) {
+              expect(
+                isAllowedLiveUrl(step.proofGallery.liveUrl),
+                `Step ${stepCtx} proofGallery.liveUrl is not allowlisted`,
+              ).toBe(true);
+            }
+            for (const artifact of step.proofGallery.artifacts) {
+              if (artifact.imageSrc) {
+                expect(
+                  isAllowedProofImageUrl(artifact.imageSrc),
+                  `Step ${stepCtx} proof artifact ${artifact.id} imageSrc not allowlisted`,
+                ).toBe(true);
+                const proofRelative = artifact.imageSrc.replace(/^\/+/, "");
+                const proofFullPath = path.resolve(ACADEMY_PUBLIC_DIR, proofRelative);
+                expect(
+                  proofFullPath.startsWith(`${ACADEMY_PUBLIC_DIR}${path.sep}`),
+                  `Step ${stepCtx} proof image escapes public dir`,
+                ).toBe(true);
+                expect(
+                  fs.existsSync(proofFullPath) && fs.statSync(proofFullPath).isFile(),
+                  `Step ${stepCtx} proof image missing on disk: ${proofFullPath}`,
+                ).toBe(true);
+              }
+            }
+          }
         }
 
         for (const prompt of course.prompts) {
@@ -154,6 +188,45 @@ describe("Next.js API Route Handlers", () => {
       expect(preInvStep).toBeDefined();
       expect(preInvStep!.codeSnippet!.code).toContain("hook_state.update_state");
       expect(preInvStep!.codeSnippet!.code).toContain('"systemMessage": {"systemMessage"');
+    });
+
+    it("serves Course 08 (vibe-website-factory) with 7 proofGallery steps & 5 prompts and Course 02 cf-prompt-learn-distill (skillRef: cf-learn)", async () => {
+      const req = new NextRequest("http://localhost:3000/api/courses?limit=20&offset=0");
+      const res = await getCourses(req);
+      expect(res.status).toBe(200);
+      const data: { items: Course[]; total: number } = await res.json();
+      expect(data.total).toBe(9);
+
+      const course08 = data.items.find((c) => c.slug === "vibe-website-factory");
+      expect(course08).toBeDefined();
+      expect(course08!.number).toBe(8);
+      expect(course08!.steps).toHaveLength(7);
+      expect(course08!.prompts).toHaveLength(5);
+      for (const step of course08!.steps) {
+        expect(
+          step.proofGallery,
+          `Course 08 step ${step.id} is missing proofGallery`,
+        ).toBeDefined();
+        expect(step.proofGallery!.artifacts.length).toBeGreaterThanOrEqual(1);
+      }
+
+      const course08PromptRefs = course08!.prompts.map((p) => p.skillRef);
+      expect(course08PromptRefs).toEqual(
+        expect.arrayContaining([
+          "cf-website-factory",
+          "cf-design-tokens",
+          "cf-threejs-craft",
+          "cf-geo-seo",
+        ]),
+      );
+
+      const sdlcCourse = data.items.find((c) => c.slug === "code-factory-sdlc");
+      expect(sdlcCourse).toBeDefined();
+      const learnPrompt = sdlcCourse!.prompts.find((p) => p.id === "cf-prompt-learn-distill");
+      expect(learnPrompt).toBeDefined();
+      expect(learnPrompt!.skillRef).toBe("cf-learn");
+      expect(learnPrompt!.eli5Title?.trim().length ?? 0).toBeGreaterThan(0);
+      expect(learnPrompt!.whenToUse?.trim().length ?? 0).toBeGreaterThan(0);
     });
   });
 

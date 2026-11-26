@@ -770,6 +770,44 @@
         }
       ],
       "expectedOutcome": "A passing Python stdlib hook test report confirming all 5 lifecycle events, atomic 0600 state isolation, latency budgets, and kill-switch behavior."
+    },
+    {
+      "id": "cf-prompt-learn-distill",
+      "title": "Distill a Resolved Bug Into a Permanent Rule & Regression Test (cf-learn)",
+      "eli5Title": "Turn a Fixed Bug Into a Permanent House Rule So It Never Returns",
+      "stage": "optimise",
+      "difficulty": "intermediate",
+      "skillRef": "cf-learn",
+      "description": "Extracts the systemic root-cause pattern from a resolved bug or post-mortem into a permanent invariant rule and deterministic regression test requirement.",
+      "whenToUse": "Copy this right after fixing any tricky bug, UI glitch, or security issue so you lock in one house rule and test preventing that failure forever.",
+      "template": "Execute Stage 6B (`cf-learn`) for the resolved incident below:\n\n- Resolved bug or incident: {{incident_summary}}\n- Systemic root-cause invariant to enforce: {{root_cause_rule}}\n- Target rule file: `{{rule_target_file}}`\n- Regression test file: `{{regression_test_file}}`\n\nSteps:\n1. Inspect the fix diff and verify we capture the systemic root-cause pattern rather than a one-off symptom.\n2. Draft a concise, enforceable permanent rule entry for `{{rule_target_file}}` (keeping global `rules/AGENTS.md <= 10 KB` if targeting global rules).\n3. Confirm or add a deterministic regression test in `{{regression_test_file}}` covering the exact failure mode.\n4. Present the proposed rule and test check for my explicit human approval before editing rule files, then verify the Stage 6B Sign-Off Gate.",
+      "variables": [
+        {
+          "key": "incident_summary",
+          "label": "Resolved Bug / Incident",
+          "placeholder": "Describe the bug, UI glitch, or security issue you resolved",
+          "defaultValue": "ESLint v9 rejected --format compact inside post-tool-feedback.py"
+        },
+        {
+          "key": "root_cause_rule",
+          "label": "Root-Cause Invariant Rule",
+          "placeholder": "What permanent guardrail prevents this failure class?",
+          "defaultValue": "Use ESLint v9-compatible --format stylish and cover hook formatter output with unit tests"
+        },
+        {
+          "key": "rule_target_file",
+          "label": "Rule Target File",
+          "placeholder": ".agents/rules/project-invariants.md",
+          "defaultValue": ".agents/rules/"
+        },
+        {
+          "key": "regression_test_file",
+          "label": "Regression Test File",
+          "placeholder": "tests/regression.test.ts",
+          "defaultValue": "hooks/test_hooks.py"
+        }
+      ],
+      "expectedOutcome": "A concise permanent invariant rule ready for explicit approval plus a deterministic regression test proving the resolved failure mode cannot silently recur."
     }
   ]
 }

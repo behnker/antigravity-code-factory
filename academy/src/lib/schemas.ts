@@ -40,6 +40,129 @@ export function isAllowedAudioUrl(url: string): boolean {
   return ALLOWED_AUDIO_URL_PATTERNS.some((pattern) => pattern.test(url));
 }
 
+/**
+ * Explicit allowlist for local Proof Pack screenshots (Security Invariant).
+ * Restricts paths strictly to /media/proof-pack/<project-slug>/<filename>.<ext>
+ * and blocks directory traversal, remote hosts, and javascript:/data: URIs.
+ */
+export const ALLOWED_PROOF_IMAGE_URL_PATTERNS: readonly RegExp[] = [
+  /^\/media\/proof-pack\/[a-z0-9-]+\/[A-Za-z0-9._-]+\.(?:png|webp|jpg|jpeg|svg)$/,
+];
+
+export function isAllowedProofImageUrl(url: string): boolean {
+  if (!url || url.includes("..")) return false;
+  return ALLOWED_PROOF_IMAGE_URL_PATTERNS.some((pattern) => pattern.test(url));
+}
+
+/**
+ * Explicit allowlist for external live demo URLs (Security Invariant).
+ * Permits strictly https:// origins without whitespace or embedded credentials.
+ */
+export function isAllowedLiveUrl(url: string): boolean {
+  if (!url || url.length > 500 || /\s/.test(url)) return false;
+  if (!/^https:\/\/[A-Za-z0-9.-]+(?:\/[^\s]*)?$/.test(url)) return false;
+  try {
+    const parsed = new URL(url);
+    return (
+      parsed.protocol === "https:" &&
+      parsed.hostname.length > 0 &&
+      parsed.hostname.includes(".") &&
+      !parsed.hostname.startsWith(".") &&
+      !parsed.hostname.endsWith(".") &&
+      !parsed.hostname.includes("..") &&
+      !parsed.username &&
+      !parsed.password
+    );
+  } catch {
+    return false;
+  }
+}
+
+export const ProofMetricSchema = z.object({
+  label: z.string().min(1).max(80),
+  before: z.string().min(1).max(80).optional(),
+  after: z.string().min(1).max(120),
+  status: z.enum(["pass", "info"]),
+});
+
+export const ProofArtifactSchema = z
+  .object({
+    id: z.string().regex(/^[a-z0-9-]+$/).max(80),
+    label: z.string().min(1).max(120),
+    imageSrc: z
+      .string()
+      .refine(isAllowedProofImageUrl, {
+        message:
+          "Proof imageSrc must match /media/proof-pack/<project-slug>/<filename>.(png|webp|jpg|jpeg|svg).",
+      })
+      .optional(),
+    alt: z.string().min(1).max(280).optional(),
+    caption: z.string().min(1).max(300),
+    command: z.string().min(1).max(240).optional(),
+    cliExcerpt: z.string().min(1).max(2000).optional(),
+  })
+  .superRefine((val, ctx) => {
+    if (val.imageSrc && !val.alt) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["alt"],
+        message:
+          "Proof artifact requires accessible alt text whenever imageSrc is provided.",
+      });
+    }
+  });
+
+export const ProofGallerySchema = z.object({
+  title: z.string().min(1).max(160),
+  summary: z.string().min(1).max(600),
+  pipelinePhase: z.string().min(1).max(80),
+  skillsUsed: z.array(z.string().min(1).max(60)).min(1).max(20),
+  promptsVerified: z.array(z.string().min(1).max(120)).default([]),
+  metrics: z.array(ProofMetricSchema).default([]),
+  artifacts: z.array(ProofArtifactSchema).min(1).max(16),
+  liveUrl: z
+    .string()
+    .refine(isAllowedLiveUrl, {
+      message: "Proof liveUrl must use a valid https:// origin.",
+    })
+    .optional(),
+});
+
+export const DomainIdSchema = z.enum(["website", "game", "video", "harness"]);
+
+export const DomainCaseStudySchema = z.object({
+  id: DomainIdSchema,
+  order: z.number().int().min(1).max(4),
+  domainLabel: z.string().min(1).max(40),
+  title: z.string().min(1).max(120),
+  eli5Title: z.string().min(1).max(120),
+  repoName: z.string().min(1).max(80),
+  status: z.enum(["shipped", "in-progress"]),
+  accentTone: z.enum(["amber", "emerald", "rose", "cyan"]),
+  summary: z.string().min(1).max(400),
+  eli5Summary: z.string().min(1).max(400),
+  stack: z.array(z.string().min(1).max(60)).min(2).max(10),
+  skillsApplied: z.array(z.string().min(1).max(40)).min(2).max(12),
+  verifiedMetrics: z
+    .array(
+      z.object({
+        label: z.string().min(1).max(60),
+        value: z.string().min(1).max(80),
+      }),
+    )
+    .min(2)
+    .max(6),
+  proofArtifactPath: z.string().min(1).max(160),
+  liveUrl: z
+    .string()
+    .refine(isAllowedLiveUrl, {
+      message: "Domain liveUrl must use a valid https:// origin.",
+    })
+    .optional(),
+  linkedCourseSlug: z.string().regex(/^[a-z0-9-]+$/).optional(),
+  linkedCourseNumber: z.number().int().min(0).optional(),
+});
+
 export const LearningDepthModeSchema = z.enum(["eli5", "pro"]);
 
 export const CourseIllustrationSchema = z.object({
@@ -161,6 +284,7 @@ export const LessonStepSchema = z.object({
   mermaidDiagram: z.string().optional(),
   repoArtifactPath: z.string().optional(),
   promptId: z.string().optional(),
+  proofGallery: ProofGallerySchema.optional(),
 });
 
 export const CourseSchema = z.object({
@@ -295,3 +419,8 @@ export type HitlSegmentResult = z.infer<typeof HitlSegmentResultSchema>;
 export type HitlSimulateResponse = z.infer<typeof HitlSimulateResponseSchema>;
 export type LearnerProgress = z.infer<typeof LearnerProgressSchema>;
 export type HarnessDimension = z.infer<typeof HarnessDimensionSchema>;
+export type ProofMetric = z.infer<typeof ProofMetricSchema>;
+export type ProofArtifact = z.infer<typeof ProofArtifactSchema>;
+export type ProofGallery = z.infer<typeof ProofGallerySchema>;
+export type DomainId = z.infer<typeof DomainIdSchema>;
+export type DomainCaseStudy = z.infer<typeof DomainCaseStudySchema>;

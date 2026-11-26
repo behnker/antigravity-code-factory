@@ -27,7 +27,8 @@ type CanonicalCourseKey =
   | "lit-software-factory"
   | "notebooklm-antigravity"
   | "enterprise-product-video-studio"
-  | "orchestration-showcase";
+  | "orchestration-showcase"
+  | "vibe-website-factory";
 
 const COURSE_KEYS_BY_NUMBER: readonly CanonicalCourseKey[] = [
   "zero-to-one-foundations",
@@ -38,6 +39,7 @@ const COURSE_KEYS_BY_NUMBER: readonly CanonicalCourseKey[] = [
   "notebooklm-antigravity",
   "enterprise-product-video-studio",
   "orchestration-showcase",
+  "vibe-website-factory",
 ];
 
 const COURSE_THEMES: Record<CanonicalCourseKey, CourseVisualTheme> = {
@@ -115,6 +117,16 @@ const COURSE_THEMES: Record<CanonicalCourseKey, CourseVisualTheme> = {
       "border-cyan-glow/45 bg-gradient-to-br from-cyan-glow/15 via-amber-glow/12 to-rose-glow/15",
     iconColorClass: "text-cyan-glow",
     themeLabel: "Orchestration Triad · Cyan · Amber · Rose",
+  },
+  "vibe-website-factory": {
+    borderClass: "border-amber-glow/40 hover:border-amber-glow/85",
+    activeBorderClass: "border-2 border-amber-glow",
+    topBarClass: "bg-gradient-to-r from-amber-glow via-emerald-glow to-cyan-glow",
+    badgeClass: "border-amber-glow/45 bg-amber-glow/15 text-amber-glow",
+    emblemContainerClass:
+      "border-amber-glow/45 bg-gradient-to-br from-amber-glow/15 via-emerald-glow/10 to-cyan-glow/15",
+    iconColorClass: "text-amber-glow",
+    themeLabel: "Website Factory · Amber & Emerald",
   },
 };
 
@@ -572,6 +584,60 @@ function EmblemArtwork({
             strokeWidth="1.7"
             strokeLinejoin="round"
           />
+        </svg>
+      );
+
+    case "vibe-website-factory":
+      // Course 08 (Amber / Emerald / Cyan):
+      // Isometric 3D wireframe cube (Cyan) + design-token swatch diamond (Amber) + GEO/AEO signal arcs (Emerald)
+      return (
+        <svg
+          viewBox="0 0 32 32"
+          className={svgClass}
+          fill="none"
+          aria-hidden="true"
+        >
+          {/* Isometric 3D wireframe cube (left-center) */}
+          <path
+            d="M12.5 10.5L19.5 14.5V22.5L12.5 26.5L5.5 22.5V14.5L12.5 10.5Z"
+            fill="var(--color-cyan-glow)"
+            fillOpacity="0.18"
+            stroke="var(--color-cyan-glow)"
+            strokeWidth="1.8"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M5.5 14.5L12.5 18.5L19.5 14.5M12.5 18.5V26.5"
+            stroke="var(--color-cyan-glow)"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          {/* Design-token swatch diamond (top-right) */}
+          <path
+            d="M23.5 5L27.5 9L23.5 13L19.5 9L23.5 5Z"
+            fill="var(--color-amber-glow)"
+            fillOpacity="0.3"
+            stroke="var(--color-amber-glow)"
+            strokeWidth="1.8"
+            strokeLinejoin="round"
+          />
+          <circle cx="23.5" cy="9" r="1.4" fill="var(--color-ink-primary)" />
+          {/* GEO/AEO signal beacon arcs (bottom-right) */}
+          <path
+            d="M22.5 21.5C24.4 21.5 26 23.1 26 25"
+            stroke="var(--color-emerald-glow)"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+          />
+          <path
+            d="M22.5 17.8C26.4 17.8 29.5 20.9 29.5 24.8"
+            stroke="var(--color-emerald-glow)"
+            strokeOpacity="0.7"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+          />
+          <circle cx="22.5" cy="25" r="1.5" fill="var(--color-emerald-glow)" />
         </svg>
       );
   }
