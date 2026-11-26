@@ -77,6 +77,358 @@ export const DRY_RUN_EXEMPT_LABELS: ReadonlySet<string> = new Set<string>([
 const SEGMENT_SPLITTER = /(?:&&|\|\||[;\n|])/;
 const DRY_RUN_FLAG = /(?:^|\s)--dry-run(?:\s|$)/i;
 
+const UNSAFE_OVERWRITE_TOKENS = [
+  "$(",
+  "`",
+  "<<",
+  "(",
+  ")",
+  "{",
+  "}",
+  "\n",
+  "\r",
+  "\0",
+] as const;
+
+const ENV_NAME_RE = /^[A-Za-z_][A-Za-z0-9_]*$/;
+
+const GIT_SKIP_EXACT_FLAGS: ReadonlySet<string> = new Set([
+  "--no-pager",
+  "-p",
+  "--paginate",
+  "--exec-path",
+  "-h",
+  "--help",
+  "--version",
+]);
+
+const CURL_SKIP_EXACT_FLAGS: ReadonlySet<string> = new Set([
+  "--max-time",
+  "-m",
+  "-h",
+  "--help",
+  "-V",
+  "--version",
+]);
+
+interface SegmentSpan {
+  readonly start: number;
+  readonly end: number;
+}
+
+interface ShellToken {
+  readonly text: string;
+  readonly start: number;
+  readonly end: number;
+  readonly envVarName: string | null;
+}
+
+interface CommandSplice {
+  readonly index: number;
+  readonly insertion: string;
+}
+
+function splitTopLevelSegments(commandLine: string): SegmentSpan[] | null {
+  const spans: SegmentSpan[] = [];
+  let segStart = 0;
+  let inSingle = false;
+  let inDouble = false;
+
+  for (let i = 0; i < commandLine.length; i += 1) {
+    const ch = commandLine[i]!;
+
+    if (inSingle) {
+      if (ch === "'") {
+        inSingle = false;
+      }
+      continue;
+    }
+
+    if (inDouble) {
+      if (ch === "\\") {
+        if (i + 1 >= commandLine.length) {
+          return null;
+        }
+        i += 1;
+        continue;
+      }
+      if (ch === '"') {
+        inDouble = false;
+      }
+      continue;
+    }
+
+    if (ch === "\\") {
+      if (i + 1 >= commandLine.length) {
+        return null;
+      }
+      i += 1;
+      continue;
+    }
+
+    if (ch === "'") {
+      inSingle = true;
+      continue;
+    }
+
+    if (ch === '"') {
+      inDouble = true;
+      continue;
+    }
+
+    const next = commandLine[i + 1];
+    if ((ch === "&" && next === "&") || (ch === "|" && next === "|")) {
+      spans.push({ start: segStart, end: i });
+      i += 1;
+      segStart = i + 1;
+      continue;
+    }
+
+    if (ch === ";" || ch === "|") {
+      spans.push({ start: segStart, end: i });
+      segStart = i + 1;
+    }
+  }
+
+  if (inSingle || inDouble) {
+    return null;
+  }
+
+  spans.push({ start: segStart, end: commandLine.length });
+  return spans;
+}
+
+function tokenizeSegment(
+  commandLine: string,
+  segStart: number,
+  segEnd: number,
+): ShellToken[] | null {
+  const tokens: ShellToken[] = [];
+  let i = segStart;
+
+  while (i < segEnd) {
+    while (i < segEnd && (commandLine[i] === " " || commandLine[i] === "\t")) {
+      i += 1;
+    }
+    if (i >= segEnd) {
+      break;
+    }
+
+    const tokenStart = i;
+    let text = "";
+    let inSingle = false;
+    let inDouble = false;
+    let sawQuoteOrEscapeBeforeEq = false;
+    let envVarName: string | null = null;
+    let sawEq = false;
+
+    while (i < segEnd) {
+      const ch = commandLine[i]!;
+
+      if (inSingle) {
+        if (ch === "'") {
+          inSingle = false;
+        } else {
+          text += ch;
+        }
+        i += 1;
+        continue;
+      }
+
+      if (inDouble) {
+        if (ch === "\\") {
+          if (i + 1 >= segEnd) {
+            return null;
+          }
+          const next = commandLine[i + 1]!;
+          if (next === '"' || next === "\\" || next === "$" || next === "`") {
+            text += next;
+          } else {
+            text += `\\${next}`;
+          }
+          i += 2;
+          continue;
+        }
+        if (ch === '"') {
+          inDouble = false;
+        } else {
+          text += ch;
+        }
+        i += 1;
+        continue;
+      }
+
+      if (ch === " " || ch === "\t") {
+        break;
+      }
+
+      if (ch === "'") {
+        if (!sawEq) sawQuoteOrEscapeBeforeEq = true;
+        inSingle = true;
+        i += 1;
+        continue;
+      }
+
+      if (ch === '"') {
+        if (!sawEq) sawQuoteOrEscapeBeforeEq = true;
+        inDouble = true;
+        i += 1;
+        continue;
+      }
+
+      if (ch === "\\") {
+        if (i + 1 >= segEnd) {
+          return null;
+        }
+        if (!sawEq) sawQuoteOrEscapeBeforeEq = true;
+        text += commandLine[i + 1]!;
+        i += 2;
+        continue;
+      }
+
+      if (ch === "=" && !sawEq) {
+        sawEq = true;
+        if (!sawQuoteOrEscapeBeforeEq && ENV_NAME_RE.test(text)) {
+          envVarName = text;
+        }
+      }
+
+      text += ch;
+      i += 1;
+    }
+
+    if (inSingle || inDouble) {
+      return null;
+    }
+
+    tokens.push({
+      text,
+      start: tokenStart,
+      end: i,
+      envVarName,
+    });
+  }
+
+  return tokens;
+}
+
+function getArgsBeforeDoubleDash(args: readonly string[]): string[] {
+  const dashDashIdx = args.indexOf("--");
+  return dashDashIdx === -1 ? [...args] : args.slice(0, dashDashIdx);
+}
+
+function shouldSkipGitRewrite(
+  hasGitPagerEnv: boolean,
+  argsBeforeDashDash: readonly string[],
+): boolean {
+  if (hasGitPagerEnv) {
+    return true;
+  }
+  return argsBeforeDashDash.some(
+    (arg) => GIT_SKIP_EXACT_FLAGS.has(arg) || arg.startsWith("--exec-path="),
+  );
+}
+
+function shouldSkipCurlRewrite(argsBeforeDashDash: readonly string[]): boolean {
+  return argsBeforeDashDash.some((arg) => {
+    if (CURL_SKIP_EXACT_FLAGS.has(arg) || arg.startsWith("--max-time=")) {
+      return true;
+    }
+    if (
+      arg.startsWith("-") &&
+      !arg.startsWith("--") &&
+      arg.length > 1 &&
+      arg.slice(1).includes("m")
+    ) {
+      return true;
+    }
+    return false;
+  });
+}
+
+/**
+ * Conservative transparent command rewriter with parity to `hooks/hitl-gate.py`.
+ * Injects `--no-pager` on `git` and `--max-time 5` on `curl` for safe `allow`
+ * commands, bailing out cleanly on subshells, heredocs, multiline scripts, or
+ * unbalanced quotes.
+ */
+export function computeCommandOverwrite(
+  commandLine: string,
+): { CommandLine: string } | undefined {
+  if (!commandLine || !commandLine.trim()) {
+    return undefined;
+  }
+
+  for (const unsafe of UNSAFE_OVERWRITE_TOKENS) {
+    if (commandLine.includes(unsafe)) {
+      return undefined;
+    }
+  }
+
+  const segmentSpans = splitTopLevelSegments(commandLine);
+  if (!segmentSpans) {
+    return undefined;
+  }
+
+  const splices: CommandSplice[] = [];
+
+  for (const span of segmentSpans) {
+    const tokens = tokenizeSegment(commandLine, span.start, span.end);
+    if (!tokens) {
+      return undefined;
+    }
+    if (tokens.length === 0) {
+      continue;
+    }
+
+    let cmdIndex = 0;
+    let hasGitPagerEnv = false;
+    while (cmdIndex < tokens.length && tokens[cmdIndex]!.envVarName !== null) {
+      if (tokens[cmdIndex]!.envVarName === "GIT_PAGER") {
+        hasGitPagerEnv = true;
+      }
+      cmdIndex += 1;
+    }
+
+    if (cmdIndex >= tokens.length) {
+      continue;
+    }
+
+    const cmdToken = tokens[cmdIndex]!;
+    const cmdText = cmdToken.text;
+    const trailingArgs = tokens.slice(cmdIndex + 1).map((t) => t.text);
+    const argsBeforeDashDash = getArgsBeforeDoubleDash(trailingArgs);
+
+    if (cmdText === "git" || cmdText.endsWith("/git")) {
+      if (!shouldSkipGitRewrite(hasGitPagerEnv, argsBeforeDashDash)) {
+        splices.push({ index: cmdToken.end, insertion: " --no-pager" });
+      }
+    } else if (cmdText === "curl" || cmdText.endsWith("/curl")) {
+      if (!shouldSkipCurlRewrite(argsBeforeDashDash)) {
+        splices.push({ index: cmdToken.end, insertion: " --max-time 5" });
+      }
+    }
+  }
+
+  if (splices.length === 0) {
+    return undefined;
+  }
+
+  let rewritten = "";
+  let cursor = 0;
+  for (const splice of splices) {
+    rewritten += commandLine.slice(cursor, splice.index) + splice.insertion;
+    cursor = splice.index;
+  }
+  rewritten += commandLine.slice(cursor);
+
+  if (rewritten === commandLine) {
+    return undefined;
+  }
+
+  return { CommandLine: rewritten };
+}
+
 /**
  * Deterministic TypeScript port of `evaluate_command()` from `hooks/hitl-gate.py`.
  * Splits chained shell commands into segments, evaluates every segment against
@@ -152,6 +504,8 @@ export function evaluateHitlCommand(
     };
   }
 
+  const overwrite = computeCommandOverwrite(commandLine);
+
   return {
     decision: "allow",
     reason: anyDryRunExempt
@@ -160,5 +514,6 @@ export function evaluateHitlCommand(
     matchedRule: null,
     dryRunExempt: anyDryRunExempt,
     segments,
+    ...(overwrite ? { overwrite } : {}),
   };
 }

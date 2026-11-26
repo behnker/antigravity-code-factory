@@ -394,6 +394,46 @@
       "mermaidDiagram": "flowchart LR\n    Edit[\"Screen, Page, or Data Change\"] --> Map[\"Update Living Feature Map\\n(Master Checklist File)\"]\n    Map --> Fence[\"Code Floor-Plan Fences\\n(Block Loops & Secret Leaks)\"]\n    Fence --> Check[\"Automatic Screen & Link Checker\\n(Phone, Tablet, Desktop)\"]\n    Check -->|\"Every Page & Check Clean\"| Pass[\"Ready for Your Approval\"]\n    Check -->|\"Missing Piece or Glitches\"| Shot[\"Save Screenshot & Fix Fast\"]",
       "repoArtifactPath": ".memory/feature-map.md",
       "promptId": "cf-prompt-verify-feature-map"
+    },
+    {
+      "id": "cf-stage-10-core-hooks",
+      "order": 10,
+      "title": "v3.0.0 Core Hooks — 5-Event Lifecycle Guardrails, Auto-Hydration & Stop Gate",
+      "stageTag": "v3.0.0: Core Hooks",
+      "summary": "Code Factory v3.0.0 activates five native Antigravity lifecycle events using pure Python 3 stdlib and an atomic 0600 per-conversation state store (`hooks/hook_state.py`): `SessionStart` `.memory/` hydration, fail-closed `PreToolUse` HITL (+ safe `overwrite`) & secret guard, `PostToolUse` -> `PreInvocation` `<2s` single-file lint, turn-15+ compaction nudges & 5-failure loop-breaker, and a bounded single-shot `Stop` verification gate.",
+      "eli5": {
+        "plainTitle": "Automatic Safety Net: 5 Built-In Checkpoints Across Every AI Session",
+        "oneLineHook": "Five quiet background checkpoints greet your session with fresh notes, guard risky commands, spot typos in 2 seconds, stop error loops, and check tests before finishing.",
+        "everydayAnalogy": "A smart airplane cockpit with pre-flight notes, safety switches, instant alerts, autopilot brakes, and a landing checklist.",
+        "simpleExplanation": "Think of every AI coding session like a short flight with five helpful cockpit checkpoints. When the session opens, Checkpoint 1 hands your AI today's handover notes and folder status. Before any command or file save runs, Checkpoint 2 blocks passwords and pauses on risky moves while adding safe defaults. Right after an edit, Checkpoints 3 and 4 run a 2-second spellcheck and halt endless error loops. Finally, Checkpoint 5 reminds your AI once to run tests before landing.",
+        "whyItMatters": "Without automatic lifecycle checkpoints, you have to babysit every session by hand—pasting handover notes, chasing silent syntax typos, stopping runaway retry loops, and remembering to ask whether tests actually ran.",
+        "roleInProtocol": "This is the v3.0.0 Phase 1 Core Hooks engine registered in hooks.json and backed by hooks/hook_state.py. Every hook uses pure Python standard library with zero external packages, strict per-conversation 0600 isolation, and instant environment-variable kill switches.",
+        "howToUseGoingForward": "Let all five hooks run quietly in the background on every project. Keep .memory/handover.md concise so SessionStart loads fast, watch for PreInvocation turn-15 compaction tips, and use CF_* environment switches if you ever need to pause one hook.",
+        "whenToUse": "Active automatically on every Antigravity session once the Code Factory v3.0.0 plugin is linked—ideal for daily feature builds, parallel swarms, and safe production maintenance.",
+        "realWorldExample": "You open a fresh chat and SessionStart loads your 2 KB handover note automatically. You edit a TypeScript file with a missing brace; two seconds later PostToolUse hands a clean note to PreInvocation, the AI fixes it, and Stop reminds it once to run tests before finishing.",
+        "audioScript": "Welcome to Code Factory version three, where five automatic checkpoints quietly protect every single session from takeoff to landing. Picture a modern airplane cockpit. First, at session start, the preflight briefing hands your helper your short handover note and current folder status automatically. Second, before any tool runs, safety switches block leaked passwords, pause for your approval on dangerous commands, and gently add safe defaults like non-blocking git output and five-second web timeouts. Third and fourth, right after saving a file, a fast two-second checker scans that single file and passes a crisp note to the next turn, while also halting runaway loops after five identical failures and nudging you to tidy long chats at turn fifteen. Finally, before the session ends, a single-shot landing checklist reminds your helper once to verify edited code with real tests.",
+        "estimatedMinutes": 7,
+        "diagramCaption": "How all five v3.0.0 lifecycle hooks coordinate through the private atomic state store from session start to verified finish."
+      },
+      "keyTakeaways": [
+        "5 Native Events in `hooks.json`: Flat arrays for `SessionStart`, `PreInvocation`, and `Stop`; grouped `{matcher, hooks}` arrays for `PreToolUse` (`hitl-gate.py`, `secret-guard.py`) and `PostToolUse` (`post-tool-feedback.py`).",
+        "Atomic Private State (`hooks/hook_state.py`): Pure Python 3 stdlib stores per-conversation JSON under `$PLUGIN_DATA/conversations/<cid>.json` with `0700`/`0600` perms, strict `conversationId` sanitization, secret redaction, and `24h` TTL pruning.",
+        "Fail-Closed vs. Fail-Open Separation: `PreToolUse` security gates fail closed (`ask`/`deny`, never `{}`) and apply conservative `overwrite` (`git --no-pager`, `curl --max-time 5`) only on safe allowed commands; DX hooks (`SessionStart`, `PostToolUse`, `PreInvocation`, `Stop`) never brick the agent loop.",
+        "Bounded Guarantees & Kill Switches: `PreInvocation` breaks 5-failure runaway loops (`terminationBehavior: \"terminate\"`) and nudges compaction at turn 15/30; `Stop` enforces a single-shot verification prompt guarding `NO_TOOL_CALL`, `continuationActive == false`, and `fullyIdle == true`; every hook can be toggled via `hooks.json` or `CF_*` env vars."
+      ],
+      "actionChecklist": [
+        "Inspect `hooks.json` and `hooks/hook_state.py` in the Live Repo Explorer to trace all 5 lifecycle hooks and atomic `0600` state isolation.",
+        "Run `python3 -m unittest discover -s hooks -p \"test_*.py\" -v` to verify every security, overwrite, lint-bridge, loop-breaker, and stop-gate invariant locally.",
+        "Keep `.memory/handover.md` under 3 KB so `SessionStart` hydrates clean workspace context in under 1.5 seconds."
+      ],
+      "codeSnippet": {
+        "language": "bash",
+        "filename": "Verify v3.0.0 Core Hooks & Zero-Code Runtime Kill Switches",
+        "code": "# 1. Run the full pure-stdlib Python hook verification suite\npython3 -m unittest discover -s hooks -p \"test_*.py\" -v\n\n# 2. Optional zero-code runtime kill switches (no file edits needed)\nexport CF_HITL_OVERWRITE=off       # Disable automatic git --no-pager / curl --max-time 5\nexport CF_POST_TOOL_LINT=off       # Skip <2s single-file lint in PostToolUse\nexport CF_LOOP_BREAKER_MAX=0       # Disable 5-failure runaway loop-breaker\nexport CF_CONTEXT_WARN_TURN=0      # Disable turn-15/30 compaction reminders\nexport CF_STOP_GATE_MODE=off       # Disable single-shot Stop verification prompt"
+      },
+      "mermaidDiagram": "flowchart LR\n    SS[\"1. SessionStart\\nLoad Handover & Git Status\"] --> PRET[\"2. PreToolUse\\nHITL, Safe Overwrite & Secret Guard\"]\n    PRET --> POST[\"3. PostToolUse\\n2-Sec Single-File Check & Track Edits\"]\n    POST --> STATE[\"Private Atomic State\\n(Per-Session 0600 JSON)\"]\n    STATE --> PREI[\"4. PreInvocation\\nDeliver Fix Notes, Turn-15 Tip & Loop Brake\"]\n    PREI --> STOP[\"5. Stop Gate\\nOne-Time Test Reminder Before Finish\"]\n    STATE --> STOP",
+      "repoArtifactPath": "hooks.json",
+      "promptId": "cf-prompt-v3-core-hooks"
     }
   ],
   "prompts": [
@@ -698,6 +738,38 @@
         }
       ],
       "expectedOutcome": "An automated `arch:check` boundary gate wired into `verify-stack.sh` guaranteeing zero circular imports or UI-to-server leaks."
+    },
+    {
+      "id": "cf-prompt-v3-core-hooks",
+      "title": "Verify & Tune Code Factory v3.0.0 5-Event Core Hooks",
+      "eli5Title": "Test & Configure All 5 Automatic Safety & Quality Checkpoints",
+      "stage": "build",
+      "difficulty": "intermediate",
+      "skillRef": "cf-start + hooks.json",
+      "description": "Audits the 5-event v3.0.0 Core Hooks registry (SessionStart, PreToolUse, PostToolUse, PreInvocation, Stop), runs deterministic stdlib Python unit tests, and verifies CF_* runtime kill switches.",
+      "whenToUse": "Copy this after linking or upgrading the Code Factory v3.0.0 plugin, or whenever you want to verify hook latency, secret redaction, safe overwrite rules, and kill switches.",
+      "template": "Audit and verify the Enterprise Code Factory v3.0.0 5-event Core Hooks under `{{hooks_dir}}`:\n\n1. Validate `hooks.json` against `agy-customizations/docs/hooks.md` (named top-level hooks, flat arrays for `SessionStart`/`PreInvocation`/`Stop`, grouped `{matcher, hooks}` arrays for `PreToolUse`/`PostToolUse`, and `timeout: 5`).\n2. Run `python3 -m unittest discover -s {{hooks_dir}} -p \"test_*.py\" -v` and confirm 100% pass across `hitl-gate.py` (`force_ask` + safe `overwrite`), `secret-guard.py`, `hook_state.py` (`0600` atomic store + redaction), `session-start.py`, `post-tool-feedback.py`, `pre-invocation.py` (loop-breaker threshold `{{loop_breaker_max}}`), and `stop-gate.py`.\n3. Verify our desired runtime toggle profile (`{{kill_switch_mode}}`) and confirm `rules/AGENTS.md` remains strictly `<= 10240` bytes (`wc -c rules/AGENTS.md`).",
+      "variables": [
+        {
+          "key": "hooks_dir",
+          "label": "Hooks Directory",
+          "placeholder": "hooks",
+          "defaultValue": "hooks"
+        },
+        {
+          "key": "loop_breaker_max",
+          "label": "Loop-Breaker Failure Threshold",
+          "placeholder": "5",
+          "defaultValue": "5"
+        },
+        {
+          "key": "kill_switch_mode",
+          "label": "Runtime Profile",
+          "placeholder": "all-enabled (default) or custom CF_* overrides",
+          "defaultValue": "all-enabled (default)"
+        }
+      ],
+      "expectedOutcome": "A passing Python stdlib hook test report confirming all 5 lifecycle events, atomic 0600 state isolation, latency budgets, and kill-switch behavior."
     }
   ]
 }

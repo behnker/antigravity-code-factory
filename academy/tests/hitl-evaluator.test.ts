@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { evaluateHitlCommand } from "@/lib/hitl-evaluator";
+import {
+  computeCommandOverwrite,
+  evaluateHitlCommand,
+} from "@/lib/hitl-evaluator";
 
 describe("evaluateHitlCommand (parity with hooks/hitl-gate.py)", () => {
   it("allows benign read-only and local test commands", () => {
@@ -97,5 +100,145 @@ describe("evaluateHitlCommand (parity with hooks/hitl-gate.py)", () => {
     const res = evaluateHitlCommand("git push origin main", true);
     expect(res.decision).toBe("force_ask");
     expect(res.matchedRule).toBe("git push");
+    expect(res.overwrite).toBeUndefined();
+    expect("overwrite" in res).toBe(false);
+  });
+});
+
+describe("computeCommandOverwrite & HITL overwrite integration", () => {
+  it("injects --no-pager on benign git and --max-time 5 on benign curl commands", () => {
+    expect(computeCommandOverwrite("git status")).toEqual({
+      CommandLine: "git --no-pager status",
+    });
+    expect(computeCommandOverwrite("/usr/bin/git diff --stat")).toEqual({
+      CommandLine: "/usr/bin/git --no-pager diff --stat",
+    });
+    expect(computeCommandOverwrite("curl -s https://example.com")).toEqual({
+      CommandLine: "curl --max-time 5 -s https://example.com",
+    });
+    expect(computeCommandOverwrite("/usr/bin/curl https://example.com")).toEqual({
+      CommandLine: "/usr/bin/curl --max-time 5 https://example.com",
+    });
+
+    const gitEval = evaluateHitlCommand("git status", false);
+    expect(gitEval.decision).toBe("allow");
+    expect(gitEval.overwrite).toEqual({ CommandLine: "git --no-pager status" });
+
+    const curlEval = evaluateHitlCommand("curl -s https://example.com", false);
+    expect(curlEval.decision).toBe("allow");
+    expect(curlEval.overwrite).toEqual({
+      CommandLine: "curl --max-time 5 -s https://example.com",
+    });
+  });
+
+  it("rewrites eligible segments across multi-segment pipelines while preserving quotes and env prefixes", () => {
+    expect(
+      computeCommandOverwrite("git diff && curl https://example.com"),
+    ).toEqual({
+      CommandLine: "git --no-pager diff && curl --max-time 5 https://example.com",
+    });
+
+    expect(
+      computeCommandOverwrite(
+        'FOO=1 git log --oneline | head -n 5; curl -H "Accept: application/json" https://example.com',
+      ),
+    ).toEqual({
+      CommandLine:
+        'FOO=1 git --no-pager log --oneline | head -n 5; curl --max-time 5 -H "Accept: application/json" https://example.com',
+    });
+
+    const pipeEval = evaluateHitlCommand("git diff && curl https://example.com", false);
+    expect(pipeEval.decision).toBe("allow");
+    expect(pipeEval.overwrite).toEqual({
+      CommandLine: "git --no-pager diff && curl --max-time 5 https://example.com",
+    });
+  });
+
+  it("respects git and curl skip flags, env overrides, and -- option delimiter semantics", () => {
+    const skippedCommands = [
+      "GIT_PAGER=cat git log",
+      "git --no-pager status",
+      "git -p log",
+      "git --paginate log",
+      "git --exec-path=/tmp status",
+      "git --version",
+      "git --help",
+      "git -h",
+      "curl --max-time 10 https://x",
+      "curl --max-time=10 https://x",
+      "curl -m 3 https://x",
+      "curl -sSm 5 https://x",
+      "curl --version",
+      "curl -V",
+      "curl --help",
+      "curl -h",
+      "git --no-pager log -- README.md",
+      "curl --max-time 2 -- https://x",
+    ];
+
+    for (const cmd of skippedCommands) {
+      expect(computeCommandOverwrite(cmd), cmd).toBeUndefined();
+    }
+
+    // Flags appearing AFTER `--` are positional args, not command options, so rewrite still applies
+    expect(computeCommandOverwrite("git log -- --no-pager")).toEqual({
+      CommandLine: "git --no-pager log -- --no-pager",
+    });
+    expect(computeCommandOverwrite("curl https://example.com -- --max-time")).toEqual({
+      CommandLine: "curl --max-time 5 https://example.com -- --max-time",
+    });
+  });
+
+  it("bails out safely on subshells, backticks, heredocs, grouping, multiline, unbalanced quotes, and quoted non-target executables", () => {
+    const excludedCommands = [
+      'git commit -m "$(date)"',
+      "git commit -m `date`",
+      "git commit -F - <<EOF",
+      "(git status)",
+      "{ git status; }",
+      "git status\ncurl https://example.com",
+      "git status\rcurl https://example.com",
+      "git status\0",
+      'git commit -m "unbalanced quote',
+      "curl 'https://example.com",
+      'echo "curl https://x"',
+      `python3 -c "print('git status')"`,
+      "",
+      "   ",
+    ];
+
+    for (const cmd of excludedCommands) {
+      expect(computeCommandOverwrite(cmd), cmd).toBeUndefined();
+    }
+  });
+
+  it("never attaches overwrite on force_ask, ask (bypassSandbox), or non-git/curl benign commands", () => {
+    const forceAskPush = evaluateHitlCommand("git push origin main", false);
+    expect(forceAskPush.decision).toBe("force_ask");
+    expect(forceAskPush.overwrite).toBeUndefined();
+    expect("overwrite" in forceAskPush).toBe(false);
+
+    const chainedForceAsk = evaluateHitlCommand(
+      "git status && git push origin main",
+      false,
+    );
+    expect(chainedForceAsk.decision).toBe("force_ask");
+    expect(chainedForceAsk.overwrite).toBeUndefined();
+    expect("overwrite" in chainedForceAsk).toBe(false);
+
+    const askGit = evaluateHitlCommand("git status", true);
+    expect(askGit.decision).toBe("ask");
+    expect(askGit.overwrite).toBeUndefined();
+    expect("overwrite" in askGit).toBe(false);
+
+    const askCurl = evaluateHitlCommand("curl -s https://example.com", true);
+    expect(askCurl.decision).toBe("ask");
+    expect(askCurl.overwrite).toBeUndefined();
+    expect("overwrite" in askCurl).toBe(false);
+
+    const nonTargetBenign = evaluateHitlCommand("pnpm test", false);
+    expect(nonTargetBenign.decision).toBe("allow");
+    expect(nonTargetBenign.overwrite).toBeUndefined();
+    expect("overwrite" in nonTargetBenign).toBe(false);
   });
 });

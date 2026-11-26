@@ -120,6 +120,41 @@ describe("Next.js API Route Handlers", () => {
       const data = await res.json();
       expect(data.error.code).toBe("INVALID_QUERY");
     });
+
+    it("reflects v3.0.0 curriculum updates in code-factory-sdlc Step 10 and harness-mastery real hook snippets", async () => {
+      const req = new NextRequest("http://localhost:3000/api/courses?limit=20&offset=0");
+      const res = await getCourses(req);
+      expect(res.status).toBe(200);
+      const data: { items: Course[] } = await res.json();
+
+      const sdlcCourse = data.items.find((c) => c.slug === "code-factory-sdlc");
+      expect(sdlcCourse).toBeDefined();
+      const step10 = sdlcCourse!.steps.find((s) => s.id === "cf-stage-10-core-hooks");
+      expect(step10).toBeDefined();
+      expect(step10!.order).toBe(10);
+      expect(step10!.repoArtifactPath).toBe("hooks.json");
+      expect(step10!.promptId).toBe("cf-prompt-v3-core-hooks");
+      const v3Prompt = sdlcCourse!.prompts.find((p) => p.id === "cf-prompt-v3-core-hooks");
+      expect(v3Prompt).toBeDefined();
+
+      const harnessCourse = data.items.find((c) => c.slug === "harness-mastery");
+      expect(harnessCourse).toBeDefined();
+      const hooksJsonStep = harnessCourse!.steps.find(
+        (s) => s.codeSnippet?.filename.includes("hooks.json"),
+      );
+      expect(hooksJsonStep).toBeDefined();
+      expect(hooksJsonStep!.codeSnippet!.code).toContain("code-factory-session-start");
+      expect(hooksJsonStep!.codeSnippet!.code).toContain("code-factory-post-tool-feedback");
+      expect(hooksJsonStep!.codeSnippet!.code).toContain("code-factory-pre-invocation");
+      expect(hooksJsonStep!.codeSnippet!.code).toContain("code-factory-stop-gate");
+
+      const preInvStep = harnessCourse!.steps.find(
+        (s) => s.codeSnippet?.filename.includes("hooks/pre-invocation.py"),
+      );
+      expect(preInvStep).toBeDefined();
+      expect(preInvStep!.codeSnippet!.code).toContain("hook_state.update_state");
+      expect(preInvStep!.codeSnippet!.code).toContain('"systemMessage": {"systemMessage"');
+    });
   });
 
   describe("GET /api/resources", () => {
@@ -140,6 +175,71 @@ describe("Next.js API Route Handlers", () => {
       expect(skillRes.status).toBe(200);
       const skillData = await skillRes.json();
       expect(skillData.items.length).toBeGreaterThanOrEqual(1);
+    });
+
+    it("reflects v3.0.0 plugin manifest, all 8 hook resources, and all 19 mapped skills", async () => {
+      const manifestReq = new NextRequest(
+        "http://localhost:3000/api/resources?category=manifest&limit=10&offset=0",
+      );
+      const manifestRes = await getResources(manifestReq);
+      expect(manifestRes.status).toBe(200);
+      const manifestData = await manifestRes.json();
+      const pluginJson = manifestData.items.find(
+        (item: { relativePath: string }) => item.relativePath === "plugin.json",
+      );
+      expect(pluginJson).toBeDefined();
+      expect(JSON.parse(pluginJson.content).version).toBe("3.0.0");
+
+      const hookReq = new NextRequest(
+        "http://localhost:3000/api/resources?category=hook&limit=20&offset=0",
+      );
+      const hookRes = await getResources(hookReq);
+      expect(hookRes.status).toBe(200);
+      const hookData = await hookRes.json();
+      expect(hookData.total).toBe(8);
+      expect(hookData.items).toHaveLength(8);
+      const hookPaths = hookData.items.map(
+        (item: { relativePath: string }) => item.relativePath,
+      );
+      expect(hookPaths).toEqual(
+        expect.arrayContaining([
+          "hooks.json",
+          "hooks/hook_state.py",
+          "hooks/session-start.py",
+          "hooks/hitl-gate.py",
+          "hooks/secret-guard.py",
+          "hooks/post-tool-feedback.py",
+          "hooks/pre-invocation.py",
+          "hooks/stop-gate.py",
+        ]),
+      );
+
+      const skillsReq = new NextRequest(
+        "http://localhost:3000/api/resources?category=skill&limit=50&offset=0",
+      );
+      const skillsRes = await getResources(skillsReq);
+      expect(skillsRes.status).toBe(200);
+      const skillsData = await skillsRes.json();
+      const skillEntries = (
+        skillsData.items as Array<{
+          name: string;
+          relativePath: string;
+          stageRef?: string;
+        }>
+      ).filter((item) => item.relativePath.endsWith("/SKILL.md"));
+      expect(skillEntries).toHaveLength(19);
+      const skillNames = skillEntries.map((item) => item.name);
+      expect(skillNames).toEqual(
+        expect.arrayContaining([
+          "cf-website-factory",
+          "cf-design-tokens",
+          "cf-threejs-craft",
+          "cf-geo-seo",
+        ]),
+      );
+      for (const skill of skillEntries) {
+        expect(skill.stageRef?.trim().length ?? 0, `${skill.name} missing stageRef`).toBeGreaterThan(0);
+      }
     });
 
     it("returns empty array when search has no match", async () => {
@@ -163,7 +263,7 @@ describe("Next.js API Route Handlers", () => {
   });
 
   describe("POST /api/hitl/simulate", () => {
-    it("evaluates high-impact commands cleanly", async () => {
+    it("evaluates high-impact commands cleanly and omits overwrite", async () => {
       const req = new NextRequest("http://localhost:3000/api/hitl/simulate", {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -174,6 +274,63 @@ describe("Next.js API Route Handlers", () => {
       const data = await res.json();
       expect(data.decision).toBe("force_ask");
       expect(data.matchedRule).toBe("git push");
+      expect(data.overwrite).toBeUndefined();
+      expect("overwrite" in data).toBe(false);
+    });
+
+    it("returns transparent overwrite for benign git and curl commands", async () => {
+      const gitReq = new NextRequest("http://localhost:3000/api/hitl/simulate", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ commandLine: "git status", bypassSandbox: false }),
+      });
+      const gitRes = await postHitlSimulate(gitReq);
+      expect(gitRes.status).toBe(200);
+      const gitData = await gitRes.json();
+      expect(gitData.decision).toBe("allow");
+      expect(gitData.overwrite).toEqual({ CommandLine: "git --no-pager status" });
+
+      const curlReq = new NextRequest("http://localhost:3000/api/hitl/simulate", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          commandLine: "curl -s https://example.com",
+          bypassSandbox: false,
+        }),
+      });
+      const curlRes = await postHitlSimulate(curlReq);
+      expect(curlRes.status).toBe(200);
+      const curlData = await curlRes.json();
+      expect(curlData.decision).toBe("allow");
+      expect(curlData.overwrite).toEqual({
+        CommandLine: "curl --max-time 5 -s https://example.com",
+      });
+    });
+
+    it("omits overwrite for ask (bypassSandbox) and benign non-git/curl commands", async () => {
+      const askReq = new NextRequest("http://localhost:3000/api/hitl/simulate", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ commandLine: "git status", bypassSandbox: true }),
+      });
+      const askRes = await postHitlSimulate(askReq);
+      expect(askRes.status).toBe(200);
+      const askData = await askRes.json();
+      expect(askData.decision).toBe("ask");
+      expect(askData.overwrite).toBeUndefined();
+      expect("overwrite" in askData).toBe(false);
+
+      const benignReq = new NextRequest("http://localhost:3000/api/hitl/simulate", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ commandLine: "pnpm test", bypassSandbox: false }),
+      });
+      const benignRes = await postHitlSimulate(benignReq);
+      expect(benignRes.status).toBe(200);
+      const benignData = await benignRes.json();
+      expect(benignData.decision).toBe("allow");
+      expect(benignData.overwrite).toBeUndefined();
+      expect("overwrite" in benignData).toBe(false);
     });
 
     it("returns 415 when content-type is not application/json", async () => {

@@ -47,6 +47,10 @@ const SKILL_STAGE_MAP: Record<string, string> = {
   "cf-deploy-staging": "Stage 5: Deploy",
   "cf-triage": "Stage 6A: User Feedback & Triage",
   "cf-learn": "Stage 6B: Optimise & Learn",
+  "cf-website-factory": "Website Factory Orchestrator",
+  "cf-design-tokens": "Design System & W3C Tokens",
+  "cf-threejs-craft": "3D / Three.js WebGL Craft",
+  "cf-geo-seo": "Tri-Layer SEO / AEO / GEO",
 };
 
 /**
@@ -108,7 +112,7 @@ function extractSummary(relativePath: string, content: string): string {
         return parsed.description.trim();
       }
       if (relativePath === "hooks.json") {
-        return "Declarative Antigravity lifecycle hooks registry binding PreToolUse safety checks to run_command.";
+        return "Declarative Antigravity Phase 1 Core Hooks registry binding SessionStart, PreToolUse, PostToolUse, PreInvocation, and Stop lifecycle handlers.";
       }
     } catch {
       // Fallback below
@@ -213,10 +217,25 @@ function collectResources(): RepoResource[] {
     readAllowlistedResource("hooks.json", "hook", "hooks.json (Hook Registry)", "Guardrails"),
   );
   pushIfPresent(
+    readAllowlistedResource("hooks/hook_state.py", "hook", "hook_state.py (Conversation State Store)", "Lifecycle Hooks"),
+  );
+  pushIfPresent(
+    readAllowlistedResource("hooks/session-start.py", "hook", "session-start.py (SessionStart Hydration)", "Lifecycle Hooks"),
+  );
+  pushIfPresent(
     readAllowlistedResource("hooks/hitl-gate.py", "hook", "hitl-gate.py (PreToolUse Gate)", "Guardrails"),
   );
   pushIfPresent(
     readAllowlistedResource("hooks/secret-guard.py", "hook", "secret-guard.py (Secret Leak Guard)", "Guardrails"),
+  );
+  pushIfPresent(
+    readAllowlistedResource("hooks/post-tool-feedback.py", "hook", "post-tool-feedback.py (PostToolUse Feedback)", "Lifecycle Hooks"),
+  );
+  pushIfPresent(
+    readAllowlistedResource("hooks/pre-invocation.py", "hook", "pre-invocation.py (PreInvocation Bridge & Loop-Breaker)", "Lifecycle Hooks"),
+  );
+  pushIfPresent(
+    readAllowlistedResource("hooks/stop-gate.py", "hook", "stop-gate.py (Stop Verification Gate)", "Lifecycle Hooks"),
   );
 
   // 2. Agents: agents/cf-*.md
@@ -446,7 +465,10 @@ function main(): void {
     pluginVersion,
     pluginName,
     counts: {
-      skills: countByCategory("skill"),
+      skills: resources.filter(
+        (item) =>
+          item.category === "skill" && item.relativePath.endsWith("/SKILL.md"),
+      ).length,
       agents: countByCategory("agent"),
       rules: countByCategory("rule"),
       hooks: countByCategory("hook"),

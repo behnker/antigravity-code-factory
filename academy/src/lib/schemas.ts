@@ -244,6 +244,7 @@ export const HitlSimulateResponseSchema = z.object({
   matchedRule: z.string().nullable(),
   dryRunExempt: z.boolean(),
   segments: z.array(HitlSegmentResultSchema),
+  overwrite: z.object({ CommandLine: z.string() }).optional(),
 });
 
 export const LearnerProgressSchema = z.object({

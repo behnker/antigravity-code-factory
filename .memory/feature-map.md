@@ -52,7 +52,7 @@
 - **Routes:** `/#repo-hitl`
 - **API Endpoints:**
   - `GET /api/resources?limit=20&offset=0` -> `200 { items, total, syncedAt }`
-  - `POST /api/hitl/simulate` (Body: `{ commandLine, bypassSandbox }`) -> `200 { decision, matchedRule, reason }` (400 on invalid input, 415 on non-JSON)
+  - `POST /api/hitl/simulate` (Body: `{ commandLine, bypassSandbox }`) -> `200 { decision, matchedRule, reason, overwrite? }` (400 on invalid input, 415 on non-JSON)
 - **Key DOM Selectors:**
   - SDLC section: `#sdlc-loop`, `#sdlc-heading`
   - Comparison lab: `#comparison-lab`, `#comparison-heading`

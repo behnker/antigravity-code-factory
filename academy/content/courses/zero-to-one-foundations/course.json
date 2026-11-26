@@ -227,7 +227,7 @@
         "everydayAnalogy": "House rules taped to the fridge, thick cookbooks on a bookshelf, and child-safety locks on the stove.",
         "simpleExplanation": "Every safe AI workshop uses three friendly pieces you already understand from real life. First, House Rules: one short page taped to the desk that your AI reads every single time (engineers name this file AGENTS.md). Second, Bookshelf Guides: longer how-to recipes (called Skills) that sit neatly on a shelf and only open when you need that specific job. Third, Safety Locks (called Hooks): automatic guards that stop risky moves—like deleting folders or publishing live—and wait for your thumbs-up.",
         "whyItMatters": "Without these three pieces, your AI either gets overwhelmed by too many instructions at once or accidentally runs a scary command before you are ready. Together, they keep your workspace tidy, smart, and completely under your control.",
-        "roleInProtocol": "This exact three-part setup powers the entire Antigravity Code Factory: lean House Rules in `rules/AGENTS.md`, 15 specialized Bookshelf Guides in `skills/`, and strict Safety Locks in `hooks/hitl-gate.py` and `hooks/secret-guard.py`.",
+        "roleInProtocol": "This exact three-part setup powers the entire Antigravity Code Factory: lean House Rules in `rules/AGENTS.md`, 19 specialized Bookshelf Guides in `skills/`, and a 5-event Safety & Quality Hooks layer in `hooks.json` (including `hooks/hitl-gate.py`, `hooks/secret-guard.py`, startup hydration, 2-second lint feedback, and bounded stop checks).",
         "howToUseGoingForward": "Start every project with a tiny 5-line House Rules file. Keep it short! Whenever you teach your AI a multi-step routine you want to reuse later, save it as a Bookshelf Guide instead of cramming it onto your main desk.",
         "whenToUse": "Use this right after opening a new project folder—or anytime you find yourself repeating the same preference or wanting an automatic pause before risky actions.",
         "realWorldExample": "You write 5 lines in your House Rules: 'Keep text easy to read, save a backup before big edits, and never share my password file.' Later, when an AI helper tries to run a live publish command, your Safety Lock automatically pops up and asks for your approval first.",
@@ -238,7 +238,7 @@
       "keyTakeaways": [
         "House Rules (`AGENTS.md`): Always-on, short golden rules (< 10 KB) covering style, safety, and quality boundaries.",
         "Bookshelf Guides (`skills/*/SKILL.md`): Progressive-disclosure playbooks that stay folded until a matching task triggers them.",
-        "Safety Locks (`hooks/`): Deterministic guards like `hitl-gate.py` and `secret-guard.py` that block leaks and pause for your human approval before destructive or live commands."
+        "Safety Locks (`hooks.json` & `hooks/`): Five deterministic lifecycle hooks—including `hitl-gate.py` (with safe `overwrite`), `secret-guard.py`, `session-start.py`, the 2-second `post-tool-feedback.py` -> `pre-invocation.py` bridge, and `stop-gate.py`—block leaks, pause before risky commands, and check edits automatically."
       ],
       "actionChecklist": [
         "Open `rules/AGENTS.md` and `hooks/hitl-gate.py` in the Repo Explorer to see real examples of House Rules and Safety Locks.",

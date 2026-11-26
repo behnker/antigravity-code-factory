@@ -1,4 +1,13 @@
 {
+  "code-factory-session-start": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "python3 ./hooks/session-start.py",
+        "timeout": 5
+      }
+    ]
+  },
   "code-factory-hitl-gate": {
     "PreToolUse": [
       {
@@ -24,6 +33,38 @@
             "timeout": 5
           }
         ]
+      }
+    ]
+  },
+  "code-factory-post-tool-feedback": {
+    "PostToolUse": [
+      {
+        "matcher": "write_file|edit_file|write_to_file|replace_file_content|multi_replace_file_content|run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ./hooks/post-tool-feedback.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "code-factory-pre-invocation": {
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "python3 ./hooks/pre-invocation.py",
+        "timeout": 5
+      }
+    ]
+  },
+  "code-factory-stop-gate": {
+    "Stop": [
+      {
+        "type": "command",
+        "command": "python3 ./hooks/stop-gate.py",
+        "timeout": 5
       }
     ]
   }

@@ -11,6 +11,7 @@ import {
   ShieldAlert,
   ShieldBan,
   ShieldCheck,
+  Sparkles,
   Terminal,
 } from "lucide-react";
 import {
@@ -27,6 +28,8 @@ const PRESET_COMMANDS = [
   "npx wrangler deploy",
   "npm test && npx tsc --noEmit",
   "npx supabase db push",
+  "git status",
+  "curl -s https://example.com",
 ] as const;
 
 function VerdictBadge({ decision }: { decision: HitlDecision }) {
@@ -62,21 +65,19 @@ function VerdictBadge({ decision }: { decision: HitlDecision }) {
   );
 }
 
-function buildPreToolUseContract(result: HitlSimulateResponse) {
+function buildPreToolUseContract(result: HitlSimulateResponse): {
+  decision: HitlDecision;
+  reason?: string;
+  overwrite?: { CommandLine: string };
+} {
   if (result.decision === "allow") {
-    return {
-      hookSpecificOutput: {
-        hookEventName: "PreToolUse",
-        permissionDecision: "allow",
-      },
-    };
+    return result.overwrite
+      ? { decision: "allow", overwrite: result.overwrite }
+      : { decision: "allow" };
   }
   return {
-    hookSpecificOutput: {
-      hookEventName: "PreToolUse",
-      permissionDecision: result.decision,
-      permissionDecisionReason: result.reason,
-    },
+    decision: result.decision,
+    reason: result.reason,
   };
 }
 
@@ -94,6 +95,7 @@ async function copyJsonText(text: string): Promise<boolean> {
 
 export function HitlGateSimulator() {
   const [commandLine, setCommandLine] = useState<string>("git push origin main");
+  const [evaluatedCommand, setEvaluatedCommand] = useState<string>("");
   const [bypassSandbox, setBypassSandbox] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -152,6 +154,7 @@ export function HitlGateSimulator() {
         return;
       }
 
+      setEvaluatedCommand(trimmed);
       setResult(parsed.data);
     } catch (err: unknown) {
       if (err instanceof DOMException && err.name === "AbortError") {
@@ -326,12 +329,60 @@ export function HitlGateSimulator() {
                     --dry-run Exempt
                   </span>
                 )}
+                {result.overwrite && (
+                  <span className="inline-flex items-center gap-1 rounded-full border border-emerald-glow/40 bg-emerald-glow/15 px-2.5 py-0.5 font-mono text-xs font-semibold text-emerald-glow">
+                    <Sparkles className="h-3 w-3" aria-hidden="true" />
+                    overwrite applied
+                  </span>
+                )}
               </div>
               <p className="text-xs leading-relaxed text-ink-primary sm:text-sm">
                 {result.reason}
               </p>
             </div>
           </div>
+
+          {result.overwrite && (
+            <div
+              role="status"
+              aria-label="PreToolUse command overwrite diff"
+              className="rounded-xl border border-emerald-glow/40 bg-void-950/90 p-3.5"
+            >
+              <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+                <span className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-wider text-emerald-glow">
+                  <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+                  Transparent PreToolUse Overwrite
+                </span>
+                <span className="font-mono text-xs text-cyan-glow">
+                  overwrite.CommandLine
+                </span>
+              </div>
+              <div className="space-y-1.5 font-mono text-xs">
+                {evaluatedCommand && (
+                  <div className="flex items-start gap-2 text-ink-secondary">
+                    <span
+                      className="shrink-0 select-none font-bold text-ink-muted"
+                      aria-label="Original command"
+                    >
+                      -
+                    </span>
+                    <code className="break-all">{evaluatedCommand}</code>
+                  </div>
+                )}
+                <div className="flex items-start gap-2 text-ink-primary">
+                  <span
+                    className="shrink-0 select-none font-bold text-emerald-glow"
+                    aria-label="Rewritten command"
+                  >
+                    +
+                  </span>
+                  <code className="break-all text-emerald-glow">
+                    {result.overwrite.CommandLine}
+                  </code>
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
             <div className="min-w-0 rounded-xl border border-glass-border bg-void-900/50 p-4 lg:col-span-7">

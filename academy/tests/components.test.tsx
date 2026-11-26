@@ -221,6 +221,144 @@ describe("Glassmorphic UI Components (States & WCAG)", () => {
     });
   });
 
+  it("HitlGateSimulator supports git status and curl presets, renders overwrite diff badge, and emits top-level PreToolUse JSON contract", async () => {
+    const fetchMock = vi
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            decision: "allow",
+            reason:
+              "No high-impact pattern matched; command is allowed under standard Antigravity sandbox policies.",
+            matchedRule: null,
+            dryRunExempt: false,
+            segments: [
+              {
+                segment: "git status",
+                isDryRun: false,
+                matchedRule: null,
+                decision: "allow",
+              },
+            ],
+            overwrite: { CommandLine: "git --no-pager status" },
+          }),
+          { status: 200, headers: { "content-type": "application/json" } },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            decision: "allow",
+            reason:
+              "No high-impact pattern matched; command is allowed under standard Antigravity sandbox policies.",
+            matchedRule: null,
+            dryRunExempt: false,
+            segments: [
+              {
+                segment: "curl -s https://example.com",
+                isDryRun: false,
+                matchedRule: null,
+                decision: "allow",
+              },
+            ],
+            overwrite: { CommandLine: "curl --max-time 5 -s https://example.com" },
+          }),
+          { status: 200, headers: { "content-type": "application/json" } },
+        ),
+      )
+      .mockResolvedValueOnce(
+        new Response(
+          JSON.stringify({
+            decision: "force_ask",
+            reason: "Matched git push",
+            matchedRule: "git push",
+            dryRunExempt: false,
+            segments: [
+              {
+                segment: "git push origin main",
+                isDryRun: false,
+                matchedRule: "git push",
+                decision: "force_ask",
+              },
+            ],
+          }),
+          { status: 200, headers: { "content-type": "application/json" } },
+        ),
+      );
+
+    const { container } = render(<HitlGateSimulator />);
+
+    const gitPresetBtn = screen.getByRole("button", { name: "git status" });
+    const curlPresetBtn = screen.getByRole("button", {
+      name: "curl -s https://example.com",
+    });
+    expect(gitPresetBtn).toBeInTheDocument();
+    expect(curlPresetBtn).toBeInTheDocument();
+
+    // 1. Click "git status" preset -> verify overwrite badge, diff status card, and top-level JSON contract
+    fireEvent.click(gitPresetBtn);
+    await waitFor(() => {
+      expect(screen.getByText("overwrite applied")).toBeInTheDocument();
+    });
+
+    const gitDiffStatus = screen.getByRole("status", {
+      name: "PreToolUse command overwrite diff",
+    });
+    expect(within(gitDiffStatus).getByText("git status")).toBeInTheDocument();
+    expect(within(gitDiffStatus).getByText("git --no-pager status")).toBeInTheDocument();
+
+    const preEl = container.querySelector("pre code");
+    expect(preEl).not.toBeNull();
+    const parsedGitContract = JSON.parse(preEl!.textContent ?? "{}");
+    expect(parsedGitContract).toEqual({
+      decision: "allow",
+      overwrite: { CommandLine: "git --no-pager status" },
+    });
+    expect("reason" in parsedGitContract).toBe(false);
+    expect("hookSpecificOutput" in parsedGitContract).toBe(false);
+
+    // 2. Click "curl -s https://example.com" preset -> verify curl overwrite diff & top-level JSON
+    fireEvent.click(curlPresetBtn);
+    await waitFor(() => {
+      expect(
+        within(
+          screen.getByRole("status", {
+            name: "PreToolUse command overwrite diff",
+          }),
+        ).getByText("curl --max-time 5 -s https://example.com"),
+      ).toBeInTheDocument();
+    });
+
+    const parsedCurlContract = JSON.parse(
+      container.querySelector("pre code")?.textContent ?? "{}",
+    );
+    expect(parsedCurlContract).toEqual({
+      decision: "allow",
+      overwrite: { CommandLine: "curl --max-time 5 -s https://example.com" },
+    });
+
+    // 3. Click "git push origin main" preset -> no overwrite badge, top-level { decision, reason } JSON
+    fireEvent.click(screen.getByRole("button", { name: "git push origin main" }));
+    await waitFor(() => {
+      expect(
+        screen.queryByRole("status", {
+          name: "PreToolUse command overwrite diff",
+        }),
+      ).not.toBeInTheDocument();
+    });
+    expect(screen.queryByText("overwrite applied")).not.toBeInTheDocument();
+
+    const parsedForceAskContract = JSON.parse(
+      container.querySelector("pre code")?.textContent ?? "{}",
+    );
+    expect(parsedForceAskContract).toEqual({
+      decision: "force_ask",
+      reason: "Matched git push",
+    });
+    expect("overwrite" in parsedForceAskContract).toBe(false);
+    expect(fetchMock).toHaveBeenCalledTimes(3);
+  });
+
   it("MermaidDiagram disables htmlLabels for XML-strict SVG parsing and renders valid SVG", async () => {
     mermaidInitializeMock.mockReset();
     mermaidRenderMock.mockReset();

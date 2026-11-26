@@ -1,22 +1,31 @@
 # Active Milestone Tasks
 
 ## Current Milestone
-- **Goal:** Release **`code-factory` `v2.5.0` (Vibe Website Factory Pipeline)** cleanly to `origin/main`, then execute **Track A (`code-factory` `v3.0.0` Phase 1 Core Hooks + Academy Sync)** via locked `cf-architect` Spec/ADR and `/teamwork`.
+- **Goal:** Execute the **GT-Alpaca Website + Academy Course 08 + 4-Domain Proof Program** (Step 2: Discovery, Locked Spec & Asset/Token Prep inside `/Users/ralphb/Projects_Personal/gt-alpaca-website`).
 - **Repository:** https://github.com/behnker/antigravity-code-factory
 
 ## In Progress
-- [ ] **`code-factory` v3.0 Phase 1 Core Hooks + Academy Sync (`cf-grill-me` locked → Stage 2 `cf-architect` Spec & ADR → `/teamwork`):**
-  - Pure Python stdlib core hooks (`<50ms` `PreToolUse`, `<2s` single-file `PostToolUse`): two-stage `PostToolUse` → `PreInvocation` single-file lint feedback bridge, `SessionStart` `.memory/` auto-injection, `PreToolUse` `overwrite` (`--no-pager`, `--max-time 5`) + context-saturation warning & runaway loop-breaker, and `Stop` verification gate.
-  - Sync `academy/` curriculum & Hero Explorer (`15 → 19` skills + v3.0 core hooks architecture/steps/prompts, keeping `localStorage` stateless).
+- [ ] **Step 2 (Fresh Conversation #1 — `gt-alpaca-website`): Discovery, Locked Spec & Asset/Token Prep:**
+  - Repo bootstrapped via `cf-bootstrap` (`proof-pack/01-bootstrap.txt` captured).
+  - Run `cf-research` → `cf-grill-me` → `cf-plan` (`plans/gt-alpaca-website-spec.md`), get HITL approval for MIT/ISC/Apache-2.0 stack, compile W3C `tokens.json → tokens.css` (`WCAG >= 4.5:1`), compress `avalon_poc.glb` via `@gltf-transform/cli` (Meshopt + WebP), and capture Proof Pack `02–04`.
 
 ## Up Next
-- [ ] **`code-factory` v3.0 Phases 2–3 (`.memory/research.md`):** Git-Shadow checkpoints (`cf-rewind`), `0600` Unix-socket async sidecar, companion `code-factory-lsp` MCP plugin, and bundled `run_workflow` scripts.
-- [ ] **Phase 3 (`gt-alpaca-website`) — HITL Dependency Approval & Toolchain Smoke Test:** Standalone repo bootstrapped via `cf-bootstrap` (`proof-pack/01-bootstrap.txt` captured); install MIT/ISC/Apache-2.0 toolchain upon approval, compress `avalon_poc.glb`, compile `tokens.json → tokens.css`, and lock `plans/gt-alpaca-website-spec.md`.
-- [ ] **Phase 4A/4B — Build `gt-alpaca-website` + Academy Course 08 (`vibe-website-factory`):** Execute Swarm build + Proof Pack capture, extend `LessonStepSchema` with allowlisted `proofGallery`, and publish Course 08 (`vibe-website-factory`) in `academy/`.
+- [ ] **Step 3 (`gt-alpaca-website` w/ `/teamwork`): Website Build, Pipeline Proof & Live Vercel Launch:** Build hybrid SSR HTML + Three.js/R3F showcase + GT-Alpaca trailer embed + `cf-geo-seo` JSON-LD `@graph` & AI `robots.txt`; pass `cf-next-verify`, `validate-tokens`, `audit-threejs`, `audit-geo-seo`, 3-viewport `cf-verify-map`, decoupled `cf-reviewer` `cf-eval` (`SHIP`), deploy live, and capture Proof Pack `05–09` (screenshots, audit JSONs, prompt & phase-completion matrix).
+- [ ] **Step 4 (Fresh Conversation #2 — `Project_Antigravity`): Academy Course 08 (`vibe-website-factory`) w/ Live GT-Alpaca Proof:** Extend `LessonStepSchema` with allowlisted `proofGallery`, embed real GT-Alpaca Website Proof Pack artifacts & live URL, and publish Course 08.
+- [ ] **Step 5 (Fresh Conversation #2 — `Project_Antigravity`): 4-Domain Method Matrix, 19-Skill Academy Gap Audit & Final Release:** Anchor all 4 proven Code Factory domains (Website, Mobile Game, Video Gen, App/Harness Dev), audit & close any training/prompt/media gaps across Courses `00–08`, pass Stage 4 QA, and deploy finalized Academy.
+- [ ] **Step 6 (Backlog — `code-factory` `v3.0.0` Phases 2–3):** Git-Shadow checkpoints (`cf-rewind`), `0600` Unix-socket async sidecar, companion `code-factory-lsp` MCP plugin, and bundled `run_workflow` scripts.
 - [ ] Add video recordings (`mp4` / audio overviews) & interactive micro-labs into Courses `00–05` & `07` (`academy/content/courses/*/course.json`) following the Course 06 `/media/*.mp4` pattern.
 - [ ] Optional: Generate a Spanish (`ES`) launch cut or voiceover version of *Herd of Ibiza — GT-Alpaca Edition* inside `/Users/ralphb/Projects_Personal/product-video-studio`.
 
 ## Completed
+- [x] **`code-factory` `v3.0.0` Phase 1 Core Hooks & Stateless Academy Lockstep Sync (`cf-reviewer` `SHIP` Verdict):**
+  - Locked `plans/code-factory-v3-phase1-spec.md` & ADR-0006 (`0006-code-factory-v3-phase1-hook-bridge.md`), implemented pure Python 3 stdlib `hooks/hook_state.py` (`0700`/`0600` atomic per-conversation JSON under `$PLUGIN_DATA`, strict `conversationId` sanitization, secret redaction, `24h` TTL pruning) and all 5 lifecycle hooks (`session-start.py`, `hitl-gate.py` w/ safe `overwrite`, `post-tool-feedback.py` w/ `<2s` single-file lint & ESLint v9 `--format stylish`, `pre-invocation.py` w/ turn-15+ compaction reminder & 5-failure loop-breaker, `stop-gate.py` bounded single-shot gate) registered in `hooks.json` (`6` entries) & bumped `plugin.json` to `3.0.0`.
+  - Synced `academy/` to `v3.0.0` (`19` skills, `8` hook resources, `5` agents, `8` courses, `58` total artifacts), added optional `overwrite` to `schemas.ts`, `hitl-evaluator.ts`, `/api/hitl/simulate`, and `HitlGateSimulator.tsx`, fixed Course 01 snippets to `docs/hooks.md`, added Course 02 Step 10 (`cf-stage-10-core-hooks`) + prompt card, kept `rules/AGENTS.md` at `9,147 B <= 10 KB`.
+  - Passed `139/139` automated tests (`37/37` Python hooks, `31/31` Node plugin tests, `71/71` Academy Vitest), `0` ruff/eslint/tsc/depcruise errors, `0` High/Critical CVEs, `6/6` `verify-stack.sh --coverage`, `9/9` live 3-viewport `verify:map`, live 3-viewport `browser` QA, and independent `cf-reviewer` Dual-Axis Eval (`SHIP` in `.memory/qa-report.md`).
+- [x] **`code-factory` `v3.0.0` Phase 1 Stage 2A (`cf-grill-me`) & Stage 2B (`cf-architect` Spec + ADR):**
+  - Locked user scope decisions (A1–A4) and produced `plans/code-factory-v3-phase1-spec.md` + `.memory/decisions/0006-code-factory-v3-phase1-hook-bridge.md` grounded in `agy-customizations/docs/hooks.md`, partitioned for `/teamwork` with zero file overlap.
+- [x] **`code-factory` `v2.5.0` Committed & Pushed (`e562472` → `origin/main`):**
+  - Pushed 4 zero-dependency Vibe Website Factory skills (`cf-design-tokens`, `cf-threejs-craft`, `cf-geo-seo`, `cf-website-factory`), spec, ADR-0005, QA `SHIP` report, `plugin.json` (`2.5.0`, `19` skills), and `README.md`.
 - [x] **`code-factory` v2.5.0 Vibe Website Factory Pipeline (Phases 1 & 2 — `cf-reviewer` `SHIP` Verdict):**
   - Extracted full 4-pillar methodology & tool/safety inventory from 37-source NotebookLM notebook (`Vibe Design: Building Premium Websites with Gemini 3`) and audited `herd_and_co`, `Project_herd_and_co`, `product-video-studio`, plus read-only security/code audit of `nextlevelbuilder/ui-ux-pro-max-skill` (`b73ee96`, MIT) into `.memory/research-vibe-website-factory.md`.
   - Authored locked spec (`plans/cf-website-factory-spec.md`) & ADR (`0005-vibe-website-factory-pipeline.md`) adopting MIT W3C token format + zero-native-binary `@gltf-transform/cli` (Meshopt + `KHR_mesh_quantization` + WebP) default.

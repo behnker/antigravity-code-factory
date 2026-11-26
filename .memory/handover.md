@@ -1,22 +1,26 @@
 # Session Handover Record
 
-**Timestamp:** 2026-11-26 02:45 UTC  
+**Timestamp:** 2026-11-26 05:00 UTC  
 **Active Model:** Gemini 4 Neon (High)  
-**Git Branch & Commit:** `main` (`v2.5.0` release ready for commit/push on top of `a7c501c`; Academy live at `https://antigravity-academy-ten.vercel.app`)
+**Git Branch & Commit:** `main` (`v3.0.0` Phase 1 release; Academy live at `https://antigravity-academy-ten.vercel.app`)
 
 ## 1. Executive Summary
-Released **`code-factory` `v2.5.0` — Vibe Website Factory Pipeline** (`19` skills total: added zero-dependency `cf-design-tokens`, `cf-threejs-craft`, `cf-geo-seo`, and `cf-website-factory`, backed by `plans/cf-website-factory-spec.md`, ADR `0005`, and independent `cf-reviewer` `SHIP` clearance in `.memory/qa-report.md`). Next milestone locked via `cf-grill-me`: **`code-factory` `v3.0` Phase 1 Core Hooks + Academy Sync** (pure Python stdlib hooks + stateless Academy update, executed via `/teamwork`).
+Shipped **`code-factory` `v3.0.0` Phase 1 Core Hooks + Stateless Academy Sync** from locked `plans/code-factory-v3-phase1-spec.md` with an independent `cf-reviewer` **`SHIP`** verdict (`0` blocking defects) and **`139/139`** tests passing (`37` Python, `31` Node, `71` Academy Vitest) plus `9/9` `verify:map` & 3-viewport `browser` QA.
 
-## 2. Production & Verification Baseline
-- **Live Academy URL:** `https://antigravity-academy-ten.vercel.app` (`antigravity-academy-1s60sh98i-nexite-os.vercel.app`)
-- **Rollback Command:** `cd academy && vercel rollback https://antigravity-academy-fzng4yn22-nexite-os.vercel.app --yes --scope nexite-os`
-- **Automated Verification:** `31/31` Node plugin tests (`16` v2.5.0 + `15` `cf-verify-map`), `12/12` Python hooks, `61/61` Academy Vitest, `depcruise` (`0` violations across `44` modules / `113` deps), `9/9` live 3-viewport `verify:map`, `0` High/Critical CVEs, `rules/AGENTS.md` at `8,842` B (`<= 10 KB`).
+## 2. Completed Items
+- **Phase 1 Core Hooks (Pure Python 3 Stdlib):** Built `hooks/hook_state.py` (`0700`/`0600` atomic `$PLUGIN_DATA` store, `conversationId` sanitization, secret redaction, `24h` TTL) and registered all 5 lifecycle events (`6` entries) in `hooks.json`: `session-start.py`, `hitl-gate.py` (`overwrite` for `git --no-pager` & `curl --max-time 5`), `secret-guard.py`, `post-tool-feedback.py` (`<2s` single-file lint), `pre-invocation.py` (feedback drain, turn-15+ warning, 5-failure loop-breaker), and `stop-gate.py` (single-shot gate).
+- **Academy Sync (`academy/`):** Bumped `plugin.json` to `3.0.0`, synced `sync-resources.ts` (`19` skills, `8` hooks, `5` agents, `8` courses, `58` artifacts), added optional `overwrite` to `schemas.ts`/`hitl-evaluator.ts`/`HitlGateSimulator.tsx`, fixed Course 01 to `docs/hooks.md`, added Course 02 Step 10 (`cf-stage-10-core-hooks`), kept `rules/AGENTS.md` at `9,147 B <= 10 KB`.
+- **QA:** `37/37` Python (`0` ruff), `31/31` Node, `6/6` `verify-stack.sh` (`71/71` Vitest, `0` TS/ESLint/depcruise, `next build`), `0` High/Critical CVEs, `9/9` `verify:map`, live `browser` QA, and `cf-reviewer` `SHIP` (`.memory/qa-report.md`).
 
-## 3. Permanent Invariants Distilled
-- `.agents/rules/academy-invariants.md`: Never wrap multi-screen sections (`CourseCurriculumStudio`, `PromptVault`, `repo-hitl`) in `motion` `initial={{ opacity: 0 }}` + numeric `viewport={{ amount: 0.05 }}`.
-- `rules/AGENTS.md` (§6 #5): Keep `.memory/feature-map.md` updated in the same commit as route/API/selector edits and pass `cf-verify-map` + `depcruise`.
-- All plugin scripts (`hooks/`, `skills/*/scripts/`) remain zero-dependency stdlib (Python 3 / Node ESM `>= 20`), fail-closed, with no shell string concatenation.
+## 3. Failed Approaches & Dead Ends
+- **ESLint v9 Removed `compact` Formatter:** Live `post-tool-feedback.py` caught ESLint v9 rejecting `--format compact`; fixed to `--format stylish` with regression test.
+- **Manifest Skill Count:** Scoped `counts.skills` in `sync-resources.ts` to `SKILL.md` entries (`19` vs. `22` with 3 reference docs).
 
-## 4. Active Milestone (`code-factory` v3.0 Phase 1 + Academy Sync)
-- **Scope:** Two-stage `PostToolUse` → `PreInvocation` single-file lint feedback bridge (`<2s`), `SessionStart` `.memory/` auto-injection, `PreToolUse` `overwrite` (`--no-pager`, `--max-time 5`) + context-saturation/loop-breaker guardrails, `Stop` verification gate, and Academy `15 → 19` skills + v3.0 hooks curriculum/explorer sync.
-- **Next Step:** Commit & push `v2.5.0` → lock `plans/code-factory-v3-phase1-spec.md` + ADR `0006` via `cf-architect` → user sign-off & `/teamwork` launch.
+## 4. Key Modified Files
+- `hooks.json`, `plugin.json`, `README.md`, `rules/AGENTS.md`, `hooks/*.py`
+- `academy/{scripts/sync-resources.ts,src/**,content/courses/*/course.json,tests/**}`
+- `plans/code-factory-v3-phase1-spec.md`, `.memory/{decisions/0006-*,feature-map.md,qa-report.md,tasks.md,handover.md}`
+
+## 5. Next Step Action Plan
+1. Open **Fresh Conversation #1** in `/Users/ralphb/Projects_Personal/gt-alpaca-website` for **Steps 2–3**: `cf-research` → `cf-grill-me` → `cf-plan`, HITL stack approval, `cf-design-tokens` + `cf-threejs-craft` GLB optimization, `/teamwork` build, Proof Pack `02–09`, and Vercel launch.
+2. Open **Fresh Conversation #2** in `/Users/ralphb/Projects_Personal/Project_Antigravity` for **Steps 4–5**: Course 08 (`vibe-website-factory`) w/ live GT-Alpaca Proof Gallery, 4-domain/19-skill gap audit, and finalized Academy deploy.
