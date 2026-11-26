@@ -1,6 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -122,4 +124,60 @@ test("validate-tokens detects arbitrary Tailwind brackets & raw CSS colors witho
     }
   `;
   assert.equal(scanSourceText(cleanSource, "Nav.tsx").length, 0);
+});
+
+test("compileTokens enforces *-text on surface/surface-elevated contrast in both light and dark modes (v3.0.1 cf-learn)", () => {
+  const failingDarkText = {
+    primitive: {
+      color: {
+        sand: { $value: "#FAF4EA" },
+        sandElevated: { $value: "#F3E4CE" },
+        ink: { $value: "#1C1917" },
+        darkBg: { $value: "#16110E" },
+        darkElevated: { $value: "#2C221D" },
+        goodDarkText: { $value: "#F5EDE3" },
+        lowContrastAccent: { $value: "#6B3828" },
+      },
+    },
+    semantic: {
+      color: {
+        background: { $value: "{primitive.color.sand}" },
+        "surface-elevated": { $value: "{primitive.color.sandElevated}" },
+        foreground: { $value: "{primitive.color.ink}" },
+        "accent-text": { $value: "{primitive.color.ink}" },
+      },
+    },
+    dark: {
+      semantic: {
+        color: {
+          background: { $value: "{primitive.color.darkBg}" },
+          "surface-elevated": { $value: "{primitive.color.darkElevated}" },
+          foreground: { $value: "{primitive.color.goodDarkText}" },
+          "accent-text": { $value: "{primitive.color.lowContrastAccent}" },
+        },
+      },
+    },
+  };
+  assert.throws(
+    () => compileTokens(failingDarkText),
+    /\[dark\] --color-accent-text .* on --color-surface-elevated/
+  );
+});
+
+test("generate-tokens and validate-tokens CLIs execute main() when invoked through symlinked plugin paths (v3.0.1 cf-learn)", () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "cf-tokens-symlink-"));
+  try {
+    for (const [scriptName, pattern] of [
+      ["generate-tokens.mjs", /Usage: node generate-tokens\.mjs/],
+      ["validate-tokens.mjs", /Usage: node validate-tokens\.mjs/],
+    ]) {
+      const symlinkPath = path.join(tmpDir, `link-${scriptName}`);
+      fs.symlinkSync(path.join(__dirname, scriptName), symlinkPath);
+      const res = spawnSync(process.execPath, [symlinkPath, "--help"], { encoding: "utf8" });
+      assert.equal(res.status, 0);
+      assert.match(res.stdout, pattern);
+    }
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
 });

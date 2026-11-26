@@ -17,7 +17,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 export const EXIT_CODES = Object.freeze({
   PASS: 0,
@@ -669,10 +669,20 @@ export async function runCli(argv = process.argv.slice(2), cwd = process.cwd()) 
   return overallPass ? EXIT_CODES.PASS : EXIT_CODES.VERIFICATION_FAIL;
 }
 
-const isDirectRun =
-  process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url;
+function safeRealpath(targetPath) {
+  try {
+    return fs.realpathSync(targetPath);
+  } catch {
+    return path.resolve(targetPath);
+  }
+}
 
-if (isDirectRun) {
+export function isDirectExecution(argv1 = process.argv[1], metaUrl = import.meta.url) {
+  if (!argv1) return false;
+  return safeRealpath(argv1) === safeRealpath(fileURLToPath(metaUrl));
+}
+
+if (isDirectExecution()) {
   runCli().then((code) => {
     process.exit(code);
   });

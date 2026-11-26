@@ -90,6 +90,19 @@ function extractMetaDescription(html) {
   return "";
 }
 
+function hasCanonicalLink(html) {
+  const linkTagRe = /<link\b[^>]*>/gi;
+  let tagMatch;
+  while ((tagMatch = linkTagRe.exec(html)) !== null) {
+    const tag = tagMatch[0];
+    if (!/\brel=(?:"canonical"|'canonical')/i.test(tag)) continue;
+    if (/\bhref=(?:"https?:\/\/[^"]+"|'https?:\/\/[^']+')/i.test(tag)) {
+      return true;
+    }
+  }
+  return false;
+}
+
 function hasFaqType(typeVal) {
   if (typeVal === "FAQPage") return true;
   return Array.isArray(typeVal) && typeVal.includes("FAQPage");
@@ -164,12 +177,8 @@ export function auditHtmlDocument(html, fileLabel, options = {}) {
     });
   }
 
-  // 4. Canonical URL
-  if (
-    !/<link\b[^>]*rel=(?:"canonical"|'canonical')[^>]*href=(?:"https?:\/\/[^"]+"|'https?:\/\/[^']+')/i.test(
-      html
-    )
-  ) {
+  // 4. Canonical URL (attribute-order agnostic)
+  if (!hasCanonicalLink(html)) {
     findings.push({
       severity: "warn",
       ruleId: "seo-canonical",
@@ -387,7 +396,7 @@ export function auditRobotsTxt(content, fileLabel = "robots.txt", allowAiBlock =
   return findings;
 }
 
-function collectHtmlFiles(targetPath) {
+export function collectHtmlFiles(targetPath) {
   const stat = fs.statSync(targetPath);
   if (stat.isFile()) return [targetPath];
   const out = [];
@@ -397,7 +406,7 @@ function collectHtmlFiles(targetPath) {
       if (entry.isDirectory()) {
         if (!["node_modules", ".git"].includes(entry.name)) walk(full);
       } else if (entry.isFile() && /\.html?$/i.test(entry.name)) {
-        if (!/^(_not-found|404|500)\.html$/i.test(entry.name)) {
+        if (!/^(_not-found|_global-error|_error|404|500)\.html$/i.test(entry.name)) {
           out.push(full);
         }
       }
@@ -483,8 +492,19 @@ function main() {
   process.exit(passed ? 0 : 1);
 }
 
-const isEntrypoint =
-  process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
-if (isEntrypoint) {
+function safeRealpath(targetPath) {
+  try {
+    return fs.realpathSync(targetPath);
+  } catch {
+    return path.resolve(targetPath);
+  }
+}
+
+export function isDirectExecution(argv1 = process.argv[1], metaUrl = import.meta.url) {
+  if (!argv1) return false;
+  return safeRealpath(argv1) === safeRealpath(fileURLToPath(metaUrl));
+}
+
+if (isDirectExecution()) {
   main();
 }

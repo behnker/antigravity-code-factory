@@ -231,8 +231,19 @@ function main() {
   process.exit(report.passed ? 0 : 1);
 }
 
-const isEntrypoint =
-  process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
-if (isEntrypoint) {
+function safeRealpath(targetPath) {
+  try {
+    return fs.realpathSync(targetPath);
+  } catch {
+    return path.resolve(targetPath);
+  }
+}
+
+export function isDirectExecution(argv1 = process.argv[1], metaUrl = import.meta.url) {
+  if (!argv1) return false;
+  return safeRealpath(argv1) === safeRealpath(fileURLToPath(metaUrl));
+}
+
+if (isDirectExecution()) {
   main();
 }

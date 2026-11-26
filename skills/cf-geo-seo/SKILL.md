@@ -29,6 +29,6 @@ node "<path-to-this-skill>/scripts/audit-geo-seo.mjs" \
   --html .next/server/app \
   --robots public/robots.txt
 ```
-- **Exit `0` (`PASS`):** All SSR crawlability, JSON-LD `@graph`, metadata, and AI `robots.txt` invariants passed.
+- **Exit `0` (`PASS`):** All SSR crawlability, JSON-LD `@graph`, metadata (including attribute-order-agnostic `<link rel="canonical">`), and AI `robots.txt` invariants passed (directory scans automatically skip Next.js system error pages `_not-found.html`, `_global-error.html`, `_error.html`, `404.html`, and `500.html`).
 - **Exit `1` (`FAIL`):** Blocking SEO/AEO/GEO error detected.
 - **Exit `2` (`CONFIG_ERROR`):** Invalid flags or missing paths.

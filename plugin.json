@@ -1,7 +1,7 @@
 {
   "name": "code-factory",
   "displayName": "Enterprise Code Factory",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "logo": "assets/logo.svg",
   "description": "Lit Software Factory & Spec-Driven Development (SDD) plugin: invariant quality gates (security, scalability, UI/UX, testing, edge/serverless, loop engineering & context economics), persistent .memory/ handovers & living feature maps, 5-event Phase 1 Core Hooks (SessionStart hydration, PreToolUse HITL + safe overwrite & secret-guard, PostToolUse -> PreInvocation <2s lint & loop-breaker, bounded Stop verification gate), 5 least-privilege personas, and a 19-skill SDLC, Website Factory, Feature Map Verification, Loop Engineering & Dual-Axis Eval pipeline.",
   "author": {

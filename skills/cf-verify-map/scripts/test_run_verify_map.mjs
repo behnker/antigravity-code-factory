@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { describe, it } from 'node:test';
+import { fileURLToPath } from 'node:url';
 import {
   EXIT_CODES,
   buildSafeScreenshotPath,
@@ -13,6 +15,8 @@ import {
   runCli,
   validateConfig,
 } from './run-verify-map.mjs';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const VALID_CONFIG = {
   baseUrl: 'http://localhost:3000',
@@ -238,6 +242,19 @@ describe('parseCliArgs & runCli exit codes', () => {
       );
       const code = await runCli(['--map', mapFile], tmpDir);
       assert.equal(code, EXIT_CODES.PLAYWRIGHT_UNAVAILABLE);
+    } finally {
+      fs.rmSync(tmpDir, { recursive: true, force: true });
+    }
+  });
+
+  it('executes CLI entrypoint when invoked via a symlinked plugin path (v3.0.1 cf-learn)', () => {
+    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'cf-verify-symlink-'));
+    try {
+      const symlinkPath = path.join(tmpDir, 'run-verify-map-link.mjs');
+      fs.symlinkSync(path.join(__dirname, 'run-verify-map.mjs'), symlinkPath);
+      const res = spawnSync(process.execPath, [symlinkPath, '--help'], { encoding: 'utf8' });
+      assert.equal(res.status, EXIT_CODES.PASS);
+      assert.match(res.stdout, /Usage:/);
     } finally {
       fs.rmSync(tmpDir, { recursive: true, force: true });
     }

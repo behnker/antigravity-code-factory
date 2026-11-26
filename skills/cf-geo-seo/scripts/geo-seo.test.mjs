@@ -1,7 +1,19 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-import { auditHtmlDocument, auditRobotsTxt, parseArgs } from "./audit-geo-seo.mjs";
+import {
+  auditHtmlDocument,
+  auditRobotsTxt,
+  collectHtmlFiles,
+  parseArgs,
+} from "./audit-geo-seo.mjs";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const GOOD_HTML = `<!doctype html>
 <html lang="en">
@@ -122,4 +134,50 @@ test("auditRobotsTxt detects blocked Google-Extended and supports empty Disallow
   `;
   const okFindings = auditRobotsTxt(allowed, "robots.txt");
   assert.equal(okFindings.length, 0);
+});
+
+test("collectHtmlFiles excludes Next.js 16 _global-error.html, _error.html, and _not-found.html (v3.0.1 cf-learn)", () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "cf-geo-html-"));
+  try {
+    for (const name of [
+      "index.html",
+      "faq.html",
+      "_not-found.html",
+      "_global-error.html",
+      "_error.html",
+      "404.html",
+      "500.html",
+    ]) {
+      fs.writeFileSync(path.join(tmpDir, name), "<html></html>", "utf8");
+    }
+    const collected = collectHtmlFiles(tmpDir).map((f) => path.basename(f)).sort();
+    assert.deepEqual(collected, ["faq.html", "index.html"]);
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
+});
+
+test("auditHtmlDocument accepts <link href=... rel=canonical> regardless of attribute order", () => {
+  const reversedCanonical = GOOD_HTML.replace(
+    '<link rel="canonical" href="https://example.com/" />',
+    '<link href="https://example.com/" rel="canonical" />'
+  );
+  const result = auditHtmlDocument(reversedCanonical, "index.html", { minWords: 120 });
+  assert.equal(
+    result.findings.some((f) => f.ruleId === "seo-canonical"),
+    false
+  );
+});
+
+test("audit-geo-seo CLI executes main() when invoked via a symlinked plugin path (v3.0.1 cf-learn)", () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "cf-geo-symlink-"));
+  try {
+    const symlinkPath = path.join(tmpDir, "audit-geo-seo-link.mjs");
+    fs.symlinkSync(path.join(__dirname, "audit-geo-seo.mjs"), symlinkPath);
+    const res = spawnSync(process.execPath, [symlinkPath, "--help"], { encoding: "utf8" });
+    assert.equal(res.status, 0);
+    assert.match(res.stdout, /Usage: node audit-geo-seo\.mjs/);
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
 });

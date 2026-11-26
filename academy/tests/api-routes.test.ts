@@ -261,7 +261,7 @@ describe("Next.js API Route Handlers", () => {
         (item: { relativePath: string }) => item.relativePath === "plugin.json",
       );
       expect(pluginJson).toBeDefined();
-      expect(JSON.parse(pluginJson.content).version).toBe("3.0.0");
+      expect(JSON.parse(pluginJson.content).version).toMatch(/^3\.0\.\d+$/);
 
       const hookReq = new NextRequest(
         "http://localhost:3000/api/resources?category=hook&limit=20&offset=0",

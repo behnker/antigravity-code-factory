@@ -31,7 +31,7 @@ Build visually distinctive, accessible, zero-"AI slop" interfaces backed by a si
      --out src/styles/tokens.css \
      --format tailwind-v4
    ```
-   - Fails with exit `1` on cyclic `{ref}` chains, missing `{ref}` targets, unsafe CSS characters (`;`, `{`, `}`, `</style`, `javascript:`), or any paired semantic foreground/background color below **4.5:1** contrast.
+   - Fails with exit `1` on cyclic `{ref}` chains, missing `{ref}` targets, unsafe CSS characters (`;`, `{`, `}`, `</style`, `javascript:`), or any paired semantic color below **4.5:1** contrast across Light & Dark modes (`foreground`, `muted-foreground`, and every `*-text` token against `background`/`surface`/`surface-elevated`/`card`, plus `*-foreground` on fill colors).
 
 3. **Validate Source Code Against Hardcoded Literals:**
    ```bash

@@ -23,14 +23,17 @@ const UNSAFE_CSS_VALUE_RE =
   /[;{}\r\n\0]|\/\*|\*\/|<\/style|javascript:|vbscript:|expression\s*\(|url\s*\(\s*["']?\s*(?:javascript|data|vbscript):/i;
 const HEX_COLOR_RE = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
 
-const CONTRAST_PAIRS = [
+const FILL_CONTRAST_PAIRS = [
   ["foreground", "background"],
   ["muted-foreground", "background"],
   ["primary-foreground", "primary"],
   ["secondary-foreground", "secondary"],
   ["accent-foreground", "accent"],
+  ["highlight-foreground", "highlight"],
   ["destructive-foreground", "destructive"],
 ];
+
+const SURFACE_CONTRAST_KEYS = ["background", "surface", "surface-elevated", "card"];
 
 function isPlainObject(val) {
   return val !== null && typeof val === "object" && !Array.isArray(val);
@@ -194,8 +197,26 @@ function flattenLayer(obj, rootTokens, prefix = [], out = Object.create(null)) {
 export function checkSemanticContrast(semanticMap, modeLabel, minContrast = 4.5) {
   const failures = [];
   const checked = [];
+  const pairs = [...FILL_CONTRAST_PAIRS];
+  const seen = new Set(pairs.map(([fgKey, bgKey]) => `${fgKey}|${bgKey}`));
 
-  for (const [fgKey, bgKey] of CONTRAST_PAIRS) {
+  const textKeys = new Set(["foreground", "muted-foreground"]);
+  for (const cssKey of Object.keys(semanticMap)) {
+    if (cssKey.startsWith("--color-") && cssKey.endsWith("-text")) {
+      textKeys.add(cssKey.slice("--color-".length));
+    }
+  }
+  for (const fgKey of textKeys) {
+    for (const bgKey of SURFACE_CONTRAST_KEYS) {
+      const pairId = `${fgKey}|${bgKey}`;
+      if (!seen.has(pairId)) {
+        seen.add(pairId);
+        pairs.push([fgKey, bgKey]);
+      }
+    }
+  }
+
+  for (const [fgKey, bgKey] of pairs) {
     const fg = semanticMap[`--color-${fgKey}`];
     const bg = semanticMap[`--color-${bgKey}`];
     if (!fg || !bg) continue;
@@ -374,8 +395,19 @@ function main() {
   }
 }
 
-const isEntrypoint =
-  process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
-if (isEntrypoint) {
+function safeRealpath(targetPath) {
+  try {
+    return fs.realpathSync(targetPath);
+  } catch {
+    return path.resolve(targetPath);
+  }
+}
+
+export function isDirectExecution(argv1 = process.argv[1], metaUrl = import.meta.url) {
+  if (!argv1) return false;
+  return safeRealpath(argv1) === safeRealpath(fileURLToPath(metaUrl));
+}
+
+if (isDirectExecution()) {
   main();
 }

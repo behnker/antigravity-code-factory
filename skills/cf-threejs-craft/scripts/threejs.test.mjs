@@ -1,5 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { auditThreeSource, parseArgs as parseAuditArgs } from "./audit-threejs.mjs";
 import {
@@ -7,6 +12,8 @@ import {
   buildOptimizeArgs,
   parseArgs as parseOptArgs,
 } from "./optimize-glb.mjs";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 test("auditThreeSource flags setState and new THREE.Vector3 inside useFrame even with comment parens", () => {
   const bad = `
@@ -84,4 +91,22 @@ test("optimize-glb validates .glb paths, missing CLI values, and builds safe arg
   assert.deepEqual(args.slice(0, 1), ["optimize"]);
   assert.ok(args.includes("meshopt"));
   assert.ok(args.includes("webp"));
+});
+
+test("audit-threejs and optimize-glb execute main() when invoked via symlinked plugin paths (v3.0.1 cf-learn)", () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "cf-threejs-symlink-"));
+  try {
+    for (const [scriptName, pattern] of [
+      ["audit-threejs.mjs", /Usage: node audit-threejs\.mjs/],
+      ["optimize-glb.mjs", /Usage: node optimize-glb\.mjs/],
+    ]) {
+      const symlinkPath = path.join(tmpDir, `link-${scriptName}`);
+      fs.symlinkSync(path.join(__dirname, scriptName), symlinkPath);
+      const res = spawnSync(process.execPath, [symlinkPath, "--help"], { encoding: "utf8" });
+      assert.equal(res.status, 0);
+      assert.match(res.stdout, pattern);
+    }
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
 });
